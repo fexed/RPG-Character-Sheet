@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/removemelee"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Rimuovi"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/meleename"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Nome"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/meleebonus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:text="+4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/meleedamage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:text="5D8 perf."
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp" />
+
+</TableRow>
