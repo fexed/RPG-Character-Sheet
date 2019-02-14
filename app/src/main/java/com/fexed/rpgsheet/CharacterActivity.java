@@ -1901,16 +1901,16 @@ public class CharacterActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        madtag.setOnLongClickListener(new View.OnLongClickListener() {
+        /*madtag.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                /*TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS INT, TS SAG, TS CAR\n2: 50% di possibilità di fare un'azione casuale ad ogni turno / ogni minuto\n3: paranoia e terrore, attacchi chiunque nelle tue vicinanze\n4: il tuo corpo è una prigione, devi liberartene\n5: consegna la scheda al Master, avrai un malus permanente a sua dicrezione");*/
+                TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS INT, TS SAG, TS CAR\n2: 50% di possibilità di fare un'azione casuale ad ogni turno / ogni minuto\n3: paranoia e terrore, attacchi chiunque nelle tue vicinanze\n4: il tuo corpo è una prigione, devi liberartene\n5: consegna la scheda al Master, avrai un malus permanente a sua dicrezione");
                 builder.setTitle(getString(R.string.pazzia));
                 builder.create().show();
                 return true;
             }
-        });
+        });*/
 
         fatigueseek.setProgress(state.getInt("fatigue", 0));
         fatiguetag.setText(getString(R.string.affaticamento) + " " + state.getInt("fatigue", 0));
@@ -1928,16 +1928,16 @@ public class CharacterActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
 
-        fatiguetag.setOnLongClickListener(new View.OnLongClickListener() {
+        /*fatiguetag.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                /*TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS FOR, TS DEX, TS COS\n2: velocità dimezzata e svantaggio in tutti i tiri per colpire\n3: svantaggio in prove di FOR, DEX e COS\n4: malus di -10 in tutte le prove fisiche\n5: 0 PF e svieni");*/
+                TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS FOR, TS DEX, TS COS\n2: velocità dimezzata e svantaggio in tutti i tiri per colpire\n3: svantaggio in prove di FOR, DEX e COS\n4: malus di -10 in tutte le prove fisiche\n5: 0 PF e svieni");
                 builder.setTitle(getString(R.string.affaticamento));
                 builder.create().show();
                 return true;
             }
-        });
+        });*/
 
         inspirationtbn.setChecked(state.getBoolean("inspiration", false));
         inspirationtbn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
