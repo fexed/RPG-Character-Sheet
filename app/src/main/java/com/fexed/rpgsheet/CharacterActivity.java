@@ -206,8 +206,8 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder b = new AlertDialog.Builder(CharacterActivity.this);
-                b.setTitle("Seleziona la statistica con cui lanci incantesimi");
-                String[] types = {"INT", "SAG", "CAR"};
+                b.setTitle(getString(R.string.selectspellstat));
+                String[] types = {getString(R.string.inte), getString(R.string.sag), getString(R.string.car)};
                 b.setItems(types, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -215,13 +215,13 @@ public class CharacterActivity extends AppCompatActivity {
                         String stat = "";
                         switch(which) {
                             case 0:
-                                stat = "INT";
+                                stat = getString(R.string.inte);
                                 break;
                             case 1:
-                                stat = "SAG";
+                                stat = getString(R.string.sag);
                                 break;
                             case 2:
-                                stat = "CAR";
+                                stat = getString(R.string.car);
                                 break;
                         }
                         int lv = state.getInt("pglv", 1);
@@ -309,13 +309,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci il livello di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertlevelof) + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -344,13 +344,13 @@ public class CharacterActivity extends AppCompatActivity {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci il nuovo nome di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewnameof) + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -374,13 +374,13 @@ public class CharacterActivity extends AppCompatActivity {
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci il mana massimo o i punti massimi");
+                alert.setTitle(getString(R.string.insertmaxpoints));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -429,13 +429,13 @@ public class CharacterActivity extends AppCompatActivity {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci la nuova classe di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewclass)+ state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -461,13 +461,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 input.setText(state.getInt("CA", 0) + "");
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci CA");
+                alert.setTitle(getString(R.string.insertca));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -494,19 +494,19 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 input.setText(state.getInt("PF", 0) + "");
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci PF");
+                alert.setTitle(getString(R.string.insertpf));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
                         if (pnt > state.getInt("PFMAX", pnt)) {
-                            Toast.makeText(CharacterActivity.this, "I PF attuali non possono essere maggiori dei PF massimi", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CharacterActivity.this, getString(R.string.insertpferror), Toast.LENGTH_SHORT).show();
                             dialog.cancel();
                             alertd.dismiss();
                         }
@@ -558,13 +558,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 input.setText(state.getInt("PFMAX", 0) + "");
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci PF massimi");
+                alert.setTitle(getString(R.string.insertmaxpf));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -590,13 +590,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci FOR");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.str));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -625,13 +625,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci DEX");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.dex));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -660,13 +660,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci COS");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.cos));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -695,13 +695,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci INT");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.inte));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -730,13 +730,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci SAG");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.sag));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -765,13 +765,13 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Inserisci CAR");
+                alert.setTitle(getString(R.string.insert) + getString(R.string.car));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -1556,10 +1556,10 @@ public class CharacterActivity extends AppCompatActivity {
         TextView bonusrange = (TextView) header.findViewById(R.id.rangedbonus);
         TextView damage = (TextView) header.findViewById(R.id.rangeddamage);
         Button removebtn = (Button) header.findViewById(R.id.removeranged);
-        name.setText("Nome");
-        range.setText("Range");
-        bonusrange.setText("Bonus DEX");
-        damage.setText("Danno");
+        name.setText(getString(R.string.name));
+        range.setText(getString(R.string.range));
+        bonusrange.setText(getString(R.string.bonusdex));
+        damage.setText(getString(R.string.damage));
         removebtn.setText("");
         rangedatks.addView(header);
 
@@ -1602,9 +1602,9 @@ public class CharacterActivity extends AppCompatActivity {
         bonusrange = (TextView) header.findViewById(R.id.meleebonus);
         damage = (TextView) header.findViewById(R.id.meleedamage);
         removebtn = (Button) header.findViewById(R.id.removemelee);
-        name.setText("Nome");
-        bonusrange.setText("Bonus FOR");
-        damage.setText("Danno");
+        name.setText(getString(R.string.name));
+        bonusrange.setText(getString(R.string.bonusfor));
+        damage.setText(getString(R.string.damage));
         removebtn.setText("");
         meleeatks.addView(header);
 
@@ -1886,12 +1886,12 @@ public class CharacterActivity extends AppCompatActivity {
         pluslv.clearFocus();
 
         madseek.setProgress(state.getInt("madness", 0));
-        madtag.setText("Pazzia: " + state.getInt("madness", 0));
+        madtag.setText(getString(R.string.pazzia) + " " + state.getInt("madness", 0));
         madseek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 state.edit().putInt("madness", i).apply();
-                madtag.setText("Pazzia: " + i);
+                madtag.setText(getString(R.string.pazzia) + " " + i);
             }
 
             @Override
@@ -1905,20 +1905,20 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                builder.setMessage("0: nessun effetto\n1: svantaggio in TS INT, TS SAG, TS CAR\n2: 50% di possibilità di fare un'azione casuale ad ogni turno / ogni minuto\n3: paranoia e terrore, attacchi chiunque nelle tue vicinanze\n4: il tuo corpo è una prigione, devi liberartene\n5: consegna la scheda al Master, avrai un malus permanente a sua dicrezione");
-                builder.setTitle("Pazzia");
+                /*TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS INT, TS SAG, TS CAR\n2: 50% di possibilità di fare un'azione casuale ad ogni turno / ogni minuto\n3: paranoia e terrore, attacchi chiunque nelle tue vicinanze\n4: il tuo corpo è una prigione, devi liberartene\n5: consegna la scheda al Master, avrai un malus permanente a sua dicrezione");*/
+                builder.setTitle(getString(R.string.pazzia));
                 builder.create().show();
                 return true;
             }
         });
 
         fatigueseek.setProgress(state.getInt("fatigue", 0));
-        fatiguetag.setText("Affaticamento: " + state.getInt("fatigue", 0));
+        fatiguetag.setText(getString(R.string.affaticamento) + " " + state.getInt("fatigue", 0));
         fatigueseek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 state.edit().putInt("fatigue", i).apply();
-                fatiguetag.setText("Affaticamento: " + i);
+                fatiguetag.setText(getString(R.string.affaticamento) + " " + i);
             }
 
             @Override
@@ -1932,8 +1932,8 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public boolean onLongClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                builder.setMessage("0: nessun effetto\n1: svantaggio in TS FOR, TS DEX, TS COS\n2: velocità dimezzata e svantaggio in tutti i tiri per colpire\n3: svantaggio in prove di FOR, DEX e COS\n4: malus di -10 in tutte le prove fisiche\n5: 0 PF e svieni");
-                builder.setTitle("Affaticamento");
+                /*TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS FOR, TS DEX, TS COS\n2: velocità dimezzata e svantaggio in tutti i tiri per colpire\n3: svantaggio in prove di FOR, DEX e COS\n4: malus di -10 in tutte le prove fisiche\n5: 0 PF e svieni");*/
+                builder.setTitle(getString(R.string.affaticamento));
                 builder.create().show();
                 return true;
             }

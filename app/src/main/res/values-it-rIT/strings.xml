@@ -82,4 +82,20 @@
     <string name="errorattackname">Il nome dell\'attacco non può essere vuoto</string>
     <string name="errorattackdmg">Il danno dell\'attacco non può essere vuoto</string>
     <string name="errorattackrng">Il range dell\'attacco non può essere vuoto</string>
+    <string name="selectspellstat">Seleziona la statistica con cui lanci incantesimi</string>
+    <string name="annulla">Annulla</string>
+    <string name="insertlevelof">Inserisci il livello di </string>
+    <string name="insertnewnameof">Inserisci il nuovo nome di </string>
+    <string name="insertmaxpoints">Inserisci i punti massimi </string>
+    <string name="insertnewclass">Aggiorna classi e livelli di </string>
+    <string name="insertca">Inserisci CA</string>
+    <string name="insertpf">Inserisci PF</string>
+    <string name="insertmaxpf">Inserisci PF massimi</string>
+    <string name="insertpferror">I PF attuali non possono essere maggiori dei PF massimi</string>
+    <string name="insert">Inserisci </string>
+    <string name="name">Nome</string>
+    <string name="range">Portata</string>
+    <string name="bonusdex">Bonus DEX</string>
+    <string name="bonusfor">Bonus FOR</string>
+    <string name="damage">Danno</string>
 </resources>

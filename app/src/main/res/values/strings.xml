@@ -72,7 +72,7 @@
     <string name="ok">Ok</string>
     <string name="rimuovi">Remove</string>
     <string name="nome">Name</string>
-    <string name="inseriscidatinuovo">Insert your character\'s details!</string>
+    <string name="inseriscidatinuovo">Enter your character\'s details!</string>
     <string name="nome_e_cognome">Name and surname</string>
     <string name="classi_e_livelli">Classes and levels</string>
     <string name="livello_totale">Level</string>
@@ -82,4 +82,20 @@
     <string name="errorattackname">Attack\'s name cannot be empty</string>
     <string name="errorattackdmg">Attack\'s damage cannot be empty</string>
     <string name="errorattackrng">Attack\'s range cannot be empty</string>
+    <string name="selectspellstat">Select your spellcasting ability</string>
+    <string name="annulla">Cancel</string>
+    <string name="insertlevelof">Enter the level of </string>
+    <string name="insertnewnameof">Enter the new name of </string>
+    <string name="insertmaxpoints">Enter max points</string>
+    <string name="insertnewclass">Update classes and levels of </string>
+    <string name="insertca">Enter AC</string>
+    <string name="insertpf">Enter HP</string>
+    <string name="insertmaxpf">Enter max HP</string>
+    <string name="insertpferror">Current HP cannot be greater than max HP</string>
+    <string name="insert">Enter </string>
+    <string name="name">Name</string>
+    <string name="range">Range</string>
+    <string name="bonusdex">DEX Bonus</string>
+    <string name="bonusfor">STR Bonus</string>
+    <string name="damage">Damage</string>
 </resources>
