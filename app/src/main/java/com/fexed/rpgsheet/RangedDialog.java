@@ -52,9 +52,9 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                 EditText rangeddamage = findViewById(R.id.rangeddamageinput);
 
                 if (TextUtils.isEmpty(rangedname.getText().toString())) {
-                    rangedname.setError("Il nome dell'attacco non può essere vuoto");
+                    rangedname.setError(getContext().getResources().getString(R.string.errorattackname));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il nome dell'attacco non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackname), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -64,9 +64,9 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                     });
                     break;
                 } else if (TextUtils.isEmpty(rangedrange.getText().toString())) {
-                    rangedrange.setError("Il range dell'attacco non può essere vuoto");
+                    rangedrange.setError(getContext().getResources().getString(R.string.errorattackrng));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il range dell'attacco non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackrng), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -76,9 +76,9 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                     });
                     break;
                 } else if (TextUtils.isEmpty(rangeddamage.getText().toString())) {
-                    rangeddamage.setError("Il danno dell'attacco non può essere vuoto");
+                    rangeddamage.setError(getContext().getResources().getString(R.string.errorattackdmg));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il danno dell'attacco non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackdmg), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override

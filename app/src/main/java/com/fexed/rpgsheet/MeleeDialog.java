@@ -51,9 +51,9 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                 EditText meleedamage = findViewById(R.id.meleedamageinput);
 
                 if (TextUtils.isEmpty(meleename.getText().toString())) {
-                    meleename.setError("Il nome dell'attacco non può essere vuoto");
+                    meleename.setError(getContext().getResources().getString(R.string.errorattackname));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il nome dell'attacco non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackname), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -63,9 +63,9 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                     });
                     break;
                 } else if (TextUtils.isEmpty(meleedamage.getText().toString())) {
-                    meleedamage.setError("Il danno dell'attacco non può essere vuoto");
+                    meleedamage.setError(getContext().getResources().getString(R.string.errorattackdmg));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il danno dell'attacco non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackdmg), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
