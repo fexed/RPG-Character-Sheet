@@ -597,8 +597,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
-            app:layout_constraintTop_toBottomOf="@+id/madfatigue" />da
+            ads:adUnitId="ca-app-pub-9387595638685451/3199806772"
+            app:layout_constraintTop_toBottomOf="@+id/madfatigue" />
 
         <TextView
             android:id="@+id/skillstitle"
