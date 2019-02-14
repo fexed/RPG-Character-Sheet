@@ -1,8 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent" >
-
 <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscroll"
@@ -1421,51 +1418,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/fauna"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/fauna"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expfauna"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compfauna"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
                         android:id="@+id/sopravvivenza"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -2063,7 +2015,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/@string/aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2672,4 +2624,3 @@
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
-</RelativeLayout>

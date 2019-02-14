@@ -83,7 +83,6 @@ public class CharacterActivity extends AppCompatActivity {
         final TextView CA = (TextView) findViewById(R.id.CA);
         final TextView PF = (TextView) findViewById(R.id.PF);
         final TextView PFmax = (TextView) findViewById(R.id.PFmax);
-        final TextView pgfirma = (TextView) findViewById(R.id.pgfirma);
         final TextView abilitatalenti = (TextView) findViewById(R.id.skillstitle);
         final ImageView abilitatalentiarrow = (ImageView) findViewById(R.id.dwna1);
         final TextView inventario = (TextView) findViewById(R.id.invtitle);
@@ -150,7 +149,6 @@ public class CharacterActivity extends AppCompatActivity {
             TextView pgclasstxt = findViewById(R.id.pgclasstxt);
             TextView pglvtxt = findViewById(R.id.pglvtxt);
             pgnametxt.setText(state.getString("pgname", "errore"));
-            pgfirma.setText(state.getString("pgname", "errore"));
             pgclasstxt.setText(state.getString("pgclass", "errore"));
             pglvtxt.setText(state.getInt("pglv", 1) + "");
             proftxt.setText("+" + prof[state.getInt("pglv", 1) - 1]);
@@ -359,7 +357,6 @@ public class CharacterActivity extends AppCompatActivity {
                         String name = input.getText().toString();
 
                         nametxt.setText(name);
-                        pgfirma.setText(name);
                         state.edit().putString("pgname", name).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -1017,36 +1014,6 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         rapiditadimano.setText(suffix + bonus);
 
-        final TextView resistenzafisica = (TextView) findViewById(R.id.resistenzafisica);
-        final CheckBox compresistenzafisica = (CheckBox) findViewById(R.id.compresistenzafisica);
-        final CheckBox expresistenzafisica = (CheckBox) findViewById(R.id.expresistenzafisica);
-        compresistenzafisica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expresistenzafisica.setVisibility(View.VISIBLE);
-                else expresistenzafisica.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compresistenzafisica", compresistenzafisica.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("COS", 10)))+ ((compresistenzafisica.isChecked()) ? ((expresistenzafisica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                resistenzafisica.setText(suffix + bonus);
-            }
-        });
-        expresistenzafisica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expresistenzafisica", expresistenzafisica.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("COS", 10)))+ ((compresistenzafisica.isChecked()) ? ((expresistenzafisica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                resistenzafisica.setText(suffix + bonus);
-            }
-        });
-        compresistenzafisica.setChecked(state.getBoolean("compresistenzafisica", false));
-        expresistenzafisica.setChecked(state.getBoolean("expresistenzafisica", false));
-        bonus = mod((state.getInt("COS", 10)))+ ((compresistenzafisica.isChecked()) ? ((expresistenzafisica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-        suffix = (bonus >= 0) ? "+" : "";
-        resistenzafisica.setText(suffix + bonus);
-
         final TextView investigare = (TextView) findViewById(R.id.investigare);
         final CheckBox compinvestigare = (CheckBox) findViewById(R.id.compinvestigare);
         final CheckBox expinvestigare = (CheckBox) findViewById(R.id.expinvestigare);
@@ -1196,36 +1163,6 @@ public class CharacterActivity extends AppCompatActivity {
         bonus = mod((state.getInt("INT", 10))) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         natura.setText(suffix + bonus);
-
-        final TextView fauna = (TextView) findViewById(R.id.fauna);
-        final CheckBox compfauna = (CheckBox) findViewById(R.id.compfauna);
-        final CheckBox expfauna = (CheckBox) findViewById(R.id.expfauna);
-        compfauna.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expfauna.setVisibility(View.VISIBLE);
-                else expfauna.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compfauna", compfauna.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compfauna.isChecked()) ? ((expfauna.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                fauna.setText(suffix + bonus);
-            }
-        });
-        expfauna.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expfauna", expfauna.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compfauna.isChecked()) ? ((expfauna.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                fauna.setText(suffix + bonus);
-            }
-        });
-        compfauna.setChecked(state.getBoolean("compfauna", false));
-        expfauna.setChecked(state.getBoolean("expfauna", false));
-        bonus = mod((state.getInt("SAG", 10))) + ((compfauna.isChecked()) ? ((expfauna.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-        suffix = (bonus >= 0) ? "+" : "";
-        fauna.setText(suffix + bonus);
 
         final TextView sopravvivenza = (TextView) findViewById(R.id.sopravvivenza);
         final CheckBox compsopravvivenza = (CheckBox) findViewById(R.id.compsopravvivenza);
