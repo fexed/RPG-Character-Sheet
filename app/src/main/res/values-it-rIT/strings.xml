@@ -79,4 +79,7 @@
     <string name="rangednameplaceholder">Arco Lungo</string>
     <string name="rangedrangeplaceholder">115m</string>
     <string name="rangeddamageplaceholder">1D8 Perforante</string>
+    <string name="errorattackname">Il nome dell\'attacco non può essere vuoto</string>
+    <string name="errorattackdmg">Il danno dell\'attacco non può essere vuoto</string>
+    <string name="errorattackrng">Il range dell\'attacco non può essere vuoto</string>
 </resources>

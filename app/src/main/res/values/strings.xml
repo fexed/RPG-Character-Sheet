@@ -79,4 +79,7 @@
     <string name="rangednameplaceholder">Longbow</string>
     <string name="rangedrangeplaceholder">100 ft.</string>
     <string name="rangeddamageplaceholder">1D8 Piercing</string>
+    <string name="errorattackname">Attack\'s name cannot be empty</string>
+    <string name="errorattackdmg">Attack\'s damage cannot be empty</string>
+    <string name="errorattackrng">Attack\'s range cannot be empty</string>
 </resources>
