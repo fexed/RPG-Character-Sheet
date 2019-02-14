@@ -27,6 +27,9 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.HashSet;
@@ -46,6 +49,7 @@ public class CharacterActivity extends AppCompatActivity {
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
         
         preparaSchedaPG();
+        initializeAds();
         Bundle bndl = new Bundle();
         bndl.putString("PG_Name", state.getString("pgname", "nonsettato"));
         FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);
@@ -2017,6 +2021,13 @@ public class CharacterActivity extends AppCompatActivity {
                 .append(state.getString("inv", "")).append("\n")
                 .toString();
         FileHelper.saveToFile(str, getApplicationContext(), state.getString("pgname", null) + "PGDATA.txt");
+    }
+
+    private void initializeAds() {
+        MobileAds.initialize(this, "ca-app-pub-9387595638685451~1613717773");
+        AdView mAdView = findViewById(R.id.banner1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public static int mod(int punteggio) {

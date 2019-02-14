@@ -1,5 +1,4 @@
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscroll"
@@ -40,8 +39,8 @@
             android:id="@+id/pglvtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="monospace"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
@@ -529,6 +528,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/capf">
@@ -565,7 +565,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <SeekBar
                     android:id="@+id/fatiguebar"
@@ -588,13 +589,24 @@
             </LinearLayout>
         </LinearLayout>
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/banner1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            ads:adSize="BANNER"
+            ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+            app:layout_constraintTop_toBottomOf="@+id/madfatigue" />da
+
         <TextView
             android:id="@+id/skillstitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/abilit_e_talenti"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -603,7 +615,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/madfatigue" />
+            app:layout_constraintTop_toBottomOf="@+id/banner1" />
 
         <ImageView
             android:id="@+id/dwna1"
@@ -1785,9 +1797,9 @@
             android:id="@+id/atktitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/attacchi_e_incantesimi"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -2498,9 +2510,9 @@
             android:id="@+id/invtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/inventario"
             android:textAlignment="center"
             android:textAllCaps="true"
@@ -2577,9 +2589,9 @@
             android:id="@+id/bgtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/background_e_note"
             android:textAlignment="center"
             android:textAllCaps="true"
