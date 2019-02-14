@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -47,7 +48,6 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(saveBundle);
         setContentView(R.layout.charactersheet);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
-        
         preparaSchedaPG();
         initializeAds();
         Bundle bndl = new Bundle();
@@ -63,7 +63,18 @@ public class CharacterActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        // return true so that the menu pop up is opened
+        inflater.inflate(R.menu.mainmenu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent myIntent = new Intent(CharacterActivity.this, Settings.class);
+                startActivity(myIntent);
+                break;
+        }
         return true;
     }
 

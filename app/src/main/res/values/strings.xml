@@ -98,4 +98,5 @@
     <string name="bonusdex">DEX Bonus</string>
     <string name="bonusfor">STR Bonus</string>
     <string name="damage">Damage</string>
+    <string name="settings">Settings</string>
 </resources>
