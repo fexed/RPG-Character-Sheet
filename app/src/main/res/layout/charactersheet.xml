@@ -487,7 +487,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:text="Punti Ferita"
+                    android:text="@string/punti_ferita"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="14sp" />
@@ -520,7 +520,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:text="PF massimi"
+                    android:text="@string/pf_massimi"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="14sp" />
@@ -557,7 +557,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:text="Pazzia"
+                    android:text="@string/pazzia"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="14sp" />
@@ -584,7 +584,7 @@
                     android:layout_marginLeft="2dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="1"
-                    android:text="Affaticamento"
+                    android:text="@string/affaticamento"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:textSize="14sp" />
@@ -598,7 +598,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:text="Abilità e talenti"
+            android:text="@string/abilit_e_talenti"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
@@ -641,7 +641,7 @@
                     android:id="@+id/tstitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tiri Salvezza"
+                    android:text="@string/tiri_salvezza"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp"
@@ -663,7 +663,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="FOR"
+                        android:text="@string/str"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -692,7 +692,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="DEX"
+                        android:text="@string/dex"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -721,7 +721,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="COS"
+                        android:text="@string/cos"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -749,7 +749,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="INT"
+                        android:text="@string/inte"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -778,7 +778,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="SAG"
+                        android:text="@string/sag"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -807,7 +807,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
                         android:layout_weight="0"
-                        android:text="CAR"
+                        android:text="@string/car"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
@@ -824,7 +824,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Lingue"
+                    android:text="@string/lingue"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -844,7 +844,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Competenze"
+                    android:text="@string/competenze"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -864,7 +864,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Talenti"
+                    android:text="@string/talenti"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -884,7 +884,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:layout_weight="1"
-                    android:text="Abilità di Classe e Razza"
+                    android:text="@string/abilit_di_classe_e_razza"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -912,7 +912,7 @@
                     android:id="@+id/abilitatitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Abilità"
+                    android:text="@string/abilit"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp"
@@ -921,7 +921,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="FOR"
+                    android:text="@string/str"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
@@ -947,7 +947,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Atletica"
+                        android:text="@string/atletica"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -975,7 +975,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="DEX"
+                    android:text="@string/dex"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
@@ -1002,7 +1002,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Acrobazia"
+                        android:text="@string/acrobazia"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1047,7 +1047,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Furtività"
+                        android:text="@string/furtivit"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1092,7 +1092,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Rapidità di Mano"
+                        android:text="@string/rapidit_di_mano"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1120,12 +1120,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="COS"
+                    android:text="@string/cos"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
 
-                <LinearLayout
+                <!-- <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="0"
@@ -1168,13 +1168,13 @@
                         android:checked="false"
                         android:duplicateParentState="false" />
 
-                </LinearLayout>
+                </LinearLayout> -->
 
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="INT"
+                    android:text="@string/inte"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
@@ -1200,7 +1200,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Investigare"
+                        android:text="@string/investigare"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1245,7 +1245,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Arcano"
+                        android:text="@string/arcano"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1290,7 +1290,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Storia"
+                        android:text="@string/storia"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1335,7 +1335,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Religione e Folklore"
+                        android:text="@string/religione_e_folklore"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1380,7 +1380,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Natura"
+                        android:text="@string/natura"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1407,7 +1407,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SAG"
+                    android:text="@string/sag"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
@@ -1433,7 +1433,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Fauna"
+                        android:text="@string/fauna"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1478,7 +1478,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Sopravvivenza"
+                        android:text="@string/sopravvivenza"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1523,7 +1523,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Medicina"
+                        android:text="@string/medicina"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1568,7 +1568,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Percezione"
+                        android:text="@string/percezione"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1613,7 +1613,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Intuizione"
+                        android:text="@string/intuizione"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1640,7 +1640,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CAR"
+                    android:text="@string/car"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold" />
@@ -1666,7 +1666,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Intimidire"
+                        android:text="@string/intimidire"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1711,7 +1711,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Ingannare"
+                        android:text="@string/ingannare"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1756,7 +1756,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Intrattenere"
+                        android:text="@string/intrattenere"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1801,7 +1801,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_weight="0"
-                        android:text="Persuadere"
+                        android:text="@string/persuadere"
                         android:textAlignment="textEnd"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
@@ -1836,7 +1836,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:text="Attacchi e incantesimi"
+            android:text="@string/attacchi_e_incantesimi"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
@@ -1891,7 +1891,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Incantesimi"
+                                android:text="@string/incantesimi"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -1908,7 +1908,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Statistica rilevante"
+                                    android:text="@string/statistica_rilevante"
                                     android:textAlignment="center"
                                     android:textColor="@color/cardview_light_background"
                                     android:textSize="12sp" />
@@ -1934,7 +1934,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Per colpire"
+                                    android:text="@string/per_colpire"
                                     android:textAlignment="center"
                                     android:textAllCaps="true"
                                     android:textColor="@color/cardview_light_background"
@@ -1959,7 +1959,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="CD"
+                                    android:text="@string/cd"
                                     android:textAlignment="center"
                                     android:textAllCaps="true"
                                     android:textColor="@color/cardview_light_background"
@@ -1984,7 +1984,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
-                                    android:text="Mana/Punti"
+                                    android:text="@string/mana_punti"
                                     android:textAlignment="center"
                                     android:textAllCaps="true"
                                     android:textColor="@color/cardview_light_background"
@@ -1997,7 +1997,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0"
                                     android:text="-"
-                                    android:textSize="10sp" />
+                                    android:textSize="12sp" />
 
                                 <TextView
                                     android:id="@+id/manatxt"
@@ -2015,7 +2015,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="0"
                                     android:text="+"
-                                    android:textSize="10sp" />
+                                    android:textSize="12sp" />
                             </LinearLayout>
 
                             <Button
@@ -2023,8 +2023,8 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="App Spell"
-                                android:textSize="10sp"
+                                android:text="@string/app_spell"
+                                android:textSize="12sp"
                                 android:visibility="visible" />
 
                         </LinearLayout>
@@ -2045,7 +2045,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Trucchetti"
+                                android:text="@string/trucchetti"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2063,7 +2063,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2083,7 +2083,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 1"
+                                android:text="@string/livello_1"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2101,7 +2101,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2121,7 +2121,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 2"
+                                android:text="@string/livello_2"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2139,7 +2139,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2159,7 +2159,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 3"
+                                android:text="@string/livello_3"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2177,7 +2177,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2197,7 +2197,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 4"
+                                android:text="@string/livello_4"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2215,7 +2215,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2235,7 +2235,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 5"
+                                android:text="@string/livello_5"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2253,7 +2253,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2273,7 +2273,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 6"
+                                android:text="@string/livello_6"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2291,7 +2291,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2311,7 +2311,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 7"
+                                android:text="@string/livello_7"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2329,7 +2329,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2349,7 +2349,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 8"
+                                android:text="@string/livello_8"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2367,7 +2367,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2387,7 +2387,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello 9"
+                                android:text="@string/livello_9"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2405,7 +2405,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2425,7 +2425,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Livello +"
+                                android:text="@string/livello"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2443,7 +2443,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="Aggiungi"
+                                android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2476,7 +2476,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Attacchi corpo a corpo"
+                                android:text="@string/attacchi_corpo_a_corpo"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2494,7 +2494,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Aggiungi" />
+                                android:text="@string/aggiungi" />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2514,7 +2514,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Attacchi a distanza"
+                                android:text="@string/attacchi_a_distanza"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2532,7 +2532,7 @@
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Aggiungi" />
+                                android:text="@string/aggiungi" />
 
                         </LinearLayout>
                     </android.support.v7.widget.CardView>
@@ -2549,7 +2549,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:text="Inventario"
+            android:text="@string/inventario"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
@@ -2593,7 +2593,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Crediti"
+                    android:text="@string/soldi"
                     android:textAlignment="textEnd"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp"
@@ -2628,7 +2628,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="10dp"
-            android:text="Background e note"
+            android:text="@string/background_e_note"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@android:color/black"
@@ -2669,16 +2669,6 @@
                 android:inputType="textMultiLine"
                 android:textSize="14sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/pgfirma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="cursive"
-            android:text="nome cognome"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/background" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

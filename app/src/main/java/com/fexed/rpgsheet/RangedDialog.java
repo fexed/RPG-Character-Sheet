@@ -28,7 +28,6 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
 
     public RangedDialog(Activity a, SharedPreferences state, TableRow r, TableLayout t) {
         super(a);
-        // TODO Auto-generated constructor stub
         this.c = a;
         this.state = state;
         this.newrow = r;

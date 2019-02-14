@@ -21,7 +21,6 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
 
     public PGDialog(Activity a, SharedPreferences state) {
         super(a);
-        // TODO Auto-generated constructor stub
         this.c = a;
         this.state = state;
     }
