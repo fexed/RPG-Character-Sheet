@@ -86,7 +86,8 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     Assert.assertTrue("ERRORE input non valdio", !(pglvinput.getText().toString().equals("")));
                     Assert.assertNotNull("ERRORE input nullo", pglvinput.getText().toString());*/
                     int lv = Integer.parseInt(pglvinput.getText().toString());
-                    if (lv <= 0) lv = 1;
+                    lv = (lv <= 0) ? 1 : lv;
+                    lv = (lv > 45) ? 45 : lv;
                     state.edit().putString("pgname", pgnameinput.getText().toString()).apply();
                     state.edit().putString("pgclass", pgclassinput.getText().toString()).apply();
                     state.edit().putInt("pglv", lv).apply();

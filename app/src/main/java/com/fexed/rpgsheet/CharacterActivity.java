@@ -151,8 +151,10 @@ public class CharacterActivity extends AppCompatActivity {
         } else {
             nametxt.setText(state.getString("pgname", "errore"));
             classtxt.setText(state.getString("pgclass", "errore"));
-            lvtxt.setText(state.getInt("pglv", 1) + "");
-            proftxt.setText("+" + prof[state.getInt("pglv", 1) - 1]);
+            int lv = (state.getInt("pglv", 1) > 45) ? 45 : state.getInt("pglv", 1);
+            state.edit().putInt("pglv", lv).apply();
+            lvtxt.setText(lv + "");
+            proftxt.setText("+" + prof[lv - 1]);
 
             pntfor = state.getInt("FOR", 10);
             modfor = mod(pntfor);
@@ -1486,7 +1488,7 @@ public class CharacterActivity extends AppCompatActivity {
         abilitatxt.clearFocus();
 
         EditText credititxt = (EditText) findViewById(R.id.credititxt);
-        credititxt.setText(state.getInt("crediti", 0) + "");
+        credititxt.setText(state.getString("crediti", "0"));
         credititxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1501,9 +1503,9 @@ public class CharacterActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable editable) {
                 try {
-                    state.edit().putInt("crediti", Integer.parseInt(editable.toString())).apply();
+                    state.edit().putString("crediti", editable.toString()).apply();
                 } catch (NumberFormatException ex) {
-                    state.edit().putInt("crediti", 0).apply();
+                    state.edit().putString("crediti", "0").apply();
                 }
             }
         });
@@ -2014,7 +2016,7 @@ public class CharacterActivity extends AppCompatActivity {
                 .append(state.getBoolean("exppersuadere", false)).append("|")
                 .append(state.getInt("fatigue", 0)).append("|")
                 .append(state.getInt("madness", 0)).append("|")
-                .append(state.getInt("crediti", 0)).append("|")
+                .append(state.getString("crediti", "0")).append("|")
                 .append(state.getString("inv", "")).append("\n")
                 .toString();
         FileHelper.saveToFile(str, getApplicationContext(), state.getString("pgname", null) + "PGDATA.txt");
