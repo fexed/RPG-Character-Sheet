@@ -43,9 +43,9 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                 EditText pglvinput = findViewById(R.id.pglvinput);
 
                 if (TextUtils.isEmpty(pgnameinput.getText().toString())) {
-                    pgnameinput.setError("Il nome del PG non può essere vuoto");
+                    pgnameinput.setError(getContext().getString(R.string.pgnameerror));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il nome del PG non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getString(R.string.pgnameerror), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -55,9 +55,9 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     });
                     break;
                 } else if (TextUtils.isEmpty(pgclassinput.getText().toString())) {
-                    pgclassinput.setError("La classe del PG non può essere vuoto");
+                    pgclassinput.setError(getContext().getString(R.string.pgclasserror));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "La classe del PG non può essere vuota", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getString(R.string.pgclasserror), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -67,9 +67,9 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     });
                     break;
                 } else if (TextUtils.isEmpty(pglvinput.getText().toString())) {
-                    pglvinput.setError("Il livello del PG non può essere vuoto");
+                    pglvinput.setError(getContext().getString(R.string.pglverror));
                     this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), "Il livello del PG non può essere vuoto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this.c.getApplicationContext(), getContext().getString(R.string.pglverror), Toast.LENGTH_SHORT).show();
                     Handler handler = new Handler();
                     handler.post(new Runnable() {
                         @Override
@@ -90,7 +90,7 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     state.edit().putString("pgname", pgnameinput.getText().toString()).apply();
                     state.edit().putString("pgclass", pgclassinput.getText().toString()).apply();
                     state.edit().putInt("pglv", lv).apply();
-                    state.edit().commit();
+                    state.edit().apply();
 
                     TextView pgnametxt = c.findViewById(R.id.pgnametxt);
                     TextView pgclasstxt = c.findViewById(R.id.pgclasstxt);

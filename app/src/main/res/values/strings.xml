@@ -99,4 +99,7 @@
     <string name="bonusfor">STR Bonus</string>
     <string name="damage">Damage</string>
     <string name="settings">Settings</string>
+    <string name="pgnameerror">Character\'s name cannot be empty</string>
+    <string name="pgclasserror">Character\'s class cannot be empty</string>
+    <string name="pglverror">Character\'s level cannot be empty</string>
 </resources>
