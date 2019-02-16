@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "349140853577",
+    "firebase_url": "https://rpg-character-sheet-af3f2.firebaseio.com",
+    "project_id": "rpg-character-sheet-af3f2",
+    "storage_bucket": "rpg-character-sheet-af3f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349140853577:android:4c13674912bed720",
+        "android_client_info": {
+          "package_name": "com.fexed.rpgsheet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349140853577-76am6s05kbb3m3dcpl3qvafbcnifa5q1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3Sl_TXudpr2SPb17Y9Bb5ocR9qPbdPS4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

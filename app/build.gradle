@@ -37,3 +37,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.6'
     implementation 'com.google.firebase:firebase-config:16.3.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
