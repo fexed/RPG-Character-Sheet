@@ -1,7 +1,5 @@
 <resources>
-    <string name="app_name">RPGSheet</string>
     <string name="title_schedaPG">Scheda Personaggio</string>
-    <string name="state">com.fexed.rpgsheet</string>
     <string name="title_activity_settings">Preferenze</string>
     <string name="nome_cognome">nome cognome</string>
     <string name="classi_di_abilit">classi</string>
@@ -47,9 +45,9 @@
     <string name="intrattenere">Intrattenere</string>
     <string name="persuadere">Persuadere</string>
     <string name="incantesimi">Incantesimi</string>
-    <string name="statistica_rilevante">Statistica rilevante</string>
+    <string name="statistica_rilevante">Statistica Rilevante</string>
     <string name="per_colpire">Bonus attacco incantesimi</string>
-    <string name="cd">CD incantesimi</string>
+    <string name="cd">CD Incantesimi</string>
     <string name="mana_punti">Punti</string>
     <string name="app_spell">App Incantesimi</string>
     <string name="trucchetti">Trucchetti</string>

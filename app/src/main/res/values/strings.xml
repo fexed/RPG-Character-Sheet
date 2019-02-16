@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">RPGSheet</string>
+    <string name="app_name" translatable="false">RPG Character Sheet</string>
     <string name="title_schedaPG">Character Sheet</string>
-    <string name="state">com.fexed.rpgsheet</string>
+    <string name="state" translatable="false">com.fexed.rpgsheet</string>
     <string name="title_activity_settings">Preferences</string>
     <string name="nome_cognome">name surname</string>
     <string name="classi_di_abilit">classes</string>

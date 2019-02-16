@@ -115,17 +115,6 @@ public class CharacterActivity extends AppCompatActivity {
         final Button addranged = (Button) findViewById(R.id.addrangedatk);
         final Button addmelee = (Button) findViewById(R.id.addmeleeatk);
         final Button spellapp = (Button) findViewById(R.id.spellappbtn);
-        final Button cantriptn = (Button) findViewById(R.id.addcantrip);
-        final Button firstlvbtn = (Button) findViewById(R.id.addfirstlv);
-        final Button secondlvbtn = (Button) findViewById(R.id.addsecondlv);
-        final Button thirdlvbtn = (Button) findViewById(R.id.addthirdlv);
-        final Button fourthlvbtn = (Button) findViewById(R.id.addfourthlv);
-        final Button fifthlvbtn = (Button) findViewById(R.id.addfifthlv);
-        final Button sixthlvbtn = (Button) findViewById(R.id.addsixthlv);
-        final Button seventhlvbtn = (Button) findViewById(R.id.addseventhlv);
-        final Button eighthlvbtn = (Button) findViewById(R.id.addeightlv);
-        final Button ninthlvbtn = (Button) findViewById(R.id.addninthlv);
-        final Button pluslvbtn = (Button) findViewById(R.id.addpluslv);
         final Button addmanabtn = (Button) findViewById(R.id.addmana);
         final Button removemanabtn = (Button) findViewById(R.id.removemana);
         final EditText cantrip = (EditText) findViewById(R.id.cantriplist);
@@ -160,12 +149,9 @@ public class CharacterActivity extends AppCompatActivity {
             PGDialog inputdialog = new PGDialog(this, state);
             inputdialog.show();
         } else {
-            TextView pgnametxt = findViewById(R.id.pgnametxt);
-            TextView pgclasstxt = findViewById(R.id.pgclasstxt);
-            TextView pglvtxt = findViewById(R.id.pglvtxt);
-            pgnametxt.setText(state.getString("pgname", "errore"));
-            pgclasstxt.setText(state.getString("pgclass", "errore"));
-            pglvtxt.setText(state.getInt("pglv", 1) + "");
+            nametxt.setText(state.getString("pgname", "errore"));
+            classtxt.setText(state.getString("pgclass", "errore"));
+            lvtxt.setText(state.getInt("pglv", 1) + "");
             proftxt.setText("+" + prof[state.getInt("pglv", 1) - 1]);
 
             pntfor = state.getInt("FOR", 10);
@@ -330,7 +316,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertlevelof) + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertlevelof) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -365,7 +351,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewnameof) + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewnameof) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -450,7 +436,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewclass)+ state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewclass) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -611,7 +597,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.str));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -646,7 +632,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.dex));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -681,7 +667,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.cos));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -716,7 +702,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.inte));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -751,7 +737,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.sag));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
@@ -786,7 +772,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + getString(R.string.car));
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //Put actions for OK button here
