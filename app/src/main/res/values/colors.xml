@@ -6,4 +6,8 @@
     <color name="semitrasp">#5a292929</color>
     <color name="semitraspblu">#5a0011ff</color>
     <color name="semitraspred">#5aff0000</color>
+    <color name="gold">#ffd700</color>
+    <color name="silver">#C0C0C0</color>
+    <color name="copper">#b87333 </color>
+    <color name="platinum">#E5E4E2</color>
 </resources>

@@ -35,6 +35,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import static java.lang.Math.floor;
@@ -1486,29 +1487,171 @@ public class CharacterActivity extends AppCompatActivity {
         });
         abilitatxt.clearFocus();
 
-        EditText credititxt = (EditText) findViewById(R.id.credititxt);
-        credititxt.setText(state.getString("crediti", "0"));
-        credititxt.addTextChangedListener(new TextWatcher() {
+        final TextView mptxtv = findViewById(R.id.mptxtv);
+        final TextView motxtv = findViewById(R.id.motxtv);
+        final TextView matxtv = findViewById(R.id.matxtv);
+        final TextView mrtxtv = findViewById(R.id.mrtxtv);
+        final TextView totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
+
+        double money = 0;
+        int mp = state.getInt("mp", 0);
+        int mo = state.getInt("mo", 0);
+        int ma = state.getInt("ma", 0);
+        int mr = state.getInt("mr", 0);
+        money = Math.ceil(mp*10 + mo + ma*0.1 + mr*0.01);
+        String txt = String.format(Locale.getDefault(), "%.0f", money);
+        String strstr = "Per un totale di " + txt + " mo";
+        totalmtxtv.setText(strstr);
+
+        mptxtv.setText(mp + "");
+        mptxtv.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                try {
-                    state.edit().putString("crediti", editable.toString()).apply();
-                } catch (NumberFormatException ex) {
-                    state.edit().putString("crediti", "0").apply();
-                }
+            public boolean onLongClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for CANCEL button here, or leave in blank
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle("Monete di platino di " + state.getString("pgname", null));
+                input.setText(state.getInt("mp", 0) + "");
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for OK button here
+                        int monete = Integer.parseInt(input.getText().toString());
+                        mptxtv.setText(monete + "");
+                        state.edit().putInt("mp", monete).apply();
+                        int mo = state.getInt("mo", 0);
+                        int ma = state.getInt("ma", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(monete*10 + mo + ma*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
             }
         });
-        credititxt.clearFocus();
+        motxtv.setText(mo + "");
+        motxtv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle("Monete d'oro di " + state.getString("pgname", null));
+                input.setText(state.getInt("mo", 0) + "");
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for OK button here
+                        int monete = Integer.parseInt(input.getText().toString());
+                        motxtv.setText(monete + "");
+                        state.edit().putInt("mo", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int ma = state.getInt("ma", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(mp*10 + monete + ma*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
+        matxtv.setText(ma + "");
+        matxtv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle("Monete d'argento di " + state.getString("pgname", null));
+                input.setText(state.getInt("ma", 0) + "");
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for OK button here
+                        int monete = Integer.parseInt(input.getText().toString());
+                        matxtv.setText(monete + "");
+                        state.edit().putInt("ma", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int mo = state.getInt("mo", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(mp*10 + mo + monete*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
+        mrtxtv.setText(mr + "");
+        mrtxtv.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle("Monete di rame di " + state.getString("pgname", null));
+                input.setText(state.getInt("mr", 0) + "");
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Put actions for OK button here
+                        int monete = Integer.parseInt(input.getText().toString());
+                        mrtxtv.setText(monete + "");
+                        state.edit().putInt("mr", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int mo = state.getInt("mo", 0);
+                        int ma = state.getInt("ma", 0);
+                        double moneteTot =  Math.ceil(mp*10 + mo + ma*0.1 + monete*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
 
         EditText invtxt = (EditText) findViewById(R.id.invtxt);
         invtxt.setText(state.getString("inv", ""));
