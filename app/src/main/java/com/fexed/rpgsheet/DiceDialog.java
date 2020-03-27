@@ -157,7 +157,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             builder.setView(input);
 
             final int finalMax = max;
-            builder.setPositiveButton("Lancia", new OnClickListener() {
+            builder.setPositiveButton(R.string.roll , new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     int howMany = Integer.parseInt(input.getText().toString());
@@ -185,8 +185,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             });
             builder.show();
         } else {
-            if (rnd.nextBoolean()) outtxt.setText("Testa");
-            else outtxt.setText("Croce");
+            if (rnd.nextBoolean()) outtxt.setText(R.string.testa);
+            else outtxt.setText(R.string.Croce);
         }
         return true;
     }

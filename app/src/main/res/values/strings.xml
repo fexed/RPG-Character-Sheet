@@ -105,4 +105,7 @@
     <string name="dice">Dice</string>
     <string name="coin">Coin</string>
     <string name="dicerollhintchoose">Choose a dice!</string>
+    <string name="roll">Roll</string>
+    <string name="testa">Heads</string>
+    <string name="Croce">Tails</string>
 </resources>

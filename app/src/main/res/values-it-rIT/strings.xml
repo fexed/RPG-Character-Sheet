@@ -103,4 +103,7 @@
     <string name="dice">Dadi</string>
     <string name="coin">Moneta</string>
     <string name="dicerollhintchoose">Scegli un dado!</string>
+    <string name="roll">Lancia</string>
+    <string name="testa">Testa</string>
+    <string name="Croce">Croce</string>
 </resources>

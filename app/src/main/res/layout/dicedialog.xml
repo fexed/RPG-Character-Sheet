@@ -10,14 +10,14 @@
         android:id="@+id/diceRollHistoryTxtV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/dicerollhintchoose"
+        android:layout_marginTop="24dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@+id/D100"
         app:layout_constraintEnd_toEndOf="@+id/D10"
-        app:layout_constraintStart_toStartOf="@+id/D20" />
+        app:layout_constraintStart_toStartOf="@+id/D20"
+        app:layout_constraintTop_toBottomOf="@+id/D6"
+        tools:text="1+103=999" />
 
     <Button
         android:id="@+id/D8"
@@ -134,11 +134,11 @@
         android:id="@+id/diceRollResutlTxtV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="5dp"
         android:text="@string/dicerollhintchoose"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/coin"
         app:layout_constraintStart_toStartOf="@+id/D8"
-        app:layout_constraintTop_toBottomOf="@+id/D6" />
+        app:layout_constraintTop_toBottomOf="@+id/diceRollHistoryTxtV" />
 </android.support.constraint.ConstraintLayout>
