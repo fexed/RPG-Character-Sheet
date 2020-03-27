@@ -70,7 +70,7 @@
         android:background="@color/semitrasp"
         android:padding="5dp"
         android:text="@string/coin"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="@+id/D10"
         app:layout_constraintStart_toEndOf="@+id/D4"
         app:layout_constraintTop_toBottomOf="@+id/D10" />
