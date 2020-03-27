@@ -102,4 +102,7 @@
     <string name="pgnameerror">Character\'s name cannot be empty</string>
     <string name="pgclasserror">Character\'s class cannot be empty</string>
     <string name="pglverror">Character\'s level cannot be empty</string>
+    <string name="dice">Dice</string>
+    <string name="coin">Coin</string>
+    <string name="dicerollhintchoose">Choose a dice!</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.fexed.rpgsheet;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -69,11 +70,12 @@ public class CharacterActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.settings:
-                Intent myIntent = new Intent(CharacterActivity.this, Settings.class);
-                startActivity(myIntent);
-                break;
+        if (item.getItemId() == R.id.settings) {
+            Intent myIntent = new Intent(CharacterActivity.this, Settings.class);
+            startActivity(myIntent);
+        } else if (item.getItemId() == R.id.dice) {
+            DiceDialog inputdialog = new DiceDialog(this);
+            inputdialog.show();
         }
         return true;
     }
@@ -151,7 +153,7 @@ public class CharacterActivity extends AppCompatActivity {
         } else {
             nametxt.setText(state.getString("pgname", "errore"));
             classtxt.setText(state.getString("pgclass", "errore"));
-            int lv = (state.getInt("pglv", 1) > 45) ? 45 : state.getInt("pglv", 1);
+            int lv = Math.min(state.getInt("pglv", 1), 20);
             state.edit().putInt("pglv", lv).apply();
             lvtxt.setText(lv + "");
             proftxt.setText("+" + prof[lv - 1]);
@@ -314,14 +316,12 @@ public class CharacterActivity extends AppCompatActivity {
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertlevelof) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int lv = Integer.parseInt(input.getText().toString());
                         if (lv <= 0) lv = 1;
                         if (lv > 45) lv = 45;
@@ -466,14 +466,12 @@ public class CharacterActivity extends AppCompatActivity {
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
                     }
                 });
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertca));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
 
                         CA.setText(pnt + "");
@@ -802,6 +800,7 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (ts >= 0) ? "+" : "";
         tsfortxt.setText(suffix + ts);
         comptsfor.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
             @Override
             public void onClick(View view) {
                 int lv = state.getInt("pglv", 1);

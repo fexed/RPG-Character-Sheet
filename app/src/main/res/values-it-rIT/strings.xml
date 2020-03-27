@@ -100,4 +100,7 @@
     <string name="pgnameerror">Il nome del PG non può essere vuoto</string>
     <string name="pgclasserror">La classe del PG non può essere vuota</string>
     <string name="pglverror">Il livello del PG non può essere vuoto</string>
+    <string name="dice">Dadi</string>
+    <string name="coin">Moneta</string>
+    <string name="dicerollhintchoose">Scegli un dado!</string>
 </resources>
