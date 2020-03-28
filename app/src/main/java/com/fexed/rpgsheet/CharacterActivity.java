@@ -17,16 +17,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -88,60 +85,60 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void preparaSchedaPG() {
-        final TextView FOR = (TextView) findViewById(R.id.FOR);
-        final TextView FORmod = (TextView) findViewById(R.id.FORmod);
-        final TextView DEX = (TextView) findViewById(R.id.DEX);
-        final TextView DEXmod = (TextView) findViewById(R.id.DEXmod);
-        final TextView COS = (TextView) findViewById(R.id.COS);
-        final TextView COSmod = (TextView) findViewById(R.id.COSmod);
-        final TextView INT = (TextView) findViewById(R.id.INT);
-        final TextView INTmod = (TextView) findViewById(R.id.INTmod);
-        final TextView SAG = (TextView) findViewById(R.id.SAG);
-        final TextView SAGmod = (TextView) findViewById(R.id.SAGmod);
-        final TextView CAR = (TextView) findViewById(R.id.CAR);
-        final TextView CARmod = (TextView) findViewById(R.id.CARmod);
-        final TextView lvtxt = (TextView) findViewById(R.id.pglvtxt);
-        final TextView nametxt = (TextView) findViewById(R.id.pgnametxt);
-        final TextView classtxt = (TextView) findViewById(R.id.pgclasstxt);
-        final TextView proftxt = (TextView) findViewById(R.id.proftxt);
-        final TextView CA = (TextView) findViewById(R.id.CA);
-        final TextView PF = (TextView) findViewById(R.id.PF);
-        final TextView PFmax = (TextView) findViewById(R.id.PFmax);
-        final TextView XP = (TextView) findViewById(R.id.pgxptxtv);
-        final TextView abilitatalenti = (TextView) findViewById(R.id.skillstitle);
-        final ImageView abilitatalentiarrow = (ImageView) findViewById(R.id.dwna1);
-        final TextView inventario = (TextView) findViewById(R.id.invtitle);
-        final ImageView inventarioarrow = (ImageView) findViewById(R.id.dwna3);
-        final TextView background = (TextView) findViewById(R.id.bgtitle);
-        final ImageView backgroundarrow = (ImageView) findViewById(R.id.dwna4);
-        final TextView attacchi = (TextView) findViewById(R.id.atktitle);
-        final ImageView attacchiarrow = (ImageView) findViewById(R.id.dwna2);
-        final TextView spellatk = (TextView) findViewById(R.id.spellatktxt);
-        final TextView spellcd = (TextView) findViewById(R.id.spellcdtxt);
-        final TextView spellstat = (TextView) findViewById(R.id.spelstatselection);
-        final TextView spellmana = (TextView) findViewById(R.id.manatxt);
-        final Button PFplus = (Button) findViewById(R.id.pfplus);
-        final Button PFminus = (Button) findViewById(R.id.pfminus);
-        final Button addranged = (Button) findViewById(R.id.addrangedatk);
-        final Button addmelee = (Button) findViewById(R.id.addmeleeatk);
-        final Button spellapp = (Button) findViewById(R.id.spellappbtn);
-        final Button addmanabtn = (Button) findViewById(R.id.addmana);
-        final Button removemanabtn = (Button) findViewById(R.id.removemana);
-        final Button addxpbtn = (Button) findViewById(R.id.addxpbtn);
-        final EditText cantrip = (EditText) findViewById(R.id.cantriplist);
-        final EditText firstlv = (EditText) findViewById(R.id.firstlist);
-        final EditText secondlv = (EditText) findViewById(R.id.secondlist);
-        final EditText thirdlv = (EditText) findViewById(R.id.thirdlist);
-        final EditText fourthlv = (EditText) findViewById(R.id.fourthlsit);
-        final EditText fifthlv = (EditText) findViewById(R.id.fifthlist);
-        final EditText sixthlv = (EditText) findViewById(R.id.sixthlist);
-        final EditText seventhlv = (EditText) findViewById(R.id.seventhlist);
-        final EditText eighthlv = (EditText) findViewById(R.id.eigththlist);
-        final EditText ninthlv = (EditText) findViewById(R.id.ninthlist);
-        final EditText pluslv = (EditText) findViewById(R.id.pluslist);
-        final CheckBox inspirationtbn = (CheckBox) findViewById(R.id.inspirationbtn);
-        final TableLayout rangedatks = (TableLayout) findViewById(R.id.rangedatks);
-        final TableLayout meleeatks = (TableLayout) findViewById(R.id.meleeatks);
+        final TextView FOR = findViewById(R.id.FOR);
+        final TextView FORmod = findViewById(R.id.FORmod);
+        final TextView DEX = findViewById(R.id.DEX);
+        final TextView DEXmod = findViewById(R.id.DEXmod);
+        final TextView COS = findViewById(R.id.COS);
+        final TextView COSmod = findViewById(R.id.COSmod);
+        final TextView INT = findViewById(R.id.INT);
+        final TextView INTmod = findViewById(R.id.INTmod);
+        final TextView SAG = findViewById(R.id.SAG);
+        final TextView SAGmod = findViewById(R.id.SAGmod);
+        final TextView CAR = findViewById(R.id.CAR);
+        final TextView CARmod = findViewById(R.id.CARmod);
+        final TextView lvtxt = findViewById(R.id.pglvtxt);
+        final TextView nametxt = findViewById(R.id.pgnametxt);
+        final TextView classtxt = findViewById(R.id.pgclasstxt);
+        final TextView proftxt = findViewById(R.id.proftxt);
+        final TextView CA = findViewById(R.id.CA);
+        final TextView PF = findViewById(R.id.PF);
+        final TextView PFmax = findViewById(R.id.PFmax);
+        final TextView XP = findViewById(R.id.pgxptxtv);
+        final TextView abilitatalenti = findViewById(R.id.skillstitle);
+        final ImageView abilitatalentiarrow = findViewById(R.id.dwna1);
+        final TextView inventario = findViewById(R.id.invtitle);
+        final ImageView inventarioarrow = findViewById(R.id.dwna3);
+        final TextView background = findViewById(R.id.bgtitle);
+        final ImageView backgroundarrow = findViewById(R.id.dwna4);
+        final TextView attacchi = findViewById(R.id.atktitle);
+        final ImageView attacchiarrow = findViewById(R.id.dwna2);
+        final TextView spellatk = findViewById(R.id.spellatktxt);
+        final TextView spellcd = findViewById(R.id.spellcdtxt);
+        final TextView spellstat = findViewById(R.id.spelstatselection);
+        final TextView spellmana = findViewById(R.id.manatxt);
+        final Button PFplus = findViewById(R.id.pfplus);
+        final Button PFminus = findViewById(R.id.pfminus);
+        final Button addranged = findViewById(R.id.addrangedatk);
+        final Button addmelee = findViewById(R.id.addmeleeatk);
+        final Button spellapp = findViewById(R.id.spellappbtn);
+        final Button addmanabtn = findViewById(R.id.addmana);
+        final Button removemanabtn = findViewById(R.id.removemana);
+        final Button addxpbtn = findViewById(R.id.addxpbtn);
+        final EditText cantrip = findViewById(R.id.cantriplist);
+        final EditText firstlv = findViewById(R.id.firstlist);
+        final EditText secondlv = findViewById(R.id.secondlist);
+        final EditText thirdlv = findViewById(R.id.thirdlist);
+        final EditText fourthlv = findViewById(R.id.fourthlsit);
+        final EditText fifthlv = findViewById(R.id.fifthlist);
+        final EditText sixthlv = findViewById(R.id.sixthlist);
+        final EditText seventhlv = findViewById(R.id.seventhlist);
+        final EditText eighthlv = findViewById(R.id.eigththlist);
+        final EditText ninthlv = findViewById(R.id.ninthlist);
+        final EditText pluslv = findViewById(R.id.pluslist);
+        final CheckBox inspirationtbn = findViewById(R.id.inspirationbtn);
+        final TableLayout rangedatks = findViewById(R.id.rangedatks);
+        final TableLayout meleeatks = findViewById(R.id.meleeatks);
         int pntfor; int modfor;
         int pntdex; int moddex;
         int pntcos; int modcos;
@@ -151,7 +148,7 @@ public class CharacterActivity extends AppCompatActivity {
 
 
         String pgname = state.getString("pgname", null);
-
+        String tempstr;
         if (pgname == null) {
             PGDialog inputdialog = new PGDialog(this, state);
             inputdialog.show();
@@ -160,47 +157,70 @@ public class CharacterActivity extends AppCompatActivity {
             classtxt.setText(state.getString("pgclass", "errore"));
             int lv = Math.min(state.getInt("pglv", 1), 20);
             state.edit().putInt("pglv", lv).apply();
-            lvtxt.setText(lv + "");
-            proftxt.setText("+" + prof[lv - 1]);
+            tempstr = lv + "";
+            lvtxt.setText(tempstr);
+            tempstr = "+" + (prof[lv - 1]);
+            proftxt.setText(tempstr);
 
             pntfor = state.getInt("FOR", 10);
             modfor = mod(pntfor);
             String suffix = (modfor >= 0) ? "+" : "";
-            FOR.setText("" + pntfor); FORmod.setText(suffix + modfor);
+            tempstr = "" + pntfor;
+            FOR.setText(tempstr);
+            tempstr = suffix + modfor;
+            FORmod.setText(tempstr);
 
             pntdex = state.getInt("DEX", 10);
             moddex = mod(pntdex);
             suffix = (moddex >= 0) ? "+" : "";
-            DEX.setText("" + pntdex); DEXmod.setText(suffix + moddex);
+            tempstr = "" + pntdex;
+            DEX.setText(tempstr);
+            tempstr = suffix + moddex;
+            DEXmod.setText(tempstr);
 
             pntcos = state.getInt("COS", 10);
             modcos = mod(pntcos);
             suffix = (modcos >= 0) ? "+" : "";
-            COS.setText("" + pntcos); COSmod.setText(suffix + modcos);
+            tempstr = "" + pntcos;
+            COS.setText(tempstr);
+            tempstr = suffix + modcos;
+            COSmod.setText(tempstr);
 
             pntint = state.getInt("INT", 10);
             modint = mod(pntint);
             suffix = (modint >= 0) ? "+" : "";
-            INT.setText("" + pntint); INTmod.setText(suffix + modint);
+            tempstr = "" + pntint;
+            INT.setText(tempstr);
+            tempstr = suffix + modint;
+            INTmod.setText(tempstr);
 
             pntsag = state.getInt("SAG", 10);
             modsag = mod(pntsag);
             suffix = (modsag >= 0) ? "+" : "";
-            SAG.setText("" + pntsag); SAGmod.setText(suffix + modsag);
+            tempstr = "" + pntsag;
+            SAG.setText(tempstr);
+            tempstr = suffix + modsag;
+            SAGmod.setText(tempstr);
 
             pntcar = state.getInt("CAR", 10);
             modcar = mod(pntcar);
             suffix = (modcar >= 0) ? "+" : "";
-            CAR.setText("" + pntcar); CARmod.setText(suffix + modcar);
+            tempstr = "" + pntcar;
+            CAR.setText(tempstr);
+            tempstr = suffix + modcar;
+            CARmod.setText(tempstr);
 
             int ca = state.getInt("CA", 10);
-            CA.setText("" + ca);
+            tempstr = "" + ca;
+            CA.setText(tempstr);
 
             int pf = state.getInt("PF", 0);
-            PF.setText("" + pf);
+            tempstr = "" + pf;
+            PF.setText(tempstr);
 
             int pfmax = state.getInt("PFMAX", 0);
-            PFmax.setText("" + pfmax);
+            tempstr = "" + pfmax;
+            PFmax.setText(tempstr);
 
         }
 
@@ -209,8 +229,10 @@ public class CharacterActivity extends AppCompatActivity {
         int lv = state.getInt("pglv", 1);
         int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
         String suffix = (bonus < 0) ? "" : "+";
-        spellatk.setText(suffix + bonus);
-        spellcd.setText("" + (8 + bonus));
+        tempstr = suffix + bonus;
+        spellatk.setText(tempstr);
+        tempstr = "" + (8 + bonus);
+        spellcd.setText(tempstr);
 
         spellstat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,8 +261,11 @@ public class CharacterActivity extends AppCompatActivity {
                         spellstat.setText(stat);
                         int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
                         String suffix = (bonus < 0) ? "" : "+";
-                        spellatk.setText(suffix + bonus);
-                        spellcd.setText("" + (8 + bonus));
+                        String tempstr;
+                        tempstr = suffix + bonus;
+                        spellatk.setText(tempstr);
+                        tempstr = "" + (8 + bonus);
+                        spellcd.setText(tempstr);
                     }
 
                 });
@@ -253,7 +278,7 @@ public class CharacterActivity extends AppCompatActivity {
         abilitatalenti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout skilllyt = (LinearLayout) findViewById(R.id.skills);
+                LinearLayout skilllyt = findViewById(R.id.skills);
                 if (skilllyt.getVisibility() == View.VISIBLE) {
                     skilllyt.setVisibility(View.GONE);
                     abilitatalentiarrow.setImageResource(R.drawable.downarrow);
@@ -268,7 +293,7 @@ public class CharacterActivity extends AppCompatActivity {
         inventario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout invlyt = (LinearLayout) findViewById(R.id.inventory);
+                LinearLayout invlyt = findViewById(R.id.inventory);
                 if (invlyt.getVisibility() == View.VISIBLE) {
                     invlyt.setVisibility(View.GONE);
                     inventarioarrow.setImageResource(R.drawable.downarrow);
@@ -283,7 +308,7 @@ public class CharacterActivity extends AppCompatActivity {
         background.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout bglyt = (LinearLayout) findViewById(R.id.background);
+                LinearLayout bglyt = findViewById(R.id.background);
                 if (bglyt.getVisibility() == View.VISIBLE) {
                     bglyt.setVisibility(View.GONE);
                     backgroundarrow.setImageResource(R.drawable.downarrow);
@@ -298,7 +323,7 @@ public class CharacterActivity extends AppCompatActivity {
         attacchi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout atklyt = (LinearLayout) findViewById(R.id.atk);
+                LinearLayout atklyt = findViewById(R.id.atk);
                 if (atklyt.getVisibility() == View.VISIBLE) {
                     atklyt.setVisibility(View.GONE);
                     attacchiarrow.setImageResource(R.drawable.downarrow);
@@ -331,8 +356,11 @@ public class CharacterActivity extends AppCompatActivity {
                         if (lv <= 0) lv = 1;
                         if (lv > 45) lv = 45;
 
-                        lvtxt.setText(lv + "");
-                        proftxt.setText("+" + prof[lv-1]);
+                        String tempstr;
+                        tempstr = lv + "";
+                        lvtxt.setText(tempstr);
+                        tempstr = "+" + prof[lv-1];
+                        proftxt.setText(tempstr);
                         state.edit().putInt("pglv", lv).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -344,7 +372,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        proftxt.setText("+" + prof[state.getInt("pglv",1)-1]);
+        tempstr = "+" + prof[state.getInt("pglv",1)-1];
+        proftxt.setText(tempstr);
 
         nametxt.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -352,16 +381,11 @@ public class CharacterActivity extends AppCompatActivity {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertnewnameof) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         String name = input.getText().toString();
 
                         nametxt.setText(name);
@@ -382,19 +406,15 @@ public class CharacterActivity extends AppCompatActivity {
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertmaxpoints));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         String name = input.getText().toString();
                         int mana = Integer.parseInt(name);
-                        spellmana.setText(state.getInt("spellmana", 0) + "/" + name);
+                        String tempstr = state.getInt("spellmana", 0) + "/" + name;
+                        spellmana.setText(tempstr);
                         state.edit().putInt("spellmanamax", mana).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -404,7 +424,8 @@ public class CharacterActivity extends AppCompatActivity {
                 return true;
             }
         });
-        spellmana.setText(state.getInt("spellmana", 0) + "/" + state.getInt("spellmanamax", 0));
+        tempstr = state.getInt("spellmana", 0) + "/" + state.getInt("spellmanamax", 0);
+        spellmana.setText(tempstr);
 
         addmanabtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -412,9 +433,10 @@ public class CharacterActivity extends AppCompatActivity {
                 int mana = state.getInt("spellmana", 0);
                 int manamax = state.getInt("spellmanamax", 0);
                 mana++;
-                mana = (mana > manamax) ? manamax : mana;
+                mana = Math.min(mana, manamax);
                 state.edit().putInt("spellmana", mana).apply();
-                spellmana.setText(mana + "/" + manamax);
+                String tempstr = mana + "/" + manamax;
+                spellmana.setText(tempstr);
                 saveSchedaPG();
             }
         });
@@ -424,9 +446,10 @@ public class CharacterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 int mana = state.getInt("spellmana", 0);
                 mana--;
-                mana = (mana < 0) ? 0 : mana;
+                mana = Math.max(mana, 0);
                 state.edit().putInt("spellmana", mana).apply();
-                spellmana.setText(mana + "/" + state.getInt("spellmanamax", 0));
+                String tempstr = mana + "/" + state.getInt("spellmanamax", 0);
+                spellmana.setText(tempstr);
                 saveSchedaPG();
             }
         });
@@ -437,16 +460,11 @@ public class CharacterActivity extends AppCompatActivity {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertnewclass) + " " + state.getString("pgname", null));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         String classs = input.getText().toString();
 
                         classtxt.setText(classs);
@@ -467,7 +485,8 @@ public class CharacterActivity extends AppCompatActivity {
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                input.setText(state.getInt("CA", 0) + "");
+                String tempstr = state.getInt("CA", 0) + "";
+                input.setText(tempstr);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
@@ -479,7 +498,8 @@ public class CharacterActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int pnt = Integer.parseInt(input.getText().toString());
 
-                        CA.setText(pnt + "");
+                        String tempstr = pnt + "";
+                        CA.setText(tempstr);
                         state.edit().putInt("CA", pnt).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -498,7 +518,8 @@ public class CharacterActivity extends AppCompatActivity {
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                input.setText(state.getInt("PF", 0) + "");
+                String tempstr = state.getInt("PF", 0) + "";
+                input.setText(tempstr);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
@@ -512,7 +533,8 @@ public class CharacterActivity extends AppCompatActivity {
                             alertd.dismiss();
                         }
                         else {
-                            PF.setText(pnt + "");
+                            String tempstr = pnt + "";
+                            PF.setText(tempstr);
                             state.edit().putInt("PF", pnt).apply();
                             dialog.cancel();
                             alertd.dismiss();
@@ -533,7 +555,8 @@ public class CharacterActivity extends AppCompatActivity {
                 int pfmax = state.getInt("PFMAX", pf);
                 if (pf > pfmax) pf = pfmax;
                 state.edit().putInt("PF", pf).apply();
-                PF.setText(pf + "");
+                String tempstr = pf + "";
+                PF.setText(tempstr);
                 saveSchedaPG();
             }
         });
@@ -544,7 +567,8 @@ public class CharacterActivity extends AppCompatActivity {
                 int pf = state.getInt("PF", 0);
                 pf--;
                 state.edit().putInt("PF", pf).apply();
-                PF.setText(pf + "");
+                String tempstr = pf + "";
+                PF.setText(tempstr);
                 saveSchedaPG();
             }
         });
@@ -556,21 +580,18 @@ public class CharacterActivity extends AppCompatActivity {
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                input.setText(state.getInt("PFMAX", 0) + "");
+                String tempstr = state.getInt("PFMAX", 0) + "";
+                input.setText(tempstr);
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertmaxpf));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
 
-                        PFmax.setText(pnt + "");
+                        String tempstr = pnt + "";
+                        PFmax.setText(tempstr);
                         state.edit().putInt("PFMAX", pnt).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -590,22 +611,19 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
                         int mod = mod(pnt);
                         String suffix = (mod >= 0) ? "+" : "";
 
-                        FOR.setText(pnt + "");
-                        FORmod.setText(suffix + mod);
+                        String tempstr = pnt + "";
+                        FOR.setText(tempstr);
+                        tempstr = suffix + mod;
+                        FORmod.setText(tempstr);
                         state.edit().putInt("FOR", pnt).apply();
                         dialog.cancel();
                         alertd.dismiss();
@@ -625,16 +643,11 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
                         int mod = mod(pnt);
                         String suffix = (mod >= 0) ? "+" : "";
@@ -792,8 +805,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tsfortxt = (TextView) findViewById(R.id.TSFOR);
-        final CheckBox comptsfor = (CheckBox) findViewById(R.id.comptsfor);
+        final TextView tsfortxt = findViewById(R.id.TSFOR);
+        final CheckBox comptsfor = findViewById(R.id.comptsfor);
         comptsfor.setChecked(state.getBoolean("comptsfor", false));
         int ts = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -810,8 +823,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tsdextxt = (TextView) findViewById(R.id.TSDEX);
-        final CheckBox comptsdex = (CheckBox) findViewById(R.id.comptsdex);
+        final TextView tsdextxt = findViewById(R.id.TSDEX);
+        final CheckBox comptsdex = findViewById(R.id.comptsdex);
         comptsdex.setChecked(state.getBoolean("comptsdex", false));
         ts = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -827,8 +840,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tscostxt = (TextView) findViewById(R.id.TSCOS);
-        final CheckBox comptscos = (CheckBox) findViewById(R.id.comptscos);
+        final TextView tscostxt = findViewById(R.id.TSCOS);
+        final CheckBox comptscos = findViewById(R.id.comptscos);
         comptscos.setChecked(state.getBoolean("comptscos", false));
         ts = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -844,8 +857,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tsinttxt = (TextView) findViewById(R.id.TSINT);
-        final CheckBox comptsint = (CheckBox) findViewById(R.id.comptsint);
+        final TextView tsinttxt = findViewById(R.id.TSINT);
+        final CheckBox comptsint = findViewById(R.id.comptsint);
         comptsint.setChecked(state.getBoolean("comptsint", false));
         ts = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -861,8 +874,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tssagtxt = (TextView) findViewById(R.id.TSSAG);
-        final CheckBox comptssag = (CheckBox) findViewById(R.id.comptssag);
+        final TextView tssagtxt = findViewById(R.id.TSSAG);
+        final CheckBox comptssag = findViewById(R.id.comptssag);
         comptssag.setChecked(state.getBoolean("comptssag", false));
         ts = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -878,8 +891,8 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView tscartxt = (TextView) findViewById(R.id.TSCAR);
-        final CheckBox comptscar = (CheckBox) findViewById(R.id.comptscar);
+        final TextView tscartxt = findViewById(R.id.TSCAR);
+        final CheckBox comptscar = findViewById(R.id.comptscar);
         comptscar.setChecked(state.getBoolean("comptscar", false));
         ts = mod((state.getInt("CAR", 10))) + ((comptscar.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
@@ -895,9 +908,9 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        final TextView atletica = (TextView) findViewById(R.id.atletica);
-        final CheckBox compatletica = (CheckBox) findViewById(R.id.compatletica);
-        final CheckBox expatletica = (CheckBox) findViewById(R.id.expatletica);
+        final TextView atletica = findViewById(R.id.atletica);
+        final CheckBox compatletica = findViewById(R.id.compatletica);
+        final CheckBox expatletica = findViewById(R.id.expatletica);
         compatletica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -925,9 +938,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         atletica.setText(suffix + bonus);
 
-        final TextView acrobazia = (TextView) findViewById(R.id.acrobazia);
-        final CheckBox compacrobazia = (CheckBox) findViewById(R.id.compacrobazia);
-        final CheckBox expacrobazia = (CheckBox) findViewById(R.id.expacrobazia);
+        final TextView acrobazia = findViewById(R.id.acrobazia);
+        final CheckBox compacrobazia = findViewById(R.id.compacrobazia);
+        final CheckBox expacrobazia = findViewById(R.id.expacrobazia);
         compacrobazia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -955,9 +968,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         acrobazia.setText(suffix + bonus);
 
-        final TextView furtivita = (TextView) findViewById(R.id.furtivita);
-        final CheckBox compfurtivita = (CheckBox) findViewById(R.id.compfurtivita);
-        final CheckBox expfurtivita = (CheckBox) findViewById(R.id.expfurtivita);
+        final TextView furtivita = findViewById(R.id.furtivita);
+        final CheckBox compfurtivita = findViewById(R.id.compfurtivita);
+        final CheckBox expfurtivita = findViewById(R.id.expfurtivita);
         compfurtivita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -985,9 +998,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         furtivita.setText(suffix + bonus);
 
-        final TextView rapiditadimano = (TextView) findViewById(R.id.rapiditadimano);
-        final CheckBox comprapiditadimano = (CheckBox) findViewById(R.id.comprapiditadimano);
-        final CheckBox exprapiditadimano = (CheckBox) findViewById(R.id.exprapiditadimano);
+        final TextView rapiditadimano = findViewById(R.id.rapiditadimano);
+        final CheckBox comprapiditadimano = findViewById(R.id.comprapiditadimano);
+        final CheckBox exprapiditadimano = findViewById(R.id.exprapiditadimano);
         comprapiditadimano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1015,9 +1028,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         rapiditadimano.setText(suffix + bonus);
 
-        final TextView investigare = (TextView) findViewById(R.id.investigare);
-        final CheckBox compinvestigare = (CheckBox) findViewById(R.id.compinvestigare);
-        final CheckBox expinvestigare = (CheckBox) findViewById(R.id.expinvestigare);
+        final TextView investigare = findViewById(R.id.investigare);
+        final CheckBox compinvestigare = findViewById(R.id.compinvestigare);
+        final CheckBox expinvestigare = findViewById(R.id.expinvestigare);
         compinvestigare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1045,9 +1058,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         investigare.setText(suffix + bonus);
 
-        final TextView arcano = (TextView) findViewById(R.id.arcano);
-        final CheckBox comparcano = (CheckBox) findViewById(R.id.comparcano);
-        final CheckBox exparcano = (CheckBox) findViewById(R.id.exparcano);
+        final TextView arcano = findViewById(R.id.arcano);
+        final CheckBox comparcano = findViewById(R.id.comparcano);
+        final CheckBox exparcano = findViewById(R.id.exparcano);
         comparcano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1075,9 +1088,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         arcano.setText(suffix + bonus);
 
-        final TextView storia = (TextView) findViewById(R.id.storia);
-        final CheckBox compstoria = (CheckBox) findViewById(R.id.compstoria);
-        final CheckBox expstoria = (CheckBox) findViewById(R.id.expstoria);
+        final TextView storia = findViewById(R.id.storia);
+        final CheckBox compstoria = findViewById(R.id.compstoria);
+        final CheckBox expstoria = findViewById(R.id.expstoria);
         compstoria.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1105,9 +1118,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         storia.setText(suffix + bonus);
 
-        final TextView religionefolklore = (TextView) findViewById(R.id.religionefolklore);
-        final CheckBox compreligionefolklore = (CheckBox) findViewById(R.id.compreligionefolklore);
-        final CheckBox expreligionefolklore = (CheckBox) findViewById(R.id.expreligionefolklore);
+        final TextView religionefolklore = findViewById(R.id.religionefolklore);
+        final CheckBox compreligionefolklore = findViewById(R.id.compreligionefolklore);
+        final CheckBox expreligionefolklore = findViewById(R.id.expreligionefolklore);
         compreligionefolklore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1135,9 +1148,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         religionefolklore.setText(suffix + bonus);
 
-        final TextView natura = (TextView) findViewById(R.id.natura);
-        final CheckBox compnatura = (CheckBox) findViewById(R.id.compnatura);
-        final CheckBox expnatura = (CheckBox) findViewById(R.id.expnatura);
+        final TextView natura = findViewById(R.id.natura);
+        final CheckBox compnatura = findViewById(R.id.compnatura);
+        final CheckBox expnatura = findViewById(R.id.expnatura);
         compnatura.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1165,9 +1178,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         natura.setText(suffix + bonus);
 
-        final TextView sopravvivenza = (TextView) findViewById(R.id.sopravvivenza);
-        final CheckBox compsopravvivenza = (CheckBox) findViewById(R.id.compsopravvivenza);
-        final CheckBox expsopravvivenza = (CheckBox) findViewById(R.id.expsopravvivenza);
+        final TextView sopravvivenza = findViewById(R.id.sopravvivenza);
+        final CheckBox compsopravvivenza = findViewById(R.id.compsopravvivenza);
+        final CheckBox expsopravvivenza = findViewById(R.id.expsopravvivenza);
         compsopravvivenza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1195,9 +1208,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         sopravvivenza.setText(suffix + bonus);
 
-        final TextView medicina = (TextView) findViewById(R.id.medicina);
-        final CheckBox compmedicina = (CheckBox) findViewById(R.id.compmedicina);
-        final CheckBox expmedicina = (CheckBox) findViewById(R.id.expmedicina);
+        final TextView medicina = findViewById(R.id.medicina);
+        final CheckBox compmedicina = findViewById(R.id.compmedicina);
+        final CheckBox expmedicina = findViewById(R.id.expmedicina);
         compmedicina.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1225,9 +1238,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         medicina.setText(suffix + bonus);
 
-        final TextView percezione = (TextView) findViewById(R.id.percezione);
-        final CheckBox comppercezione = (CheckBox) findViewById(R.id.comppercezione);
-        final CheckBox exppercezione = (CheckBox) findViewById(R.id.exppercezione);
+        final TextView percezione = findViewById(R.id.percezione);
+        final CheckBox comppercezione = findViewById(R.id.comppercezione);
+        final CheckBox exppercezione = findViewById(R.id.exppercezione);
         comppercezione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1255,9 +1268,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         percezione.setText(suffix + bonus);
 
-        final TextView intuizione = (TextView) findViewById(R.id.intuizione);
-        final CheckBox compintuizione = (CheckBox) findViewById(R.id.compintuizione);
-        final CheckBox expintuizione = (CheckBox) findViewById(R.id.expintuizione);
+        final TextView intuizione = findViewById(R.id.intuizione);
+        final CheckBox compintuizione = findViewById(R.id.compintuizione);
+        final CheckBox expintuizione = findViewById(R.id.expintuizione);
         compintuizione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1285,9 +1298,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         intuizione.setText(suffix + bonus);
 
-        final TextView intimidire = (TextView) findViewById(R.id.intimidire);
-        final CheckBox compintimidire = (CheckBox) findViewById(R.id.compintimidire);
-        final CheckBox expintimidire = (CheckBox) findViewById(R.id.expintimidire);
+        final TextView intimidire = findViewById(R.id.intimidire);
+        final CheckBox compintimidire = findViewById(R.id.compintimidire);
+        final CheckBox expintimidire = findViewById(R.id.expintimidire);
         compintimidire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1315,9 +1328,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         intimidire.setText(suffix + bonus);
 
-        final TextView ingannare = (TextView) findViewById(R.id.ingannare);
-        final CheckBox compingannare = (CheckBox) findViewById(R.id.compingannare);
-        final CheckBox expingannare = (CheckBox) findViewById(R.id.expingannare);
+        final TextView ingannare = findViewById(R.id.ingannare);
+        final CheckBox compingannare = findViewById(R.id.compingannare);
+        final CheckBox expingannare = findViewById(R.id.expingannare);
         compingannare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1345,9 +1358,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         ingannare.setText(suffix + bonus);
 
-        final TextView intrattenere = (TextView) findViewById(R.id.intrattenere);
-        final CheckBox compintrattenere = (CheckBox) findViewById(R.id.compintrattenere);
-        final CheckBox expintrattenere = (CheckBox) findViewById(R.id.expintrattenere);
+        final TextView intrattenere = findViewById(R.id.intrattenere);
+        final CheckBox compintrattenere = findViewById(R.id.compintrattenere);
+        final CheckBox expintrattenere = findViewById(R.id.expintrattenere);
         compintrattenere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1375,9 +1388,9 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         intrattenere.setText(suffix + bonus);
 
-        final TextView persuadere = (TextView) findViewById(R.id.persuadere);
-        final CheckBox comppersuadere = (CheckBox) findViewById(R.id.comppersuadere);
-        final CheckBox exppersuadere = (CheckBox) findViewById(R.id.exppersuadere);
+        final TextView persuadere = findViewById(R.id.persuadere);
+        final CheckBox comppersuadere = findViewById(R.id.comppersuadere);
+        final CheckBox exppersuadere = findViewById(R.id.exppersuadere);
         comppersuadere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -1405,7 +1418,7 @@ public class CharacterActivity extends AppCompatActivity {
         suffix = (bonus >= 0) ? "+" : "";
         persuadere.setText(suffix + bonus);
 
-        EditText linguetxt = (EditText) findViewById(R.id.linguetxt);
+        EditText linguetxt = findViewById(R.id.linguetxt);
         linguetxt.setText(state.getString("linguetxt", ""));
         linguetxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1425,7 +1438,7 @@ public class CharacterActivity extends AppCompatActivity {
         });
         linguetxt.clearFocus();
 
-        EditText armitxt = (EditText) findViewById(R.id.armitxt);
+        EditText armitxt = findViewById(R.id.armitxt);
         armitxt.setText(state.getString("armitxt", ""));
         armitxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1445,7 +1458,7 @@ public class CharacterActivity extends AppCompatActivity {
         });
         armitxt.clearFocus();
 
-        EditText talentitxt = (EditText) findViewById(R.id.talentitxt);
+        EditText talentitxt = findViewById(R.id.talentitxt);
         talentitxt.setText(state.getString("talentitxt", ""));
         talentitxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1465,7 +1478,7 @@ public class CharacterActivity extends AppCompatActivity {
         });
         talentitxt.clearFocus();
 
-        EditText abilitatxt = (EditText) findViewById(R.id.abilitatxt);
+        EditText abilitatxt = findViewById(R.id.abilitatxt);
         abilitatxt.setText(state.getString("abilitatxt", ""));
         abilitatxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1651,7 +1664,7 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
-        EditText invtxt = (EditText) findViewById(R.id.invtxt);
+        EditText invtxt = findViewById(R.id.invtxt);
         invtxt.setText(state.getString("inv", ""));
         invtxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1672,7 +1685,7 @@ public class CharacterActivity extends AppCompatActivity {
         });
         invtxt.clearFocus();
 
-        EditText backgroundtxt = (EditText) findViewById(R.id.backgroundtxt);
+        EditText backgroundtxt = findViewById(R.id.backgroundtxt);
         backgroundtxt.setText(state.getString("background", ""));
         backgroundtxt.addTextChangedListener(new TextWatcher() {
             @Override
@@ -1694,11 +1707,11 @@ public class CharacterActivity extends AppCompatActivity {
         rangedatks.removeAllViews();
 
         TableRow header = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.rangedrow, null);
-        TextView name = (TextView) header.findViewById(R.id.rangedname);
-        TextView range = (TextView) header.findViewById(R.id.range);
-        TextView bonusrange = (TextView) header.findViewById(R.id.rangedbonus);
-        TextView damage = (TextView) header.findViewById(R.id.rangeddamage);
-        Button removebtn = (Button) header.findViewById(R.id.removeranged);
+        TextView name = header.findViewById(R.id.rangedname);
+        TextView range = header.findViewById(R.id.range);
+        TextView bonusrange = header.findViewById(R.id.rangedbonus);
+        TextView damage = header.findViewById(R.id.rangeddamage);
+        Button removebtn = header.findViewById(R.id.removeranged);
         name.setText(getString(R.string.name));
         range.setText(getString(R.string.range));
         bonusrange.setText(getString(R.string.bonusdex));
@@ -1710,10 +1723,10 @@ public class CharacterActivity extends AppCompatActivity {
         for (String str : rangedset) {
             String[] ranged = str.split("%");
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.rangedrow, null);
-            name = (TextView) newrow.findViewById(R.id.rangedname);
-            range = (TextView) newrow.findViewById(R.id.range);
-            bonusrange = (TextView) newrow.findViewById(R.id.rangedbonus);
-            damage = (TextView) newrow.findViewById(R.id.rangeddamage);
+            name = newrow.findViewById(R.id.rangedname);
+            range = newrow.findViewById(R.id.range);
+            bonusrange = newrow.findViewById(R.id.rangedbonus);
+            damage = newrow.findViewById(R.id.rangeddamage);
 
             int bonusb = mod(state.getInt("DEX", 10));
             String suffixb = (bonus >= 0) ? "+" : "";
@@ -1723,7 +1736,7 @@ public class CharacterActivity extends AppCompatActivity {
             bonusrange.setText(suffixb + bonusb);
             damage.setText(ranged[2]);
 
-            removebtn = (Button) newrow.findViewById(R.id.removeranged);
+            removebtn = newrow.findViewById(R.id.removeranged);
             final String strf = str;
             removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -1741,10 +1754,10 @@ public class CharacterActivity extends AppCompatActivity {
         meleeatks.removeAllViews();
 
         header = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
-        name = (TextView) header.findViewById(R.id.meleename);
-        bonusrange = (TextView) header.findViewById(R.id.meleebonus);
-        damage = (TextView) header.findViewById(R.id.meleedamage);
-        removebtn = (Button) header.findViewById(R.id.removemelee);
+        name = header.findViewById(R.id.meleename);
+        bonusrange = header.findViewById(R.id.meleebonus);
+        damage = header.findViewById(R.id.meleedamage);
+        removebtn = header.findViewById(R.id.removemelee);
         name.setText(getString(R.string.name));
         bonusrange.setText(getString(R.string.bonusfor));
         damage.setText(getString(R.string.damage));
@@ -1755,9 +1768,9 @@ public class CharacterActivity extends AppCompatActivity {
         for (String str : meleeset) {
             String[] melee = str.split("%");
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
-            name = (TextView) newrow.findViewById(R.id.meleename);
-            bonusrange = (TextView) newrow.findViewById(R.id.meleebonus);
-            damage = (TextView) newrow.findViewById(R.id.meleedamage);
+            name = newrow.findViewById(R.id.meleename);
+            bonusrange = newrow.findViewById(R.id.meleebonus);
+            damage = newrow.findViewById(R.id.meleedamage);
 
             int bonusb = mod(state.getInt("FOR", 10));
             String suffixb = (bonus >= 0) ? "+" : "";
@@ -1766,7 +1779,7 @@ public class CharacterActivity extends AppCompatActivity {
             bonusrange.setText(suffixb + bonusb);
             damage.setText(melee[1]);
 
-            removebtn = (Button) newrow.findViewById(R.id.removemelee);
+            removebtn = newrow.findViewById(R.id.removemelee);
             final String strf = str;
             removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
@@ -2101,7 +2114,7 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void saveSchedaPG() {
-        String str = new StringBuilder("").append(state.getString("pgname", null)).append("|")
+        String str = new StringBuilder().append(state.getString("pgname", null)).append("|")
                 .append(state.getString("pgclass", null)).append("|")
                 .append(state.getBoolean("inspiration", false)).append("|")
                 .append(state.getInt("pglv", 1)).append("|")
