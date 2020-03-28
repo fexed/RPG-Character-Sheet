@@ -36,6 +36,30 @@
             tools:layout_editor_absoluteY="32dp" />
 
         <TextView
+            android:id="@+id/pgxptxtv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="xxxx xp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/pgclasstxt"
+            tools:text="xxxx xp" />
+
+        <Button
+            android:id="@+id/addxpbtn"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="4dp"
+            android:background="@android:color/transparent"
+            android:text="+"
+            app:layout_constraintBottom_toBottomOf="@+id/pgxptxtv"
+            app:layout_constraintStart_toEndOf="@+id/pgxptxtv"
+            app:layout_constraintTop_toTopOf="@id/pgxptxtv" />
+
+        <TextView
             android:id="@+id/pglvtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,8 +69,21 @@
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/pgnametxt" />
+
+        <TextView
+            android:id="@+id/pglvtxt2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:text="@string/lv"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
+            app:layout_constraintEnd_toStartOf="@+id/pglvtxt"
+            app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
         <TextView
             android:id="@+id/textView18"
@@ -523,82 +560,15 @@
             </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/madfatigue"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/capf">
-
-            <LinearLayout
-                android:id="@+id/madness"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <SeekBar
-                    android:id="@+id/madbar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="5" />
-
-                <TextView
-                    android:id="@+id/madtag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="1"
-                    android:text="@string/pazzia"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/fatigue"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <SeekBar
-                    android:id="@+id/fatiguebar"
-                    style="@style/Widget.AppCompat.SeekBar.Discrete"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:max="5" />
-
-                <TextView
-                    android:id="@+id/fatiguetag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
-                    android:layout_weight="1"
-                    android:text="@string/affaticamento"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
-
         <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
             android:id="@+id/banner1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:adSize="BANNER"
+            app:adUnitId="ca-app-pub-9387595638685451/3199806772"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-9387595638685451/3199806772"
-            app:layout_constraintTop_toBottomOf="@+id/madfatigue" />
+            app:layout_constraintTop_toBottomOf="@+id/capf" />
 
         <TextView
             android:id="@+id/skillstitle"
@@ -943,8 +913,7 @@
                 android:id="@+id/abilities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                tools:visibility="gone">
+                android:layout_weight="0.5">
 
                 <TextView
                     android:id="@+id/abilitatitle"

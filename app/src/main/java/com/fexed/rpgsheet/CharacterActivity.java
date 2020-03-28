@@ -107,6 +107,7 @@ public class CharacterActivity extends AppCompatActivity {
         final TextView CA = (TextView) findViewById(R.id.CA);
         final TextView PF = (TextView) findViewById(R.id.PF);
         final TextView PFmax = (TextView) findViewById(R.id.PFmax);
+        final TextView XP = (TextView) findViewById(R.id.pgxptxtv);
         final TextView abilitatalenti = (TextView) findViewById(R.id.skillstitle);
         final ImageView abilitatalentiarrow = (ImageView) findViewById(R.id.dwna1);
         final TextView inventario = (TextView) findViewById(R.id.invtitle);
@@ -126,6 +127,7 @@ public class CharacterActivity extends AppCompatActivity {
         final Button spellapp = (Button) findViewById(R.id.spellappbtn);
         final Button addmanabtn = (Button) findViewById(R.id.addmana);
         final Button removemanabtn = (Button) findViewById(R.id.removemana);
+        final Button addxpbtn = (Button) findViewById(R.id.addxpbtn);
         final EditText cantrip = (EditText) findViewById(R.id.cantriplist);
         final EditText firstlv = (EditText) findViewById(R.id.firstlist);
         final EditText secondlv = (EditText) findViewById(R.id.secondlist);
@@ -137,10 +139,6 @@ public class CharacterActivity extends AppCompatActivity {
         final EditText eighthlv = (EditText) findViewById(R.id.eigththlist);
         final EditText ninthlv = (EditText) findViewById(R.id.ninthlist);
         final EditText pluslv = (EditText) findViewById(R.id.pluslist);
-        final SeekBar madseek = (SeekBar) findViewById(R.id.madbar);
-        final SeekBar fatigueseek = (SeekBar) findViewById(R.id.fatiguebar);
-        final TextView madtag = (TextView) findViewById(R.id.madtag);
-        final TextView fatiguetag = (TextView) findViewById(R.id.fatiguetag);
         final CheckBox inspirationtbn = (CheckBox) findViewById(R.id.inspirationbtn);
         final TableLayout rangedatks = (TableLayout) findViewById(R.id.rangedatks);
         final TableLayout meleeatks = (TableLayout) findViewById(R.id.meleeatks);
@@ -2030,66 +2028,72 @@ public class CharacterActivity extends AppCompatActivity {
         });
         pluslv.clearFocus();
 
-        madseek.setProgress(state.getInt("madness", 0));
-        madtag.setText(getString(R.string.pazzia) + " " + state.getInt("madness", 0));
-        madseek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                state.edit().putInt("madness", i).apply();
-                madtag.setText(getString(R.string.pazzia) + " " + i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-        /*madtag.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS INT, TS SAG, TS CAR\n2: 50% di possibilità di fare un'azione casuale ad ogni turno / ogni minuto\n3: paranoia e terrore, attacchi chiunque nelle tue vicinanze\n4: il tuo corpo è una prigione, devi liberartene\n5: consegna la scheda al Master, avrai un malus permanente a sua dicrezione");
-                builder.setTitle(getString(R.string.pazzia));
-                builder.create().show();
-                return true;
-            }
-        });*/
-
-        fatigueseek.setProgress(state.getInt("fatigue", 0));
-        fatiguetag.setText(getString(R.string.affaticamento) + " " + state.getInt("fatigue", 0));
-        fatigueseek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                state.edit().putInt("fatigue", i).apply();
-                fatiguetag.setText(getString(R.string.affaticamento) + " " + i);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {}
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {}
-        });
-
-        /*fatiguetag.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                TODO builder.setMessage("0: nessun effetto\n1: svantaggio in TS FOR, TS DEX, TS COS\n2: velocità dimezzata e svantaggio in tutti i tiri per colpire\n3: svantaggio in prove di FOR, DEX e COS\n4: malus di -10 in tutte le prove fisiche\n5: 0 PF e svieni");
-                builder.setTitle(getString(R.string.affaticamento));
-                builder.create().show();
-                return true;
-            }
-        });*/
-
         inspirationtbn.setChecked(state.getBoolean("inspiration", false));
         inspirationtbn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 state.edit().putBoolean("inspiration", b).apply();
                 saveSchedaPG();
+            }
+        });
+
+        XP.setText(state.getInt("xp", 0) + " xp");
+        XP.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.insertxpof) + " " + state.getString("pgname", null));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int xp = Integer.parseInt(input.getText().toString());
+
+                        XP.setText(xp + " xp");
+                        state.edit().putInt("xp", xp).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
+        addxpbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.addxpof));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int xp = Integer.parseInt(input.getText().toString());
+                        xp += state.getInt("xp", 0);
+
+                        XP.setText(xp + " xp");
+                        state.edit().putInt("xp", xp).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
             }
         });
 
@@ -2156,8 +2160,7 @@ public class CharacterActivity extends AppCompatActivity {
                 .append(state.getBoolean("expintrattenere", false)).append("|")
                 .append(state.getBoolean("comppersuadere", false)).append("|")
                 .append(state.getBoolean("exppersuadere", false)).append("|")
-                .append(state.getInt("fatigue", 0)).append("|")
-                .append(state.getInt("madness", 0)).append("|")
+                .append(state.getInt("xp", 0)).append("|")
                 .append(state.getString("crediti", "0")).append("|")
                 .append(state.getString("inv", "")).append("\n")
                 .toString();

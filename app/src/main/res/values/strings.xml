@@ -112,4 +112,6 @@
     <string name="argento">Silver</string>
     <string name="oro">Gold</string>
     <string name="platino">Platinum</string>
+    <string name="insertxpof">Enter the experience points of</string>
+    <string name="addxpof">Enter how many experience points you gained</string>
 </resources>

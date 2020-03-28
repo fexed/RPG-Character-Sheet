@@ -110,4 +110,6 @@
     <string name="oro">Oro</string>
     <string name="platino">Platino</string>
     <string name="rame">Rame</string>
+    <string name="insertxpof">Inserisci i punti esperienza di</string>
+    <string name="addxpof">Inserisci i punti esperienza che hai guadagnato</string>
 </resources>
