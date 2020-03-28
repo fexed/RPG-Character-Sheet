@@ -8,7 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -139,6 +141,7 @@ public class CharacterActivity extends AppCompatActivity {
         final CheckBox inspirationtbn = findViewById(R.id.inspirationbtn);
         final TableLayout rangedatks = findViewById(R.id.rangedatks);
         final TableLayout meleeatks = findViewById(R.id.meleeatks);
+        final RecyclerView inventoryView = findViewById(R.id.inventoryRecV);
         int pntfor; int modfor;
         int pntdex; int moddex;
         int pntcos; int modcos;
@@ -2110,73 +2113,92 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
+        final InventoryAdapter inventoryAdapter = new InventoryAdapter(state);
+        inventoryView.setAdapter(inventoryAdapter);
+        LinearLayoutManager lytmngr = new LinearLayoutManager(CharacterActivity.this);
+        lytmngr.setOrientation(LinearLayoutManager.HORIZONTAL);
+        inventoryView.setLayoutManager(lytmngr);
+
+        Button addObjBtn = findViewById(R.id.addobjbtn);
+        addObjBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                inventoryAdapter.addObj("Nuovo Oggetto::Descrizione");
+                inventoryAdapter.notifyDataSetChanged();
+            }
+        });
+
         saveSchedaPG();
     }
 
     private void saveSchedaPG() {
-        String str = new StringBuilder().append(state.getString("pgname", null)).append("|")
-                .append(state.getString("pgclass", null)).append("|")
-                .append(state.getBoolean("inspiration", false)).append("|")
-                .append(state.getInt("pglv", 1)).append("|")
-                .append(state.getInt("CA", 10)).append("|")
-                .append(state.getInt("PF", -1)).append("|")
-                .append(state.getInt("PFMAX", -1)).append("|")
-                .append(state.getInt("FOR", 10)).append("|")
-                .append(state.getInt("DEX", 10)).append("|")
-                .append(state.getInt("COS", 10)).append("|")
-                .append(state.getInt("INT", 10)).append("|")
-                .append(state.getInt("SAG", 10)).append("|")
-                .append(state.getInt("CAR", 10)).append("|")
-                .append(state.getBoolean("comptsfor", false)).append("|")
-                .append(state.getBoolean("comptsdex", false)).append("|")
-                .append(state.getBoolean("comptscos", false)).append("|")
-                .append(state.getBoolean("comptsint", false)).append("|")
-                .append(state.getBoolean("comptssag", false)).append("|")
-                .append(state.getBoolean("comptscar", false)).append("|")
-                .append(state.getBoolean("compatletica", false)).append("|")
-                .append(state.getBoolean("expatletica", false)).append("|")
-                .append(state.getBoolean("compacrobazia", false)).append("|")
-                .append(state.getBoolean("expacrobazia", false)).append("|")
-                .append(state.getBoolean("compfurtivita", false)).append("|")
-                .append(state.getBoolean("expfurtivita", false)).append("|")
-                .append(state.getBoolean("comprapiditadimano", false)).append("|")
-                .append(state.getBoolean("exprapiditadimano", false)).append("|")
-                .append(state.getBoolean("compresistenzafisica", false)).append("|")
-                .append(state.getBoolean("expresistenzafisica", false)).append("|")
-                .append(state.getBoolean("compinvestigare", false)).append("|")
-                .append(state.getBoolean("expinvestigare", false)).append("|")
-                .append(state.getBoolean("comparcano", false)).append("|")
-                .append(state.getBoolean("exparcano", false)).append("|")
-                .append(state.getBoolean("compstoria", false)).append("|")
-                .append(state.getBoolean("expstoria", false)).append("|")
-                .append(state.getBoolean("compreligionefolklore", false)).append("|")
-                .append(state.getBoolean("expreligionefolklore", false)).append("|")
-                .append(state.getBoolean("compreligionefolklore", false)).append("|")
-                .append(state.getBoolean("expreligionefolklore", false)).append("|")
-                .append(state.getBoolean("compnatura", false)).append("|")
-                .append(state.getBoolean("expnatura", false)).append("|")
-                .append(state.getBoolean("compfauna", false)).append("|")
-                .append(state.getBoolean("expfauna", false)).append("|")
-                .append(state.getBoolean("compsopravvivenza", false)).append("|")
-                .append(state.getBoolean("expsopravvivenza", false)).append("|")
-                .append(state.getBoolean("compmedicina", false)).append("|")
-                .append(state.getBoolean("expmedicina", false)).append("|")
-                .append(state.getBoolean("comppercezione", false)).append("|")
-                .append(state.getBoolean("exppercezione", false)).append("|")
-                .append(state.getBoolean("compintuizione", false)).append("|")
-                .append(state.getBoolean("expintuizione", false)).append("|")
-                .append(state.getBoolean("compintimidire", false)).append("|")
-                .append(state.getBoolean("expintimidire", false)).append("|")
-                .append(state.getBoolean("compingannare", false)).append("|")
-                .append(state.getBoolean("expingannare", false)).append("|")
-                .append(state.getBoolean("compintrattenere", false)).append("|")
-                .append(state.getBoolean("expintrattenere", false)).append("|")
-                .append(state.getBoolean("comppersuadere", false)).append("|")
-                .append(state.getBoolean("exppersuadere", false)).append("|")
-                .append(state.getInt("xp", 0)).append("|")
-                .append(state.getString("crediti", "0")).append("|")
-                .append(state.getString("inv", "")).append("\n")
-                .toString();
+        String str = state.getString("pgname", null) + "|" +
+                state.getString("pgclass", null) + "|" +
+                state.getBoolean("inspiration", false) + "|" +
+                state.getInt("pglv", 1) + "|" +
+                state.getInt("CA", 10) + "|" +
+                state.getInt("PF", -1) + "|" +
+                state.getInt("PFMAX", -1) + "|" +
+                state.getInt("FOR", 10) + "|" +
+                state.getInt("DEX", 10) + "|" +
+                state.getInt("COS", 10) + "|" +
+                state.getInt("INT", 10) + "|" +
+                state.getInt("SAG", 10) + "|" +
+                state.getInt("CAR", 10) + "|" +
+                state.getBoolean("comptsfor", false) + "|" +
+                state.getBoolean("comptsdex", false) + "|" +
+                state.getBoolean("comptscos", false) + "|" +
+                state.getBoolean("comptsint", false) + "|" +
+                state.getBoolean("comptssag", false) + "|" +
+                state.getBoolean("comptscar", false) + "|" +
+                state.getBoolean("compatletica", false) + "|" +
+                state.getBoolean("expatletica", false) + "|" +
+                state.getBoolean("compacrobazia", false) + "|" +
+                state.getBoolean("expacrobazia", false) + "|" +
+                state.getBoolean("compfurtivita", false) + "|" +
+                state.getBoolean("expfurtivita", false) + "|" +
+                state.getBoolean("comprapiditadimano", false) + "|" +
+                state.getBoolean("exprapiditadimano", false) + "|" +
+                state.getBoolean("compresistenzafisica", false) + "|" +
+                state.getBoolean("expresistenzafisica", false) + "|" +
+                state.getBoolean("compinvestigare", false) + "|" +
+                state.getBoolean("expinvestigare", false) + "|" +
+                state.getBoolean("comparcano", false) + "|" +
+                state.getBoolean("exparcano", false) + "|" +
+                state.getBoolean("compstoria", false) + "|" +
+                state.getBoolean("expstoria", false) + "|" +
+                state.getBoolean("compreligionefolklore", false) + "|" +
+                state.getBoolean("expreligionefolklore", false) + "|" +
+                state.getBoolean("compreligionefolklore", false) + "|" +
+                state.getBoolean("expreligionefolklore", false) + "|" +
+                state.getBoolean("compnatura", false) + "|" +
+                state.getBoolean("expnatura", false) + "|" +
+                state.getBoolean("compfauna", false) + "|" +
+                state.getBoolean("expfauna", false) + "|" +
+                state.getBoolean("compsopravvivenza", false) + "|" +
+                state.getBoolean("expsopravvivenza", false) + "|" +
+                state.getBoolean("compmedicina", false) + "|" +
+                state.getBoolean("expmedicina", false) + "|" +
+                state.getBoolean("comppercezione", false) + "|" +
+                state.getBoolean("exppercezione", false) + "|" +
+                state.getBoolean("compintuizione", false) + "|" +
+                state.getBoolean("expintuizione", false) + "|" +
+                state.getBoolean("compintimidire", false) + "|" +
+                state.getBoolean("expintimidire", false) + "|" +
+                state.getBoolean("compingannare", false) + "|" +
+                state.getBoolean("expingannare", false) + "|" +
+                state.getBoolean("compintrattenere", false) + "|" +
+                state.getBoolean("expintrattenere", false) + "|" +
+                state.getBoolean("comppersuadere", false) + "|" +
+                state.getBoolean("exppersuadere", false) + "|" +
+                state.getInt("xp", 0) + "|" +
+                state.getInt("mp", 0) + "|" +
+                state.getInt("mo", 0) + "|" +
+                state.getInt("ma", 0) + "|" +
+                state.getInt("mr", 0) + "|" +
+                state.getString("crediti", "0") + "|" +
+                state.getStringSet("inventory", null) + "|" +
+                state.getString("inv", "") + "\n";
         FileHelper.saveToFile(str, getApplicationContext(), state.getString("pgname", null) + "PGDATA.txt");
     }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -78,9 +78,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
+            android:fontFamily="sans-serif-condensed"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="18sp"
+            android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
             app:layout_constraintEnd_toStartOf="@+id/pglvtxt"
             app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
@@ -909,7 +910,7 @@
             </LinearLayout>
 
 
-            <android.support.constraint.ConstraintLayout
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/abilities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -1740,7 +1741,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -1791,7 +1792,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -1946,9 +1947,9 @@
                                 android:visibility="visible" />
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -1984,9 +1985,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2022,9 +2023,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2060,9 +2061,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2098,9 +2099,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2136,9 +2137,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2174,9 +2175,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2212,9 +2213,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2250,9 +2251,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2288,9 +2289,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2326,9 +2327,9 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -2364,7 +2365,7 @@
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -2379,7 +2380,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -2415,9 +2416,9 @@
                                 android:text="@string/aggiungi" />
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
-                    <android.support.v7.widget.CardView
+                    <androidx.cardview.widget.CardView
                         android:layout_width="400dp"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
@@ -2453,7 +2454,7 @@
                                 android:text="@string/aggiungi" />
 
                         </LinearLayout>
-                    </android.support.v7.widget.CardView>
+                    </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -2631,6 +2632,29 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="400dp"
+                android:layout_weight="0"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/addobjbtn"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="35dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="25dp"
+                    android:text="+" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/inventoryRecV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="true"/>
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/invtxt"
                 android:layout_width="match_parent"
@@ -2690,5 +2714,5 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
