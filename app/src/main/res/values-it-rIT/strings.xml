@@ -106,4 +106,8 @@
     <string name="roll">Lancia</string>
     <string name="testa">Testa</string>
     <string name="Croce">Croce</string>
+    <string name="argento">Argento</string>
+    <string name="oro">Oro</string>
+    <string name="platino">Platino</string>
+    <string name="rame">Rame</string>
 </resources>

@@ -631,202 +631,231 @@
             android:id="@+id/skills"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/skillstitle">
 
-            <LinearLayout
-                android:id="@+id/ts"
+            <TextView
+                android:id="@+id/tstitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:orientation="vertical">
+                android:layout_gravity="center_horizontal"
+                android:text="@string/tiri_salvezza"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tstitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tiri_salvezza"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/str"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptsfor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/str"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSFOR"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dex"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptsdex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/dex"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSDEX"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cos"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptscos"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/cos"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSCOS"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/inte"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptsint"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/inte"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSINT"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sag"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptssag"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/sag"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSSAG"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:orientation="horizontal">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/car"
+                        android:textAlignment="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/comptscar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/car"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
+                        android:layout_gravity="center_horizontal"
+                        android:button="@drawable/checkmark"
+                        android:gravity="center_horizontal|center_vertical"
+                        android:textAlignment="center"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/TSCAR"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView" />
+                        android:textAlignment="center"
+                        tools:text="+100" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.25"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingTop="15dp">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -910,229 +939,227 @@
             </LinearLayout>
 
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:id="@+id/abilities"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:orientation="vertical">
+                tools:visibility="gone">
 
                 <TextView
                     android:id="@+id/abilitatitle"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/abilit"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/str"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/atletica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/atletica"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expatletica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compatletica"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/abilitatitle" />
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/atletica"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/atletica"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/atletica"
+                    app:layout_constraintStart_toEndOf="@+id/atletica" />
+
+                <CheckBox
+                    android:id="@+id/expatletica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView8"
+                    app:layout_constraintStart_toEndOf="@id/textView8" />
+
+                <CheckBox
+                    android:id="@+id/compatletica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+                    app:layout_constraintStart_toEndOf="@+id/expatletica" />
+
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/dex"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/acrobazia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/acrobazia"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expacrobazia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compacrobazia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/furtivita"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/furtivit"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expfurtivita"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compfurtivita"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/rapiditadimano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/rapidit_di_mano"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/exprapiditadimano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/comprapiditadimano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/atletica" />
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/acrobazia"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/cos"
-                    android:textAlignment="center"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView9"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/acrobazia"
+                    android:textAlignment="textEnd"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/acrobazia"
+                    app:layout_constraintStart_toEndOf="@+id/acrobazia" />
+
+                <CheckBox
+                    android:id="@+id/expacrobazia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+                    app:layout_constraintStart_toEndOf="@+id/textView12" />
+
+                <CheckBox
+                    android:id="@+id/compacrobazia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expacrobazia"
+                    app:layout_constraintStart_toEndOf="@+id/expacrobazia" />
+
+
+                <TextView
+                    android:id="@+id/furtivita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/acrobazia"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/furtivit"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/furtivita"
+                    app:layout_constraintStart_toEndOf="@+id/furtivita" />
+
+                <CheckBox
+                    android:id="@+id/expfurtivita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView14"
+                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                    tools:layout_editor_absoluteY="120dp" />
+
+                <CheckBox
+                    android:id="@+id/compfurtivita"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@id/expfurtivita"
+                    app:layout_constraintStart_toEndOf="@+id/expfurtivita" />
+
+
+                <TextView
+                    android:id="@+id/rapiditadimano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/furtivita"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/rapidit_di_mano"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/rapiditadimano"
+                    app:layout_constraintStart_toEndOf="@+id/rapiditadimano" />
+
+                <CheckBox
+                    android:id="@+id/exprapiditadimano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView15"
+                    app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+                <CheckBox
+                    android:id="@+id/comprapiditadimano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@id/exprapiditadimano"
+                    app:layout_constraintStart_toEndOf="@+id/exprapiditadimano" />
+
 
                 <!-- <LinearLayout
                     android:layout_width="match_parent"
@@ -1147,7 +1174,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="TextView"
+                        tools:text="+100"
                         android:textAlignment="textEnd" />
 
                     <TextView
@@ -1181,615 +1208,620 @@
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/textView17"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/inte"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rapiditadimano" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/investigare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/investigare"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expinvestigare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compinvestigare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/arcano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/arcano"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/exparcano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/comparcano"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/storia"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/storia"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expstoria"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compstoria"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/religionefolklore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/religione_e_folklore"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expreligionefolklore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compreligionefolklore"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/natura"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/natura"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expnatura"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compnatura"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/investigare"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView17"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/investigare"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/investigare"
+                    app:layout_constraintStart_toEndOf="@+id/investigare" />
+
+                <CheckBox
+                    android:id="@+id/expinvestigare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView19"
+                    app:layout_constraintStart_toEndOf="@+id/textView19" />
+
+                <CheckBox
+                    android:id="@+id/compinvestigare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expinvestigare"
+                    app:layout_constraintStart_toEndOf="@+id/expinvestigare" />
+
+
+                <TextView
+                    android:id="@+id/arcano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/investigare"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/arcano"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/arcano"
+                    app:layout_constraintStart_toEndOf="@id/arcano" />
+
+                <CheckBox
+                    android:id="@+id/exparcano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView20"
+                    app:layout_constraintStart_toEndOf="@id/textView20" />
+
+                <CheckBox
+                    android:id="@+id/comparcano"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/exparcano"
+                    app:layout_constraintStart_toEndOf="@+id/exparcano" />
+
+
+                <TextView
+                    android:id="@+id/storia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/arcano"
+                    tools:layout_editor_absoluteY="241dp"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/storia"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/storia"
+                    app:layout_constraintStart_toEndOf="@+id/storia" />
+
+                <CheckBox
+                    android:id="@+id/expstoria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView21"
+                    app:layout_constraintStart_toEndOf="@+id/textView21" />
+
+                <CheckBox
+                    android:id="@+id/compstoria"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expstoria"
+                    app:layout_constraintStart_toEndOf="@+id/expstoria" />
+
+
+                <TextView
+                    android:id="@+id/religionefolklore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/storia"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/religione_e_folklore"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/religionefolklore"
+                    app:layout_constraintStart_toEndOf="@+id/religionefolklore" />
+
+                <CheckBox
+                    android:id="@+id/expreligionefolklore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView22"
+                    app:layout_constraintStart_toEndOf="@+id/textView22" />
+
+                <CheckBox
+                    android:id="@+id/compreligionefolklore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expreligionefolklore"
+                    app:layout_constraintStart_toEndOf="@+id/expreligionefolklore" />
+
+
+                <TextView
+                    android:id="@+id/natura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="@id/religionefolklore"
+                    app:layout_constraintTop_toBottomOf="@+id/expreligionefolklore"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView23"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/natura"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/natura"
+                    app:layout_constraintStart_toEndOf="@+id/natura" />
+
+                <CheckBox
+                    android:id="@+id/expnatura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView23"
+                    app:layout_constraintStart_toEndOf="@+id/textView23" />
+
+                <CheckBox
+                    android:id="@+id/compnatura"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expnatura"
+                    app:layout_constraintStart_toEndOf="@+id/expnatura" />
+
+
+                <TextView
+                    android:id="@+id/textView24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/sag"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/natura" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/sopravvivenza"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/sopravvivenza"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expsopravvivenza"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compsopravvivenza"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/medicina"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/medicina"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expmedicina"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compmedicina"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/percezione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/percezione"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/exppercezione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/comppercezione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/intuizione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/intuizione"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expintuizione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compintuizione"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/sopravvivenza"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView24"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/sopravvivenza"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/sopravvivenza"
+                    app:layout_constraintStart_toEndOf="@+id/sopravvivenza" />
+
+                <CheckBox
+                    android:id="@+id/expsopravvivenza"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView25"
+                    app:layout_constraintStart_toEndOf="@id/textView25" />
+
+                <CheckBox
+                    android:id="@+id/compsopravvivenza"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expsopravvivenza"
+                    app:layout_constraintStart_toEndOf="@+id/expsopravvivenza" />
+
+
+                <TextView
+                    android:id="@+id/medicina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="@id/sopravvivenza"
+                    app:layout_constraintTop_toBottomOf="@id/sopravvivenza"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/medicina"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/medicina"
+                    app:layout_constraintStart_toEndOf="@+id/medicina" />
+
+                <CheckBox
+                    android:id="@+id/expmedicina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView26"
+                    app:layout_constraintStart_toEndOf="@+id/textView26" />
+
+                <CheckBox
+                    android:id="@+id/compmedicina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expmedicina"
+                    app:layout_constraintStart_toEndOf="@+id/expmedicina" />
+
+
+                <TextView
+                    android:id="@+id/percezione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/medicina"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView27"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/percezione"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/percezione"
+                    app:layout_constraintStart_toEndOf="@+id/percezione" />
+
+                <CheckBox
+                    android:id="@+id/exppercezione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView27"
+                    app:layout_constraintStart_toEndOf="@+id/textView27" />
+
+                <CheckBox
+                    android:id="@+id/comppercezione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/exppercezione"
+                    app:layout_constraintStart_toEndOf="@+id/exppercezione" />
+
+
+                <TextView
+                    android:id="@+id/intuizione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/percezione"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/intuizione"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/intuizione"
+                    app:layout_constraintStart_toEndOf="@+id/intuizione" />
+
+                <CheckBox
+                    android:id="@+id/expintuizione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView28"
+                    app:layout_constraintStart_toEndOf="@+id/textView28"
+                    tools:layout_editor_absoluteY="408dp" />
+
+                <CheckBox
+                    android:id="@+id/compintuizione"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expintuizione"
+                    app:layout_constraintStart_toEndOf="@+id/expintuizione" />
+
+
+                <TextView
+                    android:id="@+id/textView29"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/car"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/intuizione" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+
+                <TextView
+                    android:id="@+id/intimidire"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView29"
+                    tools:text="+100" />
 
-                    <TextView
-                        android:id="@+id/intimidire"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/intimidire"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expintimidire"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compintimidire"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView30"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
+                    android:layout_marginStart="8dp"
+                    android:text="@string/intimidire"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/intimidire"
+                    app:layout_constraintStart_toEndOf="@+id/intimidire" />
 
-                    <TextView
-                        android:id="@+id/ingannare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/ingannare"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expingannare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compingannare"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:id="@+id/expintimidire"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView30"
+                    app:layout_constraintStart_toEndOf="@+id/textView30"
+                    tools:layout_editor_absoluteY="456dp" />
 
-                    <TextView
-                        android:id="@+id/intrattenere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/intrattenere"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
-
-                    <CheckBox
-                        android:id="@+id/expintrattenere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
-
-                    <CheckBox
-                        android:id="@+id/compintrattenere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <CheckBox
+                    android:id="@+id/compintimidire"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:foregroundGravity="right"
-                    android:gravity="right"
-                    android:orientation="horizontal">
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expintimidire"
+                    app:layout_constraintStart_toEndOf="@+id/expintimidire" />
 
-                    <TextView
-                        android:id="@+id/persuadere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="TextView"
-                        android:textAlignment="textEnd" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="0"
-                        android:text="@string/persuadere"
-                        android:textAlignment="textEnd"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/ingannare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/intimidire"
+                    tools:text="+100" />
 
-                    <CheckBox
-                        android:id="@+id/exppersuadere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false"
-                        android:visibility="invisible" />
+                <TextView
+                    android:id="@+id/textView31"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/ingannare"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/ingannare"
+                    app:layout_constraintStart_toEndOf="@+id/ingannare" />
 
-                    <CheckBox
-                        android:id="@+id/comppersuadere"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0"
-                        android:checked="false"
-                        android:duplicateParentState="false" />
+                <CheckBox
+                    android:id="@+id/expingannare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView31"
+                    app:layout_constraintStart_toEndOf="@+id/textView31" />
 
-                </LinearLayout>
+                <CheckBox
+                    android:id="@+id/compingannare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expingannare"
+                    app:layout_constraintStart_toEndOf="@+id/expingannare" />
 
-            </LinearLayout>
+
+                <TextView
+                    android:id="@+id/intrattenere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ingannare"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView32"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/intrattenere"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/intrattenere"
+                    app:layout_constraintStart_toEndOf="@+id/intrattenere" />
+
+                <CheckBox
+                    android:id="@+id/expintrattenere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView32"
+                    app:layout_constraintStart_toEndOf="@id/textView32" />
+
+                <CheckBox
+                    android:id="@+id/compintrattenere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expintrattenere"
+                    app:layout_constraintStart_toEndOf="@+id/expintrattenere" />
+
+
+                <TextView
+                    android:id="@+id/persuadere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textAlignment="textEnd"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/intrattenere"
+                    tools:text="+100" />
+
+                <TextView
+                    android:id="@+id/textView33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/persuadere"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/persuadere"
+                    app:layout_constraintStart_toEndOf="@+id/persuadere" />
+
+                <CheckBox
+                    android:id="@+id/exppersuadere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView33"
+                    app:layout_constraintStart_toEndOf="@id/textView33" />
+
+                <CheckBox
+                    android:id="@+id/comppersuadere"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@id/exppersuadere"
+                    app:layout_constraintStart_toEndOf="@+id/exppersuadere" />
+
+
+            </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>
 
@@ -1909,9 +1941,9 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
                                     android:paddingTop="5dp"
                                     android:paddingBottom="5dp"
-                                    android:layout_weight="1"
                                     android:text="+0"
                                     android:textColor="@color/cardview_light_background" />
                             </LinearLayout>
@@ -2566,7 +2598,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="TextView"
+                        tools:text="+100"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />
@@ -2575,7 +2607,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Platino"
+                        android:text="@string/platino"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/platinum"
@@ -2593,7 +2625,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="TextView"
+                        tools:text="+100"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />
@@ -2602,7 +2634,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Oro"
+                        android:text="@string/oro"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/gold"
@@ -2622,7 +2654,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="TextView"
+                        tools:text="+100"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />
@@ -2631,7 +2663,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Argento"
+                        android:text="@string/argento"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/silver"
@@ -2652,7 +2684,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="TextView"
+                        tools:text="+100"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textSize="18sp" />
@@ -2661,7 +2693,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Rame"
+                        android:text="@string/rame"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/copper"
@@ -2676,7 +2708,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="10dp"
-                android:text="TextView"
+                tools:text="+100"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 

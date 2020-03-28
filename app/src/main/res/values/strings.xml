@@ -108,4 +108,8 @@
     <string name="roll">Roll</string>
     <string name="testa">Heads</string>
     <string name="Croce">Tails</string>
+    <string name="rame">Copper</string>
+    <string name="argento">Silver</string>
+    <string name="oro">Gold</string>
+    <string name="platino">Platinum</string>
 </resources>

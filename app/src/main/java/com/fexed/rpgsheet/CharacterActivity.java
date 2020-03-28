@@ -12,13 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -44,6 +47,8 @@ public class CharacterActivity extends AppCompatActivity {
 
     static SharedPreferences state;
     static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13};
+    static boolean minusPressed = false;
+    static boolean plusPressed = false;
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -55,6 +60,7 @@ public class CharacterActivity extends AppCompatActivity {
         Bundle bndl = new Bundle();
         bndl.putString("PG_Name", state.getString("pgname", "nonsettato"));
         FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);
+        Log.d("NOTE", state.getString("notes", ""));
     }
 
     @Override
@@ -496,16 +502,11 @@ public class CharacterActivity extends AppCompatActivity {
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 input.setText(state.getInt("PF", 0) + "");
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
                 alert.setTitle(getString(R.string.insertpf));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int pnt = Integer.parseInt(input.getText().toString());
                         if (pnt > state.getInt("PFMAX", pnt)) {
                             Toast.makeText(CharacterActivity.this, getString(R.string.insertpferror), Toast.LENGTH_SHORT).show();
@@ -549,7 +550,6 @@ public class CharacterActivity extends AppCompatActivity {
                 saveSchedaPG();
             }
         });
-
 
         PFmax.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
