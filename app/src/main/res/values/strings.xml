@@ -107,7 +107,7 @@
     <string name="dicerollhintchoose">Choose a dice!</string>
     <string name="roll">Roll</string>
     <string name="testa">Heads</string>
-    <string name="Croce">Tails</string>
+    <string name="croce">Tails</string>
     <string name="rame">Copper</string>
     <string name="argento">Silver</string>
     <string name="oro">Gold</string>
@@ -118,4 +118,11 @@
     <string name="addobjtoinv">Add an item to the inventory</string>
     <string name="scrollformore">Scroll for more</string>
     <string name="comp">Prof.</string>
+    <string name="mo">gp</string>
+    <string name="total">Total</string>
+    <string name="pgsgoldpieces">Editing %1$s\'s gold coins</string>
+    <string name="pgsplatpieces">Editing %1$s\'s platinum coins</string>
+    <string name="pgssilvpieces">Editing %1$s\'s silver coins</string>
+    <string name="pgscopppieces">Editing %1$s\'s copper coins</string>
+    <string name="howmanydice">How many D%1$ds to roll?</string>
 </resources>

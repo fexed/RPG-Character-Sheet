@@ -1563,14 +1563,14 @@ public class CharacterActivity extends AppCompatActivity {
         final TextView mrtxtv = findViewById(R.id.mrtxtv);
         final TextView totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
 
-        double money = 0;
+        double money;
         int mp = state.getInt("mp", 0);
         int mo = state.getInt("mo", 0);
         int ma = state.getInt("ma", 0);
         int mr = state.getInt("mr", 0);
         money = Math.ceil(mp*10 + mo + ma*0.1 + mr*0.01);
         String txt = String.format(Locale.getDefault(), "%.0f", money);
-        String strstr = "Per un totale di " + txt + " mo";
+        String strstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
         totalmtxtv.setText(strstr);
 
         mptxtv.setText(mp + "");
@@ -1580,19 +1580,14 @@ public class CharacterActivity extends AppCompatActivity {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
                 final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
                 alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
+                alert.setNegativeButton(getString(R.string.annulla), null);
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Monete di platino di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.pgsplatpieces, state.getString("pgname", null)));
                 input.setText(state.getInt("mp", 0) + "");
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
                         int monete = Integer.parseInt(input.getText().toString());
                         mptxtv.setText(monete + "");
                         state.edit().putInt("mp", monete).apply();
@@ -1601,7 +1596,7 @@ public class CharacterActivity extends AppCompatActivity {
                         int mr = state.getInt("mr", 0);
                         double moneteTot =  Math.ceil(monete*10 + mo + ma*0.1 + mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
@@ -1623,7 +1618,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Monete d'oro di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.pgsgoldpieces, state.getString("pgname", null)));
                 input.setText(state.getInt("mo", 0) + "");
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -1638,7 +1633,7 @@ public class CharacterActivity extends AppCompatActivity {
                         int mr = state.getInt("mr", 0);
                         double moneteTot =  Math.ceil(mp*10 + monete + ma*0.1 + mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
@@ -1660,7 +1655,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Monete d'argento di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.pgssilvpieces, state.getString("pgname", null)));
                 input.setText(state.getInt("ma", 0) + "");
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -1675,7 +1670,7 @@ public class CharacterActivity extends AppCompatActivity {
                         int mr = state.getInt("mr", 0);
                         double moneteTot =  Math.ceil(mp*10 + mo + monete*0.1 + mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
@@ -1697,7 +1692,7 @@ public class CharacterActivity extends AppCompatActivity {
                     }
                 });
                 final AlertDialog alertd = alert.create();
-                alert.setTitle("Monete di rame di " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.pgscopppieces, state.getString("pgname", null)));
                 input.setText(state.getInt("mr", 0) + "");
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -1712,7 +1707,7 @@ public class CharacterActivity extends AppCompatActivity {
                         int ma = state.getInt("ma", 0);
                         double moneteTot =  Math.ceil(mp*10 + mo + ma*0.1 + monete*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText("Per un totale di " + txt + " mo");
+                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();

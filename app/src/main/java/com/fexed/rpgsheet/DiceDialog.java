@@ -114,8 +114,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             str.append("= ").append(total);
             histtxt.setText(str.toString());
         } else {
-            if (rnd.nextBoolean()) outtxt.setText("Testa");
-            else outtxt.setText("Croce");
+            if (rnd.nextBoolean()) outtxt.setText(this.getContext().getText(R.string.testa));
+            else outtxt.setText(this.getContext().getText(R.string.croce));
         }
     }
 
@@ -151,7 +151,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
 
         if (max != -1) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-            builder.setTitle("Quanti D" + max + " lanciare?");
+            builder.setTitle(this.getContext().getString(R.string.howmanydice, max));
             final EditText input = new EditText(this.c);
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             builder.setView(input);
@@ -186,7 +186,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             builder.show();
         } else {
             if (rnd.nextBoolean()) outtxt.setText(R.string.testa);
-            else outtxt.setText(R.string.Croce);
+            else outtxt.setText(R.string.croce);
         }
         return true;
     }
