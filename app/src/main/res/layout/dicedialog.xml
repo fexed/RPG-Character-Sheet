@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="25dp">
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/d20_b" />
 
     <TextView
         android:id="@+id/diceRollHistoryTxtV"
@@ -81,13 +92,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:background="@color/semitrasp"
         android:padding="5dp"
         android:text="D12"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/D100"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/D20" />
 
     <Button
         android:id="@+id/D10"
@@ -95,13 +105,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:background="@color/semitrasp"
         android:padding="5dp"
         android:text="D10"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@id/D12"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/D20" />
 
     <Button
         android:id="@+id/D100"
@@ -109,26 +118,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
         android:background="@color/semitrasp"
         android:padding="5dp"
         android:text="D100"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/D20"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/D20" />
 
     <Button
         android:id="@+id/D20"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:background="@color/semitrasp"
         android:padding="5dp"
         android:text="D20"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <TextView
         android:id="@+id/diceRollResutlTxtV"
