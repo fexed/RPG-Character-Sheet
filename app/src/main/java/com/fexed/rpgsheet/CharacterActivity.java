@@ -42,10 +42,61 @@ import java.util.Set;
 
 import static java.lang.Math.floor;
 
-public class CharacterActivity extends AppCompatActivity {
+public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
 
     static SharedPreferences state;
     static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13};
+
+    TextView FOR; TextView FORmod;
+    TextView DEX; TextView DEXmod;
+    TextView COS; TextView COSmod;
+    TextView INT; TextView INTmod;
+    TextView SAG; TextView SAGmod;
+    TextView CAR; TextView CARmod;
+    TextView lvtxt; TextView nametxt; TextView classtxt; TextView proftxt;
+    TextView CA; TextView PF; TextView PFmax; TextView XP;
+    TextView abilitatalenti; ImageView abilitatalentiarrow;
+    TextView inventario; ImageView inventarioarrow;
+    TextView background; ImageView backgroundarrow;
+    TextView attacchi; ImageView attacchiarrow;
+    TextView spellatk; TextView spellcd; TextView spellstat; TextView spellmana; Button spellapp;
+    Button addmanabtn; Button removemanabtn;
+    Button PFplus; Button PFminus;
+    Button addranged; Button addmelee; TableLayout rangedatks; TableLayout meleeatks;
+    Button addxpbtn;
+    EditText cantrip; EditText firstlv; EditText secondlv; EditText thirdlv; EditText fourthlv; EditText fifthlv; EditText sixthlv; EditText seventhlv; EditText eighthlv; EditText ninthlv; EditText pluslv;
+    CheckBox inspirationtbn;
+    TextView mptxtv; TextView motxtv; TextView matxtv; TextView mrtxtv; TextView totalmtxtv;
+    RecyclerView inventoryView;
+    int pntfor; int modfor;
+    TextView tsfortxt; CheckBox comptsfor;
+    TextView atletica; CheckBox compatletica; CheckBox expatletica;
+    int pntdex; int moddex;
+    TextView tsdextxt; CheckBox comptsdex;
+    TextView acrobazia; CheckBox compacrobazia; CheckBox expacrobazia;
+    TextView furtivita; CheckBox compfurtivita; CheckBox expfurtivita;
+    TextView rapiditadimano; CheckBox comprapiditadimano; CheckBox exprapiditadimano;
+    int pntcos; int modcos;
+    TextView tscostxt; CheckBox comptscos;
+    int pntint; int modint;
+    TextView tsinttxt; CheckBox comptsint;
+    TextView investigare; CheckBox compinvestigare; CheckBox expinvestigare;
+    TextView arcano; CheckBox comparcano; CheckBox exparcano;
+    TextView storia; CheckBox compstoria; CheckBox expstoria;
+    TextView religionefolklore; CheckBox compreligionefolklore; CheckBox expreligionefolklore;
+    TextView natura; CheckBox compnatura; CheckBox expnatura;
+    int pntsag; int modsag;
+    TextView tssagtxt; CheckBox comptssag;
+    TextView sopravvivenza; CheckBox compsopravvivenza; CheckBox expsopravvivenza;
+    TextView medicina; CheckBox compmedicina; CheckBox expmedicina;
+    TextView percezione; CheckBox comppercezione; CheckBox exppercezione;
+    TextView intuizione; CheckBox compintuizione; CheckBox expintuizione;
+    int pntcar; int modcar;
+    TextView tscartxt; CheckBox comptscar;
+    TextView intimidire; CheckBox compintimidire; CheckBox expintimidire;
+    TextView ingannare; CheckBox compingannare; CheckBox expingannare;
+    TextView intrattenere; CheckBox compintrattenere; CheckBox expintrattenere;
+    TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -92,68 +143,61 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     private void preparaSchedaPG() {
-        final TextView FOR = findViewById(R.id.FOR);
-        final TextView FORmod = findViewById(R.id.FORmod);
-        final TextView DEX = findViewById(R.id.DEX);
-        final TextView DEXmod = findViewById(R.id.DEXmod);
-        final TextView COS = findViewById(R.id.COS);
-        final TextView COSmod = findViewById(R.id.COSmod);
-        final TextView INT = findViewById(R.id.INT);
-        final TextView INTmod = findViewById(R.id.INTmod);
-        final TextView SAG = findViewById(R.id.SAG);
-        final TextView SAGmod = findViewById(R.id.SAGmod);
-        final TextView CAR = findViewById(R.id.CAR);
-        final TextView CARmod = findViewById(R.id.CARmod);
-        final TextView lvtxt = findViewById(R.id.pglvtxt);
-        final TextView nametxt = findViewById(R.id.pgnametxt);
-        final TextView classtxt = findViewById(R.id.pgclasstxt);
-        final TextView proftxt = findViewById(R.id.proftxt);
-        final TextView CA = findViewById(R.id.CA);
-        final TextView PF = findViewById(R.id.PF);
-        final TextView PFmax = findViewById(R.id.PFmax);
-        final TextView XP = findViewById(R.id.pgxptxtv);
-        final TextView abilitatalenti = findViewById(R.id.skillstitle);
-        final ImageView abilitatalentiarrow = findViewById(R.id.dwna1);
-        final TextView inventario = findViewById(R.id.invtitle);
-        final ImageView inventarioarrow = findViewById(R.id.dwna3);
-        final TextView background = findViewById(R.id.bgtitle);
-        final ImageView backgroundarrow = findViewById(R.id.dwna4);
-        final TextView attacchi = findViewById(R.id.atktitle);
-        final ImageView attacchiarrow = findViewById(R.id.dwna2);
-        final TextView spellatk = findViewById(R.id.spellatktxt);
-        final TextView spellcd = findViewById(R.id.spellcdtxt);
-        final TextView spellstat = findViewById(R.id.spelstatselection);
-        final TextView spellmana = findViewById(R.id.manatxt);
-        final Button PFplus = findViewById(R.id.pfplus);
-        final Button PFminus = findViewById(R.id.pfminus);
-        final Button addranged = findViewById(R.id.addrangedatk);
-        final Button addmelee = findViewById(R.id.addmeleeatk);
-        final Button spellapp = findViewById(R.id.spellappbtn);
-        final Button addmanabtn = findViewById(R.id.addmana);
-        final Button removemanabtn = findViewById(R.id.removemana);
-        final Button addxpbtn = findViewById(R.id.addxpbtn);
-        final EditText cantrip = findViewById(R.id.cantriplist);
-        final EditText firstlv = findViewById(R.id.firstlist);
-        final EditText secondlv = findViewById(R.id.secondlist);
-        final EditText thirdlv = findViewById(R.id.thirdlist);
-        final EditText fourthlv = findViewById(R.id.fourthlsit);
-        final EditText fifthlv = findViewById(R.id.fifthlist);
-        final EditText sixthlv = findViewById(R.id.sixthlist);
-        final EditText seventhlv = findViewById(R.id.seventhlist);
-        final EditText eighthlv = findViewById(R.id.eigththlist);
-        final EditText ninthlv = findViewById(R.id.ninthlist);
-        final EditText pluslv = findViewById(R.id.pluslist);
-        final CheckBox inspirationtbn = findViewById(R.id.inspirationbtn);
-        final TableLayout rangedatks = findViewById(R.id.rangedatks);
-        final TableLayout meleeatks = findViewById(R.id.meleeatks);
-        final RecyclerView inventoryView = findViewById(R.id.inventoryRecV);
-        int pntfor; int modfor;
-        int pntdex; int moddex;
-        int pntcos; int modcos;
-        int pntint; int modint;
-        int pntsag; int modsag;
-        int pntcar; int modcar;
-
+        FOR = findViewById(R.id.FOR);
+        FORmod = findViewById(R.id.FORmod);
+        DEX = findViewById(R.id.DEX);
+        DEXmod = findViewById(R.id.DEXmod);
+        COS = findViewById(R.id.COS);
+        COSmod = findViewById(R.id.COSmod);
+        INT = findViewById(R.id.INT);
+        INTmod = findViewById(R.id.INTmod);
+        SAG = findViewById(R.id.SAG);
+        SAGmod = findViewById(R.id.SAGmod);
+        CAR = findViewById(R.id.CAR);
+        CARmod = findViewById(R.id.CARmod);
+        lvtxt = findViewById(R.id.pglvtxt);
+        nametxt = findViewById(R.id.pgnametxt);
+        classtxt = findViewById(R.id.pgclasstxt);
+        proftxt = findViewById(R.id.proftxt);
+        CA = findViewById(R.id.CA);
+        PF = findViewById(R.id.PF);
+        PFmax = findViewById(R.id.PFmax);
+        XP = findViewById(R.id.pgxptxtv);
+        abilitatalenti = findViewById(R.id.skillstitle);
+        abilitatalentiarrow = findViewById(R.id.dwna1);
+        inventario = findViewById(R.id.invtitle);
+        inventarioarrow = findViewById(R.id.dwna3);
+        background = findViewById(R.id.bgtitle);
+        backgroundarrow = findViewById(R.id.dwna4);
+        attacchi = findViewById(R.id.atktitle);
+        attacchiarrow = findViewById(R.id.dwna2);
+        spellatk = findViewById(R.id.spellatktxt);
+        spellcd = findViewById(R.id.spellcdtxt);
+        spellstat = findViewById(R.id.spelstatselection);
+        spellmana = findViewById(R.id.manatxt);
+        PFplus = findViewById(R.id.pfplus);
+        PFminus = findViewById(R.id.pfminus);
+        addranged = findViewById(R.id.addrangedatk);
+        addmelee = findViewById(R.id.addmeleeatk);
+        spellapp = findViewById(R.id.spellappbtn);
+        addmanabtn = findViewById(R.id.addmana);
+        removemanabtn = findViewById(R.id.removemana);
+        addxpbtn = findViewById(R.id.addxpbtn);
+        cantrip = findViewById(R.id.cantriplist);
+        firstlv = findViewById(R.id.firstlist);
+        secondlv = findViewById(R.id.secondlist);
+        thirdlv = findViewById(R.id.thirdlist);
+        fourthlv = findViewById(R.id.fourthlsit);
+        fifthlv = findViewById(R.id.fifthlist);
+        sixthlv = findViewById(R.id.sixthlist);
+        seventhlv = findViewById(R.id.seventhlist);
+        eighthlv = findViewById(R.id.eigththlist);
+        ninthlv = findViewById(R.id.ninthlist);
+        pluslv = findViewById(R.id.pluslist);
+        inspirationtbn = findViewById(R.id.inspirationbtn);
+        rangedatks = findViewById(R.id.rangedatks);
+        meleeatks = findViewById(R.id.meleeatks);
+        inventoryView = findViewById(R.id.inventoryRecV);
 
         String pgname = state.getString("pgname", null);
         String tempstr;
@@ -242,1325 +286,308 @@ public class CharacterActivity extends AppCompatActivity {
         tempstr = "" + (8 + bonus);
         spellcd.setText(tempstr);
 
-        spellstat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder b = new AlertDialog.Builder(CharacterActivity.this);
-                b.setTitle(getString(R.string.selectspellstat));
-                String[] types = {getString(R.string.inte), getString(R.string.sag), getString(R.string.car)};
-                b.setItems(types, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        String stat = "";
-                        switch(which) {
-                            case 0:
-                                stat = getString(R.string.inte);
-                                break;
-                            case 1:
-                                stat = getString(R.string.sag);
-                                break;
-                            case 2:
-                                stat = getString(R.string.car);
-                                break;
-                        }
-                        int lv = state.getInt("pglv", 1);
-                        state.edit().putString("SPELLSTAT", stat).apply();
-                        spellstat.setText(stat);
-                        int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
-                        String suffix = (bonus < 0) ? "" : "+";
-                        String tempstr;
-                        tempstr = suffix + bonus;
-                        spellatk.setText(tempstr);
-                        tempstr = "" + (8 + bonus);
-                        spellcd.setText(tempstr);
-                    }
-
-                });
-
-                b.show();
-
-            }
-        });
-
-        abilitatalenti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout skilllyt = findViewById(R.id.skills);
-                if (skilllyt.getVisibility() == View.VISIBLE) {
-                    skilllyt.setVisibility(View.GONE);
-                    abilitatalentiarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    skilllyt.setVisibility(View.VISIBLE);
-                    abilitatalentiarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-        abilitatalentiarrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout skilllyt = findViewById(R.id.skills);
-                if (skilllyt.getVisibility() == View.VISIBLE) {
-                    skilllyt.setVisibility(View.GONE);
-                    abilitatalentiarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    skilllyt.setVisibility(View.VISIBLE);
-                    abilitatalentiarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-
-        inventario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout invlyt = findViewById(R.id.inventory);
-                if (invlyt.getVisibility() == View.VISIBLE) {
-                    invlyt.setVisibility(View.GONE);
-                    inventarioarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    invlyt.setVisibility(View.VISIBLE);
-                    inventarioarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-        inventarioarrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout invlyt = findViewById(R.id.inventory);
-                if (invlyt.getVisibility() == View.VISIBLE) {
-                    invlyt.setVisibility(View.GONE);
-                    inventarioarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    invlyt.setVisibility(View.VISIBLE);
-                    inventarioarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-
-        background.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout bglyt = findViewById(R.id.background);
-                if (bglyt.getVisibility() == View.VISIBLE) {
-                    bglyt.setVisibility(View.GONE);
-                    backgroundarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    bglyt.setVisibility(View.VISIBLE);
-                    backgroundarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-        backgroundarrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout bglyt = findViewById(R.id.background);
-                if (bglyt.getVisibility() == View.VISIBLE) {
-                    bglyt.setVisibility(View.GONE);
-                    backgroundarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    bglyt.setVisibility(View.VISIBLE);
-                    backgroundarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-
-        attacchi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout atklyt = findViewById(R.id.atk);
-                if (atklyt.getVisibility() == View.VISIBLE) {
-                    atklyt.setVisibility(View.GONE);
-                    attacchiarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    atklyt.setVisibility(View.VISIBLE);
-                    attacchiarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-        attacchiarrow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LinearLayout atklyt = findViewById(R.id.atk);
-                if (atklyt.getVisibility() == View.VISIBLE) {
-                    atklyt.setVisibility(View.GONE);
-                    attacchiarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    atklyt.setVisibility(View.VISIBLE);
-                    attacchiarrow.setImageResource(R.drawable.uparrow);
-                }
-            }
-        });
-
-
-        lvtxt.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertlevelof) + " " + state.getString("pgname", null));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int lv = Integer.parseInt(input.getText().toString());
-                        if (lv <= 0) lv = 1;
-                        if (lv > 45) lv = 45;
-
-                        String tempstr;
-                        tempstr = lv + "";
-                        lvtxt.setText(tempstr);
-                        tempstr = "+" + prof[lv-1];
-                        proftxt.setText(tempstr);
-                        state.edit().putInt("pglv", lv).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
+        spellstat.setOnClickListener(this);
+        abilitatalenti.setOnClickListener(this);
+        abilitatalentiarrow.setOnClickListener(this);
+        inventario.setOnClickListener(this);
+        inventarioarrow.setOnClickListener(this);
+        background.setOnClickListener(this);
+        backgroundarrow.setOnClickListener(this);
+        attacchi.setOnClickListener(this);
+        attacchiarrow.setOnClickListener(this);
+        lvtxt.setOnLongClickListener(this);
+        nametxt.setOnLongClickListener(this);
 
         tempstr = "+" + prof[state.getInt("pglv",1)-1];
         proftxt.setText(tempstr);
 
-        nametxt.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewnameof) + " " + state.getString("pgname", null));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String name = input.getText().toString();
-
-                        nametxt.setText(name);
-                        state.edit().putString("pgname", name).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        spellmana.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxpoints));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String name = input.getText().toString();
-                        int mana = Integer.parseInt(name);
-                        String tempstr = state.getInt("spellmana", 0) + "/" + name;
-                        spellmana.setText(tempstr);
-                        state.edit().putInt("spellmanamax", mana).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
+        spellmana.setOnLongClickListener(this);
         tempstr = state.getInt("spellmana", 0) + "/" + state.getInt("spellmanamax", 0);
         spellmana.setText(tempstr);
 
-        addmanabtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int mana = state.getInt("spellmana", 0);
-                int manamax = state.getInt("spellmanamax", 0);
-                mana++;
-                mana = Math.min(mana, manamax);
-                state.edit().putInt("spellmana", mana).apply();
-                String tempstr = mana + "/" + manamax;
-                spellmana.setText(tempstr);
-                saveSchedaPG();
-            }
-        });
+        addmanabtn.setOnClickListener(this);
+        removemanabtn.setOnClickListener(this);
+        classtxt.setOnLongClickListener(this);
+        CA.setOnLongClickListener(this);
+        PF.setOnLongClickListener(this);
+        PFplus.setOnClickListener(this);
+        PFplus.setOnLongClickListener(this);
+        PFminus.setOnClickListener(this);
+        PFminus.setOnLongClickListener(this);
+        PFmax.setOnLongClickListener(this);
+        FOR.setOnLongClickListener(this);
+        DEX.setOnLongClickListener(this);
+        COS.setOnLongClickListener(this);
+        INT.setOnLongClickListener(this);
+        SAG.setOnLongClickListener(this);
+        CAR.setOnLongClickListener(this);
 
-        removemanabtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int mana = state.getInt("spellmana", 0);
-                mana--;
-                mana = Math.max(mana, 0);
-                state.edit().putInt("spellmana", mana).apply();
-                String tempstr = mana + "/" + state.getInt("spellmanamax", 0);
-                spellmana.setText(tempstr);
-                saveSchedaPG();
-            }
-        });
-
-        classtxt.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewclass) + " " + state.getString("pgname", null));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String classs = input.getText().toString();
-
-                        classtxt.setText(classs);
-                        state.edit().putString("pgclass", classs).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        CA.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                String tempstr = state.getInt("CA", 0) + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertca));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-
-                        String tempstr = pnt + "";
-                        CA.setText(tempstr);
-                        state.edit().putInt("CA", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        PF.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                String tempstr = state.getInt("PF", 0) + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertpf));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        if (pnt > state.getInt("PFMAX", pnt)) {
-                            Toast.makeText(CharacterActivity.this, getString(R.string.insertpferror), Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
-                            alertd.dismiss();
-                        }
-                        else {
-                            String tempstr = pnt + "";
-                            PF.setText(tempstr);
-                            state.edit().putInt("PF", pnt).apply();
-                            dialog.cancel();
-                            alertd.dismiss();
-                            preparaSchedaPG();
-                        }
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        PFplus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int pf = state.getInt("PF", 0);
-                pf++;
-                int pfmax = state.getInt("PFMAX", pf);
-                if (pf > pfmax) pf = pfmax;
-                state.edit().putInt("PF", pf).apply();
-                String tempstr = pf + "";
-                PF.setText(tempstr);
-                saveSchedaPG();
-            }
-        });
-
-        PFplus.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                String tempstr = 0 + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.entercure));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int pf = state.getInt("PF", 0);
-
-                        pf += pnt;
-
-                        String tempstr = pf + "";
-                        PF.setText(tempstr);
-                        state.edit().putInt("PF", pf).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        PFminus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int pf = state.getInt("PF", 0);
-                pf--;
-                state.edit().putInt("PF", pf).apply();
-                String tempstr = pf + "";
-                PF.setText(tempstr);
-                saveSchedaPG();
-            }
-        });
-
-        PFminus.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                String tempstr = 0 + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.enterdamage));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int pf = state.getInt("PF", 0);
-
-                        pf -= pnt;
-                        pf = Math.max(pf, 0);
-
-                        String tempstr = pf + "";
-                        PF.setText(tempstr);
-                        state.edit().putInt("PF", pf).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        PFmax.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                String tempstr = state.getInt("PFMAX", 0) + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxpf));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-
-                        String tempstr = pnt + "";
-                        PFmax.setText(tempstr);
-                        state.edit().putInt("PFMAX", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        FOR.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        String tempstr = pnt + "";
-                        FOR.setText(tempstr);
-                        tempstr = suffix + mod;
-                        FORmod.setText(tempstr);
-                        state.edit().putInt("FOR", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        DEX.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        DEX.setText(pnt + "");
-                        DEXmod.setText(suffix + mod);
-                        state.edit().putInt("DEX", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        COS.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        COS.setText(pnt + "");
-                        COSmod.setText(suffix + mod);
-                        state.edit().putInt("COS", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        INT.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        INT.setText(pnt + "");
-                        INTmod.setText(suffix + mod);
-                        state.edit().putInt("INT", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        SAG.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        SAG.setText(pnt + "");
-                        SAGmod.setText(suffix + mod);
-                        state.edit().putInt("SAG", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        CAR.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(final View view) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for CANCEL button here, or leave in blank
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
-
-                        CAR.setText(pnt + "");
-                        CARmod.setText(suffix + mod);
-                        state.edit().putInt("CAR", pnt).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-
-        final TextView tsfortxt = findViewById(R.id.TSFOR);
-        final CheckBox comptsfor = findViewById(R.id.comptsfor);
+        tsfortxt = findViewById(R.id.TSFOR);
+        comptsfor = findViewById(R.id.comptsfor);
         comptsfor.setChecked(state.getBoolean("comptsfor", false));
         int ts = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tsfortxt.setText(suffix + ts);
-        comptsfor.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptsfor", comptsfor.isChecked()).apply();
-                int ts = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tsfortxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tsfortxt.setText(tempstr);
+        comptsfor.setOnClickListener(this);
 
-        final TextView tsdextxt = findViewById(R.id.TSDEX);
-        final CheckBox comptsdex = findViewById(R.id.comptsdex);
+        tsdextxt = findViewById(R.id.TSDEX);
+        comptsdex = findViewById(R.id.comptsdex);
         comptsdex.setChecked(state.getBoolean("comptsdex", false));
         ts = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tsdextxt.setText(suffix + ts);
-        comptsdex.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptsdex", comptsdex.isChecked()).apply();
-                int ts = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tsdextxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tsdextxt.setText(tempstr);
+        comptsdex.setOnClickListener(this);
 
-        final TextView tscostxt = findViewById(R.id.TSCOS);
-        final CheckBox comptscos = findViewById(R.id.comptscos);
+        tscostxt = findViewById(R.id.TSCOS);
+        comptscos = findViewById(R.id.comptscos);
         comptscos.setChecked(state.getBoolean("comptscos", false));
         ts = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tscostxt.setText(suffix + ts);
-        comptscos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptscos", comptscos.isChecked()).apply();
-                int ts = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tscostxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tscostxt.setText(tempstr);
+        comptscos.setOnClickListener(this);
 
-        final TextView tsinttxt = findViewById(R.id.TSINT);
-        final CheckBox comptsint = findViewById(R.id.comptsint);
+        tsinttxt = findViewById(R.id.TSINT);
+        comptsint = findViewById(R.id.comptsint);
         comptsint.setChecked(state.getBoolean("comptsint", false));
         ts = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tsinttxt.setText(suffix + ts);
-        comptsint.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptsint", comptsint.isChecked()).apply();
-                int ts = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tsinttxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tsinttxt.setText(tempstr);
+        comptsint.setOnClickListener(this);
 
-        final TextView tssagtxt = findViewById(R.id.TSSAG);
-        final CheckBox comptssag = findViewById(R.id.comptssag);
+        tssagtxt = findViewById(R.id.TSSAG);
+        comptssag = findViewById(R.id.comptssag);
         comptssag.setChecked(state.getBoolean("comptssag", false));
         ts = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tssagtxt.setText(suffix + ts);
-        comptssag.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptssag", comptssag.isChecked()).apply();
-                int ts = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tssagtxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tssagtxt.setText(tempstr);
+        comptssag.setOnClickListener(this);
 
-        final TextView tscartxt = findViewById(R.id.TSCAR);
-        final CheckBox comptscar = findViewById(R.id.comptscar);
+        tscartxt = findViewById(R.id.TSCAR);
+        comptscar = findViewById(R.id.comptscar);
         comptscar.setChecked(state.getBoolean("comptscar", false));
         ts = mod((state.getInt("CAR", 10))) + ((comptscar.isChecked()) ? prof[lv-1] : 0);
         suffix = (ts >= 0) ? "+" : "";
-        tscartxt.setText(suffix + ts);
-        comptscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                int lv = state.getInt("pglv", 1);
-                state.edit().putBoolean("comptscar", comptscar.isChecked()).apply();
-                int ts = mod((state.getInt("CAR", 10)))+ ((comptscar.isChecked()) ? prof[lv-1] : 0);
-                String suffix = (ts >= 0) ? "+" : "";
-                tscartxt.setText(suffix + ts);
-            }
-        });
+        tempstr = suffix + ts;
+        tscartxt.setText(tempstr);
+        comptscar.setOnClickListener(this);
 
-        final TextView atletica = findViewById(R.id.atletica);
-        final CheckBox compatletica = findViewById(R.id.compatletica);
-        final CheckBox expatletica = findViewById(R.id.expatletica);
-        compatletica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expatletica.setVisibility(View.VISIBLE);
-                else expatletica.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compatletica", compatletica.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("FOR", 10))) + ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                atletica.setText(suffix + bonus);
-            }
-        });
-        expatletica.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expatletica", expatletica.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("FOR", 10)))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                atletica.setText(suffix + bonus);
-            }
-        });
+        atletica = findViewById(R.id.atletica);
+        compatletica = findViewById(R.id.compatletica);
+        expatletica = findViewById(R.id.expatletica);
+        compatletica.setOnCheckedChangeListener(this);
+        expatletica.setOnCheckedChangeListener(this);
         compatletica.setChecked(state.getBoolean("compatletica", false));
         expatletica.setChecked(state.getBoolean("expatletica", false));
         bonus = mod((state.getInt("FOR", 10)))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        atletica.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        atletica.setText(tempstr);
 
-        final TextView acrobazia = findViewById(R.id.acrobazia);
-        final CheckBox compacrobazia = findViewById(R.id.compacrobazia);
-        final CheckBox expacrobazia = findViewById(R.id.expacrobazia);
-        compacrobazia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expacrobazia.setVisibility(View.VISIBLE);
-                else expacrobazia.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compacrobazia", compacrobazia.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                acrobazia.setText(suffix + bonus);
-            }
-        });
-        expacrobazia.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expacrobazia", expacrobazia.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                acrobazia.setText(suffix + bonus);
-            }
-        });
+        acrobazia = findViewById(R.id.acrobazia);
+        compacrobazia = findViewById(R.id.compacrobazia);
+        expacrobazia = findViewById(R.id.expacrobazia);
+        compacrobazia.setOnCheckedChangeListener(this);
+        expacrobazia.setOnCheckedChangeListener(this);
         compacrobazia.setChecked(state.getBoolean("compacrobazia", false));
         expacrobazia.setChecked(state.getBoolean("expacrobazia", false));
         bonus = mod((state.getInt("DEX", 10)))+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        acrobazia.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        acrobazia.setText(tempstr);
 
-        final TextView furtivita = findViewById(R.id.furtivita);
-        final CheckBox compfurtivita = findViewById(R.id.compfurtivita);
-        final CheckBox expfurtivita = findViewById(R.id.expfurtivita);
-        compfurtivita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expfurtivita.setVisibility(View.VISIBLE);
-                else expfurtivita.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compfurtivita", compfurtivita.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                furtivita.setText(suffix + bonus);
-            }
-        });
-        expfurtivita.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expfurtivita", expfurtivita.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                furtivita.setText(suffix + bonus);
-            }
-        });
+        furtivita = findViewById(R.id.furtivita);
+        compfurtivita = findViewById(R.id.compfurtivita);
+        expfurtivita = findViewById(R.id.expfurtivita);
+        compfurtivita.setOnCheckedChangeListener(this);
+        expfurtivita.setOnCheckedChangeListener(this);
         compfurtivita.setChecked(state.getBoolean("compfurtivita", false));
         expfurtivita.setChecked(state.getBoolean("expfurtivita", false));
         bonus = mod((state.getInt("DEX", 10)))+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        furtivita.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        furtivita.setText(tempstr);
 
-        final TextView rapiditadimano = findViewById(R.id.rapiditadimano);
-        final CheckBox comprapiditadimano = findViewById(R.id.comprapiditadimano);
-        final CheckBox exprapiditadimano = findViewById(R.id.exprapiditadimano);
-        comprapiditadimano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) exprapiditadimano.setVisibility(View.VISIBLE);
-                else exprapiditadimano.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("comprapiditadimano", comprapiditadimano.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                rapiditadimano.setText(suffix + bonus);
-            }
-        });
-        exprapiditadimano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("exprapiditadimano", exprapiditadimano.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("DEX", 10)))+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                rapiditadimano.setText(suffix + bonus);
-            }
-        });
+        rapiditadimano = findViewById(R.id.rapiditadimano);
+        comprapiditadimano = findViewById(R.id.comprapiditadimano);
+        exprapiditadimano = findViewById(R.id.exprapiditadimano);
+        comprapiditadimano.setOnCheckedChangeListener(this);
+        exprapiditadimano.setOnCheckedChangeListener(this);
         comprapiditadimano.setChecked(state.getBoolean("comprapiditadimano", false));
         exprapiditadimano.setChecked(state.getBoolean("exprapiditadimano", false));
         bonus = mod((state.getInt("DEX", 10)))+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        rapiditadimano.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        rapiditadimano.setText(tempstr);
 
-        final TextView investigare = findViewById(R.id.investigare);
-        final CheckBox compinvestigare = findViewById(R.id.compinvestigare);
-        final CheckBox expinvestigare = findViewById(R.id.expinvestigare);
-        compinvestigare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expinvestigare.setVisibility(View.VISIBLE);
-                else expinvestigare.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compinvestigare", compinvestigare.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10)))+ ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                investigare.setText(suffix + bonus);
-            }
-        });
-        expinvestigare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expinvestigare", expinvestigare.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                investigare.setText(suffix + bonus);
-            }
-        });
+        investigare = findViewById(R.id.investigare);
+        compinvestigare = findViewById(R.id.compinvestigare);
+        expinvestigare = findViewById(R.id.expinvestigare);
+        compinvestigare.setOnCheckedChangeListener(this);
+        expinvestigare.setOnCheckedChangeListener(this);
         compinvestigare.setChecked(state.getBoolean("compinvestigare", false));
         expinvestigare.setChecked(state.getBoolean("expinvestigare", false));
         bonus = mod((state.getInt("INT", 10))) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        investigare.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        investigare.setText(tempstr);
 
-        final TextView arcano = findViewById(R.id.arcano);
-        final CheckBox comparcano = findViewById(R.id.comparcano);
-        final CheckBox exparcano = findViewById(R.id.exparcano);
-        comparcano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) exparcano.setVisibility(View.VISIBLE);
-                else exparcano.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("comparcano", comparcano.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                arcano.setText(suffix + bonus);
-            }
-        });
-        exparcano.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("exparcano", exparcano.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                arcano.setText(suffix + bonus);
-            }
-        });
+        arcano = findViewById(R.id.arcano);
+        comparcano = findViewById(R.id.comparcano);
+        exparcano = findViewById(R.id.exparcano);
+        comparcano.setOnCheckedChangeListener(this);
+        exparcano.setOnCheckedChangeListener(this);
         comparcano.setChecked(state.getBoolean("comparcano", false));
         exparcano.setChecked(state.getBoolean("exparcano", false));
         bonus = mod((state.getInt("INT", 10))) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        arcano.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        arcano.setText(tempstr);
 
-        final TextView storia = findViewById(R.id.storia);
-        final CheckBox compstoria = findViewById(R.id.compstoria);
-        final CheckBox expstoria = findViewById(R.id.expstoria);
-        compstoria.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expstoria.setVisibility(View.VISIBLE);
-                else expstoria.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compstoria", compstoria.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                storia.setText(suffix + bonus);
-            }
-        });
-        expstoria.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expstoria", expstoria.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                storia.setText(suffix + bonus);
-            }
-        });
+        storia = findViewById(R.id.storia);
+        compstoria = findViewById(R.id.compstoria);
+        expstoria = findViewById(R.id.expstoria);
+        compstoria.setOnCheckedChangeListener(this);
+        expstoria.setOnCheckedChangeListener(this);
         compstoria.setChecked(state.getBoolean("compstoria", false));
         expstoria.setChecked(state.getBoolean("expstoria", false));
         bonus = mod((state.getInt("INT", 10))) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        storia.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        storia.setText(tempstr);
 
-        final TextView religionefolklore = findViewById(R.id.religionefolklore);
-        final CheckBox compreligionefolklore = findViewById(R.id.compreligionefolklore);
-        final CheckBox expreligionefolklore = findViewById(R.id.expreligionefolklore);
-        compreligionefolklore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expreligionefolklore.setVisibility(View.VISIBLE);
-                else expreligionefolklore.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compreligionefolklore", compreligionefolklore.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                religionefolklore.setText(suffix + bonus);
-            }
-        });
-        expreligionefolklore.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expreligionefolklore", expreligionefolklore.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                religionefolklore.setText(suffix + bonus);
-            }
-        });
+        religionefolklore = findViewById(R.id.religionefolklore);
+        compreligionefolklore = findViewById(R.id.compreligionefolklore);
+        expreligionefolklore = findViewById(R.id.expreligionefolklore);
+        compreligionefolklore.setOnCheckedChangeListener(this);
+        expreligionefolklore.setOnCheckedChangeListener(this);
         compreligionefolklore.setChecked(state.getBoolean("compreligionefolklore", false));
         expreligionefolklore.setChecked(state.getBoolean("expreligionefolklore", false));
         bonus = mod((state.getInt("INT", 10))) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        religionefolklore.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        religionefolklore.setText(tempstr);
 
-        final TextView natura = findViewById(R.id.natura);
-        final CheckBox compnatura = findViewById(R.id.compnatura);
-        final CheckBox expnatura = findViewById(R.id.expnatura);
-        compnatura.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expnatura.setVisibility(View.VISIBLE);
-                else expnatura.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compnatura", compnatura.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                natura.setText(suffix + bonus);
-            }
-        });
-        expnatura.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expnatura", expnatura.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("INT", 10))) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                natura.setText(suffix + bonus);
-            }
-        });
+        natura = findViewById(R.id.natura);
+        compnatura = findViewById(R.id.compnatura);
+        expnatura = findViewById(R.id.expnatura);
+        compnatura.setOnCheckedChangeListener(this);
+        expnatura.setOnCheckedChangeListener(this);
         compnatura.setChecked(state.getBoolean("compnatura", false));
         expnatura.setChecked(state.getBoolean("expnatura", false));
         bonus = mod((state.getInt("INT", 10))) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        natura.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        natura.setText(tempstr);
 
-        final TextView sopravvivenza = findViewById(R.id.sopravvivenza);
-        final CheckBox compsopravvivenza = findViewById(R.id.compsopravvivenza);
-        final CheckBox expsopravvivenza = findViewById(R.id.expsopravvivenza);
-        compsopravvivenza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expsopravvivenza.setVisibility(View.VISIBLE);
-                else expsopravvivenza.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compsopravvivenza", compsopravvivenza.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                sopravvivenza.setText(suffix + bonus);
-            }
-        });
-        expsopravvivenza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expsopravvivenza", expsopravvivenza.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                sopravvivenza.setText(suffix + bonus);
-            }
-        });
+        sopravvivenza = findViewById(R.id.sopravvivenza);
+        compsopravvivenza = findViewById(R.id.compsopravvivenza);
+        expsopravvivenza = findViewById(R.id.expsopravvivenza);
+        compsopravvivenza.setOnCheckedChangeListener(this);
+        expsopravvivenza.setOnCheckedChangeListener(this);
         compsopravvivenza.setChecked(state.getBoolean("compsopravvivenza", false));
         expsopravvivenza.setChecked(state.getBoolean("expsopravvivenza", false));
         bonus = mod((state.getInt("SAG", 10))) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        sopravvivenza.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        sopravvivenza.setText(tempstr);
 
-        final TextView medicina = findViewById(R.id.medicina);
-        final CheckBox compmedicina = findViewById(R.id.compmedicina);
-        final CheckBox expmedicina = findViewById(R.id.expmedicina);
-        compmedicina.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expmedicina.setVisibility(View.VISIBLE);
-                else expmedicina.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compmedicina", compmedicina.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                medicina.setText(suffix + bonus);
-            }
-        });
-        expmedicina.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expmedicina", expmedicina.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                medicina.setText(suffix + bonus);
-            }
-        });
+        medicina = findViewById(R.id.medicina);
+        compmedicina = findViewById(R.id.compmedicina);
+        expmedicina = findViewById(R.id.expmedicina);
+        compmedicina.setOnCheckedChangeListener(this);
+        expmedicina.setOnCheckedChangeListener(this);
         compmedicina.setChecked(state.getBoolean("compmedicina", false));
         expmedicina.setChecked(state.getBoolean("expmedicina", false));
         bonus = mod((state.getInt("SAG", 10))) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        medicina.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        medicina.setText(tempstr);
 
-        final TextView percezione = findViewById(R.id.percezione);
-        final CheckBox comppercezione = findViewById(R.id.comppercezione);
-        final CheckBox exppercezione = findViewById(R.id.exppercezione);
-        comppercezione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) exppercezione.setVisibility(View.VISIBLE);
-                else exppercezione.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("comppercezione", comppercezione.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                percezione.setText(suffix + bonus);
-            }
-        });
-        exppercezione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("exppercezione", exppercezione.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                percezione.setText(suffix + bonus);
-            }
-        });
+        percezione = findViewById(R.id.percezione);
+        comppercezione = findViewById(R.id.comppercezione);
+        exppercezione = findViewById(R.id.exppercezione);
+        comppercezione.setOnCheckedChangeListener(this);
+        exppercezione.setOnCheckedChangeListener(this);
         comppercezione.setChecked(state.getBoolean("comppercezione", false));
         exppercezione.setChecked(state.getBoolean("exppercezione", false));
         bonus = mod((state.getInt("SAG", 10))) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        percezione.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        percezione.setText(tempstr);
 
-        final TextView intuizione = findViewById(R.id.intuizione);
-        final CheckBox compintuizione = findViewById(R.id.compintuizione);
-        final CheckBox expintuizione = findViewById(R.id.expintuizione);
-        compintuizione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expintuizione.setVisibility(View.VISIBLE);
-                else expintuizione.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compintuizione", compintuizione.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intuizione.setText(suffix + bonus);
-            }
-        });
-        expintuizione.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expintuizione", expintuizione.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("SAG", 10))) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intuizione.setText(suffix + bonus);
-            }
-        });
+        intuizione = findViewById(R.id.intuizione);
+        compintuizione = findViewById(R.id.compintuizione);
+        expintuizione = findViewById(R.id.expintuizione);
+        compintuizione.setOnCheckedChangeListener(this);
+        expintuizione.setOnCheckedChangeListener(this);
         compintuizione.setChecked(state.getBoolean("compintuizione", false));
         expintuizione.setChecked(state.getBoolean("expintuizione", false));
         bonus = mod((state.getInt("SAG", 10))) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        intuizione.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        intuizione.setText(tempstr);
 
-        final TextView intimidire = findViewById(R.id.intimidire);
-        final CheckBox compintimidire = findViewById(R.id.compintimidire);
-        final CheckBox expintimidire = findViewById(R.id.expintimidire);
-        compintimidire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expintimidire.setVisibility(View.VISIBLE);
-                else expintimidire.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compintimidire", compintimidire.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intimidire.setText(suffix + bonus);
-            }
-        });
-        expintimidire.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expintimidire", expintimidire.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intimidire.setText(suffix + bonus);
-            }
-        });
+        intimidire = findViewById(R.id.intimidire);
+        compintimidire = findViewById(R.id.compintimidire);
+        expintimidire = findViewById(R.id.expintimidire);
+        compintimidire.setOnCheckedChangeListener(this);
+        expintimidire.setOnCheckedChangeListener(this);
         compintimidire.setChecked(state.getBoolean("compintimidire", false));
         expintimidire.setChecked(state.getBoolean("expintimidire", false));
         bonus = mod((state.getInt("CAR", 10))) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        intimidire.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        intimidire.setText(tempstr);
 
-        final TextView ingannare = findViewById(R.id.ingannare);
-        final CheckBox compingannare = findViewById(R.id.compingannare);
-        final CheckBox expingannare = findViewById(R.id.expingannare);
-        compingannare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expingannare.setVisibility(View.VISIBLE);
-                else expingannare.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compingannare", compingannare.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                ingannare.setText(suffix + bonus);
-            }
-        });
-        expingannare.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expingannare", expingannare.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                ingannare.setText(suffix + bonus);
-            }
-        });
+        ingannare = findViewById(R.id.ingannare);
+        compingannare = findViewById(R.id.compingannare);
+        expingannare = findViewById(R.id.expingannare);
+        compingannare.setOnCheckedChangeListener(this);
+        expingannare.setOnCheckedChangeListener(this);
         compingannare.setChecked(state.getBoolean("compingannare", false));
         expingannare.setChecked(state.getBoolean("expingannare", false));
         bonus = mod((state.getInt("CAR", 10))) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        ingannare.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        ingannare.setText(tempstr);
 
-        final TextView intrattenere = findViewById(R.id.intrattenere);
-        final CheckBox compintrattenere = findViewById(R.id.compintrattenere);
-        final CheckBox expintrattenere = findViewById(R.id.expintrattenere);
-        compintrattenere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) expintrattenere.setVisibility(View.VISIBLE);
-                else expintrattenere.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("compintrattenere", compintrattenere.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intrattenere.setText(suffix + bonus);
-            }
-        });
-        expintrattenere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("expintrattenere", expintrattenere.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                intrattenere.setText(suffix + bonus);
-            }
-        });
+        intrattenere = findViewById(R.id.intrattenere);
+        compintrattenere = findViewById(R.id.compintrattenere);
+        expintrattenere = findViewById(R.id.expintrattenere);
+        compintrattenere.setOnCheckedChangeListener(this);
+        expintrattenere.setOnCheckedChangeListener(this);
         compintrattenere.setChecked(state.getBoolean("compintrattenere", false));
         expintrattenere.setChecked(state.getBoolean("expintrattenere", false));
         bonus = mod((state.getInt("CAR", 10))) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        intrattenere.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        intrattenere.setText(tempstr);
 
-        final TextView persuadere = findViewById(R.id.persuadere);
-        final CheckBox comppersuadere = findViewById(R.id.comppersuadere);
-        final CheckBox exppersuadere = findViewById(R.id.exppersuadere);
-        comppersuadere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) exppersuadere.setVisibility(View.VISIBLE);
-                else exppersuadere.setVisibility(View.INVISIBLE);
-                state.edit().putBoolean("comppersuadere", comppersuadere.isChecked()).apply();
-                int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                persuadere.setText(suffix + bonus);
-            }
-        });
-        exppersuadere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("exppersuadere", exppersuadere.isChecked()).apply();int lv = state.getInt("pglv", 1);
-                int bonus = mod((state.getInt("CAR", 10))) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
-                String suffix = (bonus >= 0) ? "+" : "";
-                persuadere.setText(suffix + bonus);
-            }
-        });
+        persuadere = findViewById(R.id.persuadere);
+        comppersuadere = findViewById(R.id.comppersuadere);
+        exppersuadere = findViewById(R.id.exppersuadere);
+        comppersuadere.setOnCheckedChangeListener(this);
+        exppersuadere.setOnCheckedChangeListener(this);
         comppersuadere.setChecked(state.getBoolean("comppersuadere", false));
         exppersuadere.setChecked(state.getBoolean("exppersuadere", false));
         bonus = mod((state.getInt("CAR", 10))) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
-        persuadere.setText(suffix + bonus);
+        tempstr = suffix + bonus;
+        persuadere.setText(tempstr);
 
         EditText linguetxt = findViewById(R.id.linguetxt);
         linguetxt.setText(state.getString("linguetxt", ""));
         linguetxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -1573,14 +600,10 @@ public class CharacterActivity extends AppCompatActivity {
         armitxt.setText(state.getString("armitxt", ""));
         armitxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -1593,14 +616,10 @@ public class CharacterActivity extends AppCompatActivity {
         talentitxt.setText(state.getString("talentitxt", ""));
         talentitxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -1613,14 +632,10 @@ public class CharacterActivity extends AppCompatActivity {
         abilitatxt.setText(state.getString("abilitatxt", ""));
         abilitatxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -1629,11 +644,11 @@ public class CharacterActivity extends AppCompatActivity {
         });
         abilitatxt.clearFocus();
 
-        final TextView mptxtv = findViewById(R.id.mptxtv);
-        final TextView motxtv = findViewById(R.id.motxtv);
-        final TextView matxtv = findViewById(R.id.matxtv);
-        final TextView mrtxtv = findViewById(R.id.mrtxtv);
-        final TextView totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
+        mptxtv = findViewById(R.id.mptxtv);
+        motxtv = findViewById(R.id.motxtv);
+        matxtv = findViewById(R.id.matxtv);
+        mrtxtv = findViewById(R.id.mrtxtv);
+        totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
 
         double money;
         int mp = state.getInt("mp", 0);
@@ -1645,163 +660,28 @@ public class CharacterActivity extends AppCompatActivity {
         String strstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
         totalmtxtv.setText(strstr);
 
-        mptxtv.setText(mp + "");
-        mptxtv.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsplatpieces, state.getString("pgname", null)));
-                input.setText(state.getInt("mp", 0) + "");
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int monete = Integer.parseInt(input.getText().toString());
-                        mptxtv.setText(monete + "");
-                        state.edit().putInt("mp", monete).apply();
-                        int mo = state.getInt("mo", 0);
-                        int ma = state.getInt("ma", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(monete*10 + mo + ma*0.1 + mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-        motxtv.setText(mo + "");
-        motxtv.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsgoldpieces, state.getString("pgname", null)));
-                input.setText(state.getInt("mo", 0) + "");
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int monete = Integer.parseInt(input.getText().toString());
-                        motxtv.setText(monete + "");
-                        state.edit().putInt("mo", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int ma = state.getInt("ma", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(mp*10 + monete + ma*0.1 + mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-        matxtv.setText(ma + "");
-        matxtv.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.pgssilvpieces, state.getString("pgname", null)));
-                input.setText(state.getInt("ma", 0) + "");
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int monete = Integer.parseInt(input.getText().toString());
-                        matxtv.setText(monete + "");
-                        state.edit().putInt("ma", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int mo = state.getInt("mo", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(mp*10 + mo + monete*0.1 + mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-        mrtxtv.setText(mr + "");
-        mrtxtv.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.pgscopppieces, state.getString("pgname", null)));
-                input.setText(state.getInt("mr", 0) + "");
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Put actions for OK button here
-                        int monete = Integer.parseInt(input.getText().toString());
-                        mrtxtv.setText(monete + "");
-                        state.edit().putInt("mr", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int mo = state.getInt("mo", 0);
-                        int ma = state.getInt("ma", 0);
-                        double moneteTot =  Math.ceil(mp*10 + mo + ma*0.1 + monete*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        totalmtxtv.setText(getString(R.string.total) + " " + txt + " " + getString(R.string.mo));
-                        dialog.cancel();
-                        alertd.dismiss();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
+        tempstr = mp + "";
+        mptxtv.setText(tempstr);
+        mptxtv.setOnLongClickListener(this);
+        tempstr = mo + "";
+        motxtv.setText(tempstr);
+        motxtv.setOnLongClickListener(this);
+        tempstr = ma + "";
+        matxtv.setText(tempstr);
+        matxtv.setOnLongClickListener(this);
+        tempstr = mr + "";
+        mrtxtv.setText(tempstr);
+        mrtxtv.setOnLongClickListener(this);
 
         EditText invtxt = findViewById(R.id.invtxt);
         invtxt.setText(state.getString("inv", ""));
         invtxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -1815,13 +695,10 @@ public class CharacterActivity extends AppCompatActivity {
         backgroundtxt.setText(state.getString("background", ""));
         backgroundtxt.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-            }
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void afterTextChanged(Editable editable) {
@@ -1862,8 +739,10 @@ public class CharacterActivity extends AppCompatActivity {
 
             name.setText(ranged[0]);
             range.setText(ranged[1]);
-            bonusrange.setText(suffixb + bonusb);
-            comprange.setText("+" + prof[lv-1]);
+            tempstr = suffixb + bonusb;
+            bonusrange.setText(tempstr);
+            tempstr = "+" + prof[lv-1];
+            comprange.setText(tempstr);
             damage.setText(ranged[2]);
 
             removebtn = newrow.findViewById(R.id.removeranged);
@@ -2358,5 +1237,733 @@ public class CharacterActivity extends AppCompatActivity {
 
     public static int mod(int punteggio) {
         return (int) floor((((double) punteggio - 10) / 2));
+    }
+
+    @Override
+    public void onClick(View view) {
+        int lv = state.getInt("pglv", 1);
+        String tempstr, suffix;
+        switch (view.getId()) {
+            case R.id.spelstatselection:
+                AlertDialog.Builder b = new AlertDialog.Builder(CharacterActivity.this);
+                b.setTitle(getString(R.string.selectspellstat));
+                String[] types = {getString(R.string.inte), getString(R.string.sag), getString(R.string.car)};
+                b.setItems(types, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        String stat = "";
+                        switch(which) {
+                            case 0:
+                                stat = getString(R.string.inte);
+                                break;
+                            case 1:
+                                stat = getString(R.string.sag);
+                                break;
+                            case 2:
+                                stat = getString(R.string.car);
+                                break;
+                        }
+                        int lv = state.getInt("pglv", 1);
+                        state.edit().putString("SPELLSTAT", stat).apply();
+                        spellstat.setText(stat);
+                        int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
+                        String suffix = (bonus < 0) ? "" : "+";
+                        String tempstr;
+                        tempstr = suffix + bonus;
+                        spellatk.setText(tempstr);
+                        tempstr = "" + (8 + bonus);
+                        spellcd.setText(tempstr);
+                    }
+
+                });
+                b.show();
+                break;
+            case R.id.dwna1:
+            case R.id.skillstitle:
+                LinearLayout skilllyt = findViewById(R.id.skills);
+                if (skilllyt.getVisibility() == View.VISIBLE) {
+                    skilllyt.setVisibility(View.GONE);
+                    abilitatalentiarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    skilllyt.setVisibility(View.VISIBLE);
+                    abilitatalentiarrow.setImageResource(R.drawable.uparrow);
+                }
+                break;
+            case R.id.dwna2:
+            case R.id.atktitle:
+                LinearLayout atklyt = findViewById(R.id.atk);
+                if (atklyt.getVisibility() == View.VISIBLE) {
+                    atklyt.setVisibility(View.GONE);
+                    attacchiarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    atklyt.setVisibility(View.VISIBLE);
+                    attacchiarrow.setImageResource(R.drawable.uparrow);
+                }
+                break;
+            case R.id.dwna3:
+            case R.id.invtitle:
+                LinearLayout invlyt = findViewById(R.id.inventory);
+                if (invlyt.getVisibility() == View.VISIBLE) {
+                    invlyt.setVisibility(View.GONE);
+                    inventarioarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    invlyt.setVisibility(View.VISIBLE);
+                    inventarioarrow.setImageResource(R.drawable.uparrow);
+                }
+                break;
+            case R.id.dwna4:
+            case R.id.bgtitle:
+                LinearLayout bglyt = findViewById(R.id.background);
+                if (bglyt.getVisibility() == View.VISIBLE) {
+                    bglyt.setVisibility(View.GONE);
+                    backgroundarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    bglyt.setVisibility(View.VISIBLE);
+                    backgroundarrow.setImageResource(R.drawable.uparrow);
+                }
+                break;
+            case R.id.addmana:
+                int mana = state.getInt("spellmana", 0);
+                int manamax = state.getInt("spellmanamax", 0);
+                mana++;
+                mana = Math.min(mana, manamax);
+                state.edit().putInt("spellmana", mana).apply();
+                tempstr = mana + "/" + manamax;
+                spellmana.setText(tempstr);
+                saveSchedaPG();
+                break;
+            case R.id.removemana:
+                int manam = state.getInt("spellmana", 0);
+                manam--;
+                manam = Math.max(manam, 0);
+                state.edit().putInt("spellmana", manam).apply();
+                tempstr = manam + "/" + state.getInt("spellmanamax", 0);
+                spellmana.setText(tempstr);
+                saveSchedaPG();
+                break;
+            case R.id.pfplus:
+                int pf = state.getInt("PF", 0);
+                pf++;
+                int pfmax = state.getInt("PFMAX", pf);
+                if (pf > pfmax) pf = pfmax;
+                state.edit().putInt("PF", pf).apply();
+                tempstr = pf + "";
+                PF.setText(tempstr);
+                saveSchedaPG();
+                break;
+            case R.id.pfminus:
+                int pfm = state.getInt("PF", 0);
+                pfm--;
+                state.edit().putInt("PF", pfm).apply();
+                tempstr = pfm + "";
+                PF.setText(tempstr);
+                saveSchedaPG();
+                break;
+            case R.id.comptsfor:
+                state.edit().putBoolean("comptsfor", comptsfor.isChecked()).apply();
+                int tsf = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsf >= 0) ? "+" : "";
+                tempstr = suffix + tsf;
+                tsfortxt.setText(tempstr);
+                break;
+            case R.id.comptsdex:
+                state.edit().putBoolean("comptsdex", comptsdex.isChecked()).apply();
+                int tsd = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsd >= 0) ? "+" : "";
+                tempstr = suffix + tsd;
+                tsdextxt.setText(tempstr);
+                break;
+            case R.id.comptscos:
+                state.edit().putBoolean("comptscos", comptscos.isChecked()).apply();
+                int tsc = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsc >= 0) ? "+" : "";
+                tempstr = suffix + tsc;
+                tscostxt.setText(tempstr);
+                break;
+            case R.id.comptsint:
+                state.edit().putBoolean("comptsint", comptsint.isChecked()).apply();
+                int tsi = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsi >= 0) ? "+" : "";
+                tempstr = suffix + tsi;
+                tsinttxt.setText(tempstr);
+                break;
+            case R.id.comptssag:
+                state.edit().putBoolean("comptssag", comptssag.isChecked()).apply();
+                int tsa = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsa >= 0) ? "+" : "";
+                tempstr = suffix + tsa;
+                tssagtxt.setText(tempstr);
+                break;
+            case R.id.comptscar:
+                state.edit().putBoolean("comptscar", comptscar.isChecked()).apply();
+                int tsca = mod((state.getInt("CAR", 10)))+ ((comptscar.isChecked()) ? prof[lv-1] : 0);
+                suffix = (tsca >= 0) ? "+" : "";
+                tempstr = suffix + tsca;
+                tscartxt.setText(tempstr);
+                break;
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+        final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+        final AlertDialog alertd;
+        String tempstr;
+        switch (view.getId()) {
+            case R.id.pglvtxt:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertlevelof) + " " + state.getString("pgname", null));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int lv = Integer.parseInt(input.getText().toString());
+                        if (lv <= 0) lv = 1;
+                        if (lv > 45) lv = 45;
+
+                        String tempstr;
+                        tempstr = lv + "";
+                        lvtxt.setText(tempstr);
+                        tempstr = "+" + prof[lv-1];
+                        proftxt.setText(tempstr);
+                        state.edit().putInt("pglv", lv).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.pgnametxt:
+                input.setText(state.getString("pgname", ""));
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertnewnameof) + " " + state.getString("pgname", null));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String name = input.getText().toString();
+
+                        nametxt.setText(name);
+                        state.edit().putString("pgname", name).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.manatxt:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxpoints));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String name = input.getText().toString();
+                        int mana = Integer.parseInt(name);
+                        String tempstr = state.getInt("spellmana", 0) + "/" + name;
+                        spellmana.setText(tempstr);
+                        state.edit().putInt("spellmanamax", mana).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.pgclasstxt:
+                input.setText(state.getString("pgclass", ""));
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertnewclass) + " " + state.getString("pgname", null));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String classs = input.getText().toString();
+
+                        classtxt.setText(classs);
+                        state.edit().putString("pgclass", classs).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.CA:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                tempstr = state.getInt("CA", 0) + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertca));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+
+                        String tempstr = pnt + "";
+                        CA.setText(tempstr);
+                        state.edit().putInt("CA", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.PF:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                tempstr = state.getInt("PF", 0) + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertpf));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        if (pnt > state.getInt("PFMAX", pnt)) {
+                            Toast.makeText(CharacterActivity.this, getString(R.string.insertpferror), Toast.LENGTH_SHORT).show();
+                            dialog.cancel();
+                            alertd.dismiss();
+                        }
+                        else {
+                            String tempstr = pnt + "";
+                            PF.setText(tempstr);
+                            state.edit().putInt("PF", pnt).apply();
+                            dialog.cancel();
+                            alertd.dismiss();
+                            preparaSchedaPG();
+                        }
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.pfplus:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                tempstr = 0 + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.entercure));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int pf = state.getInt("PF", 0);
+
+                        pf += pnt;
+
+                        String tempstr = pf + "";
+                        PF.setText(tempstr);
+                        state.edit().putInt("PF", pf).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.pfminus:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                tempstr = 0 + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.enterdamage));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int pf = state.getInt("PF", 0);
+
+                        pf -= pnt;
+                        pf = Math.max(pf, 0);
+
+                        String tempstr = pf + "";
+                        PF.setText(tempstr);
+                        state.edit().putInt("PF", pf).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.PFmax:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                tempstr = state.getInt("PFMAX", 0) + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxpf));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+
+                        String tempstr = pnt + "";
+                        PFmax.setText(tempstr);
+                        state.edit().putInt("PFMAX", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.FOR:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        FOR.setText(tempstr);
+                        tempstr = suffix + mod;
+                        FORmod.setText(tempstr);
+                        state.edit().putInt("FOR", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.DEX:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        DEX.setText(tempstr);
+                        tempstr = suffix + mod;
+                        DEXmod.setText(tempstr);
+                        state.edit().putInt("DEX", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.COS:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        COS.setText(tempstr);
+                        tempstr = suffix + mod;
+                        COSmod.setText(tempstr);
+                        state.edit().putInt("COS", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.INT:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        INT.setText(tempstr);
+                        tempstr = suffix + mod;
+                        INTmod.setText(tempstr);
+                        state.edit().putInt("INT", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.SAG:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        SAG.setText(tempstr);
+                        tempstr = suffix + mod;
+                        SAGmod.setText(tempstr);
+                        state.edit().putInt("SAG", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.CAR:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
+
+                        String tempstr = pnt + "";
+                        CAR.setText(tempstr);
+                        tempstr = suffix + mod;
+                        CARmod.setText(tempstr);
+                        state.edit().putInt("CAR", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.mptxtv:
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.pgsplatpieces, state.getString("pgname", null)));
+                tempstr = state.getInt("mp", 0) + "";
+                input.setText(tempstr);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        mptxtv.setText(tempstr);
+                        state.edit().putInt("mp", monete).apply();
+                        int mo = state.getInt("mo", 0);
+                        int ma = state.getInt("ma", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(monete*10 + mo + ma*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.motxtv:
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.pgsgoldpieces, state.getString("pgname", null)));
+                tempstr = state.getInt("mo", 0) + "";
+                input.setText(tempstr);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        motxtv.setText(tempstr);
+                        state.edit().putInt("mo", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int ma = state.getInt("ma", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(mp*10 + monete + ma*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.matxtv:
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.pgssilvpieces, state.getString("pgname", null)));
+                tempstr = state.getInt("ma", 0) + "";
+                input.setText(tempstr);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        matxtv.setText(tempstr);
+                        state.edit().putInt("ma", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int mo = state.getInt("mo", 0);
+                        int mr = state.getInt("mr", 0);
+                        double moneteTot =  Math.ceil(mp*10 + mo + monete*0.1 + mr*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.mrtxtv:
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.pgscopppieces, state.getString("pgname", null)));
+                tempstr = state.getInt("mr", 0) + "";
+                input.setText(tempstr);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        mrtxtv.setText(tempstr);
+                        state.edit().putInt("mr", monete).apply();
+                        int mp = state.getInt("mp", 0);
+                        int mo = state.getInt("mo", 0);
+                        int ma = state.getInt("ma", 0);
+                        double moneteTot =  Math.ceil(mp*10 + mo + ma*0.1 + monete*0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            default: return false;
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        switch (compoundButton.getId()) {
+            //FOR
+            case R.id.compatletica: compSwitch(b, compatletica, expatletica, atletica, "compatletica", "FOR"); break;
+            case R.id.expatletica: expSwitch(compatletica, expatletica, atletica, "expatletica", "FOR"); break;
+            //DEX
+            case R.id.compacrobazia: compSwitch(b, compacrobazia, expacrobazia, acrobazia, "compacrobazia", "DEX"); break;
+            case R.id.expacrobazia: expSwitch(compacrobazia, expacrobazia, acrobazia, "compacrobazia", "DEX"); break;
+            case R.id.compfurtivita: compSwitch(b, compfurtivita, expfurtivita, furtivita, "compfurtivita", "DEX"); break;
+            case R.id.expfurtivita: expSwitch(compfurtivita, expfurtivita, furtivita, "expfurtivita", "DEX"); break;
+            case R.id.comprapiditadimano: compSwitch(b, comprapiditadimano, exprapiditadimano, rapiditadimano, "comprapiditadimano", "DEX"); break;
+            case R.id.exprapiditadimano: expSwitch(comprapiditadimano, exprapiditadimano, rapiditadimano, "exprapiditadimano", "DEX"); break;
+            //INT
+            case R.id.compinvestigare: compSwitch(b, compinvestigare, expinvestigare, investigare, "compinvestigare", "INT"); break;
+            case R.id.expinvestigare: expSwitch(compinvestigare, expinvestigare, investigare, "expinvestigare", "INT"); break;
+            case R.id.comparcano: compSwitch(b, comparcano, exparcano, arcano, "comparcano", "INT"); break;
+            case R.id.exparcano: expSwitch(comparcano, exparcano, arcano, "exparcano", "INT"); break;
+            case R.id.compstoria: compSwitch(b, compstoria, expstoria, storia, "compstoria", "INT"); break;
+            case R.id.expstoria: expSwitch(compstoria, expstoria, storia, "expstoria", "INT"); break;
+            case R.id.compreligionefolklore: compSwitch(b, compreligionefolklore, expreligionefolklore, religionefolklore, "compreligionefolklore", "INT"); break;
+            case R.id.expreligionefolklore: expSwitch(compreligionefolklore, expreligionefolklore, religionefolklore, "expreligionefolklore", "INT"); break;
+            case R.id.compnatura: compSwitch(b, compnatura, expnatura, natura, "compnatura", "INT"); break;
+            case R.id.expnatura: expSwitch(compnatura, expnatura, natura, "expnatura", "INT"); break;
+            //SAG
+            case R.id.compsopravvivenza: compSwitch(b, compsopravvivenza, expsopravvivenza, sopravvivenza, "compsopravvivenza", "SAG"); break;
+            case R.id.expsopravvivenza: expSwitch(compsopravvivenza, expsopravvivenza, sopravvivenza, "expsopravvivenza", "SAG"); break;
+            case R.id.compmedicina: compSwitch(b, compmedicina, expmedicina, medicina, "compmedicina", "SAG"); break;
+            case R.id.expmedicina: expSwitch(compmedicina, expmedicina, medicina, "expmedicina", "SAG"); break;
+            case R.id.comppercezione: compSwitch(b, comppercezione, exppercezione, percezione, "comppercezione", "SAG"); break;
+            case R.id.exppercezione: expSwitch(comppercezione, exppercezione, percezione, "exppercezione", "SAG"); break;
+            case R.id.compintuizione: compSwitch(b, compintuizione, expintuizione, intuizione, "compintuizione", "SAG"); break;
+            case R.id.expintuizione: expSwitch(compintuizione, expintuizione, intuizione, "expintuizione", "SAG"); break;
+            //CAR
+            case R.id.compintimidire: compSwitch(b, compintimidire, expintimidire, intimidire, "compintimidire", "CAR"); break;
+            case R.id.expintimidire: expSwitch(compintimidire, expintimidire, intimidire, "expintimidire", "CAR"); break;
+            case R.id.compingannare: compSwitch(b, compingannare, expingannare, ingannare, "compingannare", "CAR"); break;
+            case R.id.expingannare: expSwitch(compingannare, expingannare, ingannare, "expingannare", "CAR"); break;
+            case R.id.compintrattenere: compSwitch(b, compintrattenere, expintrattenere, intrattenere, "compintrattenere", "CAR"); break;
+            case R.id.expintrattenere: expSwitch(compintrattenere, expintrattenere, intrattenere, "expintrattenere", "CAR"); break;
+            case R.id.comppersuadere: compSwitch(b, comppersuadere, exppersuadere, persuadere, "comppersuadere", "CAR"); break;
+            case R.id.exppersuadere: expSwitch(comppersuadere, exppersuadere, persuadere, "exppersuadere", "CAR"); break;
+
+        }
+    }
+
+    public void compSwitch(boolean b, CheckBox comp, CheckBox exp, TextView label, String stateLabel, String carattLabel) {
+        int lv = state.getInt("pglv", 1);
+        if (b) exp.setVisibility(View.VISIBLE);
+        else exp.setVisibility(View.INVISIBLE);
+        state.edit().putBoolean(stateLabel, comp.isChecked()).apply();
+        int bonus = mod((state.getInt(carattLabel, 10))) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        String suffix = (bonus >= 0) ? "+" : "";
+        String tempstr = suffix + bonus;
+        label.setText(tempstr);
+    }
+
+    public void expSwitch(CheckBox comp, CheckBox exp, TextView label, String stateLabel, String carattLabel) {
+        int lv = state.getInt("pglv", 1);
+        state.edit().putBoolean(stateLabel, exp.isChecked()).apply();
+        int bonus = mod((state.getInt(carattLabel, 10)))+ ((comp.isChecked()) ? ((exp.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        String suffix = (bonus >= 0) ? "+" : "";
+        String tempstr = suffix + bonus;
+        label.setText(tempstr);
     }
 }
