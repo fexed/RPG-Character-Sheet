@@ -131,4 +131,5 @@
     <string name="resettxt">Reset all the data</string>
     <string name="resetconfirm">Are you sure you want to reset all the data? You will lose your character.</string>
     <string name="areusure">Are you sure?</string>
+    <string name="ratepls">Do you like the app? Leave an opinion on the Play Store!</string>
 </resources>

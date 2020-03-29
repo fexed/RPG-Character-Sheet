@@ -129,4 +129,5 @@
     <string name="resettxt">Resetta i dati</string>
     <string name="resetconfirm">Sei sicuro di voler resettare completamente i dati? Così facendo perderai il tuo personaggio.</string>
     <string name="areusure">Sei sicuro?</string>
+    <string name="ratepls">Ti piace l\'app? Lascia un\'opinione sul Play Store!</string>
 </resources>

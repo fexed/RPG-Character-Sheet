@@ -54,6 +54,13 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(saveBundle);
         setContentView(R.layout.charactersheet);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
+        int n = state.getInt("launchn", 0);
+        n++;
+        if (n == 5) {
+            n = 0;
+            Toast.makeText(this, getString(R.string.ratepls), Toast.LENGTH_LONG).show();
+        }
+        state.edit().putInt("launchn", n).apply();
         preparaSchedaPG();
         initializeAds();
         Bundle bndl = new Bundle();
