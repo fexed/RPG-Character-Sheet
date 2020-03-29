@@ -116,4 +116,5 @@
     <string name="addxpof">Enter how many experience points you gained</string>
     <string name="keeppressedtoedit">Long tap to edit</string>
     <string name="addobjtoinv">Add an item to the inventory</string>
+    <string name="scrollformore">Scroll for more</string>
 </resources>
