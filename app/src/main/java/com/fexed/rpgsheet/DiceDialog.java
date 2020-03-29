@@ -16,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,6 +34,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         this.c = a;
         rnd = new Random(System.currentTimeMillis());
         rolls = new ArrayList<>();
+        FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
     }
 
     @Override

@@ -46,8 +46,6 @@ public class CharacterActivity extends AppCompatActivity {
 
     static SharedPreferences state;
     static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13};
-    static boolean minusPressed = false;
-    static boolean plusPressed = false;
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -56,17 +54,16 @@ public class CharacterActivity extends AppCompatActivity {
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
         int n = state.getInt("launchn", 0);
         n++;
-        if (n == 5) {
-            n = 0;
+        if (n % 5 == 0) {
             Toast.makeText(this, getString(R.string.ratepls), Toast.LENGTH_LONG).show();
         }
         state.edit().putInt("launchn", n).apply();
         preparaSchedaPG();
         initializeAds();
         Bundle bndl = new Bundle();
-        bndl.putString("PG_Name", state.getString("pgname", "nonsettato"));
+        bndl.putString("Name", state.getString("pgname", "nonsettato"));
+        bndl.putInt("launchtimes", n);
         FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);
-        Log.d("NOTE", state.getString("notes", ""));
     }
 
     @Override
@@ -2359,7 +2356,6 @@ public class CharacterActivity extends AppCompatActivity {
     }
 
     public static int mod(int punteggio) {
-        double pnt = punteggio;
-        return (int) floor(((pnt - 10) / 2));
+        return (int) floor((((double) punteggio - 10) / 2));
     }
 }
