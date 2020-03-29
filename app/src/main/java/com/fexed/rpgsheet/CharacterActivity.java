@@ -52,6 +52,7 @@ public class CharacterActivity extends AppCompatActivity {
         super.onCreate(saveBundle);
         setContentView(R.layout.charactersheet);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
+        setTitle(getString(R.string.pgcharsheet, state.getString("pgname", "?")));
         int n = state.getInt("launchn", 0);
         n++;
         if (n % 5 == 0) {

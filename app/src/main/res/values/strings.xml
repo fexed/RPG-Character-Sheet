@@ -118,7 +118,7 @@
     <string name="addxpof">Enter how many experience points you gained</string>
     <string name="keeppressedtoedit">Long tap to edit</string>
     <string name="addobjtoinv">Add an item to the inventory</string>
-    <string name="scrollformore">Scroll for more</string>
+    <string name="scrollformore">Scroll for more →</string>
     <string name="comp">Prof.</string>
     <string name="mo">gp</string>
     <string name="total">Total</string>
@@ -126,6 +126,7 @@
     <string name="pgsplatpieces">Editing %1$s\'s platinum coins</string>
     <string name="pgssilvpieces">Editing %1$s\'s silver coins</string>
     <string name="pgscopppieces">Editing %1$s\'s copper coins</string>
+    <string name="pgcharsheet">%1$s\'s character sheet</string>
     <string name="howmanydice">How many D%1$ds to roll?</string>
     <string name="newweapon">New weapon</string>
     <string name="resettxt">Reset all the data</string>
