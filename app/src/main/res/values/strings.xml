@@ -128,4 +128,7 @@
     <string name="pgscopppieces">Editing %1$s\'s copper coins</string>
     <string name="howmanydice">How many D%1$ds to roll?</string>
     <string name="newweapon">New weapon</string>
+    <string name="resettxt">Reset all the data</string>
+    <string name="resetconfirm">Are you sure you want to reset all the data? You will lose your character.</string>
+    <string name="areusure">Are you sure?</string>
 </resources>

@@ -126,4 +126,7 @@
     <string name="pgscopppieces">Monete di rame di %1$s</string>
     <string name="howmanydice">Quanti D%1$d lanciare?</string>
     <string name="newweapon">Nuova arma</string>
+    <string name="resettxt">Resetta i dati</string>
+    <string name="resetconfirm">Sei sicuro di voler resettare completamente i dati? Così facendo perderai il tuo personaggio.</string>
+    <string name="areusure">Sei sicuro?</string>
 </resources>
