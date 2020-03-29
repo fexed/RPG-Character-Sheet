@@ -34,6 +34,17 @@
         android:textSize="14sp" />
 
     <TextView
+        android:id="@+id/rangedbonuscomp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
+        android:text="+4"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="14sp" />
+
+    <TextView
         android:id="@+id/rangeddamage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

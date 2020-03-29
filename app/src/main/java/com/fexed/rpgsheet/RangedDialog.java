@@ -91,6 +91,7 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                     TextView name = (TextView) newrow.findViewById(R.id.rangedname);
                     TextView range = (TextView) newrow.findViewById(R.id.range);
                     TextView bonusrange = (TextView) newrow.findViewById(R.id.rangedbonus);
+                    TextView comprange = (TextView) newrow.findViewById(R.id.rangedbonuscomp);
                     TextView damage = (TextView) newrow.findViewById(R.id.rangeddamage);
 
                     Set<String> rangedset = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
@@ -115,6 +116,7 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
 
                     name.setText(rangedname.getText().toString());
                     bonusrange.setText(suffix + bonus);
+                    comprange.setText("+" + CharacterActivity.prof[state.getInt("pglv", 1) - 1]);
                     range.setText(rangedrange.getText().toString());
                     damage.setText(rangeddamage.getText().toString());
 

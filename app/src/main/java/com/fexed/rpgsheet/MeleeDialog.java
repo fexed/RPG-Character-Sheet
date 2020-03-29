@@ -77,6 +77,7 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                 } else {
                     TextView name = (TextView) newrow.findViewById(R.id.meleename);
                     TextView bonusrange = (TextView) newrow.findViewById(R.id.meleebonus);
+                    TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
                     TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
 
                     Set<String> meleeset = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
@@ -101,6 +102,7 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
 
                     name.setText(meleename.getText().toString());
                     bonusrange.setText(suffix + bonus);
+                    comprange.setText("+" + CharacterActivity.prof[state.getInt("pglv", 1) - 1]);
                     damage.setText(meleedamage.getText().toString());
 
                     rangedatks.addView(newrow);

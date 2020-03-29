@@ -292,8 +292,36 @@ public class CharacterActivity extends AppCompatActivity {
                 }
             }
         });
+        abilitatalentiarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout skilllyt = findViewById(R.id.skills);
+                if (skilllyt.getVisibility() == View.VISIBLE) {
+                    skilllyt.setVisibility(View.GONE);
+                    abilitatalentiarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    skilllyt.setVisibility(View.VISIBLE);
+                    abilitatalentiarrow.setImageResource(R.drawable.uparrow);
+                }
+            }
+        });
 
         inventario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout invlyt = findViewById(R.id.inventory);
+                if (invlyt.getVisibility() == View.VISIBLE) {
+                    invlyt.setVisibility(View.GONE);
+                    inventarioarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    invlyt.setVisibility(View.VISIBLE);
+                    inventarioarrow.setImageResource(R.drawable.uparrow);
+                }
+            }
+        });
+        inventarioarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LinearLayout invlyt = findViewById(R.id.inventory);
@@ -322,8 +350,36 @@ public class CharacterActivity extends AppCompatActivity {
                 }
             }
         });
+        backgroundarrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout bglyt = findViewById(R.id.background);
+                if (bglyt.getVisibility() == View.VISIBLE) {
+                    bglyt.setVisibility(View.GONE);
+                    backgroundarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    bglyt.setVisibility(View.VISIBLE);
+                    backgroundarrow.setImageResource(R.drawable.uparrow);
+                }
+            }
+        });
 
         attacchi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout atklyt = findViewById(R.id.atk);
+                if (atklyt.getVisibility() == View.VISIBLE) {
+                    atklyt.setVisibility(View.GONE);
+                    attacchiarrow.setImageResource(R.drawable.downarrow);
+                }
+                else {
+                    atklyt.setVisibility(View.VISIBLE);
+                    attacchiarrow.setImageResource(R.drawable.uparrow);
+                }
+            }
+        });
+        attacchiarrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LinearLayout atklyt = findViewById(R.id.atk);
@@ -1713,11 +1769,13 @@ public class CharacterActivity extends AppCompatActivity {
         TextView name = header.findViewById(R.id.rangedname);
         TextView range = header.findViewById(R.id.range);
         TextView bonusrange = header.findViewById(R.id.rangedbonus);
+        TextView comprange = header.findViewById(R.id.rangedbonuscomp);
         TextView damage = header.findViewById(R.id.rangeddamage);
         Button removebtn = header.findViewById(R.id.removeranged);
         name.setText(getString(R.string.name));
         range.setText(getString(R.string.range));
         bonusrange.setText(getString(R.string.bonusdex));
+        comprange.setText(getString(R.string.comp));
         damage.setText(getString(R.string.damage));
         removebtn.setText("");
         rangedatks.addView(header);
@@ -1729,6 +1787,7 @@ public class CharacterActivity extends AppCompatActivity {
             name = newrow.findViewById(R.id.rangedname);
             range = newrow.findViewById(R.id.range);
             bonusrange = newrow.findViewById(R.id.rangedbonus);
+            comprange = newrow.findViewById(R.id.rangedbonuscomp);
             damage = newrow.findViewById(R.id.rangeddamage);
 
             int bonusb = mod(state.getInt("DEX", 10));
@@ -1737,6 +1796,7 @@ public class CharacterActivity extends AppCompatActivity {
             name.setText(ranged[0]);
             range.setText(ranged[1]);
             bonusrange.setText(suffixb + bonusb);
+            comprange.setText("+" + prof[lv-1]);
             damage.setText(ranged[2]);
 
             removebtn = newrow.findViewById(R.id.removeranged);
@@ -1759,10 +1819,12 @@ public class CharacterActivity extends AppCompatActivity {
         header = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
         name = header.findViewById(R.id.meleename);
         bonusrange = header.findViewById(R.id.meleebonus);
+        comprange = header.findViewById(R.id.meleebonuscomp);
         damage = header.findViewById(R.id.meleedamage);
         removebtn = header.findViewById(R.id.removemelee);
         name.setText(getString(R.string.name));
         bonusrange.setText(getString(R.string.bonusfor));
+        comprange.setText(getString(R.string.comp));
         damage.setText(getString(R.string.damage));
         removebtn.setText("");
         meleeatks.addView(header);
@@ -1773,6 +1835,7 @@ public class CharacterActivity extends AppCompatActivity {
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
             name = newrow.findViewById(R.id.meleename);
             bonusrange = newrow.findViewById(R.id.meleebonus);
+            comprange = newrow.findViewById(R.id.meleebonuscomp);
             damage = newrow.findViewById(R.id.meleedamage);
 
             int bonusb = mod(state.getInt("FOR", 10));
@@ -1780,6 +1843,7 @@ public class CharacterActivity extends AppCompatActivity {
 
             name.setText(melee[0]);
             bonusrange.setText(suffixb + bonusb);
+            comprange.setText("+" + prof[lv-1]);
             damage.setText(melee[1]);
 
             removebtn = newrow.findViewById(R.id.removemelee);
