@@ -620,6 +620,39 @@ public class CharacterActivity extends AppCompatActivity {
             }
         });
 
+        PFplus.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                String tempstr = 0 + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.entercure));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int pf = state.getInt("PF", 0);
+
+                        pf += pnt;
+
+                        String tempstr = pf + "";
+                        PF.setText(tempstr);
+                        state.edit().putInt("PF", pf).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            }
+        });
+
         PFminus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -629,6 +662,40 @@ public class CharacterActivity extends AppCompatActivity {
                 String tempstr = pf + "";
                 PF.setText(tempstr);
                 saveSchedaPG();
+            }
+        });
+
+        PFminus.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(final View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                String tempstr = 0 + "";
+                input.setText(tempstr);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.enterdamage));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int pf = state.getInt("PF", 0);
+
+                        pf -= pnt;
+                        pf = Math.max(pf, 0);
+
+                        String tempstr = pf + "";
+                        PF.setText(tempstr);
+                        state.edit().putInt("PF", pf).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
             }
         });
 

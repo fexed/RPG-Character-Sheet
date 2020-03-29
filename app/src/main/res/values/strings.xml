@@ -91,6 +91,8 @@
     <string name="insertca">Enter AC</string>
     <string name="insertpf">Enter HP</string>
     <string name="insertmaxpf">Enter max HP</string>
+    <string name="enterdamage">Enter how many HP you lost</string>
+    <string name="entercure">Enter how many HP you gained</string>
     <string name="insertpferror">Current HP cannot be greater than max HP</string>
     <string name="insert">Enter </string>
     <string name="name">Name</string>

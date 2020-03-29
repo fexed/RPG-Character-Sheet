@@ -89,6 +89,8 @@
     <string name="insertca">Inserisci CA</string>
     <string name="insertpf">Inserisci PF</string>
     <string name="insertmaxpf">Inserisci PF massimi</string>
+    <string name="enterdamage">Inserisci i PF persi</string>
+    <string name="entercure">Inserisci i PF guadagnati</string>
     <string name="insertpferror">I PF attuali non possono essere maggiori dei PF massimi</string>
     <string name="insert">Inserisci </string>
     <string name="name">Nome</string>
