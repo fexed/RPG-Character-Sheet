@@ -112,4 +112,6 @@
     <string name="rame">Rame</string>
     <string name="insertxpof">Inserisci i punti esperienza di</string>
     <string name="addxpof">Inserisci i punti esperienza che hai guadagnato</string>
+    <string name="keeppressedtoedit">Tieni premuto per modificare</string>
+    <string name="addobjtoinv">Aggiungi un oggetto all\'inventario</string>
 </resources>

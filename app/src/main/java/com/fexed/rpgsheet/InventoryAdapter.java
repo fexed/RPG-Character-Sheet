@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Set;
 
 public class InventoryAdapter extends RecyclerView.Adapter {
@@ -23,7 +24,10 @@ public class InventoryAdapter extends RecyclerView.Adapter {
     public InventoryAdapter(SharedPreferences state) {
         this.state = state;
         Set<String> stringSet = state.getStringSet("inventory", null);
-        if (stringSet != null) inventory = new ArrayList<>(stringSet);
+        if (stringSet != null) {
+            inventory = new ArrayList<>(stringSet);
+            Collections.sort(inventory);
+        }
         else inventory = new ArrayList<>();
 
     }
@@ -54,6 +58,7 @@ public class InventoryAdapter extends RecyclerView.Adapter {
 
     public void addObj(String obj) {
         inventory.add(obj);
+        Collections.sort(inventory);
         state.edit().putStringSet("inventory", new ArraySet<>(inventory)).apply();
     }
 

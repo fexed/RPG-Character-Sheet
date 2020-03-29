@@ -2123,8 +2123,24 @@ public class CharacterActivity extends AppCompatActivity {
         addObjBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inventoryAdapter.addObj("Nuovo Oggetto::Descrizione");
-                inventoryAdapter.notifyDataSetChanged();
+                final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
+                final EditText input = new EditText(view.getContext());
+                input.setText(getString(R.string.name));
+                alert.setView(input);
+                alert.setNegativeButton(view.getContext().getString(R.string.annulla), null);
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.addobjtoinv));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String name = input.getText().toString();
+
+                        inventoryAdapter.addObj(name + "::" + getString(R.string.keeppressedtoedit));
+                        inventoryAdapter.notifyDataSetChanged();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
             }
         });
 
