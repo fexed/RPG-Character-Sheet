@@ -127,4 +127,5 @@
     <string name="pgssilvpieces">Editing %1$s\'s silver coins</string>
     <string name="pgscopppieces">Editing %1$s\'s copper coins</string>
     <string name="howmanydice">How many D%1$ds to roll?</string>
+    <string name="newweapon">New weapon</string>
 </resources>

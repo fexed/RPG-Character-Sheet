@@ -125,4 +125,5 @@
     <string name="pgssilvpieces">Monete d\'argento di %1$s</string>
     <string name="pgscopppieces">Monete di rame di %1$s</string>
     <string name="howmanydice">Quanti D%1$d lanciare?</string>
+    <string name="newweapon">Nuova arma</string>
 </resources>
