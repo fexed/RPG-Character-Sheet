@@ -29,7 +29,6 @@ public class InventoryAdapter extends RecyclerView.Adapter {
             Collections.sort(inventory);
         }
         else inventory = new ArrayList<>();
-
     }
 
     @NonNull
@@ -85,13 +84,13 @@ public class InventoryAdapter extends RecyclerView.Adapter {
                     alert.setView(input);
                     alert.setNegativeButton(view.getContext().getString(R.string.annulla), null);
                     final AlertDialog alertd = alert.create();
-                    alert.setTitle("Modifica " + title);
+                    alert.setTitle(view.getContext().getString(R.string.edit) + " " + title);
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String newTitle = input.getText().toString();
 
                             removeObj(title + "::" + desc);
-                            addObj(newTitle + "::" + desc);
+                            addObj(newTitle.replace("::", "") + "::" + desc);
                             dialog.cancel();
                             alertd.dismiss();
                         }
@@ -110,12 +109,12 @@ public class InventoryAdapter extends RecyclerView.Adapter {
                     alert.setView(input);
                     alert.setNegativeButton(view.getContext().getString(R.string.annulla), null);
                     final AlertDialog alertd = alert.create();
-                    alert.setTitle("Modifica descrizione");
+                    alert.setTitle(view.getContext().getString(R.string.editdesc));
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String newDesc = input.getText().toString();
                             removeObj(title + "::" + desc);
-                            addObj(title + "::" + newDesc);
+                            addObj(title + "::" + newDesc.replace("::", ""));
                             dialog.cancel();
                             alertd.dismiss();
                         }

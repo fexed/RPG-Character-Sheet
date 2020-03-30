@@ -838,14 +838,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         cantrip.setText(state.getString("cantripss", ""));
         cantrip.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -858,14 +855,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         firstlv.setText(state.getString("firstlv", ""));
         firstlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -878,14 +872,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         secondlv.setText(state.getString("secondlv", ""));
         secondlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -898,14 +889,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         thirdlv.setText(state.getString("thirdlv", ""));
         thirdlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -918,14 +906,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         fourthlv.setText(state.getString("fourthlv", ""));
         fourthlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -938,14 +923,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         fifthlv.setText(state.getString("fifthlv", ""));
         fifthlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -958,14 +940,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         sixthlv.setText(state.getString("sixthlv", ""));
         sixthlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -978,14 +957,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         seventhlv.setText(state.getString("seventhlv", ""));
         seventhlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -998,14 +974,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         eighthlv.setText(state.getString("eighthlv", ""));
         eighthlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -1018,14 +991,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         ninthlv.setText(state.getString("ninthlv", ""));
         ninthlv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 saveSchedaPG();
-
             }
 
             @Override
@@ -1038,9 +1008,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         pluslv.setText(state.getString("pluslv", ""));
         pluslv.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -1055,13 +1023,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         pluslv.clearFocus();
 
         inspirationtbn.setChecked(state.getBoolean("inspiration", false));
-        inspirationtbn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                state.edit().putBoolean("inspiration", b).apply();
-                saveSchedaPG();
-            }
-        });
+        inspirationtbn.setOnCheckedChangeListener(this);
 
         tempstr = state.getInt("xp", 0) + " xp";
         XP.setText(tempstr);
@@ -1089,7 +1051,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = input.getText().toString();
 
-                        inventoryAdapter.addObj(name + "::" + getString(R.string.keeppressedtoedit));
+                        inventoryAdapter.addObj(name.replace("::", "") + "::" + getString(R.string.keeppressedtoedit));
                         inventoryAdapter.notifyDataSetChanged();
                         dialog.cancel();
                         alertd.dismiss();
@@ -1900,6 +1862,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
+            case R.id.inspirationbtn: state.edit().putBoolean("inspiration", b).apply(); saveSchedaPG(); break;
             //FOR
             case R.id.compatletica: compSwitch(b, compatletica, expatletica, atletica, "compatletica", "FOR"); break;
             case R.id.expatletica: expSwitch(compatletica, expatletica, atletica, "expatletica", "FOR"); break;

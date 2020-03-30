@@ -131,4 +131,6 @@
     <string name="areusure">Sei sicuro?</string>
     <string name="ratepls">Ti piace l\'app? Lascia un\'opinione sul Play Store!</string>
     <string name="pgcharsheet">Scheda di %1$s</string>
+    <string name="edit">Modifica</string>
+    <string name="editdesc">Modifica descrizione</string>
 </resources>
