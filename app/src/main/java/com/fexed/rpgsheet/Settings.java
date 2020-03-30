@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,8 +24,8 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.settings);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
         setTitle(getString(R.string.settings));
-        TextView vertxt = findViewById(R.id.vertext);
 
+        TextView vertxt = findViewById(R.id.vertext);
         vertxt.setText(BuildConfig.VERSION_NAME);
 
         Button resetbtn = findViewById(R.id.resetbtn);
