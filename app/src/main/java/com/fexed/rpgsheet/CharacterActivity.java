@@ -1063,65 +1063,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        XP.setText(state.getInt("xp", 0) + " xp");
-        XP.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.insertxpof) + " " + state.getString("pgname", null));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int xp = Integer.parseInt(input.getText().toString());
-
-                        XP.setText(xp + " xp");
-                        state.edit().putInt("xp", xp).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            }
-        });
-        addxpbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.addxpof));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int xp = Integer.parseInt(input.getText().toString());
-                        xp += state.getInt("xp", 0);
-
-                        XP.setText(xp + " xp");
-                        state.edit().putInt("xp", xp).apply();
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-            }
-        });
+        tempstr = state.getInt("xp", 0) + " xp";
+        XP.setText(tempstr);
+        XP.setOnLongClickListener(this);
+        addxpbtn.setOnClickListener(this);
 
         final InventoryAdapter inventoryAdapter = new InventoryAdapter(state);
         inventoryView.setAdapter(inventoryAdapter);
@@ -1405,6 +1350,33 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 suffix = (tsca >= 0) ? "+" : "";
                 tempstr = suffix + tsca;
                 tscartxt.setText(tempstr);
+                break;
+            case R.id.addxpbtn:
+                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                final AlertDialog alertd = alert.create();
+                alert.setTitle(getString(R.string.addxpof));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int xp = Integer.parseInt(input.getText().toString());
+                        xp += state.getInt("xp", 0);
+
+                        String tempstr = xp + " xp";
+                        XP.setText(tempstr);
+                        state.edit().putInt("xp", xp).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                    }
+                });
+                alert.show();
                 break;
         }
     }
@@ -1893,6 +1865,30 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.pgxptxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setRawInputType(Configuration.KEYBOARD_12KEY);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                    }
+                });
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertxpof) + " " + state.getString("pgname", null));
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int xp = Integer.parseInt(input.getText().toString());
+
+                        String tempstr = xp + " xp";
+                        XP.setText(tempstr);
+                        state.edit().putInt("xp", xp).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
                     }
                 });
                 alert.show();
