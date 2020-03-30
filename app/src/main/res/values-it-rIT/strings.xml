@@ -24,8 +24,8 @@
     <string name="tiri_salvezza">Tiri Salvezza</string>
     <string name="lingue">Lingue</string>
     <string name="competenze">Competenze</string>
-    <string name="talenti">Talenti</string>
-    <string name="abilit_di_classe_e_razza">Abilità di Classe e Razza</string>
+    <string name="talenti">Talenti della classe</string>
+    <string name="abilit_di_classe_e_razza">Tratti della razza</string>
     <string name="abilit">Abilità</string>
     <string name="atletica">Atletica</string>
     <string name="acrobazia">Acrobazia</string>
@@ -133,4 +133,5 @@
     <string name="pgcharsheet">Scheda di %1$s</string>
     <string name="edit">Modifica</string>
     <string name="editdesc">Modifica descrizione</string>
+    <string name="try_diceroller">Prova il lanciatore di dadi!</string>
 </resources>

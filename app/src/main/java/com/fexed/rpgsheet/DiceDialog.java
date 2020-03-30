@@ -3,6 +3,7 @@ package com.fexed.rpgsheet;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,11 +30,12 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     private Random rnd;
     private ArrayList<Integer> rolls;
 
-    public DiceDialog(Activity a) {
+    public DiceDialog(Activity a, SharedPreferences state) {
         super(a);
         this.c = a;
         rnd = new Random(System.currentTimeMillis());
         rolls = new ArrayList<>();
+        state.edit().putBoolean("diceroller", true).apply();
         FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
     }
 

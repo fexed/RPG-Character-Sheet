@@ -20,10 +20,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -35,6 +37,9 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
 
 import java.util.HashSet;
 import java.util.Locale;
@@ -104,14 +109,18 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.charactersheet);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
         setTitle(getString(R.string.pgcharsheet, state.getString("pgname", "?")));
+
+        //Launches
         int n = state.getInt("launchn", 0);
         n++;
         if (n % 5 == 0) {
             Toast.makeText(this, getString(R.string.ratepls), Toast.LENGTH_LONG).show();
         }
         state.edit().putInt("launchn", n).apply();
+
         preparaSchedaPG();
         initializeAds();
+
         Bundle bndl = new Bundle();
         bndl.putString("Name", state.getString("pgname", "nonsettato"));
         bndl.putInt("launchtimes", n);
@@ -127,6 +136,21 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.mainmenu, menu);
+
+        //Dice roller tutorial
+        boolean diceroller = state.getBoolean("diceroller", false);
+        if (!diceroller) {
+            TextView lvltxtv = findViewById(R.id.pglvtxt);
+            Balloon balloon = new Balloon.Builder(getApplicationContext())
+                    .setText(getString(R.string.try_diceroller))
+                    .setPadding(5)
+                    .setDismissWhenTouchOutside(true)
+                    .setArrowVisible(false)
+                    .setBackgroundColorResource(R.color.colorPrimaryDark)
+                    .setBalloonAnimation(BalloonAnimation.ELASTIC)
+                    .build();
+            balloon.showAlignTop(lvltxtv, 0, 45);
+        }
         return true;
     }
 
@@ -136,7 +160,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             Intent myIntent = new Intent(CharacterActivity.this, Settings.class);
             startActivity(myIntent);
         } else if (item.getItemId() == R.id.dice) {
-            DiceDialog inputdialog = new DiceDialog(this);
+            DiceDialog inputdialog = new DiceDialog(this, state);
             inputdialog.show();
         }
         return true;
