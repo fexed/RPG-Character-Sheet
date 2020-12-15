@@ -138,4 +138,5 @@
     <string name="try_diceroller">Try the dice roller!</string>
     <string name="rateplslink"><a href="https://play.google.com/store/apps/details?id=com.fexed.rpgsheet">Go to the Store</a></string>
     <string name="sleep">Rest</string>
+    <string name="resttxt">Rest! Spell slots and health have been restored!</string>
 </resources>

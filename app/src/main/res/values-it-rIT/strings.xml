@@ -136,4 +136,5 @@
     <string name="try_diceroller">Prova il lanciatore di dadi!</string>
     <string name="rateplslink"><a href="https://play.google.com/store/apps/details?id=com.fexed.rpgsheet">Vai allo Store</a></string>
     <string name="sleep">Riposo</string>
+    <string name="resttxt">Riposo! Slot e punti ferita ripristinati!</string>
 </resources>

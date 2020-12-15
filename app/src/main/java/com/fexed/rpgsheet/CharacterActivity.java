@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
@@ -163,6 +164,66 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         } else if (item.getItemId() == R.id.dice) {
             DiceDialog inputdialog = new DiceDialog(this, state);
             inputdialog.show();
+        } else if (item.getItemId() == R.id.sleep) {
+            String tmps;
+            int tmpi;
+
+            tmpi = state.getInt("PFMAX", 0);
+            tmps = "" + tmpi;
+            state.edit().putInt("PF", tmpi).apply();
+            PF.setText(tmps);
+
+            tmpi = state.getInt("firstlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currfirstlvslots", tmpi).apply();
+            firstlvslots.setText(tmps);
+
+            tmpi = state.getInt("secondlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currsecondlvslots", tmpi).apply();
+            secondlvslots.setText(tmps);
+
+            tmpi = state.getInt("thirdlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currthirdlvslots", tmpi).apply();
+            thirdlvslots.setText(tmps);
+
+            tmpi = state.getInt("fourthlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currfourthlvslots", tmpi).apply();
+            fourthlvslots.setText(tmps);
+
+            tmpi = state.getInt("fifthlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currfifthlvslots", tmpi).apply();
+            fifthlvslots.setText(tmps);
+
+            tmpi = state.getInt("sixthlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currsixthlvslots", tmpi).apply();
+            sixthlvslots.setText(tmps);
+
+            tmpi = state.getInt("seventhlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currseventhlvslots", tmpi).apply();
+            seventhlvslots.setText(tmps);
+
+            tmpi = state.getInt("eighthlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("curreighthlvslots", tmpi).apply();
+            eighthlvslots.setText(tmps);
+
+            tmpi = state.getInt("ninthlvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currninthlvslots", tmpi).apply();
+            ninthlvslots.setText(tmps);
+
+            tmpi = state.getInt("pluslvslots", 0);
+            tmps = tmpi + "/" + tmpi;
+            state.edit().putInt("currpluslvslots", tmpi).apply();
+            pluslvslots.setText(tmps);
+
+            Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.resttxt), Snackbar.LENGTH_LONG).show();
         }
         return true;
     }
