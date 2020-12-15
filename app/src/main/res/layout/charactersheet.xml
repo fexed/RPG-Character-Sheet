@@ -609,7 +609,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/skillstitle"
             app:layout_constraintStart_toEndOf="@+id/skillstitle"
             app:layout_constraintTop_toTopOf="@+id/skillstitle"
-            app:srcCompat="@drawable/downarrow" />
+            app:srcCompat="@drawable/uparrow" />
 
         <LinearLayout
             android:id="@+id/skills"
@@ -1792,7 +1792,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/atktitle"
             app:layout_constraintStart_toEndOf="@+id/atktitle"
             app:layout_constraintTop_toTopOf="@+id/atktitle"
-            app:srcCompat="@drawable/downarrow" />
+            app:srcCompat="@drawable/uparrow" />
 
         <LinearLayout
             android:id="@+id/atk"
@@ -2517,7 +2517,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/invtitle"
             app:layout_constraintStart_toEndOf="@+id/invtitle"
             app:layout_constraintTop_toTopOf="@+id/invtitle"
-            app:srcCompat="@drawable/downarrow" />
+            app:srcCompat="@drawable/uparrow" />
 
         <LinearLayout
             android:id="@+id/inventory"
@@ -2725,7 +2725,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/bgtitle"
             app:layout_constraintStart_toEndOf="@+id/bgtitle"
             app:layout_constraintTop_toTopOf="@+id/bgtitle"
-            app:srcCompat="@drawable/downarrow" />
+            app:srcCompat="@drawable/uparrow" />
 
         <LinearLayout
             android:id="@+id/background"
