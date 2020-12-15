@@ -1972,6 +1972,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_vertical"
                                     android:layout_weight="1"
+                                    android:paddingLeft="5dp"
                                     android:paddingTop="5dp"
                                     android:paddingBottom="5dp"
                                     android:text="+0"
@@ -2002,6 +2003,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:paddingLeft="5dp"
                                     android:text="+0"
                                     android:textColor="@color/cardview_light_background" />
                             </LinearLayout>
@@ -2137,6 +2139,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2186,6 +2189,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2234,6 +2238,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2282,6 +2287,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2330,6 +2336,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2378,6 +2385,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2426,6 +2434,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2474,6 +2483,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2522,6 +2532,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
@@ -2570,6 +2581,7 @@
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
+                                android:textSize="18sp"
                                 android:textStyle="bold" />
 
                             <EditText
