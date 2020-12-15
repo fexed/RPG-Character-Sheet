@@ -71,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:autoLink="all"
-        android:text="https://sites.google.com/view/fexed/home"
+        android:text="https://fexed.github.io/"
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
