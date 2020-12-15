@@ -72,6 +72,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     Button addxpbtn;
     EditText cantrip; EditText firstlv; EditText secondlv; EditText thirdlv; EditText fourthlv; EditText fifthlv; EditText sixthlv; EditText seventhlv; EditText eighthlv; EditText ninthlv; EditText pluslv;
     TextView firstlvslots; TextView secondlvslots; TextView thirdlvslots; TextView fourthlvslots; TextView fifthlvslots; TextView sixthlvslots; TextView seventhlvslots; TextView eighthlvslots; TextView ninthlvslots; TextView pluslvslots;
+    Button castfirstlv; Button castsecondlv; Button castthirdlv; Button castfourthlv; Button castfifthlv; Button castsixthlv; Button castseventhlv; Button casteightlv; Button castninthlv; Button castpluslv;
     CheckBox inspirationtbn;
     TextView mptxtv; TextView motxtv; TextView matxtv; TextView mrtxtv; TextView totalmtxtv;
     RecyclerView inventoryView;
@@ -290,6 +291,16 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         eighthlvslots = findViewById(R.id.sloteigthtxtv);
         ninthlvslots = findViewById(R.id.slotninthtxtv);
         pluslvslots = findViewById(R.id.slotplustxtv);
+        castfirstlv = findViewById(R.id.castfirstlv);
+        castsecondlv = findViewById(R.id.castsecondlv);
+        castthirdlv = findViewById(R.id.castthirdlv);
+        castfourthlv = findViewById(R.id.castfourthlv);
+        castfifthlv = findViewById(R.id.castfifthlv);
+        castsixthlv = findViewById(R.id.castsixthlv);
+        castseventhlv = findViewById(R.id.castseventhlv);
+        casteightlv = findViewById(R.id.casteightlv);
+        castninthlv = findViewById(R.id.castninthlv);
+        castpluslv = findViewById(R.id.castpluslv);
         inspirationtbn = findViewById(R.id.inspirationbtn);
         rangedatks = findViewById(R.id.rangedatks);
         meleeatks = findViewById(R.id.meleeatks);
@@ -965,6 +976,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         firstlv.clearFocus();
         firstlvslots.setText(new StringBuilder().append(state.getInt("currfirstlvslots", 0)).append("/").append(state.getInt("firstlvslots", 0)));
+        castfirstlv.setOnClickListener(this);
+
 
         secondlv.setText(state.getString("secondlv", ""));
         secondlv.addTextChangedListener(new TextWatcher() {
@@ -983,6 +996,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         secondlv.clearFocus();
         secondlvslots.setText(new StringBuilder().append(state.getInt("currsecondlvslots", 0)).append("/").append(state.getInt("secondlvslots", 0)));
+        castsecondlv.setOnClickListener(this);
 
         thirdlv.setText(state.getString("thirdlv", ""));
         thirdlv.addTextChangedListener(new TextWatcher() {
@@ -1001,6 +1015,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         thirdlv.clearFocus();
         thirdlvslots.setText(new StringBuilder().append(state.getInt("currthirdlvslots", 0)).append("/").append(state.getInt("thirdlvslots", 0)));
+        castthirdlv.setOnClickListener(this);
 
         fourthlv.setText(state.getString("fourthlv", ""));
         fourthlv.addTextChangedListener(new TextWatcher() {
@@ -1019,6 +1034,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         fourthlv.clearFocus();
         fourthlvslots.setText(new StringBuilder().append(state.getInt("currfourthlvslots", 0)).append("/").append(state.getInt("fourthlvslots", 0)));
+        castfourthlv.setOnClickListener(this);
 
         fifthlv.setText(state.getString("fifthlv", ""));
         fifthlv.addTextChangedListener(new TextWatcher() {
@@ -1037,6 +1053,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         fifthlv.clearFocus();
         fifthlvslots.setText(new StringBuilder().append(state.getInt("currfifthlvslots", 0)).append("/").append(state.getInt("fifthlvslots", 0)));
+        castfifthlv.setOnClickListener(this);
 
         sixthlv.setText(state.getString("sixthlv", ""));
         sixthlv.addTextChangedListener(new TextWatcher() {
@@ -1055,6 +1072,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         sixthlv.clearFocus();
         sixthlvslots.setText(new StringBuilder().append(state.getInt("currsixthlvslots", 0)).append("/").append(state.getInt("sixthlvslots", 0)));
+        castsixthlv.setOnClickListener(this);
 
         seventhlv.setText(state.getString("seventhlv", ""));
         seventhlv.addTextChangedListener(new TextWatcher() {
@@ -1073,6 +1091,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         seventhlv.clearFocus();
         seventhlvslots.setText(new StringBuilder().append(state.getInt("currseventhlvslots", 0)).append("/").append(state.getInt("seventhlvslots", 0)));
+        castseventhlv.setOnClickListener(this);
 
         eighthlv.setText(state.getString("eighthlv", ""));
         eighthlv.addTextChangedListener(new TextWatcher() {
@@ -1091,6 +1110,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         eighthlv.clearFocus();
         eighthlvslots.setText(new StringBuilder().append(state.getInt("curreighthlvslots", 0)).append("/").append(state.getInt("eighthlvslots", 0)));
+        casteightlv.setOnClickListener(this);
 
         ninthlv.setText(state.getString("ninthlv", ""));
         ninthlv.addTextChangedListener(new TextWatcher() {
@@ -1109,6 +1129,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         ninthlv.clearFocus();
         ninthlvslots.setText(new StringBuilder().append(state.getInt("currninthlvslots", 0)).append("/").append(state.getInt("ninthlvslots", 0)));
+        castninthlv.setOnClickListener(this);
 
         pluslv.setText(state.getString("pluslv", ""));
         pluslv.addTextChangedListener(new TextWatcher() {
@@ -1127,6 +1148,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         pluslv.clearFocus();
         pluslvslots.setText(new StringBuilder().append(state.getInt("currpluslvslots", 0)).append("/").append(state.getInt("pluslvslots", 0)));
+        castpluslv.setOnClickListener(this);
 
         inspirationtbn.setChecked(state.getBoolean("inspiration", false));
         inspirationtbn.setOnCheckedChangeListener(this);
@@ -1445,6 +1467,66 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
                 alert.show();
+                break;
+            case R.id.castfirstlv:
+                int n = state.getInt("currfirstlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                firstlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("firstlvslots", 0)));
+                state.edit().putInt("currfirstlvslots", n).apply();
+                break;
+            case R.id.castsecondlv:
+                n = state.getInt("currsecondlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                secondlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("secondlvslots", 0)));
+                state.edit().putInt("currsecondlvslots", n).apply();
+                break;
+            case R.id.castthirdlv:
+                n = state.getInt("currthirdlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                thirdlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("thirdlvslots", 0)));
+                state.edit().putInt("currthirdlvslots", n).apply();
+                break;
+            case R.id.castfourthlv:
+                n = state.getInt("currfourthlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                fourthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("fourthlvslots", 0)));
+                state.edit().putInt("currfourthlvslots", n).apply();
+                break;
+            case R.id.castfifthlv:
+                n = state.getInt("currfifthlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                fifthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("fifthlvslots", 0)));
+                state.edit().putInt("currfifthlvslots", n).apply();
+                break;
+            case R.id.castsixthlv:
+                n = state.getInt("currsixthlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                sixthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("sixthlvslots", 0)));
+                state.edit().putInt("currsixthlvslots", n).apply();
+                break;
+            case R.id.castseventhlv:
+                n = state.getInt("currseventhlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                seventhlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("seventhlvslots", 0)));
+                state.edit().putInt("currseventhlvslots", n).apply();
+                break;
+            case R.id.casteightlv:
+                n = state.getInt("curreighthlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                eighthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("eighthlvslots", 0)));
+                state.edit().putInt("curreighthlvslots", n).apply();
+                break;
+            case R.id.castninthlv:
+                n = state.getInt("currninthlvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                ninthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("ninthlvslots", 0)));
+                state.edit().putInt("currninthlvslots", n).apply();
+                break;
+            case R.id.castpluslv:
+                n = state.getInt("currpluslvslots", 0);
+                n = (n > 0) ? n - 1 : 0;
+                pluslvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("pluslvslots", 0)));
+                state.edit().putInt("currpluslvslots", n).apply();
                 break;
         }
     }
