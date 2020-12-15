@@ -50,7 +50,7 @@
     <string name="statistica_rilevante">Spellcasting Ability</string>
     <string name="per_colpire">Spell attack bonus</string>
     <string name="cd">Spell Save DC</string>
-    <string name="mana_punti">Points</string>
+    <string name="mana_punti">Sorcery/Ki/mana points</string>
     <string name="app_spell">Spells App</string>
     <string name="trucchetti">Cantrips</string>
     <string name="aggiungi">Add</string>
