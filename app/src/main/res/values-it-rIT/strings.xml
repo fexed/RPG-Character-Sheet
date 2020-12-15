@@ -85,6 +85,7 @@
     <string name="insertlevelof">Inserisci il livello di </string>
     <string name="insertnewnameof">Inserisci il nuovo nome di </string>
     <string name="insertmaxpoints">Inserisci i punti massimi </string>
+    <string name="insertmaxslots">Inserisci gli slot massimi</string>
     <string name="insertnewclass">Aggiorna classi e livelli di </string>
     <string name="insertca">Inserisci CA</string>
     <string name="insertpf">Inserisci PF</string>

@@ -87,6 +87,7 @@
     <string name="insertlevelof">Enter the level of </string>
     <string name="insertnewnameof">Enter the new name of </string>
     <string name="insertmaxpoints">Enter max points</string>
+    <string name="insertmaxslots">Enter max slots</string>
     <string name="insertnewclass">Update classes and levels of </string>
     <string name="insertca">Enter AC</string>
     <string name="insertpf">Enter HP</string>

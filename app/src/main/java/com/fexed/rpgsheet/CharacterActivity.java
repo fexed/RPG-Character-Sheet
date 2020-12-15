@@ -976,6 +976,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         firstlv.clearFocus();
         firstlvslots.setText(new StringBuilder().append(state.getInt("currfirstlvslots", 0)).append("/").append(state.getInt("firstlvslots", 0)));
+        firstlvslots.setOnLongClickListener(this);
         castfirstlv.setOnClickListener(this);
 
 
@@ -996,6 +997,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         secondlv.clearFocus();
         secondlvslots.setText(new StringBuilder().append(state.getInt("currsecondlvslots", 0)).append("/").append(state.getInt("secondlvslots", 0)));
+        secondlvslots.setOnLongClickListener(this);
         castsecondlv.setOnClickListener(this);
 
         thirdlv.setText(state.getString("thirdlv", ""));
@@ -1015,6 +1017,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         thirdlv.clearFocus();
         thirdlvslots.setText(new StringBuilder().append(state.getInt("currthirdlvslots", 0)).append("/").append(state.getInt("thirdlvslots", 0)));
+        thirdlvslots.setOnLongClickListener(this);
         castthirdlv.setOnClickListener(this);
 
         fourthlv.setText(state.getString("fourthlv", ""));
@@ -1034,6 +1037,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         fourthlv.clearFocus();
         fourthlvslots.setText(new StringBuilder().append(state.getInt("currfourthlvslots", 0)).append("/").append(state.getInt("fourthlvslots", 0)));
+        fourthlvslots.setOnLongClickListener(this);
         castfourthlv.setOnClickListener(this);
 
         fifthlv.setText(state.getString("fifthlv", ""));
@@ -1053,6 +1057,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         fifthlv.clearFocus();
         fifthlvslots.setText(new StringBuilder().append(state.getInt("currfifthlvslots", 0)).append("/").append(state.getInt("fifthlvslots", 0)));
+        fifthlvslots.setOnLongClickListener(this);
         castfifthlv.setOnClickListener(this);
 
         sixthlv.setText(state.getString("sixthlv", ""));
@@ -1072,6 +1077,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         sixthlv.clearFocus();
         sixthlvslots.setText(new StringBuilder().append(state.getInt("currsixthlvslots", 0)).append("/").append(state.getInt("sixthlvslots", 0)));
+        sixthlvslots.setOnLongClickListener(this);
         castsixthlv.setOnClickListener(this);
 
         seventhlv.setText(state.getString("seventhlv", ""));
@@ -1091,6 +1097,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         seventhlv.clearFocus();
         seventhlvslots.setText(new StringBuilder().append(state.getInt("currseventhlvslots", 0)).append("/").append(state.getInt("seventhlvslots", 0)));
+        seventhlvslots.setOnLongClickListener(this);
         castseventhlv.setOnClickListener(this);
 
         eighthlv.setText(state.getString("eighthlv", ""));
@@ -1110,6 +1117,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         eighthlv.clearFocus();
         eighthlvslots.setText(new StringBuilder().append(state.getInt("curreighthlvslots", 0)).append("/").append(state.getInt("eighthlvslots", 0)));
+        eighthlvslots.setOnLongClickListener(this);
         casteightlv.setOnClickListener(this);
 
         ninthlv.setText(state.getString("ninthlv", ""));
@@ -1129,6 +1137,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         ninthlv.clearFocus();
         ninthlvslots.setText(new StringBuilder().append(state.getInt("currninthlvslots", 0)).append("/").append(state.getInt("ninthlvslots", 0)));
+        ninthlvslots.setOnLongClickListener(this);
         castninthlv.setOnClickListener(this);
 
         pluslv.setText(state.getString("pluslv", ""));
@@ -1148,6 +1157,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         pluslv.clearFocus();
         pluslvslots.setText(new StringBuilder().append(state.getInt("currpluslvslots", 0)).append("/").append(state.getInt("pluslvslots", 0)));
+        pluslvslots.setOnLongClickListener(this);
         castpluslv.setOnClickListener(this);
 
         inspirationtbn.setChecked(state.getBoolean("inspiration", false));
@@ -2039,6 +2049,196 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         dialog.cancel();
                         alertd.dismiss();
                         preparaSchedaPG();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotfirsttxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_1) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        firstlvslots.setText(tmp);
+                        state.edit().putInt("firstlvslots", pnt).apply();
+                        state.edit().putInt("currfirstlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotsecondtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_2) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        secondlvslots.setText(tmp);
+                        state.edit().putInt("secondlvslots", pnt).apply();
+                        state.edit().putInt("currsecondlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotthirdtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_3) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        thirdlvslots.setText(tmp);
+                        state.edit().putInt("thirdlvslots", pnt).apply();
+                        state.edit().putInt("currthirdlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotfourthtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_4) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        fourthlvslots.setText(tmp);
+                        state.edit().putInt("fourthlvslots", pnt).apply();
+                        state.edit().putInt("currfourthlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotfifthtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_5) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        fifthlvslots.setText(tmp);
+                        state.edit().putInt("fifthlvslots", pnt).apply();
+                        state.edit().putInt("currfifthlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotsixthtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_6) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        sixthlvslots.setText(tmp);
+                        state.edit().putInt("sixthlvslots", pnt).apply();
+                        state.edit().putInt("currsixthlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotseventhtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_7) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        seventhlvslots.setText(tmp);
+                        state.edit().putInt("seventhlvslots", pnt).apply();
+                        state.edit().putInt("currseventhlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.sloteigthtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_8) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        eighthlvslots.setText(tmp);
+                        state.edit().putInt("eighthlvslots", pnt).apply();
+                        state.edit().putInt("curreighthlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotninthtxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_9) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        ninthlvslots.setText(tmp);
+                        state.edit().putInt("ninthlvslots", pnt).apply();
+                        state.edit().putInt("currninthlvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
+                    }
+                });
+                alert.show();
+                return true;
+            case R.id.slotplustxtv:
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                alert.setView(input);
+                alert.setNegativeButton(getString(R.string.annulla), null);
+                alertd = alert.create();
+                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello) + ")");
+                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        pluslvslots.setText(tmp);
+                        state.edit().putInt("pluslvslots", pnt).apply();
+                        state.edit().putInt("currpluslvslots", pnt).apply();
+                        dialog.cancel();
+                        alertd.dismiss();
                     }
                 });
                 alert.show();
