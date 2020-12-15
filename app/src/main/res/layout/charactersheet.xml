@@ -619,7 +619,8 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/skillstitle">
+            app:layout_constraintTop_toBottomOf="@+id/skillstitle"
+            tools:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/ts"
@@ -2128,6 +2129,16 @@
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/slotfirsttxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
                             <EditText
                                 android:id="@+id/firstlist"
                                 android:layout_width="match_parent"
@@ -2142,6 +2153,7 @@
                                 android:layout_height="35dp"
                                 android:text="@string/aggiungi"
                                 android:visibility="gone" />
+
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2161,6 +2173,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/livello_2"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/slotsecondtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2204,6 +2226,16 @@
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/slotthirdtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
                             <EditText
                                 android:id="@+id/thirdlist"
                                 android:layout_width="match_parent"
@@ -2237,6 +2269,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/livello_4"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/slotfourthtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2280,6 +2322,16 @@
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/slotfifthtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
                             <EditText
                                 android:id="@+id/fifthlist"
                                 android:layout_width="match_parent"
@@ -2313,6 +2365,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/livello_6"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/slotsixthtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2356,6 +2418,16 @@
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/slotseventhtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
                             <EditText
                                 android:id="@+id/seventhlist"
                                 android:layout_width="match_parent"
@@ -2389,6 +2461,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/livello_8"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/sloteigthtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
@@ -2432,6 +2514,16 @@
                                 android:textColor="@color/cardview_light_background"
                                 android:textStyle="bold" />
 
+                            <TextView
+                                android:id="@+id/slotninthtxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
                             <EditText
                                 android:id="@+id/ninthlist"
                                 android:layout_width="match_parent"
@@ -2465,6 +2557,16 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/livello"
+                                android:textAlignment="center"
+                                android:textAllCaps="true"
+                                android:textColor="@color/cardview_light_background"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/slotplustxtv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Slot nn/nn"
                                 android:textAlignment="center"
                                 android:textAllCaps="true"
                                 android:textColor="@color/cardview_light_background"
