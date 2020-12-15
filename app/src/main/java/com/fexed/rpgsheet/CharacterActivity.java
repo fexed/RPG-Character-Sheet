@@ -3,14 +3,21 @@ package com.fexed.rpgsheet;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -42,6 +49,13 @@ import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -50,6 +64,7 @@ import static java.lang.Math.floor;
 
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
 
+    private static final int PICK_IMAGE = 101;
     static SharedPreferences state;
     static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13};
 
@@ -105,6 +120,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView ingannare; CheckBox compingannare; CheckBox expingannare;
     TextView intrattenere; CheckBox compintrattenere; CheckBox expintrattenere;
     TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
+    ImageView portrait;
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -305,6 +321,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         rangedatks = findViewById(R.id.rangedatks);
         meleeatks = findViewById(R.id.meleeatks);
         inventoryView = findViewById(R.id.inventoryRecV);
+        portrait = findViewById(R.id.pgportrait);
 
         String pgname = state.getString("pgname", null);
         String tempstr;
@@ -1198,6 +1215,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.show();
             }
         });
+
+        portrait.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                gallery.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivityForResult(gallery, PICK_IMAGE);
+                return true;
+            }
+        });
+        String path = state.getString("portrait", null);
+        if (path != null) {
+            portrait.setImageBitmap(BitmapFactory.decodeFile(path));
+        }
 
         saveSchedaPG();
     }
@@ -2312,5 +2343,44 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         String suffix = (bonus >= 0) ? "+" : "";
         String tempstr = suffix + bonus;
         label.setText(tempstr);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            Uri imageUri = data.getData();
+
+            InputStream in;
+            try {
+                in = getContentResolver().openInputStream(imageUri);
+                Bitmap selected_img = BitmapFactory.decodeStream(in);
+
+                ContextWrapper cw = new ContextWrapper(getApplicationContext());
+                File directory = cw.getDir("images", Context.MODE_PRIVATE);
+                File mypath = new File(directory, selected_img.hashCode() + ".png");
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(mypath);
+                    selected_img.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        fos.close();
+                    } catch (IOException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                String bmpuri = new ContextWrapper(getApplicationContext()).getDir("images", Context.MODE_PRIVATE).getAbsolutePath() + "/" + selected_img.hashCode() + ".png";
+                state.edit().putString("portrait", bmpuri).apply();
+                portrait.setImageBitmap(selected_img);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Toast.makeText(this, R.string.fileopenerror, Toast.LENGTH_LONG).show();
+            }
+
+            portrait.setImageURI(imageUri);
+        }
     }
 }

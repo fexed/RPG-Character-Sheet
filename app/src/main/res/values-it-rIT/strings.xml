@@ -139,4 +139,5 @@
     <string name="sleep">Riposo</string>
     <string name="resttxt">Riposo! Slot e punti ferita ripristinati!</string>
     <string name="cast">Lancia incantesimo</string>
+    <string name="fileopenerror">An error occurred while opening file</string>
 </resources>
