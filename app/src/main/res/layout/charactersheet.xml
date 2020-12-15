@@ -3,50 +3,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainscroll"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    app:flow_wrapMode="none">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pgportrait"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/propicplaceholder" />
 
         <TextView
             android:id="@+id/pgnametxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:fontFamily="serif"
             android:text="@string/nome_cognome"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@+id/textView18"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pgportrait"
+            app:layout_constraintTop_toTopOf="@+id/pgportrait"
+            tools:text="Atanvar il discretamente avveduto" />
 
         <TextView
             android:id="@+id/pgclasstxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/classi_di_abilit"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/pgnametxt"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pgnametxt"
             app:layout_constraintTop_toBottomOf="@+id/pgnametxt" />
 
         <TextView
             android:id="@+id/pgxptxtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-condensed"
             android:text="xxxx xp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
             app:layout_constraintTop_toBottomOf="@+id/pgclasstxt"
             tools:text="xxxx xp" />
 
@@ -65,43 +77,40 @@
             android:id="@+id/pglvtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="monospace"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pgnametxt" />
+            app:layout_constraintStart_toEndOf="@+id/pglvtxt2"
+            app:layout_constraintTop_toBottomOf="@+id/pgportrait" />
 
         <TextView
             android:id="@+id/pglvtxt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintEnd_toStartOf="@+id/pglvtxt"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
         <TextView
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/bonus_comp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintBottom_toTopOf="@+id/inspirationbtn"
-            app:layout_constraintEnd_toStartOf="@+id/proftxt"
-            app:layout_constraintTop_toTopOf="@+id/proftxt"
-            app:layout_constraintVertical_bias="0.25" />
+            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
+            app:layout_constraintTop_toTopOf="@+id/proftxt" />
 
         <TextView
             android:id="@+id/proftxt"
@@ -111,24 +120,26 @@
             android:text="+nn"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@+id/pglvtxt"
-            app:layout_constraintStart_toStartOf="@+id/pglvtxt"
-            app:layout_constraintTop_toBottomOf="@+id/pglvtxt" />
+            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
+            app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
         <CheckBox
             android:id="@+id/inspirationbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="sans-serif-condensed"
             android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/proftxt"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/proftxt" />
+            app:layout_constraintTop_toTopOf="@+id/proftxt" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/ispirazione"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
@@ -141,7 +152,7 @@
             android:id="@+id/stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@+id/inspirationbtn">
 
@@ -1081,7 +1092,7 @@
                     android:duplicateParentState="false"
                     android:visibility="invisible"
                     app:layout_constraintBaseline_toBaselineOf="@id/textView14"
-                    app:layout_constraintEnd_toStartOf="@id/compfurtivita"/>
+                    app:layout_constraintEnd_toStartOf="@id/compfurtivita" />
 
                 <CheckBox
                     android:id="@+id/compfurtivita"
@@ -1236,7 +1247,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/exparcano"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1281,7 +1292,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expstoria"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1325,7 +1336,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expreligionefolklore"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1369,7 +1380,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expnatura"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1427,7 +1438,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expsopravvivenza"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1471,7 +1482,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expmedicina"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1515,7 +1526,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/exppercezione"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1559,7 +1570,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintuizione"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1617,7 +1628,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintimidire"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1661,7 +1672,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expingannare"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1705,7 +1716,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintrattenere"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
                 <TextView
@@ -1749,7 +1760,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@id/exppersuadere"
-                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle"  />
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -2652,9 +2663,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:paddingTop="10dp"
-                tools:text="+100"
                 android:textAlignment="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                tools:text="+100" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -2676,7 +2687,7 @@
                     android:id="@+id/inventoryRecV"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:nestedScrollingEnabled="true"/>
+                    android:nestedScrollingEnabled="true" />
             </LinearLayout>
 
             <EditText
