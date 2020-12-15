@@ -2150,12 +2150,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addfirstlv"
+                                android:id="@+id/castfirstlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -2200,12 +2200,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addsecondlv"
+                                android:id="@+id/castsecondlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2249,12 +2249,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addthirdlv"
+                                android:id="@+id/castthirdlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2298,12 +2298,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addfourthlv"
+                                android:id="@+id/castfourthlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2347,12 +2347,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addfifthlv"
+                                android:id="@+id/castfifthlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2396,12 +2396,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addsixthlv"
+                                android:id="@+id/castsixthlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2445,12 +2445,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addseventhlv"
+                                android:id="@+id/castseventhlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2494,12 +2494,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addeightlv"
+                                android:id="@+id/casteightlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2543,12 +2543,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addninthlv"
+                                android:id="@+id/castninthlv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -2592,12 +2592,12 @@
                                 android:textSize="14sp" />
 
                             <Button
-                                android:id="@+id/addpluslv"
+                                android:id="@+id/castpluslv"
                                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                                 android:layout_width="match_parent"
                                 android:layout_height="35dp"
-                                android:text="@string/aggiungi"
-                                android:visibility="gone" />
+                                android:text="@string/cast"
+                                android:visibility="visible" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
 
