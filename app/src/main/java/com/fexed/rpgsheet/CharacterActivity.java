@@ -186,9 +186,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             int tmpi;
 
             tmpi = state.getInt("PFMAX", 0);
-            tmps = "" + tmpi;
-            state.edit().putInt("PF", tmpi).apply();
-            PF.setText(tmps);
+            if (state.getInt("PF", 0) < tmpi) {
+                tmps = "" + tmpi;
+                state.edit().putInt("PF", tmpi).apply();
+                PF.setText(tmps);
+            }
 
             tmpi = state.getInt("firstlvslots", 0);
             tmps = tmpi + "/" + tmpi;
