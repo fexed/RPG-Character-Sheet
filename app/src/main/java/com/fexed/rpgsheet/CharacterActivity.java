@@ -168,7 +168,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     .setBackgroundColorResource(R.color.colorPrimaryDark)
                     .setBalloonAnimation(BalloonAnimation.ELASTIC)
                     .build();
-            balloon.showAlignTop(lvltxtv, 0, 45);
+            balloon.showAlignTop(nametxt, 95, 45);
         }
         return true;
     }
