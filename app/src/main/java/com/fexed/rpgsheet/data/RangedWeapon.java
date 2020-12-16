@@ -3,8 +3,10 @@ package com.fexed.rpgsheet.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class RangedWeapon implements Parcelable {
-    String name, range, damage;
+import java.io.Serializable;
+
+public class RangedWeapon implements Parcelable, Serializable {
+    public String name, range, damage;
 
     public static final Creator<RangedWeapon> CREATOR = new Creator<RangedWeapon>() {
 
@@ -18,6 +20,12 @@ public class RangedWeapon implements Parcelable {
             return new RangedWeapon[size];
         }
     };
+
+    public RangedWeapon(String name, String range, String damage) {
+        this.name = name;
+        this.range = range;
+        this.damage = damage;
+    }
 
     public RangedWeapon(Parcel source) {
         name = source.readString();

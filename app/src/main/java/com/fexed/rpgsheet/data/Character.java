@@ -3,15 +3,22 @@ package com.fexed.rpgsheet.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Character implements Parcelable {
-    public int FOR, DEX, COS, INT, SAG, CAR, PF, PFMAX, CA, EXP;
+import static java.lang.Math.floor;
+
+public class Character implements Parcelable, Serializable {
+    public String nome, classe;
+    public int FOR, DEX, COS, INT, SAG, CAR, PF, PFMAX, CA, EXP, LV;
     public boolean inspiration; //1 true 0 false
 
+    public String spellstat;
     public int slot1, slot2, slot3, slot4, slot5, slot6, slot7, slot8, slot9, slotplus;
+    public int currslot1, currslot2, currslot3, currslot4, currslot5, currslot6, currslot7, currslot8, currslot9, currslotplus;
     public String cantrips, lv1, lv2, lv3, lv4, lv5, lv6, lv7, lv8, lv9, lvplus;
+    public int spellmana, spellmanamax;
 
     public int mp, mo, ma, mr;
 
@@ -44,7 +51,41 @@ public class Character implements Parcelable {
         }
     };
 
+    public Character() {
+        nome = ""; classe = "";
+        FOR = 10; DEX = 10; COS = 10; INT = 10; SAG = 10; CAR = 10; PF = 0; PFMAX = 0; CA = 10;
+        EXP = 0; LV = 1; inspiration = false;
+        slot1 = 0; slot2 = 0; slot3 = 0; slot4 = 0; slot5 = 0; slot6 = 0; slot7 = 0; slot8 = 0;
+        slot9 = 0; slotplus = 0;
+        currslot1 = 0; currslot2 = 0; currslot3 = 0; currslot4 = 0; currslot5 = 0; currslot6 = 0; currslot7 = 0; currslot8 = 0;
+        currslot9 = 0; currslotplus = 0;
+        cantrips = ""; lv1 = ""; lv2 = ""; lv3 = ""; lv4 = ""; lv5 = ""; lv6 = ""; lv7 = "";
+        lv8 = ""; lv9 = ""; lvplus = "";
+        mp = 0; mo = 0; ma = 0; mr = 0;
+        tsfor = false; tsdex = false; tscos = false; tsint = false; tssag = false; tscar = false;
+        portrait = null; linguetxt = ""; armitxt = ""; talentitxt = ""; abilitatxt = "";
+        inventariotxt = ""; backgroundtxt = "";
+        armimelee = new ArrayList<>(); armiranged = new ArrayList<>(); inventario = new ArrayList<>();
+        compatletica= false; expatletica= false; compacrobazia= false; expacrobazia= false;
+        compfurtivita= false; expfurtivita= false; comprapiditadimano= false;
+        exprapiditadimano= false; compinvestigare= false; expinvestigare= false;
+        comparcano= false; exparcano= false; compstoria= false; expstoria= false;
+        compreligione= false; expreligione= false; compnatura= false; expnatura= false;
+        compsopravvivenza= false; expsopravvivenza= false; compmedicina= false; expmedicina= false;
+        comppercezione= false; exppercezione= false;compintuizione= false; expintuizione= false;
+        compintimidire= false; expintimidire= false; compingannare= false; expingannare= false;
+        compintrattenere= false; expintrattenere= false; comppersuadere= false; exppersuadere = false;
+        spellstat = "INT";
+        spellmana = 0; spellmanamax = 0;
+    }
+
+    public static int mod(int punteggio) {
+        return (int) floor((((double) punteggio - 10) / 2));
+    }
+
     public Character(Parcel source) {
+        nome = source.readString();
+        classe = source.readString();
         FOR = source.readInt();
         DEX = source.readInt();
         COS = source.readInt();
@@ -55,7 +96,9 @@ public class Character implements Parcelable {
         PFMAX = source.readInt();
         CA = source.readInt();
         EXP = source.readInt();
+        LV = source.readInt();
         inspiration = (source.readInt() == 1);
+        spellstat = source.readString();
         slot1 = source.readInt();
         slot2 = source.readInt();
         slot3 = source.readInt();
@@ -66,6 +109,16 @@ public class Character implements Parcelable {
         slot8 = source.readInt();
         slot9 = source.readInt();
         slotplus = source.readInt();
+        currslot1 = source.readInt();
+        currslot2 = source.readInt();
+        currslot3 = source.readInt();
+        currslot4 = source.readInt();
+        currslot5 = source.readInt();
+        currslot6 = source.readInt();
+        currslot7 = source.readInt();
+        currslot8 = source.readInt();
+        currslot9 = source.readInt();
+        currslotplus = source.readInt();
         cantrips = source.readString();
         lv1 = source.readString();
         lv2 = source.readString();
@@ -77,6 +130,8 @@ public class Character implements Parcelable {
         lv8 = source.readString();
         lv9 = source.readString();
         lvplus = source.readString();
+        spellmana = source.readInt();
+        spellmanamax = source.readInt();
         mp = source.readInt();
         mo = source.readInt();
         ma = source.readInt();
@@ -145,16 +200,22 @@ public class Character implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(nome); dest.writeString(classe);
         dest.writeInt(FOR); dest.writeInt(DEX); dest.writeInt(COS); dest.writeInt(INT);
         dest.writeInt(SAG); dest.writeInt(CAR); dest.writeInt(PF); dest.writeInt(PFMAX);
-        dest.writeInt(CA); dest.writeInt(EXP);
+        dest.writeInt(CA); dest.writeInt(EXP); dest.writeInt(LV);
         dest.writeInt((inspiration) ? 1 : 0);
+        dest.writeString(spellstat);
         dest.writeInt(slot1); dest.writeInt(slot2); dest.writeInt(slot3); dest.writeInt(slot4);
         dest.writeInt(slot5); dest.writeInt(slot6); dest.writeInt(slot7); dest.writeInt(slot8);
         dest.writeInt(slot9); dest.writeInt(slotplus);
+        dest.writeInt(currslot1); dest.writeInt(currslot2); dest.writeInt(currslot3); dest.writeInt(currslot4);
+        dest.writeInt(currslot5); dest.writeInt(currslot6); dest.writeInt(currslot7); dest.writeInt(currslot8);
+        dest.writeInt(currslot9); dest.writeInt(currslotplus);
         dest.writeString(cantrips); dest.writeString(lv1); dest.writeString(lv2);
         dest.writeString(lv3); dest.writeString(lv4); dest.writeString(lv5); dest.writeString(lv6);
         dest.writeString(lv7); dest.writeString(lv8); dest.writeString(lv9); dest.writeString(lvplus);
+        dest.writeInt(spellmana); dest.writeInt(spellmanamax);
         dest.writeInt(mp); dest.writeInt(mo); dest.writeInt(ma); dest.writeInt(mr);
         dest.writeInt((tsfor) ? 1 : 0); dest.writeInt((tsdex) ? 1 : 0); dest.writeInt((tscos) ? 1 : 0);
         dest.writeInt((tsint) ? 1 : 0); dest.writeInt((tssag) ? 1 : 0); dest.writeInt((tscar) ? 1 : 0);

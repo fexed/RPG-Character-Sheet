@@ -1,5 +1,6 @@
 package com.fexed.rpgsheet;
 
+import com.fexed.rpgsheet.data.Character;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -22,17 +23,17 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Range;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ActionMenuView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -40,12 +41,13 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fexed.rpgsheet.data.InventoryItem;
+import com.fexed.rpgsheet.data.MeleeWeapon;
+import com.fexed.rpgsheet.data.RangedWeapon;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.analytics.FirebaseAnalytics;
-import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 
@@ -55,7 +57,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -122,12 +125,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
     ImageView portrait;
 
+    Character character;
+
     @Override
     protected void onCreate (Bundle saveBundle) {
         super.onCreate(saveBundle);
         setContentView(R.layout.charactersheet);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
-        setTitle(getString(R.string.pgcharsheet, state.getString("pgname", "?")));
+        setTitle(getString(android.R.string.unknownName));
 
         //Launches
         int n = state.getInt("launchn", 0);
@@ -137,13 +142,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         }
         state.edit().putInt("launchn", n).apply();
 
-        preparaSchedaPG();
+        migrateFromPreferences();
+        loadSchedaPG();
         initializeAds();
 
-        Bundle bndl = new Bundle();
+        /*Bundle bndl = new Bundle();
         bndl.putString("Name", state.getString("pgname", "nonsettato"));
         bndl.putInt("launchtimes", n);
-        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);*/
     }
 
     @Override
@@ -159,16 +165,17 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         //Dice roller tutorial
         boolean diceroller = state.getBoolean("diceroller", false);
         if (!diceroller) {
-            TextView lvltxtv = findViewById(R.id.pglvtxt);
-            Balloon balloon = new Balloon.Builder(getApplicationContext())
-                    .setText(getString(R.string.try_diceroller))
-                    .setPadding(5)
-                    .setDismissWhenTouchOutside(true)
-                    .setArrowVisible(false)
-                    .setBackgroundColorResource(R.color.colorPrimaryDark)
-                    .setBalloonAnimation(BalloonAnimation.ELASTIC)
-                    .build();
-            balloon.showAlignTop(nametxt, 95, 45);
+            try {
+                Balloon balloon = new Balloon.Builder(getApplicationContext())
+                        .setText(getString(R.string.try_diceroller))
+                        .setPadding(5)
+                        .setDismissWhenTouchOutside(true)
+                        .setArrowVisible(false)
+                        .setBackgroundColorResource(R.color.colorPrimaryDark)
+                        .setBalloonAnimation(BalloonAnimation.ELASTIC)
+                        .build();
+                balloon.showAlignTop(nametxt, 95, 45);
+            } catch (Exception ignored) {}
         }
         return true;
     }
@@ -183,68 +190,183 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             inputdialog.show();
         } else if (item.getItemId() == R.id.sleep) {
             String tmps;
-            int tmpi;
-
-            tmpi = state.getInt("PFMAX", 0);
-            if (state.getInt("PF", 0) < tmpi) {
-                tmps = "" + tmpi;
-                state.edit().putInt("PF", tmpi).apply();
+            
+            if (character.PF < character.PFMAX) {
+                tmps = "" + character.PFMAX;
+                character.PF = character.PFMAX;
                 PF.setText(tmps);
             }
 
-            tmpi = state.getInt("firstlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currfirstlvslots", tmpi).apply();
+            character.currslot1 = character.slot1;
+            tmps = character.currslot1 + "/" + character.slot1;
             firstlvslots.setText(tmps);
 
-            tmpi = state.getInt("secondlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currsecondlvslots", tmpi).apply();
+            character.currslot2 = character.slot2;
+            tmps = character.currslot2 + "/" + character.slot2;
             secondlvslots.setText(tmps);
 
-            tmpi = state.getInt("thirdlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currthirdlvslots", tmpi).apply();
+            character.currslot3 = character.slot3;
+            tmps = character.currslot3 + "/" + character.slot3;
             thirdlvslots.setText(tmps);
 
-            tmpi = state.getInt("fourthlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currfourthlvslots", tmpi).apply();
+            character.currslot4 = character.slot4;
+            tmps = character.currslot4 + "/" + character.slot4;
             fourthlvslots.setText(tmps);
 
-            tmpi = state.getInt("fifthlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currfifthlvslots", tmpi).apply();
+            character.currslot5 = character.slot5;
+            tmps = character.currslot5 + "/" + character.slot5;
             fifthlvslots.setText(tmps);
 
-            tmpi = state.getInt("sixthlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currsixthlvslots", tmpi).apply();
+            character.currslot6 = character.slot6;
+            tmps = character.currslot6 + "/" + character.slot6;
             sixthlvslots.setText(tmps);
 
-            tmpi = state.getInt("seventhlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currseventhlvslots", tmpi).apply();
+            character.currslot7 = character.slot7;
+            tmps = character.currslot7 + "/" + character.slot7;
             seventhlvslots.setText(tmps);
 
-            tmpi = state.getInt("eighthlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("curreighthlvslots", tmpi).apply();
+            character.currslot8 = character.slot8;
+            tmps = character.currslot8 + "/" + character.slot8;
             eighthlvslots.setText(tmps);
 
-            tmpi = state.getInt("ninthlvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currninthlvslots", tmpi).apply();
+            character.currslot9 = character.slot9;
+            tmps = character.currslot9 + "/" + character.slot9;
             ninthlvslots.setText(tmps);
 
-            tmpi = state.getInt("pluslvslots", 0);
-            tmps = tmpi + "/" + tmpi;
-            state.edit().putInt("currpluslvslots", tmpi).apply();
+            character.currslotplus = character.slotplus;
+            tmps = character.currslotplus + "/" + character.slotplus;
             pluslvslots.setText(tmps);
+
+            character.spellmana = character.spellmanamax;
+            tmps = character.spellmanamax + "/" + character.spellmanamax;
+            spellmana.setText(tmps);
 
             Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.resttxt), Snackbar.LENGTH_LONG).show();
         }
         return true;
+    }
+
+    public void migrateFromPreferences() {
+        if (state.getString("pgname", null) != null) {
+            Toast.makeText(getApplicationContext(), "Migrating character", Toast.LENGTH_LONG).show();
+            character = new Character();
+            character.nome = state.getString("pgname", "");
+            character.classe = state.getString("pgclass", "");
+            character.LV = state.getInt("pglv", 1);
+            character.FOR = state.getInt("FOR", 10);
+            character.DEX = state.getInt("DEX", 10);
+            character.COS = state.getInt("COS", 10);
+            character.INT = state.getInt("INT", 10);
+            character.SAG = state.getInt("SAG", 10);
+            character.CAR = state.getInt("CAR", 10);
+            character.CA = state.getInt("CA", 10);
+            character.PF = state.getInt("PF", 0);
+            character.PFMAX = state.getInt("PFMAX", 0);
+            character.EXP = state.getInt("xp", 0);
+            character.spellstat = state.getString("SPELLSTAT", "INT");
+            character.spellmana = state.getInt("spellmana", 0);
+            character.spellmanamax = state.getInt("spellmanamax", 0);
+            character.tsfor = state.getBoolean("comptsfor", false);
+            character.tsdex = state.getBoolean("comptsdex", false);
+            character.tscos = state.getBoolean("comptscos", false);
+            character.tsint = state.getBoolean("comptsint", false);
+            character.tssag = state.getBoolean("comptssag", false);
+            character.tscar = state.getBoolean("comptscar", false);
+            character.compatletica = state.getBoolean("compatletica", false);
+            character.expatletica = state.getBoolean("expatletica", false);
+            character.compacrobazia = state.getBoolean("compacrobazia", false);
+            character.expacrobazia = state.getBoolean("expacrobazia", false);
+            character.compfurtivita = state.getBoolean("compfurtivita", false);
+            character.expfurtivita = state.getBoolean("expfurtivita", false);
+            character.comprapiditadimano = state.getBoolean("comprapiditadimano", false);
+            character.exprapiditadimano = state.getBoolean("exprapiditadimano", false);
+            character.compinvestigare = state.getBoolean("compinvestigare", false);
+            character.expinvestigare = state.getBoolean("expinvestigare", false);
+            character.comparcano = state.getBoolean("comparcano", false);
+            character.exparcano = state.getBoolean("exparcano", false);
+            character.compstoria = state.getBoolean("compstoria", false);
+            character.expstoria = state.getBoolean("expstoria", false);
+            character.compreligione = state.getBoolean("compreligionefolklore", false);
+            character.expreligione = state.getBoolean("expreligionefolklore", false);
+            character.compnatura = state.getBoolean("compnatura", false);
+            character.expnatura = state.getBoolean("expnatura", false);
+            character.compsopravvivenza = state.getBoolean("compsopravvivenza", false);
+            character.expsopravvivenza = state.getBoolean("expsopravvivenza", false);
+            character.compmedicina = state.getBoolean("compmedicina", false);
+            character.expmedicina = state.getBoolean("expmedicina", false);
+            character.comppercezione = state.getBoolean("comppercezione", false);
+            character.exppercezione = state.getBoolean("exppercezione", false);
+            character.compintuizione = state.getBoolean("compintuizione", false);
+            character.expintuizione = state.getBoolean("expintuizione", false);
+            character.compintimidire = state.getBoolean("compintimidire", false);
+            character.expintimidire = state.getBoolean("expintimidire", false);
+            character.compingannare = state.getBoolean("compingannare", false);
+            character.expingannare = state.getBoolean("expingannare", false);
+            character.compintrattenere = state.getBoolean("compintrattenere", false);
+            character.expintrattenere = state.getBoolean("expintrattenere", false);
+            character.comppersuadere = state.getBoolean("comppersuadere", false);
+            character.exppersuadere = state.getBoolean("exppersuadere", false);
+            character.linguetxt = state.getString("linguetxt", "");
+            character.armitxt = state.getString("armitxt", "");
+            character.talentitxt = state.getString("talentitxt", "");
+            character.abilitatxt = state.getString("abilitatxt", "");
+            character.mp = state.getInt("mp", 0);
+            character.mo = state.getInt("mo", 0);
+            character.ma = state.getInt("ma", 0);
+            character.mr = state.getInt("mr", 0);
+            character.inventariotxt = state.getString("inv", "");
+            character.backgroundtxt = state.getString("background", "");
+            character.cantrips = state.getString("cantripss", "");
+            character.lv1 = state.getString("firstlv", "");
+            character.currslot1 = state.getInt("currfirstlvslots", 0);
+            character.slot1 = state.getInt("firstlvslots", 0);
+            character.lv2 = state.getString("secondlv", "");
+            character.currslot2 = state.getInt("currsecondlvslots", 0);
+            character.slot2 = state.getInt("secondlvslots", 0);
+            character.lv3 = state.getString("thirdlv", "");
+            character.currslot3 = state.getInt("currthirdlvslots", 0);
+            character.slot3 = state.getInt("thirdlvslots", 0);
+            character.lv4 = state.getString("fourthlv", "");
+            character.currslot4 = state.getInt("currfourthlvslots", 0);
+            character.slot4 = state.getInt("fourthlvslots", 0);
+            character.lv5 = state.getString("fifthlv", "");
+            character.currslot5 = state.getInt("currfifthlvslots", 0);
+            character.slot5 = state.getInt("fifthlvslots", 0);
+            character.lv6 = state.getString("sixthlv", "");
+            character.currslot6 = state.getInt("currsixthlvslots", 0);
+            character.slot6 = state.getInt("sixthlvslots", 0);
+            character.lv7 = state.getString("seventhlv", "");
+            character.currslot7 = state.getInt("currseventhlvslots", 0);
+            character.slot7 = state.getInt("seventhlvslots", 0);
+            character.lv8 = state.getString("eighthlv", "");
+            character.currslot8 = state.getInt("curreighthlvslots", 0);
+            character.slot8 = state.getInt("eighthlvslots", 0);
+            character.lv9 = state.getString("ninthlv", "");
+            character.currslot9 = state.getInt("currninthlvslots", 0);
+            character.slot9 = state.getInt("ninthlvslots", 0);
+            character.lvplus = state.getString("pluslv", "");
+            character.currslotplus = state.getInt("currpluslvslots", 0);
+            character.slotplus = state.getInt("pluslvslots", 0);
+            character.portrait = state.getString("portrait", null);
+
+            Set<String> set = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
+            for (String str : set) {
+                String[] melee = str.split("%");
+                character.armimelee.add(new MeleeWeapon(melee[0], melee[1]));
+            }
+            set = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
+            for (String str : set) {
+                String[] ranged = str.split("%");
+                character.armiranged.add(new RangedWeapon(ranged[0], ranged[1], ranged[2]));
+            }
+            set = state.getStringSet("inventory", null);
+            for (String str : set) {
+                String[] item = str.split("::");
+                character.inventario.add(new InventoryItem(item[0], item[1]));
+            }
+            saveSchedaPG();
+            //state.edit().clear().apply();
+        }
     }
 
     private void preparaSchedaPG() {
@@ -325,88 +447,80 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         inventoryView = findViewById(R.id.inventoryRecV);
         portrait = findViewById(R.id.pgportrait);
 
-        String pgname = state.getString("pgname", null);
         String tempstr;
-        if (pgname == null) {
-            PGDialog inputdialog = new PGDialog(this, state);
+        if (character == null) {
+            character = new Character();
+            PGDialog inputdialog = new PGDialog(this, character);
             inputdialog.show();
-        } else {
-            nametxt.setText(state.getString("pgname", "errore"));
-            classtxt.setText(state.getString("pgclass", "errore"));
-            int lv = Math.min(state.getInt("pglv", 1), 20);
-            state.edit().putInt("pglv", lv).apply();
-            tempstr = lv + "";
-            lvtxt.setText(tempstr);
-            tempstr = "+" + (prof[lv - 1]);
-            proftxt.setText(tempstr);
-
-            pntfor = state.getInt("FOR", 10);
-            modfor = mod(pntfor);
-            String suffix = (modfor >= 0) ? "+" : "";
-            tempstr = "" + pntfor;
-            FOR.setText(tempstr);
-            tempstr = suffix + modfor;
-            FORmod.setText(tempstr);
-
-            pntdex = state.getInt("DEX", 10);
-            moddex = mod(pntdex);
-            suffix = (moddex >= 0) ? "+" : "";
-            tempstr = "" + pntdex;
-            DEX.setText(tempstr);
-            tempstr = suffix + moddex;
-            DEXmod.setText(tempstr);
-
-            pntcos = state.getInt("COS", 10);
-            modcos = mod(pntcos);
-            suffix = (modcos >= 0) ? "+" : "";
-            tempstr = "" + pntcos;
-            COS.setText(tempstr);
-            tempstr = suffix + modcos;
-            COSmod.setText(tempstr);
-
-            pntint = state.getInt("INT", 10);
-            modint = mod(pntint);
-            suffix = (modint >= 0) ? "+" : "";
-            tempstr = "" + pntint;
-            INT.setText(tempstr);
-            tempstr = suffix + modint;
-            INTmod.setText(tempstr);
-
-            pntsag = state.getInt("SAG", 10);
-            modsag = mod(pntsag);
-            suffix = (modsag >= 0) ? "+" : "";
-            tempstr = "" + pntsag;
-            SAG.setText(tempstr);
-            tempstr = suffix + modsag;
-            SAGmod.setText(tempstr);
-
-            pntcar = state.getInt("CAR", 10);
-            modcar = mod(pntcar);
-            suffix = (modcar >= 0) ? "+" : "";
-            tempstr = "" + pntcar;
-            CAR.setText(tempstr);
-            tempstr = suffix + modcar;
-            CARmod.setText(tempstr);
-
-            int ca = state.getInt("CA", 10);
-            tempstr = "" + ca;
-            CA.setText(tempstr);
-
-            int pf = state.getInt("PF", 0);
-            tempstr = "" + pf;
-            PF.setText(tempstr);
-
-            int pfmax = state.getInt("PFMAX", 0);
-            tempstr = "" + pfmax;
-            PFmax.setText(tempstr);
-
         }
+        nametxt.setText(character.nome);
+        classtxt.setText(character.classe);
+        tempstr = character.LV + "";
+        lvtxt.setText(tempstr);
+        tempstr = "+" + (prof[character.LV - 1]);
+        proftxt.setText(tempstr);
 
-        String stat = state.getString("SPELLSTAT", "INT");
-        spellstat.setText(stat);
-        int lv = state.getInt("pglv", 1);
-        int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
-        String suffix = (bonus < 0) ? "" : "+";
+        modfor = mod(character.FOR);
+        String suffix = (modfor >= 0) ? "+" : "";
+        tempstr = "" + character.FOR;
+        FOR.setText(tempstr);
+        tempstr = suffix + modfor;
+        FORmod.setText(tempstr);
+
+        moddex = mod(character.DEX);
+        suffix = (moddex >= 0) ? "+" : "";
+        tempstr = "" + character.DEX;
+        DEX.setText(tempstr);
+        tempstr = suffix + moddex;
+        DEXmod.setText(tempstr);
+
+        pntcos = character.COS;
+        modcos = mod(pntcos);
+        suffix = (modcos >= 0) ? "+" : "";
+        tempstr = "" + character.COS;
+        COS.setText(tempstr);
+        tempstr = suffix + modcos;
+        COSmod.setText(tempstr);
+
+        pntint = character.INT;
+        modint = mod(pntint);
+        suffix = (modint >= 0) ? "+" : "";
+        tempstr = "" + character.INT;
+        INT.setText(tempstr);
+        tempstr = suffix + modint;
+        INTmod.setText(tempstr);
+
+        pntsag = character.SAG;
+        modsag = mod(pntsag);
+        suffix = (modsag >= 0) ? "+" : "";
+        tempstr = "" + character.SAG;
+        SAG.setText(tempstr);
+        tempstr = suffix + modsag;
+        SAGmod.setText(tempstr);
+
+        pntcar = character.CAR;
+        modcar = mod(pntcar);
+        suffix = (modcar >= 0) ? "+" : "";
+        tempstr = "" + character.CAR;
+        CAR.setText(tempstr);
+        tempstr = suffix + modcar;
+        CARmod.setText(tempstr);
+
+        tempstr = "" + character.CA;
+        CA.setText(tempstr);
+
+        tempstr = "" + character.PF;
+        PF.setText(tempstr);
+
+        tempstr = "" + character.PFMAX;
+        PFmax.setText(tempstr);
+
+        spellstat.setText(character.spellstat);
+        int bonus = 0;
+        if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
+        else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
+        else bonus = prof[character.LV - 1] + mod(character.INT);
+        suffix = (bonus < 0) ? "" : "+";
         tempstr = suffix + bonus;
         spellatk.setText(tempstr);
         tempstr = "" + (8 + bonus);
@@ -424,11 +538,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         lvtxt.setOnLongClickListener(this);
         nametxt.setOnLongClickListener(this);
 
-        tempstr = "+" + prof[state.getInt("pglv",1)-1];
+        tempstr = "+" + prof[character.LV - 1];
         proftxt.setText(tempstr);
 
         spellmana.setOnLongClickListener(this);
-        tempstr = state.getInt("spellmana", 0) + "/" + state.getInt("spellmanamax", 0);
+        tempstr = character.spellmana + "/" + character.spellmanamax;
         spellmana.setText(tempstr);
 
         addmanabtn.setOnClickListener(this);
@@ -450,8 +564,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tsfortxt = findViewById(R.id.TSFOR);
         comptsfor = findViewById(R.id.comptsfor);
-        comptsfor.setChecked(state.getBoolean("comptsfor", false));
-        int ts = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
+        comptsfor.setChecked(character.tsfor);
+        int ts = mod(character.FOR) + ((comptsfor.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsfortxt.setText(tempstr);
@@ -459,8 +573,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tsdextxt = findViewById(R.id.TSDEX);
         comptsdex = findViewById(R.id.comptsdex);
-        comptsdex.setChecked(state.getBoolean("comptsdex", false));
-        ts = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
+        comptsdex.setChecked(character.tsdex);
+        ts = mod(character.DEX) + ((comptsdex.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsdextxt.setText(tempstr);
@@ -468,8 +582,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tscostxt = findViewById(R.id.TSCOS);
         comptscos = findViewById(R.id.comptscos);
-        comptscos.setChecked(state.getBoolean("comptscos", false));
-        ts = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
+        comptscos.setChecked(character.tscos);
+        ts = mod(character.COS) + ((comptscos.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscostxt.setText(tempstr);
@@ -477,8 +591,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tsinttxt = findViewById(R.id.TSINT);
         comptsint = findViewById(R.id.comptsint);
-        comptsint.setChecked(state.getBoolean("comptsint", false));
-        ts = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
+        comptsint.setChecked(character.tsint);
+        ts = mod(character.INT) + ((comptsint.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsinttxt.setText(tempstr);
@@ -486,8 +600,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tssagtxt = findViewById(R.id.TSSAG);
         comptssag = findViewById(R.id.comptssag);
-        comptssag.setChecked(state.getBoolean("comptssag", false));
-        ts = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
+        comptssag.setChecked(character.tssag);
+        ts = mod(character.SAG) + ((comptssag.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tssagtxt.setText(tempstr);
@@ -495,8 +609,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         tscartxt = findViewById(R.id.TSCAR);
         comptscar = findViewById(R.id.comptscar);
-        comptscar.setChecked(state.getBoolean("comptscar", false));
-        ts = mod((state.getInt("CAR", 10))) + ((comptscar.isChecked()) ? prof[lv-1] : 0);
+        comptscar.setChecked(character.tscar);
+        ts = mod(character.CAR) + ((comptscar.isChecked()) ? prof[character.LV - 1] : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscartxt.setText(tempstr);
@@ -507,9 +621,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expatletica = findViewById(R.id.expatletica);
         compatletica.setOnCheckedChangeListener(this);
         expatletica.setOnCheckedChangeListener(this);
-        compatletica.setChecked(state.getBoolean("compatletica", false));
-        expatletica.setChecked(state.getBoolean("expatletica", false));
-        bonus = mod((state.getInt("FOR", 10)))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compatletica.setChecked(character.compatletica);
+        expatletica.setChecked(character.expatletica);
+        bonus = mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         atletica.setText(tempstr);
@@ -519,9 +633,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expacrobazia = findViewById(R.id.expacrobazia);
         compacrobazia.setOnCheckedChangeListener(this);
         expacrobazia.setOnCheckedChangeListener(this);
-        compacrobazia.setChecked(state.getBoolean("compacrobazia", false));
-        expacrobazia.setChecked(state.getBoolean("expacrobazia", false));
-        bonus = mod((state.getInt("DEX", 10)))+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compacrobazia.setChecked(character.compacrobazia);
+        expacrobazia.setChecked(character.expacrobazia);
+        bonus = mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         acrobazia.setText(tempstr);
@@ -531,9 +645,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expfurtivita = findViewById(R.id.expfurtivita);
         compfurtivita.setOnCheckedChangeListener(this);
         expfurtivita.setOnCheckedChangeListener(this);
-        compfurtivita.setChecked(state.getBoolean("compfurtivita", false));
-        expfurtivita.setChecked(state.getBoolean("expfurtivita", false));
-        bonus = mod((state.getInt("DEX", 10)))+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compfurtivita.setChecked(character.compfurtivita);
+        expfurtivita.setChecked(character.expfurtivita);
+        bonus = mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         furtivita.setText(tempstr);
@@ -543,9 +657,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exprapiditadimano = findViewById(R.id.exprapiditadimano);
         comprapiditadimano.setOnCheckedChangeListener(this);
         exprapiditadimano.setOnCheckedChangeListener(this);
-        comprapiditadimano.setChecked(state.getBoolean("comprapiditadimano", false));
-        exprapiditadimano.setChecked(state.getBoolean("exprapiditadimano", false));
-        bonus = mod((state.getInt("DEX", 10)))+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        comprapiditadimano.setChecked(character.comprapiditadimano);
+        exprapiditadimano.setChecked(character.exprapiditadimano);
+        bonus = mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         rapiditadimano.setText(tempstr);
@@ -555,9 +669,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expinvestigare = findViewById(R.id.expinvestigare);
         compinvestigare.setOnCheckedChangeListener(this);
         expinvestigare.setOnCheckedChangeListener(this);
-        compinvestigare.setChecked(state.getBoolean("compinvestigare", false));
-        expinvestigare.setChecked(state.getBoolean("expinvestigare", false));
-        bonus = mod((state.getInt("INT", 10))) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compinvestigare.setChecked(character.compinvestigare);
+        expinvestigare.setChecked(character.expinvestigare);
+        bonus = mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         investigare.setText(tempstr);
@@ -567,9 +681,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exparcano = findViewById(R.id.exparcano);
         comparcano.setOnCheckedChangeListener(this);
         exparcano.setOnCheckedChangeListener(this);
-        comparcano.setChecked(state.getBoolean("comparcano", false));
-        exparcano.setChecked(state.getBoolean("exparcano", false));
-        bonus = mod((state.getInt("INT", 10))) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        comparcano.setChecked(character.comparcano);
+        exparcano.setChecked(character.exparcano);
+        bonus = mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         arcano.setText(tempstr);
@@ -579,9 +693,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expstoria = findViewById(R.id.expstoria);
         compstoria.setOnCheckedChangeListener(this);
         expstoria.setOnCheckedChangeListener(this);
-        compstoria.setChecked(state.getBoolean("compstoria", false));
-        expstoria.setChecked(state.getBoolean("expstoria", false));
-        bonus = mod((state.getInt("INT", 10))) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compstoria.setChecked(character.compstoria);
+        expstoria.setChecked(character.expstoria);
+        bonus = mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         storia.setText(tempstr);
@@ -591,9 +705,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expreligionefolklore = findViewById(R.id.expreligionefolklore);
         compreligionefolklore.setOnCheckedChangeListener(this);
         expreligionefolklore.setOnCheckedChangeListener(this);
-        compreligionefolklore.setChecked(state.getBoolean("compreligionefolklore", false));
-        expreligionefolklore.setChecked(state.getBoolean("expreligionefolklore", false));
-        bonus = mod((state.getInt("INT", 10))) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compreligionefolklore.setChecked(character.compreligione);
+        expreligionefolklore.setChecked(character.expreligione);
+        bonus = mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         religionefolklore.setText(tempstr);
@@ -603,9 +717,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expnatura = findViewById(R.id.expnatura);
         compnatura.setOnCheckedChangeListener(this);
         expnatura.setOnCheckedChangeListener(this);
-        compnatura.setChecked(state.getBoolean("compnatura", false));
-        expnatura.setChecked(state.getBoolean("expnatura", false));
-        bonus = mod((state.getInt("INT", 10))) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compnatura.setChecked(character.compnatura);
+        expnatura.setChecked(character.expnatura);
+        bonus = mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         natura.setText(tempstr);
@@ -615,9 +729,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expsopravvivenza = findViewById(R.id.expsopravvivenza);
         compsopravvivenza.setOnCheckedChangeListener(this);
         expsopravvivenza.setOnCheckedChangeListener(this);
-        compsopravvivenza.setChecked(state.getBoolean("compsopravvivenza", false));
-        expsopravvivenza.setChecked(state.getBoolean("expsopravvivenza", false));
-        bonus = mod((state.getInt("SAG", 10))) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compsopravvivenza.setChecked(character.compsopravvivenza);
+        expsopravvivenza.setChecked(character.expsopravvivenza);
+        bonus = mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         sopravvivenza.setText(tempstr);
@@ -627,9 +741,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expmedicina = findViewById(R.id.expmedicina);
         compmedicina.setOnCheckedChangeListener(this);
         expmedicina.setOnCheckedChangeListener(this);
-        compmedicina.setChecked(state.getBoolean("compmedicina", false));
-        expmedicina.setChecked(state.getBoolean("expmedicina", false));
-        bonus = mod((state.getInt("SAG", 10))) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compmedicina.setChecked(character.compmedicina);
+        expmedicina.setChecked(character.expmedicina);
+        bonus = mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         medicina.setText(tempstr);
@@ -639,9 +753,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exppercezione = findViewById(R.id.exppercezione);
         comppercezione.setOnCheckedChangeListener(this);
         exppercezione.setOnCheckedChangeListener(this);
-        comppercezione.setChecked(state.getBoolean("comppercezione", false));
-        exppercezione.setChecked(state.getBoolean("exppercezione", false));
-        bonus = mod((state.getInt("SAG", 10))) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        comppercezione.setChecked(character.comppercezione);
+        exppercezione.setChecked(character.exppercezione);
+        bonus = mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         percezione.setText(tempstr);
@@ -651,9 +765,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintuizione = findViewById(R.id.expintuizione);
         compintuizione.setOnCheckedChangeListener(this);
         expintuizione.setOnCheckedChangeListener(this);
-        compintuizione.setChecked(state.getBoolean("compintuizione", false));
-        expintuizione.setChecked(state.getBoolean("expintuizione", false));
-        bonus = mod((state.getInt("SAG", 10))) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compintuizione.setChecked(character.compintuizione);
+        expintuizione.setChecked(character.expintuizione);
+        bonus = mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intuizione.setText(tempstr);
@@ -663,9 +777,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintimidire = findViewById(R.id.expintimidire);
         compintimidire.setOnCheckedChangeListener(this);
         expintimidire.setOnCheckedChangeListener(this);
-        compintimidire.setChecked(state.getBoolean("compintimidire", false));
-        expintimidire.setChecked(state.getBoolean("expintimidire", false));
-        bonus = mod((state.getInt("CAR", 10))) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compintimidire.setChecked(character.compintimidire);
+        expintimidire.setChecked(character.expintimidire);
+        bonus = mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intimidire.setText(tempstr);
@@ -675,9 +789,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expingannare = findViewById(R.id.expingannare);
         compingannare.setOnCheckedChangeListener(this);
         expingannare.setOnCheckedChangeListener(this);
-        compingannare.setChecked(state.getBoolean("compingannare", false));
-        expingannare.setChecked(state.getBoolean("expingannare", false));
-        bonus = mod((state.getInt("CAR", 10))) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compingannare.setChecked(character.compingannare);
+        expingannare.setChecked(character.expingannare);
+        bonus = mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         ingannare.setText(tempstr);
@@ -687,9 +801,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintrattenere = findViewById(R.id.expintrattenere);
         compintrattenere.setOnCheckedChangeListener(this);
         expintrattenere.setOnCheckedChangeListener(this);
-        compintrattenere.setChecked(state.getBoolean("compintrattenere", false));
-        expintrattenere.setChecked(state.getBoolean("expintrattenere", false));
-        bonus = mod((state.getInt("CAR", 10))) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        compintrattenere.setChecked(character.compintrattenere);
+        expintrattenere.setChecked(character.expintrattenere);
+        bonus = mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intrattenere.setText(tempstr);
@@ -699,15 +813,15 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exppersuadere = findViewById(R.id.exppersuadere);
         comppersuadere.setOnCheckedChangeListener(this);
         exppersuadere.setOnCheckedChangeListener(this);
-        comppersuadere.setChecked(state.getBoolean("comppersuadere", false));
-        exppersuadere.setChecked(state.getBoolean("exppersuadere", false));
-        bonus = mod((state.getInt("CAR", 10))) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        comppersuadere.setChecked(character.comppersuadere);
+        exppersuadere.setChecked(character.exppersuadere);
+        bonus = mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         persuadere.setText(tempstr);
 
         EditText linguetxt = findViewById(R.id.linguetxt);
-        linguetxt.setText(state.getString("linguetxt", ""));
+        linguetxt.setText(character.linguetxt);
         linguetxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -717,13 +831,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("linguetxt", editable.toString()).apply();
+                character.linguetxt  = editable.toString();
+                saveSchedaPG();
             }
         });
         linguetxt.clearFocus();
 
         EditText armitxt = findViewById(R.id.armitxt);
-        armitxt.setText(state.getString("armitxt", ""));
+        armitxt.setText(character.armitxt);
         armitxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -733,13 +848,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("armitxt", editable.toString()).apply();
+                character.armitxt = editable.toString();
+                saveSchedaPG();
             }
         });
         armitxt.clearFocus();
 
         EditText talentitxt = findViewById(R.id.talentitxt);
-        talentitxt.setText(state.getString("talentitxt", ""));
+        talentitxt.setText(character.talentitxt);
         talentitxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -749,13 +865,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("talentitxt", editable.toString()).apply();
+                character.talentitxt = editable.toString();
+                saveSchedaPG();
             }
         });
         talentitxt.clearFocus();
 
         EditText abilitatxt = findViewById(R.id.abilitatxt);
-        abilitatxt.setText(state.getString("abilitatxt", ""));
+        abilitatxt.setText(character.abilitatxt);
         abilitatxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -765,7 +882,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("abilitatxt", editable.toString()).apply();
+                character.abilitatxt = editable.toString();
+                saveSchedaPG();
             }
         });
         abilitatxt.clearFocus();
@@ -777,48 +895,44 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
 
         double money;
-        int mp = state.getInt("mp", 0);
-        int mo = state.getInt("mo", 0);
-        int ma = state.getInt("ma", 0);
-        int mr = state.getInt("mr", 0);
-        money = Math.ceil(mp*10 + mo + ma*0.1 + mr*0.01);
+        money = Math.ceil(character.mp*10 + character.mo + character.ma*0.1 + character.mr*0.01);
         String txt = String.format(Locale.getDefault(), "%.0f", money);
         String strstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
         totalmtxtv.setText(strstr);
 
-        tempstr = mp + "";
+        tempstr = character.mp+ "";
         mptxtv.setText(tempstr);
         mptxtv.setOnLongClickListener(this);
-        tempstr = mo + "";
+        tempstr = character.mo + "";
         motxtv.setText(tempstr);
         motxtv.setOnLongClickListener(this);
-        tempstr = ma + "";
+        tempstr = character.ma + "";
         matxtv.setText(tempstr);
         matxtv.setOnLongClickListener(this);
-        tempstr = mr + "";
+        tempstr = character.mr + "";
         mrtxtv.setText(tempstr);
         mrtxtv.setOnLongClickListener(this);
 
         EditText invtxt = findViewById(R.id.invtxt);
-        invtxt.setText(state.getString("inv", ""));
+        invtxt.setText(character.inventariotxt);
         invtxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("inv", editable.toString()).apply();
+                character.inventariotxt = editable.toString();
+                saveSchedaPG();
             }
         });
         invtxt.clearFocus();
 
         EditText backgroundtxt = findViewById(R.id.backgroundtxt);
-        backgroundtxt.setText(state.getString("background", ""));
+        backgroundtxt.setText(character.backgroundtxt);
         backgroundtxt.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -828,7 +942,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("background", editable.toString()).apply();
+                character.backgroundtxt = editable.toString();
+                saveSchedaPG();
             }
         });
         backgroundtxt.clearFocus();
@@ -850,36 +965,33 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         removebtn.setText("");
         rangedatks.addView(header);
 
-        final Set<String> rangedset = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
-        for (String str : rangedset) {
-            String[] ranged = str.split("%");
+        for (RangedWeapon weap : character.armiranged) {
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.rangedrow, null);
             name = newrow.findViewById(R.id.rangedname);
             range = newrow.findViewById(R.id.range);
             bonusrange = newrow.findViewById(R.id.rangedbonus);
             comprange = newrow.findViewById(R.id.rangedbonuscomp);
             damage = newrow.findViewById(R.id.rangeddamage);
+            removebtn = newrow.findViewById(R.id.removeranged);
 
-            int bonusb = mod(state.getInt("DEX", 10));
+            int bonusb = mod(character.DEX);
             String suffixb = (bonus >= 0) ? "+" : "";
 
-            name.setText(ranged[0]);
-            range.setText(ranged[1]);
+            name.setText(weap.name);
+            range.setText(weap.range);
             tempstr = suffixb + bonusb;
             bonusrange.setText(tempstr);
-            tempstr = "+" + prof[lv-1];
+            tempstr = "+" + prof[character.LV - 1];
             comprange.setText(tempstr);
-            damage.setText(ranged[2]);
+            damage.setText(weap.damage);
 
-            removebtn = newrow.findViewById(R.id.removeranged);
-            final String strf = str;
+            final RangedWeapon finalweap = weap;
             removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Set<String> rangedset = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
-                    rangedset.remove(strf);
-                    state.edit().putStringSet("rangedatks", rangedset).apply();
+                    character.armiranged.remove(finalweap);
                     rangedatks.removeView(newrow);
+                    saveSchedaPG();
                     return true;
                 }
             });
@@ -901,31 +1013,30 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         removebtn.setText("");
         meleeatks.addView(header);
 
-        final Set<String> meleeset = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
-        for (String str : meleeset) {
-            String[] melee = str.split("%");
+        for (MeleeWeapon weap : character.armimelee) {
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
             name = newrow.findViewById(R.id.meleename);
             bonusrange = newrow.findViewById(R.id.meleebonus);
             comprange = newrow.findViewById(R.id.meleebonuscomp);
             damage = newrow.findViewById(R.id.meleedamage);
 
-            int bonusb = mod(state.getInt("FOR", 10));
+            removebtn = newrow.findViewById(R.id.removemelee);
+
+            int bonusb = mod(character.FOR);
             String suffixb = (bonus >= 0) ? "+" : "";
 
-            name.setText(melee[0]);
-            bonusrange.setText(suffixb + bonusb);
-            comprange.setText("+" + prof[lv-1]);
-            damage.setText(melee[1]);
+            name.setText(weap.name);
+            tempstr = suffixb + bonusb;
+            bonusrange.setText(tempstr);
+            tempstr = "+" + prof[character.LV - 1];
+            comprange.setText(tempstr);
+            damage.setText(weap.damage);
 
-            removebtn = newrow.findViewById(R.id.removemelee);
-            final String strf = str;
+            final MeleeWeapon finalweap = weap;
             removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    Set<String> meleeset = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
-                    meleeset.remove(strf);
-                    state.edit().putStringSet("meleeatks", meleeset).apply();
+                    character.armimelee.remove(finalweap);
                     meleeatks.removeView(newrow);
                     return true;
                 }
@@ -937,7 +1048,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View view) {
                 TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.rangedrow, null);
-                RangedDialog inputdialog = new RangedDialog(CharacterActivity.this, state, newrow, rangedatks);
+                RangedDialog inputdialog = new RangedDialog(CharacterActivity.this, character, newrow, rangedatks);
                 inputdialog.show();
             }
         });
@@ -946,7 +1057,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onClick(View view) {
                 TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
-                MeleeDialog inputdialog = new MeleeDialog(CharacterActivity.this, state, newrow, meleeatks);
+                MeleeDialog inputdialog = new MeleeDialog(CharacterActivity.this, character, newrow, meleeatks);
                 inputdialog.show();
             }
         });
@@ -961,233 +1072,233 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-        cantrip.setText(state.getString("cantripss", ""));
+        cantrip.setText(character.cantrips);
         cantrip.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("cantripss", editable.toString()).apply();
+                character.cantrips = editable.toString();
+                saveSchedaPG();
             }
         });
         cantrip.clearFocus();
 
-        firstlv.setText(state.getString("firstlv", ""));
+        firstlv.setText(character.lv1);
         firstlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("firstlv", editable.toString()).apply();
+                character.lv1 = editable.toString();
+                saveSchedaPG();
             }
         });
         firstlv.clearFocus();
-        firstlvslots.setText(new StringBuilder().append(state.getInt("currfirstlvslots", 0)).append("/").append(state.getInt("firstlvslots", 0)));
+        firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
         firstlvslots.setOnLongClickListener(this);
         castfirstlv.setOnClickListener(this);
 
 
-        secondlv.setText(state.getString("secondlv", ""));
+        secondlv.setText(character.lv2);
         secondlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("secondlv", editable.toString()).apply();
+                character.lv2 = editable.toString();
+                saveSchedaPG();
             }
         });
         secondlv.clearFocus();
-        secondlvslots.setText(new StringBuilder().append(state.getInt("currsecondlvslots", 0)).append("/").append(state.getInt("secondlvslots", 0)));
+        secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
         secondlvslots.setOnLongClickListener(this);
         castsecondlv.setOnClickListener(this);
 
-        thirdlv.setText(state.getString("thirdlv", ""));
+        thirdlv.setText(character.lv3);
         thirdlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("thirdlv", editable.toString()).apply();
+                character.lv3 = editable.toString();
+                saveSchedaPG();
             }
         });
         thirdlv.clearFocus();
-        thirdlvslots.setText(new StringBuilder().append(state.getInt("currthirdlvslots", 0)).append("/").append(state.getInt("thirdlvslots", 0)));
+        thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
         thirdlvslots.setOnLongClickListener(this);
         castthirdlv.setOnClickListener(this);
 
-        fourthlv.setText(state.getString("fourthlv", ""));
+        fourthlv.setText(character.lv4);
         fourthlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("fourthlv", editable.toString()).apply();
+                character.lv4 = editable.toString();
+                saveSchedaPG();
             }
         });
         fourthlv.clearFocus();
-        fourthlvslots.setText(new StringBuilder().append(state.getInt("currfourthlvslots", 0)).append("/").append(state.getInt("fourthlvslots", 0)));
+        fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
         fourthlvslots.setOnLongClickListener(this);
         castfourthlv.setOnClickListener(this);
 
-        fifthlv.setText(state.getString("fifthlv", ""));
+        fifthlv.setText(character.lv5);
         fifthlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("fifthlv", editable.toString()).apply();
+                character.lv5 = editable.toString();
+                saveSchedaPG();
             }
         });
         fifthlv.clearFocus();
-        fifthlvslots.setText(new StringBuilder().append(state.getInt("currfifthlvslots", 0)).append("/").append(state.getInt("fifthlvslots", 0)));
+        fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
         fifthlvslots.setOnLongClickListener(this);
         castfifthlv.setOnClickListener(this);
 
-        sixthlv.setText(state.getString("sixthlv", ""));
+        sixthlv.setText(character.lv6);
         sixthlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("sixthlv", editable.toString()).apply();
+                character.lv6 = editable.toString();
+                saveSchedaPG();
             }
         });
         sixthlv.clearFocus();
-        sixthlvslots.setText(new StringBuilder().append(state.getInt("currsixthlvslots", 0)).append("/").append(state.getInt("sixthlvslots", 0)));
+        sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
         sixthlvslots.setOnLongClickListener(this);
         castsixthlv.setOnClickListener(this);
 
-        seventhlv.setText(state.getString("seventhlv", ""));
+        seventhlv.setText(character.lv7);
         seventhlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("seventhlv", editable.toString()).apply();
+                character.lv7 = editable.toString();
+                saveSchedaPG();
             }
         });
         seventhlv.clearFocus();
-        seventhlvslots.setText(new StringBuilder().append(state.getInt("currseventhlvslots", 0)).append("/").append(state.getInt("seventhlvslots", 0)));
+        seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
         seventhlvslots.setOnLongClickListener(this);
         castseventhlv.setOnClickListener(this);
 
-        eighthlv.setText(state.getString("eighthlv", ""));
+        eighthlv.setText(character.lv8);
         eighthlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("eighthlv", editable.toString()).apply();
+                character.lv8 = editable.toString();
+                saveSchedaPG();
             }
         });
         eighthlv.clearFocus();
-        eighthlvslots.setText(new StringBuilder().append(state.getInt("curreighthlvslots", 0)).append("/").append(state.getInt("eighthlvslots", 0)));
+        eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
         eighthlvslots.setOnLongClickListener(this);
         casteightlv.setOnClickListener(this);
 
-        ninthlv.setText(state.getString("ninthlv", ""));
+        ninthlv.setText(character.lv9);
         ninthlv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("ninthlv", editable.toString()).apply();
+                character.lv9 = editable.toString();
+                saveSchedaPG();
             }
         });
         ninthlv.clearFocus();
-        ninthlvslots.setText(new StringBuilder().append(state.getInt("currninthlvslots", 0)).append("/").append(state.getInt("ninthlvslots", 0)));
+        ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
         ninthlvslots.setOnLongClickListener(this);
         castninthlv.setOnClickListener(this);
 
-        pluslv.setText(state.getString("pluslv", ""));
+        pluslv.setText(character.lvplus);
         pluslv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                saveSchedaPG();
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                state.edit().putString("pluslv", editable.toString()).apply();
+                character.lvplus = editable.toString();
+                saveSchedaPG();
             }
         });
         pluslv.clearFocus();
-        pluslvslots.setText(new StringBuilder().append(state.getInt("currpluslvslots", 0)).append("/").append(state.getInt("pluslvslots", 0)));
+        pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
         pluslvslots.setOnLongClickListener(this);
         castpluslv.setOnClickListener(this);
 
-        inspirationtbn.setChecked(state.getBoolean("inspiration", false));
+        inspirationtbn.setChecked(character.inspiration);
         inspirationtbn.setOnCheckedChangeListener(this);
 
-        tempstr = state.getInt("xp", 0) + " xp";
+        tempstr = character.EXP + " xp";
         XP.setText(tempstr);
         XP.setOnLongClickListener(this);
         addxpbtn.setOnClickListener(this);
 
-        final InventoryAdapter inventoryAdapter = new InventoryAdapter(state);
+        final InventoryAdapter inventoryAdapter = new InventoryAdapter(character);
         inventoryView.setAdapter(inventoryAdapter);
         LinearLayoutManager lytmngr = new LinearLayoutManager(CharacterActivity.this);
         lytmngr.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -1208,10 +1319,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = input.getText().toString();
 
-                        inventoryAdapter.addObj(name.replace("::", "") + "::" + getString(R.string.keeppressedtoedit));
+                        inventoryAdapter.addObj(new InventoryItem(name, getString(R.string.keeppressedtoedit)));
                         inventoryAdapter.notifyDataSetChanged();
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1227,7 +1339,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 return true;
             }
         });
-        String path = state.getString("portrait", null);
+        String path = character.portrait;
         if (path != null) {
             portrait.setImageBitmap(BitmapFactory.decodeFile(path));
         }
@@ -1235,75 +1347,62 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         saveSchedaPG();
     }
 
+    private void loadSchedaPG() { //TODO
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("characters", Context.MODE_PRIVATE);
+        final File[] files = directory.listFiles();
+        if (files.length > 0) {
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
+            builder.setTitle(getString(R.string.selectpg));
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CharacterActivity.this, android.R.layout.select_dialog_singlechoice);
+            for (int i = 0; i < files.length; i++) {
+                arrayAdapter.add((i+1) + ". " + files[i].getName().split("::")[0]);
+            }
+            builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ObjectInputStream os = null;
+                    try {
+                        os = new ObjectInputStream(new FileInputStream(files[which]));
+                        character = (Character) os.readObject();
+                        preparaSchedaPG();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            os.close();
+                        } catch (IOException | NullPointerException e) {
+                            Toast.makeText(getApplicationContext(), R.string.fileopenerror, Toast.LENGTH_LONG).show();
+                        }
+                    }
+                }
+            });
+            builder.setCancelable(false);
+            builder.show();
+        } else {
+            character = null;
+            preparaSchedaPG();
+        }
+    }
+
     private void saveSchedaPG() {
-        String str = state.getString("pgname", null) + "|" +
-                state.getString("pgclass", null) + "|" +
-                state.getBoolean("inspiration", false) + "|" +
-                state.getInt("pglv", 1) + "|" +
-                state.getInt("CA", 10) + "|" +
-                state.getInt("PF", -1) + "|" +
-                state.getInt("PFMAX", -1) + "|" +
-                state.getInt("FOR", 10) + "|" +
-                state.getInt("DEX", 10) + "|" +
-                state.getInt("COS", 10) + "|" +
-                state.getInt("INT", 10) + "|" +
-                state.getInt("SAG", 10) + "|" +
-                state.getInt("CAR", 10) + "|" +
-                state.getBoolean("comptsfor", false) + "|" +
-                state.getBoolean("comptsdex", false) + "|" +
-                state.getBoolean("comptscos", false) + "|" +
-                state.getBoolean("comptsint", false) + "|" +
-                state.getBoolean("comptssag", false) + "|" +
-                state.getBoolean("comptscar", false) + "|" +
-                state.getBoolean("compatletica", false) + "|" +
-                state.getBoolean("expatletica", false) + "|" +
-                state.getBoolean("compacrobazia", false) + "|" +
-                state.getBoolean("expacrobazia", false) + "|" +
-                state.getBoolean("compfurtivita", false) + "|" +
-                state.getBoolean("expfurtivita", false) + "|" +
-                state.getBoolean("comprapiditadimano", false) + "|" +
-                state.getBoolean("exprapiditadimano", false) + "|" +
-                state.getBoolean("compresistenzafisica", false) + "|" +
-                state.getBoolean("expresistenzafisica", false) + "|" +
-                state.getBoolean("compinvestigare", false) + "|" +
-                state.getBoolean("expinvestigare", false) + "|" +
-                state.getBoolean("comparcano", false) + "|" +
-                state.getBoolean("exparcano", false) + "|" +
-                state.getBoolean("compstoria", false) + "|" +
-                state.getBoolean("expstoria", false) + "|" +
-                state.getBoolean("compreligionefolklore", false) + "|" +
-                state.getBoolean("expreligionefolklore", false) + "|" +
-                state.getBoolean("compreligionefolklore", false) + "|" +
-                state.getBoolean("expreligionefolklore", false) + "|" +
-                state.getBoolean("compnatura", false) + "|" +
-                state.getBoolean("expnatura", false) + "|" +
-                state.getBoolean("compfauna", false) + "|" +
-                state.getBoolean("expfauna", false) + "|" +
-                state.getBoolean("compsopravvivenza", false) + "|" +
-                state.getBoolean("expsopravvivenza", false) + "|" +
-                state.getBoolean("compmedicina", false) + "|" +
-                state.getBoolean("expmedicina", false) + "|" +
-                state.getBoolean("comppercezione", false) + "|" +
-                state.getBoolean("exppercezione", false) + "|" +
-                state.getBoolean("compintuizione", false) + "|" +
-                state.getBoolean("expintuizione", false) + "|" +
-                state.getBoolean("compintimidire", false) + "|" +
-                state.getBoolean("expintimidire", false) + "|" +
-                state.getBoolean("compingannare", false) + "|" +
-                state.getBoolean("expingannare", false) + "|" +
-                state.getBoolean("compintrattenere", false) + "|" +
-                state.getBoolean("expintrattenere", false) + "|" +
-                state.getBoolean("comppersuadere", false) + "|" +
-                state.getBoolean("exppersuadere", false) + "|" +
-                state.getInt("xp", 0) + "|" +
-                state.getInt("mp", 0) + "|" +
-                state.getInt("mo", 0) + "|" +
-                state.getInt("ma", 0) + "|" +
-                state.getInt("mr", 0) + "|" +
-                state.getString("crediti", "0") + "|" +
-                state.getStringSet("inventory", null) + "|" +
-                state.getString("inv", "") + "\n";
-        FileHelper.saveToFile(str, getApplicationContext(), state.getString("pgname", null) + "PGDATA.txt");
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File directory = cw.getDir("characters", Context.MODE_PRIVATE);
+        File pgfile = new File(directory, character.nome + "::" + character.LV);
+        ObjectOutputStream os = null;
+        try {
+            os = new ObjectOutputStream(new FileOutputStream(pgfile));
+            os.writeObject(character);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                os.close();
+            } catch (IOException | NullPointerException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void initializeAds() {
@@ -1319,7 +1418,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
-        int lv = state.getInt("pglv", 1);
         String tempstr, suffix;
         switch (view.getId()) {
             case R.id.spelstatselection:
@@ -1342,10 +1440,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                                 stat = getString(R.string.car);
                                 break;
                         }
-                        int lv = state.getInt("pglv", 1);
-                        state.edit().putString("SPELLSTAT", stat).apply();
-                        spellstat.setText(stat);
-                        int bonus = prof[lv-1] + mod(state.getInt(stat, 10));
+                        character.spellstat = stat;
+                        spellstat.setText(stat);int bonus = 0;
+                        if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
+                        else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
+                        else bonus = prof[character.LV - 1] + mod(character.INT);
                         String suffix = (bonus < 0) ? "" : "+";
                         String tempstr;
                         tempstr = suffix + bonus;
@@ -1406,80 +1505,64 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 }
                 break;
             case R.id.addmana:
-                int mana = state.getInt("spellmana", 0);
-                int manamax = state.getInt("spellmanamax", 0);
-                mana++;
-                mana = Math.min(mana, manamax);
-                state.edit().putInt("spellmana", mana).apply();
-                tempstr = mana + "/" + manamax;
+                character.spellmana = Math.min(character.spellmana+1, character.spellmanamax);
+                tempstr = character.spellmana+ "/" + character.spellmanamax;
                 spellmana.setText(tempstr);
-                saveSchedaPG();
                 break;
             case R.id.removemana:
-                int manam = state.getInt("spellmana", 0);
-                manam--;
-                manam = Math.max(manam, 0);
-                state.edit().putInt("spellmana", manam).apply();
-                tempstr = manam + "/" + state.getInt("spellmanamax", 0);
+                character.spellmana = Math.max(character.spellmana-1, 0);
+                tempstr = character.spellmana + "/" + character.spellmanamax;
                 spellmana.setText(tempstr);
-                saveSchedaPG();
                 break;
             case R.id.pfplus:
-                int pf = state.getInt("PF", 0);
-                pf++;
-                int pfmax = state.getInt("PFMAX", pf);
-                if (pf > pfmax) pf = pfmax;
-                state.edit().putInt("PF", pf).apply();
-                tempstr = pf + "";
+                character.PF++;
+                if (character.PF > character.PFMAX) character.PF = character.PFMAX;
+                tempstr = character.PF + "";
                 PF.setText(tempstr);
-                saveSchedaPG();
                 break;
             case R.id.pfminus:
-                int pfm = state.getInt("PF", 0);
-                pfm--;
-                state.edit().putInt("PF", pfm).apply();
-                tempstr = pfm + "";
+                character.PF--;
+                tempstr = character.PF + "";
                 PF.setText(tempstr);
-                saveSchedaPG();
                 break;
             case R.id.comptsfor:
-                state.edit().putBoolean("comptsfor", comptsfor.isChecked()).apply();
-                int tsf = mod(state.getInt("FOR", 10)) + ((comptsfor.isChecked()) ? prof[lv-1] : 0);
+                character.tsfor = comptsfor.isChecked();
+                int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsf >= 0) ? "+" : "";
                 tempstr = suffix + tsf;
                 tsfortxt.setText(tempstr);
                 break;
             case R.id.comptsdex:
-                state.edit().putBoolean("comptsdex", comptsdex.isChecked()).apply();
-                int tsd = mod((state.getInt("DEX", 10))) + ((comptsdex.isChecked()) ? prof[lv-1] : 0);
+                character.tsdex = comptsdex.isChecked();
+                int tsd = mod(character.DEX) + ((comptsdex.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsd >= 0) ? "+" : "";
                 tempstr = suffix + tsd;
                 tsdextxt.setText(tempstr);
                 break;
             case R.id.comptscos:
-                state.edit().putBoolean("comptscos", comptscos.isChecked()).apply();
-                int tsc = mod((state.getInt("COS", 10))) + ((comptscos.isChecked()) ? prof[lv-1] : 0);
+                character.tscos = comptscos.isChecked();
+                int tsc = mod(character.COS) + ((comptscos.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsc >= 0) ? "+" : "";
                 tempstr = suffix + tsc;
                 tscostxt.setText(tempstr);
                 break;
             case R.id.comptsint:
-                state.edit().putBoolean("comptsint", comptsint.isChecked()).apply();
-                int tsi = mod((state.getInt("INT", 10))) + ((comptsint.isChecked()) ? prof[lv-1] : 0);
+                character.tsint = comptsint.isChecked();
+                int tsi = mod(character.INT) + ((comptsint.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsi >= 0) ? "+" : "";
                 tempstr = suffix + tsi;
                 tsinttxt.setText(tempstr);
                 break;
             case R.id.comptssag:
-                state.edit().putBoolean("comptssag", comptssag.isChecked()).apply();
-                int tsa = mod((state.getInt("SAG", 10))) + ((comptssag.isChecked()) ? prof[lv-1] : 0);
+                character.tssag = comptssag.isChecked();
+                int tsa = mod(character.SAG) + ((comptssag.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsa >= 0) ? "+" : "";
                 tempstr = suffix + tsa;
                 tssagtxt.setText(tempstr);
                 break;
             case R.id.comptscar:
-                state.edit().putBoolean("comptscar", comptscar.isChecked()).apply();
-                int tsca = mod((state.getInt("CAR", 10)))+ ((comptscar.isChecked()) ? prof[lv-1] : 0);
+                character.tscar = comptscar.isChecked();
+                int tsca = mod(character.CAR)+ ((comptscar.isChecked()) ? prof[character.LV - 1] : 0);
                 suffix = (tsca >= 0) ? "+" : "";
                 tempstr = suffix + tsca;
                 tscartxt.setText(tempstr);
@@ -1499,11 +1582,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int xp = Integer.parseInt(input.getText().toString());
-                        xp += state.getInt("xp", 0);
+                        xp += character.EXP;
 
                         String tempstr = xp + " xp";
                         XP.setText(tempstr);
-                        state.edit().putInt("xp", xp).apply();
+                        character.EXP = xp;
                         dialog.cancel();
                         alertd.dismiss();
                         preparaSchedaPG();
@@ -1512,66 +1595,47 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.show();
                 break;
             case R.id.castfirstlv:
-                int n = state.getInt("currfirstlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                firstlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("firstlvslots", 0)));
-                state.edit().putInt("currfirstlvslots", n).apply();
+                character.currslot1 = (character.currslot1 > 0) ? character.currslot1 - 1 : 0;
+                firstlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot1));
                 break;
             case R.id.castsecondlv:
-                n = state.getInt("currsecondlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                secondlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("secondlvslots", 0)));
-                state.edit().putInt("currsecondlvslots", n).apply();
+                character.currslot2 = (character.currslot2 > 0) ? character.currslot2 - 1 : 0;
+                secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
                 break;
             case R.id.castthirdlv:
-                n = state.getInt("currthirdlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                thirdlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("thirdlvslots", 0)));
-                state.edit().putInt("currthirdlvslots", n).apply();
+                character.currslot3 = (character.currslot3 > 0) ? character.currslot3 - 1 : 0;
+                thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
                 break;
             case R.id.castfourthlv:
-                n = state.getInt("currfourthlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                fourthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("fourthlvslots", 0)));
-                state.edit().putInt("currfourthlvslots", n).apply();
+                character.currslot4 = (character.currslot4 > 0) ? character.currslot4 - 1 : 0;
+                fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
                 break;
             case R.id.castfifthlv:
-                n = state.getInt("currfifthlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                fifthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("fifthlvslots", 0)));
-                state.edit().putInt("currfifthlvslots", n).apply();
+                character.currslot5 = (character.currslot5 > 0) ? character.currslot5 - 1 : 0;
+                fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
                 break;
             case R.id.castsixthlv:
-                n = state.getInt("currsixthlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                sixthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("sixthlvslots", 0)));
-                state.edit().putInt("currsixthlvslots", n).apply();
+                character.currslot6 = (character.currslot6 > 0) ? character.currslot6 - 1 : 0;
+                sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
                 break;
             case R.id.castseventhlv:
-                n = state.getInt("currseventhlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                seventhlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("seventhlvslots", 0)));
-                state.edit().putInt("currseventhlvslots", n).apply();
+                character.currslot7 = (character.currslot7 > 0) ? character.currslot7 - 1 : 0;
+                seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
                 break;
             case R.id.casteightlv:
-                n = state.getInt("curreighthlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                eighthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("eighthlvslots", 0)));
-                state.edit().putInt("curreighthlvslots", n).apply();
+                character.currslot8 = (character.currslot8 > 0) ? character.currslot8 - 1 : 0;
+                eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
                 break;
             case R.id.castninthlv:
-                n = state.getInt("currninthlvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                ninthlvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("ninthlvslots", 0)));
-                state.edit().putInt("currninthlvslots", n).apply();
+                character.currslot9 = (character.currslot9 > 0) ? character.currslot9 - 1 : 0;
+                ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
                 break;
             case R.id.castpluslv:
-                n = state.getInt("currpluslvslots", 0);
-                n = (n > 0) ? n - 1 : 0;
-                pluslvslots.setText(new StringBuilder().append(n).append("/").append(state.getInt("pluslvslots", 0)));
-                state.edit().putInt("currpluslvslots", n).apply();
+                character.currslotplus = (character.currslotplus > 0) ? character.currslotplus - 1 : 0;
+                pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
                 break;
         }
+        saveSchedaPG();
     }
 
     @Override
@@ -1590,7 +1654,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.insertlevelof) + " " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertlevelof) + " " + character.nome);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int lv = Integer.parseInt(input.getText().toString());
@@ -1600,30 +1664,31 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr;
                         tempstr = lv + "";
                         lvtxt.setText(tempstr);
-                        tempstr = "+" + prof[lv-1];
+                        tempstr = "+" + prof[lv - 1];
                         proftxt.setText(tempstr);
-                        state.edit().putInt("pglv", lv).apply();
+                        character.LV = lv;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
                 return true;
             case R.id.pgnametxt:
-                input.setText(state.getString("pgname", ""));
+                input.setText(character.nome);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewnameof) + " " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewnameof) + " " + character.nome);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String name = input.getText().toString();
 
                         nametxt.setText(name);
-                        state.edit().putString("pgname", name).apply();
+                        character.nome = name;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1636,31 +1701,33 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setTitle(getString(R.string.insertmaxpoints));
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String name = input.getText().toString();
-                        int mana = Integer.parseInt(name);
-                        String tempstr = state.getInt("spellmana", 0) + "/" + name;
+                        String maxp = input.getText().toString();
+                        int mana = Integer.parseInt(maxp);
+                        String tempstr = character.spellmana + "/" + mana;
                         spellmana.setText(tempstr);
-                        state.edit().putInt("spellmanamax", mana).apply();
+                        character.spellmanamax = mana;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
                 return true;
             case R.id.pgclasstxt:
-                input.setText(state.getString("pgclass", ""));
+                input.setText(character.classe);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewclass) + " " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertnewclass) + " " + character.nome);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         String classs = input.getText().toString();
 
                         classtxt.setText(classs);
-                        state.edit().putString("pgclass", classs).apply();
+                        character.classe = classs;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1668,7 +1735,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             case R.id.CA:
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = state.getInt("CA", 0) + "";
+                tempstr = character.CA + "";
                 input.setText(tempstr);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
@@ -1683,10 +1750,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
                         String tempstr = pnt + "";
                         CA.setText(tempstr);
-                        state.edit().putInt("CA", pnt).apply();
+                        character.CA = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1694,7 +1761,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             case R.id.PF:
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = state.getInt("PF", 0) + "";
+                tempstr = character.PF + "";
                 input.setText(tempstr);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
@@ -1703,19 +1770,12 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int pnt = Integer.parseInt(input.getText().toString());
-                        if (pnt > state.getInt("PFMAX", pnt)) {
-                            Toast.makeText(CharacterActivity.this, getString(R.string.insertpferror), Toast.LENGTH_SHORT).show();
-                            dialog.cancel();
-                            alertd.dismiss();
-                        }
-                        else {
-                            String tempstr = pnt + "";
-                            PF.setText(tempstr);
-                            state.edit().putInt("PF", pnt).apply();
-                            dialog.cancel();
-                            alertd.dismiss();
-                            preparaSchedaPG();
-                        }
+                        String tempstr = pnt + "";
+                        PF.setText(tempstr);
+                        character.PF = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1732,13 +1792,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int pnt = Integer.parseInt(input.getText().toString());
-                        int pf = state.getInt("PF", 0);
+                        character.PF += pnt;
 
-                        pf += pnt;
-
-                        String tempstr = pf + "";
+                        String tempstr = character.PF + "";
                         PF.setText(tempstr);
-                        state.edit().putInt("PF", pf).apply();
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
@@ -1758,14 +1815,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int pnt = Integer.parseInt(input.getText().toString());
-                        int pf = state.getInt("PF", 0);
+                        character.PF -= pnt;
 
-                        pf -= pnt;
-                        pf = Math.max(pf, 0);
-
-                        String tempstr = pf + "";
+                        String tempstr = character.PF + "";
                         PF.setText(tempstr);
-                        state.edit().putInt("PF", pf).apply();
                         dialog.cancel();
                         alertd.dismiss();
                         saveSchedaPG();
@@ -1776,7 +1829,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             case R.id.PFmax:
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = state.getInt("PFMAX", 0) + "";
+                tempstr = character.PFMAX + "";
                 input.setText(tempstr);
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
@@ -1788,10 +1841,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
                         String tempstr = pnt + "";
                         PFmax.setText(tempstr);
-                        state.edit().putInt("PFMAX", pnt).apply();
+                        character.PFMAX = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1813,10 +1866,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         FOR.setText(tempstr);
                         tempstr = suffix + mod;
                         FORmod.setText(tempstr);
-                        state.edit().putInt("FOR", pnt).apply();
+                        character.FOR = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1838,10 +1891,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         DEX.setText(tempstr);
                         tempstr = suffix + mod;
                         DEXmod.setText(tempstr);
-                        state.edit().putInt("DEX", pnt).apply();
+                        character.DEX = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1863,10 +1916,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         COS.setText(tempstr);
                         tempstr = suffix + mod;
                         COSmod.setText(tempstr);
-                        state.edit().putInt("COS", pnt).apply();
+                        character.COS = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1888,10 +1941,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         INT.setText(tempstr);
                         tempstr = suffix + mod;
                         INTmod.setText(tempstr);
-                        state.edit().putInt("INT", pnt).apply();
+                        character.INT = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1913,10 +1966,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         SAG.setText(tempstr);
                         tempstr = suffix + mod;
                         SAGmod.setText(tempstr);
-                        state.edit().putInt("SAG", pnt).apply();
+                        character.SAG = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1938,10 +1991,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         CAR.setText(tempstr);
                         tempstr = suffix + mod;
                         CARmod.setText(tempstr);
-                        state.edit().putInt("CAR", pnt).apply();
+                        character.CAR = pnt;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -1950,8 +2003,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsplatpieces, state.getString("pgname", null)));
-                tempstr = state.getInt("mp", 0) + "";
+                alert.setTitle(getString(R.string.pgsplatpieces, character.nome));
+                tempstr = character.mp + "";
                 input.setText(tempstr);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -1960,11 +2013,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int monete = Integer.parseInt(input.getText().toString());
                         String tempstr = monete + "";
                         mptxtv.setText(tempstr);
-                        state.edit().putInt("mp", monete).apply();
-                        int mo = state.getInt("mo", 0);
-                        int ma = state.getInt("ma", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(monete*10 + mo + ma*0.1 + mr*0.01);
+                        character.mp = monete;
+                        double moneteTot =  Math.ceil(monete*10 + character.mo +character.ma*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -1979,8 +2029,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsgoldpieces, state.getString("pgname", null)));
-                tempstr = state.getInt("mo", 0) + "";
+                alert.setTitle(getString(R.string.pgsgoldpieces, character.nome));
+                tempstr = character.mo + "";
                 input.setText(tempstr);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -1989,11 +2039,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int monete = Integer.parseInt(input.getText().toString());
                         String tempstr = monete + "";
                         motxtv.setText(tempstr);
-                        state.edit().putInt("mo", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int ma = state.getInt("ma", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(mp*10 + monete + ma*0.1 + mr*0.01);
+                        character.mo = monete;
+                        double moneteTot =  Math.ceil(character.mp*10 + monete +character.ma*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2008,8 +2055,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.pgssilvpieces, state.getString("pgname", null)));
-                tempstr = state.getInt("ma", 0) + "";
+                alert.setTitle(getString(R.string.pgssilvpieces, character.nome));
+                tempstr = character.ma + "";
                 input.setText(tempstr);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -2018,11 +2065,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int monete = Integer.parseInt(input.getText().toString());
                         String tempstr = monete + "";
                         matxtv.setText(tempstr);
-                        state.edit().putInt("ma", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int mo = state.getInt("mo", 0);
-                        int mr = state.getInt("mr", 0);
-                        double moneteTot =  Math.ceil(mp*10 + mo + monete*0.1 + mr*0.01);
+                        character.ma = monete;
+                        double moneteTot =  Math.ceil(character.mp*10 + character.mo + monete*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2037,8 +2081,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.setView(input);
                 alert.setNegativeButton(getString(R.string.annulla), null);
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.pgscopppieces, state.getString("pgname", null)));
-                tempstr = state.getInt("mr", 0) + "";
+                alert.setTitle(getString(R.string.pgscopppieces, character.nome));
+                tempstr = character.mr + "";
                 input.setText(tempstr);
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
                 input.setRawInputType(Configuration.KEYBOARD_12KEY);
@@ -2047,11 +2091,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int monete = Integer.parseInt(input.getText().toString());
                         String tempstr = monete + "";
                         mrtxtv.setText(tempstr);
-                        state.edit().putInt("mr", monete).apply();
-                        int mp = state.getInt("mp", 0);
-                        int mo = state.getInt("mo", 0);
-                        int ma = state.getInt("ma", 0);
-                        double moneteTot =  Math.ceil(mp*10 + mo + ma*0.1 + monete*0.01);
+                        character.mr = monete;
+                        double moneteTot =  Math.ceil(character.mp*10 + character.mo +character.ma*0.1 + monete*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2071,17 +2112,17 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     }
                 });
                 alertd = alert.create();
-                alert.setTitle(getString(R.string.insertxpof) + " " + state.getString("pgname", null));
+                alert.setTitle(getString(R.string.insertxpof) + " " + character.nome);
                 alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         int xp = Integer.parseInt(input.getText().toString());
 
                         String tempstr = xp + " xp";
                         XP.setText(tempstr);
-                        state.edit().putInt("xp", xp).apply();
+                        character.EXP = xp;
                         dialog.cancel();
                         alertd.dismiss();
-                        preparaSchedaPG();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2097,10 +2138,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         firstlvslots.setText(tmp);
-                        state.edit().putInt("firstlvslots", pnt).apply();
-                        state.edit().putInt("currfirstlvslots", pnt).apply();
+                        character.slot1 = pnt;
+                        character.currslot1 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2116,10 +2158,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         secondlvslots.setText(tmp);
-                        state.edit().putInt("secondlvslots", pnt).apply();
-                        state.edit().putInt("currsecondlvslots", pnt).apply();
+                        character.slot2 = pnt;
+                        character.currslot2 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2135,10 +2178,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         thirdlvslots.setText(tmp);
-                        state.edit().putInt("thirdlvslots", pnt).apply();
-                        state.edit().putInt("currthirdlvslots", pnt).apply();
+                        character.slot3 = pnt;
+                        character.currslot3 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2154,10 +2198,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         fourthlvslots.setText(tmp);
-                        state.edit().putInt("fourthlvslots", pnt).apply();
-                        state.edit().putInt("currfourthlvslots", pnt).apply();
+                        character.slot4 = pnt;
+                        character.currslot4 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2173,10 +2218,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         fifthlvslots.setText(tmp);
-                        state.edit().putInt("fifthlvslots", pnt).apply();
-                        state.edit().putInt("currfifthlvslots", pnt).apply();
+                        character.slot5 = pnt;
+                        character.currslot5 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2192,10 +2238,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         sixthlvslots.setText(tmp);
-                        state.edit().putInt("sixthlvslots", pnt).apply();
-                        state.edit().putInt("currsixthlvslots", pnt).apply();
+                        character.slot6 = pnt;
+                        character.currslot6 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2211,10 +2258,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         seventhlvslots.setText(tmp);
-                        state.edit().putInt("seventhlvslots", pnt).apply();
-                        state.edit().putInt("currseventhlvslots", pnt).apply();
+                        character.slot7 = pnt;
+                        character.currslot7 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2230,10 +2278,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         eighthlvslots.setText(tmp);
-                        state.edit().putInt("eighthlvslots", pnt).apply();
-                        state.edit().putInt("curreighthlvslots", pnt).apply();
+                        character.slot8 = pnt;
+                        character.currslot8 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2249,10 +2298,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         ninthlvslots.setText(tmp);
-                        state.edit().putInt("ninthlvslots", pnt).apply();
-                        state.edit().putInt("currninthlvslots", pnt).apply();
+                        character.slot9 = pnt;
+                        character.currslot9 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2268,10 +2318,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         int pnt = Integer.parseInt(input.getText().toString());
                         String tmp = pnt + "/" + pnt;
                         pluslvslots.setText(tmp);
-                        state.edit().putInt("pluslvslots", pnt).apply();
-                        state.edit().putInt("currpluslvslots", pnt).apply();
+                        character.slotplus = pnt;
+                        character.currslotplus = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        saveSchedaPG();
                     }
                 });
                 alert.show();
@@ -2283,65 +2334,163 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         switch (compoundButton.getId()) {
-            case R.id.inspirationbtn: state.edit().putBoolean("inspiration", b).apply(); saveSchedaPG(); break;
+            case R.id.inspirationbtn: character.inspiration = b; break;
             //FOR
-            case R.id.compatletica: compSwitch(b, compatletica, expatletica, atletica, "compatletica", "FOR"); break;
-            case R.id.expatletica: expSwitch(compatletica, expatletica, atletica, "expatletica", "FOR"); break;
+            case R.id.compatletica:
+                compSwitch(b, compatletica, expatletica, atletica, character.FOR);
+                character.compatletica = b;
+                break;
+            case R.id.expatletica:
+                expSwitch(compatletica, expatletica, atletica, character.FOR);
+                character.expatletica = expatletica.isChecked();
+                break;
             //DEX
-            case R.id.compacrobazia: compSwitch(b, compacrobazia, expacrobazia, acrobazia, "compacrobazia", "DEX"); break;
-            case R.id.expacrobazia: expSwitch(compacrobazia, expacrobazia, acrobazia, "compacrobazia", "DEX"); break;
-            case R.id.compfurtivita: compSwitch(b, compfurtivita, expfurtivita, furtivita, "compfurtivita", "DEX"); break;
-            case R.id.expfurtivita: expSwitch(compfurtivita, expfurtivita, furtivita, "expfurtivita", "DEX"); break;
-            case R.id.comprapiditadimano: compSwitch(b, comprapiditadimano, exprapiditadimano, rapiditadimano, "comprapiditadimano", "DEX"); break;
-            case R.id.exprapiditadimano: expSwitch(comprapiditadimano, exprapiditadimano, rapiditadimano, "exprapiditadimano", "DEX"); break;
+            case R.id.compacrobazia:
+                compSwitch(b, compacrobazia, expacrobazia, acrobazia, character.DEX);
+                character.compacrobazia = b;
+                break;
+            case R.id.expacrobazia:
+                expSwitch(compacrobazia, expacrobazia, acrobazia, character.DEX);
+                character.expatletica = expacrobazia.isChecked();
+                break;
+            case R.id.compfurtivita:
+                compSwitch(b, compfurtivita, expfurtivita, furtivita, character.DEX);
+                character.compfurtivita = b;
+                break;
+            case R.id.expfurtivita:
+                expSwitch(compfurtivita, expfurtivita, furtivita, character.DEX);
+                character.expfurtivita = expfurtivita.isChecked();
+                break;
+            case R.id.comprapiditadimano:
+                compSwitch(b, comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
+                character.comprapiditadimano = b;
+                break;
+            case R.id.exprapiditadimano:
+                expSwitch(comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
+                character.exprapiditadimano = exprapiditadimano.isChecked();
+                break;
             //INT
-            case R.id.compinvestigare: compSwitch(b, compinvestigare, expinvestigare, investigare, "compinvestigare", "INT"); break;
-            case R.id.expinvestigare: expSwitch(compinvestigare, expinvestigare, investigare, "expinvestigare", "INT"); break;
-            case R.id.comparcano: compSwitch(b, comparcano, exparcano, arcano, "comparcano", "INT"); break;
-            case R.id.exparcano: expSwitch(comparcano, exparcano, arcano, "exparcano", "INT"); break;
-            case R.id.compstoria: compSwitch(b, compstoria, expstoria, storia, "compstoria", "INT"); break;
-            case R.id.expstoria: expSwitch(compstoria, expstoria, storia, "expstoria", "INT"); break;
-            case R.id.compreligionefolklore: compSwitch(b, compreligionefolklore, expreligionefolklore, religionefolklore, "compreligionefolklore", "INT"); break;
-            case R.id.expreligionefolklore: expSwitch(compreligionefolklore, expreligionefolklore, religionefolklore, "expreligionefolklore", "INT"); break;
-            case R.id.compnatura: compSwitch(b, compnatura, expnatura, natura, "compnatura", "INT"); break;
-            case R.id.expnatura: expSwitch(compnatura, expnatura, natura, "expnatura", "INT"); break;
+            case R.id.compinvestigare:
+                compSwitch(b, compinvestigare, expinvestigare, investigare, character.INT);
+                character.compinvestigare = b;
+                break;
+            case R.id.expinvestigare:
+                expSwitch(compinvestigare, expinvestigare, investigare, character.INT);
+                character.expinvestigare = expinvestigare.isChecked();
+                break;
+            case R.id.comparcano:
+                compSwitch(b, comparcano, exparcano, arcano, character.INT);
+                character.comparcano = b;
+                break;
+            case R.id.exparcano:
+                expSwitch(comparcano, exparcano, arcano, character.INT);
+                character.exparcano = exparcano.isChecked();
+                break;
+            case R.id.compstoria:
+                compSwitch(b, compstoria, expstoria, storia, character.INT);
+                character.compstoria = b;
+                break;
+            case R.id.expstoria:
+                expSwitch(compstoria, expstoria, storia, character.INT);
+                character.expstoria = expstoria.isChecked();
+                break;
+            case R.id.compreligionefolklore:
+                compSwitch(b, compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
+                character.compreligione = b;
+                break;
+            case R.id.expreligionefolklore:
+                expSwitch(compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
+                character.expreligione = expreligionefolklore.isChecked();
+                break;
+            case R.id.compnatura:
+                compSwitch(b, compnatura, expnatura, natura, character.INT);
+                character.compnatura = b;
+                break;
+            case R.id.expnatura:
+                expSwitch(compnatura, expnatura, natura, character.INT);
+                character.expnatura = expnatura.isChecked();
+                break;
             //SAG
-            case R.id.compsopravvivenza: compSwitch(b, compsopravvivenza, expsopravvivenza, sopravvivenza, "compsopravvivenza", "SAG"); break;
-            case R.id.expsopravvivenza: expSwitch(compsopravvivenza, expsopravvivenza, sopravvivenza, "expsopravvivenza", "SAG"); break;
-            case R.id.compmedicina: compSwitch(b, compmedicina, expmedicina, medicina, "compmedicina", "SAG"); break;
-            case R.id.expmedicina: expSwitch(compmedicina, expmedicina, medicina, "expmedicina", "SAG"); break;
-            case R.id.comppercezione: compSwitch(b, comppercezione, exppercezione, percezione, "comppercezione", "SAG"); break;
-            case R.id.exppercezione: expSwitch(comppercezione, exppercezione, percezione, "exppercezione", "SAG"); break;
-            case R.id.compintuizione: compSwitch(b, compintuizione, expintuizione, intuizione, "compintuizione", "SAG"); break;
-            case R.id.expintuizione: expSwitch(compintuizione, expintuizione, intuizione, "expintuizione", "SAG"); break;
+            case R.id.compsopravvivenza:
+                compSwitch(b, compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
+                character.compsopravvivenza = b;
+                break;
+            case R.id.expsopravvivenza:
+                expSwitch(compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
+                character.expsopravvivenza = expsopravvivenza.isChecked();
+                break;
+            case R.id.compmedicina:
+                compSwitch(b, compmedicina, expmedicina, medicina, character.SAG);
+                character.compmedicina = b;
+                break;
+            case R.id.expmedicina:
+                expSwitch(compmedicina, expmedicina, medicina, character.SAG);
+                character.expmedicina = expmedicina.isChecked();
+                break;
+            case R.id.comppercezione:
+                compSwitch(b, comppercezione, exppercezione, percezione, character.SAG);
+                character.comppercezione = b;
+                break;
+            case R.id.exppercezione:
+                expSwitch(comppercezione, exppercezione, percezione, character.SAG);
+                character.exppercezione = exppercezione.isChecked();
+                break;
+            case R.id.compintuizione:
+                compSwitch(b, compintuizione, expintuizione, intuizione, character.SAG);
+                character.compintuizione = b;
+                break;
+            case R.id.expintuizione:
+                expSwitch(compintuizione, expintuizione, intuizione, character.SAG);
+                character.expintuizione = expintuizione.isChecked();
+                break;
             //CAR
-            case R.id.compintimidire: compSwitch(b, compintimidire, expintimidire, intimidire, "compintimidire", "CAR"); break;
-            case R.id.expintimidire: expSwitch(compintimidire, expintimidire, intimidire, "expintimidire", "CAR"); break;
-            case R.id.compingannare: compSwitch(b, compingannare, expingannare, ingannare, "compingannare", "CAR"); break;
-            case R.id.expingannare: expSwitch(compingannare, expingannare, ingannare, "expingannare", "CAR"); break;
-            case R.id.compintrattenere: compSwitch(b, compintrattenere, expintrattenere, intrattenere, "compintrattenere", "CAR"); break;
-            case R.id.expintrattenere: expSwitch(compintrattenere, expintrattenere, intrattenere, "expintrattenere", "CAR"); break;
-            case R.id.comppersuadere: compSwitch(b, comppersuadere, exppersuadere, persuadere, "comppersuadere", "CAR"); break;
-            case R.id.exppersuadere: expSwitch(comppersuadere, exppersuadere, persuadere, "exppersuadere", "CAR"); break;
-
+            case R.id.compintimidire:
+                compSwitch(b, compintimidire, expintimidire, intimidire, character.CAR);
+                character.compintimidire = b;
+                break;
+            case R.id.expintimidire:
+                expSwitch(compintimidire, expintimidire, intimidire, character.CAR);
+                character.expintimidire = expintimidire.isChecked();
+                break;
+            case R.id.compingannare:
+                compSwitch(b, compingannare, expingannare, ingannare, character.CAR);
+                character.compingannare = b;
+                break;
+            case R.id.expingannare:
+                expSwitch(compingannare, expingannare, ingannare, character.CAR);
+                character.expingannare = expingannare.isChecked();
+                break;
+            case R.id.compintrattenere:
+                compSwitch(b, compintrattenere, expintrattenere, intrattenere, character.CAR);
+                character.compintrattenere = b;
+                break;
+            case R.id.expintrattenere:
+                expSwitch(compintrattenere, expintrattenere, intrattenere, character.CAR);
+                character.expintrattenere = expintrattenere.isChecked();
+                break;
+            case R.id.comppersuadere:
+                compSwitch(b, comppersuadere, exppersuadere, persuadere, character.CAR);
+                character.comppersuadere = b;
+                break;
+            case R.id.exppersuadere:
+                expSwitch(comppersuadere, exppersuadere, persuadere, character.CAR);
+                character.exppersuadere = exppersuadere.isChecked();
+                break;
         }
+        saveSchedaPG();
     }
 
-    public void compSwitch(boolean b, CheckBox comp, CheckBox exp, TextView label, String stateLabel, String carattLabel) {
-        int lv = state.getInt("pglv", 1);
+    public void compSwitch(boolean b, CheckBox comp, CheckBox exp, TextView label, int caratt) {
         if (b) exp.setVisibility(View.VISIBLE);
         else exp.setVisibility(View.INVISIBLE);
-        state.edit().putBoolean(stateLabel, comp.isChecked()).apply();
-        int bonus = mod((state.getInt(carattLabel, 10))) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         String suffix = (bonus >= 0) ? "+" : "";
         String tempstr = suffix + bonus;
         label.setText(tempstr);
     }
 
-    public void expSwitch(CheckBox comp, CheckBox exp, TextView label, String stateLabel, String carattLabel) {
-        int lv = state.getInt("pglv", 1);
-        state.edit().putBoolean(stateLabel, exp.isChecked()).apply();
-        int bonus = mod((state.getInt(carattLabel, 10)))+ ((comp.isChecked()) ? ((exp.isChecked()) ? prof[lv-1]*2 : prof[lv-1]) : 0);
+    public void expSwitch(CheckBox comp, CheckBox exp, TextView label, int caratt) {
+        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
         String suffix = (bonus >= 0) ? "+" : "";
         String tempstr = suffix + bonus;
         label.setText(tempstr);
@@ -2375,8 +2524,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 }
 
                 String bmpuri = new ContextWrapper(getApplicationContext()).getDir("images", Context.MODE_PRIVATE).getAbsolutePath() + "/" + selected_img.hashCode() + ".png";
-                state.edit().putString("portrait", bmpuri).apply();
+                character.portrait = bmpuri;
                 portrait.setImageBitmap(selected_img);
+                saveSchedaPG();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Toast.makeText(this, R.string.fileopenerror, Toast.LENGTH_LONG).show();

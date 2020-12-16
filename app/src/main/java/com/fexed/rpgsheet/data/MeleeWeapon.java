@@ -3,8 +3,10 @@ package com.fexed.rpgsheet.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class MeleeWeapon implements Parcelable {
-    String name, damage;
+import java.io.Serializable;
+
+public class MeleeWeapon implements Parcelable, Serializable {
+    public String name, damage;
 
     public static final Creator<MeleeWeapon> CREATOR = new Creator<MeleeWeapon>() {
         @Override
@@ -17,6 +19,11 @@ public class MeleeWeapon implements Parcelable {
             return new MeleeWeapon[size];
         }
     };
+
+    public MeleeWeapon(String name, String damage) {
+        this.name = name;
+        this.damage = damage;
+    }
 
     public MeleeWeapon(Parcel source) {
         name = source.readString();

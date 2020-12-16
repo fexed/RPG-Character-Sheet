@@ -1,10 +1,11 @@
 package com.fexed.rpgsheet;
 
+import com.fexed.rpgsheet.data.Character;
+import com.fexed.rpgsheet.data.InventoryItem;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
-import androidx.collection.ArraySet;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,22 +14,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-
 public class InventoryAdapter extends RecyclerView.Adapter {
-    private ArrayList<String> inventory;
-    private SharedPreferences state;
+    private Character character;
 
-    public InventoryAdapter(SharedPreferences state) {
-        this.state = state;
-        Set<String> stringSet = state.getStringSet("inventory", null);
-        if (stringSet != null) {
-            inventory = new ArrayList<>(stringSet);
-            Collections.sort(inventory);
-        }
-        else inventory = new ArrayList<>();
+    public InventoryAdapter(Character character) {
+        this.character = character;
     }
 
     @NonNull
@@ -40,25 +30,22 @@ public class InventoryAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        String obj = inventory.get(i);
-        if (obj != null) ((InventoryViewHolder) viewHolder).bindObj(obj.split("::")[0], obj.split(("::"))[1]);
+        InventoryItem obj = character.inventario.get(i);
+        if (obj != null) ((InventoryViewHolder) viewHolder).bindObj(obj);
     }
 
     @Override
     public int getItemCount() {
-        return inventory.size();
+        return character.inventario.size();
     }
 
-    public void removeObj(String obj) {
-        inventory.remove(obj);
-        state.edit().putStringSet("inventory", new ArraySet<>(inventory)).apply();
+    public void removeObj(InventoryItem obj) {
+        character.inventario.remove(obj);
         notifyDataSetChanged();
     }
 
-    public void addObj(String obj) {
-        inventory.add(obj);
-        Collections.sort(inventory);
-        state.edit().putStringSet("inventory", new ArraySet<>(inventory)).apply();
+    public void addObj(InventoryItem obj) {
+        character.inventario.add(obj);
     }
 
     class InventoryViewHolder extends RecyclerView.ViewHolder {
@@ -73,24 +60,24 @@ public class InventoryAdapter extends RecyclerView.Adapter {
             removeBtn = itemView.findViewById(R.id.removeObjBtn);
         }
 
-        void bindObj(final String title, final String desc) {
-            nameTxt.setText(title);
+        void bindObj(final InventoryItem obj) {
+            nameTxt.setText(obj.name);
             nameTxt.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
                     final EditText input = new EditText(view.getContext());
-                    input.setText(title);
+                    input.setText(obj.name);
                     alert.setView(input);
                     alert.setNegativeButton(view.getContext().getString(R.string.annulla), null);
                     final AlertDialog alertd = alert.create();
-                    alert.setTitle(view.getContext().getString(R.string.edit) + " " + title);
+                    alert.setTitle(view.getContext().getString(R.string.edit) + " " + obj.name);
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String newTitle = input.getText().toString();
 
-                            removeObj(title + "::" + desc);
-                            addObj(newTitle.replace("::", "") + "::" + desc);
+                            removeObj(obj);
+                            addObj(new InventoryItem(newTitle, obj.desc));
                             dialog.cancel();
                             alertd.dismiss();
                         }
@@ -99,13 +86,13 @@ public class InventoryAdapter extends RecyclerView.Adapter {
                     return true;
                 }
             });
-            descTxt.setText(desc);
+            descTxt.setText(obj.desc);
             descTxt.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
                     final AlertDialog.Builder alert = new AlertDialog.Builder(view.getContext());
                     final EditText input = new EditText(view.getContext());
-                    input.setText(desc);
+                    input.setText(obj.desc);
                     alert.setView(input);
                     alert.setNegativeButton(view.getContext().getString(R.string.annulla), null);
                     final AlertDialog alertd = alert.create();
@@ -113,8 +100,8 @@ public class InventoryAdapter extends RecyclerView.Adapter {
                     alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             String newDesc = input.getText().toString();
-                            removeObj(title + "::" + desc);
-                            addObj(title + "::" + newDesc.replace("::", ""));
+                            removeObj(obj);
+                            addObj(new InventoryItem(obj.name, newDesc));
                             dialog.cancel();
                             alertd.dismiss();
                         }
@@ -128,12 +115,12 @@ public class InventoryAdapter extends RecyclerView.Adapter {
                 public boolean onLongClick(View view) {
                     new AlertDialog.Builder(view.getContext())
                             .setTitle("Sei sicuro?")
-                            .setMessage("Sei sicuro di voler eliminare " + title + "?")
+                            .setMessage("Sei sicuro di voler eliminare " + obj.name + "?")
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    removeObj(title + "::" + desc);
+                                    removeObj(obj);
                                 }
                             })
                             .setNegativeButton(android.R.string.no, null)

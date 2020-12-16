@@ -142,4 +142,5 @@
     <string name="resttxt">Rest! Spell slots and health have been restored!</string>
     <string name="cast">Cast spell</string>
     <string name="fileopenerror">An error occurred while opening file</string>
+    <string name="selectpg">Select a character</string>
 </resources>

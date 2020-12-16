@@ -13,16 +13,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fexed.rpgsheet.data.Character;
+
 public class PGDialog extends Dialog implements android.view.View.OnClickListener {
 
     public Activity c;
-    public SharedPreferences state;
+    public Character character;
     public Button yes;
 
-    public PGDialog(Activity a, SharedPreferences state) {
+    public PGDialog(Activity a, Character character) {
         super(a);
         this.c = a;
-        this.state = state;
+        this.character = character;
     }
 
     @Override
@@ -79,27 +81,21 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     });
                     break;
                 } else {
-                    /*Assert.assertTrue("ERRORE input non valdio", !(pgnameinput.getText().toString().equals("")));
-                    Assert.assertNotNull("ERRORE input nullo", pgnameinput.getText().toString());
-                    Assert.assertTrue("ERRORE input non valdio", !(pgclassinput.getText().toString().equals("")));
-                    Assert.assertNotNull("ERRORE input nullo", pgclassinput.getText().toString());
-                    Assert.assertTrue("ERRORE input non valdio", !(pglvinput.getText().toString().equals("")));
-                    Assert.assertNotNull("ERRORE input nullo", pglvinput.getText().toString());*/
+                    character = new Character();
                     int lv = Integer.parseInt(pglvinput.getText().toString());
                     lv = (lv <= 0) ? 1 : lv;
-                    lv = (lv > 45) ? 45 : lv;
-                    state.edit().putString("pgname", pgnameinput.getText().toString()).apply();
-                    state.edit().putString("pgclass", pgclassinput.getText().toString()).apply();
-                    state.edit().putInt("pglv", lv).apply();
-                    state.edit().apply();
+                    lv = Math.min(lv, 45);
+                    character.nome = pgnameinput.getText().toString();
+                    character.classe = pgclassinput.getText().toString();
+                    character.LV = lv;
 
                     TextView pgnametxt = c.findViewById(R.id.pgnametxt);
                     TextView pgclasstxt = c.findViewById(R.id.pgclasstxt);
                     TextView pglvtxt = c.findViewById(R.id.pglvtxt);
 
-                    pgnametxt.setText(state.getString("pgname", "errore"));
-                    pgclasstxt.setText(state.getString("pgclass", "errore"));
-                    pglvtxt.setText(state.getInt("pglv", 0) + "");
+                    pgnametxt.setText(character.nome);
+                    pgclasstxt.setText(character.classe);
+                    pglvtxt.setText(character.LV + "");
 
                     this.dismiss();
                     break;

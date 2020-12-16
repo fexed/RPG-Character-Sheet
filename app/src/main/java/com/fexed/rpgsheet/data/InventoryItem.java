@@ -3,8 +3,10 @@ package com.fexed.rpgsheet.data;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class InventoryItem implements Parcelable {
-    String name, desc;
+import java.io.Serializable;
+
+public class InventoryItem implements Parcelable, Serializable {
+    public String name, desc;
 
     public static final Creator<InventoryItem> CREATOR = new Creator<InventoryItem>() {
 
@@ -18,6 +20,11 @@ public class InventoryItem implements Parcelable {
             return new InventoryItem[size];
         }
     };
+
+    public InventoryItem(String name, String desc) {
+        this.name = name;
+        this.desc = desc;
+    }
 
     public InventoryItem(Parcel source) {
         name = source.readString();

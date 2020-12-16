@@ -15,21 +15,24 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fexed.rpgsheet.data.Character;
+import com.fexed.rpgsheet.data.RangedWeapon;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class RangedDialog extends Dialog implements View.OnClickListener {
 
     public Activity c;
-    public SharedPreferences state;
+    public Character character;
     public Button yes;
     public TableRow newrow;
     public TableLayout rangedatks;
 
-    public RangedDialog(Activity a, SharedPreferences state, TableRow r, TableLayout t) {
+    public RangedDialog(Activity a, Character character, TableRow r, TableLayout t) {
         super(a);
         this.c = a;
-        this.state = state;
+        this.character = character;
         this.newrow = r;
         this.rangedatks = t;
     }
@@ -94,29 +97,25 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                     TextView comprange = (TextView) newrow.findViewById(R.id.rangedbonuscomp);
                     TextView damage = (TextView) newrow.findViewById(R.id.rangeddamage);
 
-                    Set<String> rangedset = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
-                    final String element = rangedname.getText().toString()+"%"+rangedrange.getText().toString()+"%"+rangeddamage.getText().toString();
-                    rangedset.add(element);
-                    state.edit().putStringSet("rangedatks", rangedset).apply();
+                    final RangedWeapon weap = new RangedWeapon(rangedname.getText().toString(), rangedrange.getText().toString(), rangeddamage.getText().toString());
+                    character.armiranged.add(weap);
 
                     Button removebtn = (Button) newrow.findViewById(R.id.removeranged);
                     removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            Set<String> rangedset = new HashSet<>(state.getStringSet("rangedatks", new HashSet<String>()));
-                            rangedset.remove(element);
-                            state.edit().putStringSet("rangedatks", rangedset).apply();
+                            character.armiranged.remove(weap);
                             rangedatks.removeView(newrow);
                             return true;
                         }
                     });
 
-                    int bonus = CharacterActivity.mod(state.getInt("DEX", 10));
+                    int bonus = CharacterActivity.mod(character.DEX);
                     String suffix = (bonus >= 0) ? "+" : "";
 
                     name.setText(rangedname.getText().toString());
                     bonusrange.setText(suffix + bonus);
-                    comprange.setText("+" + CharacterActivity.prof[state.getInt("pglv", 1) - 1]);
+                    comprange.setText("+" + CharacterActivity.prof[character.LV - 1]);
                     range.setText(rangedrange.getText().toString());
                     damage.setText(rangeddamage.getText().toString());
 

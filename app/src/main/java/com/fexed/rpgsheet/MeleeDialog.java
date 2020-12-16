@@ -15,21 +15,24 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fexed.rpgsheet.data.Character;
+import com.fexed.rpgsheet.data.MeleeWeapon;
+
 import java.util.HashSet;
 import java.util.Set;
 
 public class MeleeDialog extends Dialog implements View.OnClickListener {
 
     public Activity c;
-    public SharedPreferences state;
+    public Character character;
     public Button yes;
     public TableRow newrow;
     public TableLayout rangedatks;
 
-    public MeleeDialog(Activity a, SharedPreferences state, TableRow r, TableLayout t) {
+    public MeleeDialog(Activity a, Character character, TableRow r, TableLayout t) {
         super(a);
         this.c = a;
-        this.state = state;
+        this.character = character;
         this.newrow = r;
         this.rangedatks = t;
     }
@@ -80,29 +83,25 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                     TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
                     TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
 
-                    Set<String> meleeset = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
-                    final String element = meleename.getText().toString()+"%"+meleedamage.getText().toString();
-                    meleeset.add(element);
-                    state.edit().putStringSet("meleeatks", meleeset).apply();
+                    final MeleeWeapon weap = new MeleeWeapon(name.getText().toString(), damage.getText().toString());
+                    character.armimelee.add(weap);
 
                     Button removebtn = (Button) newrow.findViewById(R.id.removemelee);
                     removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            Set<String> meleeset = new HashSet<>(state.getStringSet("meleeatks", new HashSet<String>()));
-                            meleeset.remove(element);
-                            state.edit().putStringSet("meleeatks", meleeset).apply();
+                            character.armimelee.remove(weap);
                             rangedatks.removeView(newrow);
                             return true;
                         }
                     });
 
-                    int bonus = CharacterActivity.mod(state.getInt("FOR", 10));
+                    int bonus = CharacterActivity.mod(character.FOR);
                     String suffix = (bonus >= 0) ? "+" : "";
 
                     name.setText(meleename.getText().toString());
                     bonusrange.setText(suffix + bonus);
-                    comprange.setText("+" + CharacterActivity.prof[state.getInt("pglv", 1) - 1]);
+                    comprange.setText("+" + CharacterActivity.prof[character.LV - 1]);
                     damage.setText(meleedamage.getText().toString());
 
                     rangedatks.addView(newrow);

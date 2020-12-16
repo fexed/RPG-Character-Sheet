@@ -140,4 +140,5 @@
     <string name="resttxt">Riposo! Slot e punti ferita ripristinati!</string>
     <string name="cast">Lancia incantesimo</string>
     <string name="fileopenerror">An error occurred while opening file</string>
+    <string name="selectpg">Seleziona un personaggio</string>
 </resources>
