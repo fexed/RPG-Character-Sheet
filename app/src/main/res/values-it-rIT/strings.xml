@@ -141,4 +141,6 @@
     <string name="cast">Lancia incantesimo</string>
     <string name="fileopenerror">An error occurred while opening file</string>
     <string name="selectpg">Seleziona un personaggio</string>
+    <string name="newpg">Nuovo personaggio</string>
+    <string name="charselect">Seleziona personaggio</string>
 </resources>

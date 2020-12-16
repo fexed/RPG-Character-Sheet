@@ -14,7 +14,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,8 +21,6 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
-import android.util.Range;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -125,7 +122,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
     ImageView portrait;
 
-    Character character;
+    public Character character;
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -242,6 +239,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             spellmana.setText(tmps);
 
             Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.resttxt), Snackbar.LENGTH_LONG).show();
+        } else if (item.getItemId() == R.id.charselect) {
+            this.recreate();
         }
         return true;
     }
@@ -450,7 +449,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         String tempstr;
         if (character == null) {
             character = new Character();
-            PGDialog inputdialog = new PGDialog(this, character);
+            PGDialog inputdialog = new PGDialog(this);
             inputdialog.show();
         }
         nametxt.setText(character.nome);
@@ -1359,21 +1358,28 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             for (int i = 0; i < files.length; i++) {
                 arrayAdapter.add((i+1) + ". " + files[i].getName().split("::")[0]);
             }
+            arrayAdapter.add(getString(R.string.newpg));
             builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    ObjectInputStream os = null;
-                    try {
-                        os = new ObjectInputStream(new FileInputStream(files[which]));
-                        character = (Character) os.readObject();
+                    if (which == files.length) {
+                        character = null;
                         preparaSchedaPG();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
+                    } else {
+                        ObjectInputStream os = null;
                         try {
+                            os = new ObjectInputStream(new FileInputStream(files[which]));
+                            character = (Character) os.readObject();
                             os.close();
-                        } catch (IOException | NullPointerException e) {
-                            Toast.makeText(getApplicationContext(), R.string.fileopenerror, Toast.LENGTH_LONG).show();
+                            preparaSchedaPG();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        } finally {
+                            try {
+                                os.close();
+                            } catch (IOException | NullPointerException e) {
+                                Toast.makeText(getApplicationContext(), R.string.fileopenerror, Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 }
@@ -1386,21 +1392,23 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    private void saveSchedaPG() {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File directory = cw.getDir("characters", Context.MODE_PRIVATE);
-        File pgfile = new File(directory, character.nome + "::" + character.LV);
-        ObjectOutputStream os = null;
-        try {
-            os = new ObjectOutputStream(new FileOutputStream(pgfile));
-            os.writeObject(character);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
+    public void saveSchedaPG() {
+        if (!character.nome.equals("")) {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            File directory = cw.getDir("characters", Context.MODE_PRIVATE);
+            File pgfile = new File(directory, character.nome);
+            ObjectOutputStream os = null;
             try {
-                os.close();
-            } catch (IOException | NullPointerException e) {
+                os = new ObjectOutputStream(new FileOutputStream(pgfile));
+                os.writeObject(character);
+            } catch (Exception e) {
                 e.printStackTrace();
+            } finally {
+                try {
+                    os.close();
+                } catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -1596,7 +1604,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.castfirstlv:
                 character.currslot1 = (character.currslot1 > 0) ? character.currslot1 - 1 : 0;
-                firstlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot1));
+                firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
                 break;
             case R.id.castsecondlv:
                 character.currslot2 = (character.currslot2 > 0) ? character.currslot2 - 1 : 0;
@@ -1669,6 +1677,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.LV = lv;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1688,6 +1697,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.nome = name;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1708,6 +1718,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.spellmanamax = mana;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1727,6 +1738,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.classe = classs;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1753,6 +1765,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.CA = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1775,6 +1788,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.PF = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1798,6 +1812,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         PF.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1821,6 +1836,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         PF.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1844,6 +1860,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.PFMAX = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1869,6 +1886,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.FOR = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1894,6 +1912,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.DEX = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1919,6 +1938,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.COS = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1944,6 +1964,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.INT = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1969,6 +1990,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.SAG = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -1994,6 +2016,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.CAR = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2020,6 +2043,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         totalmtxtv.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2046,6 +2070,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         totalmtxtv.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2072,6 +2097,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         totalmtxtv.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2098,6 +2124,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         totalmtxtv.setText(tempstr);
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2122,6 +2149,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.EXP = xp;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2142,6 +2170,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot1 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2162,6 +2191,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot2 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2182,6 +2212,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot3 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2202,6 +2233,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot4 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2222,6 +2254,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot5 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2242,6 +2275,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot6 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2262,6 +2296,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot7 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2282,6 +2317,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot8 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2302,6 +2338,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslot9 = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2322,6 +2359,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         character.currslotplus = pnt;
                         dialog.cancel();
                         alertd.dismiss();
+                        preparaSchedaPG();
                         saveSchedaPG();
                     }
                 });
@@ -2477,6 +2515,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 character.exppersuadere = exppersuadere.isChecked();
                 break;
         }
+        preparaSchedaPG();
         saveSchedaPG();
     }
 

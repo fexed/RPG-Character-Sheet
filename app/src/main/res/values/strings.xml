@@ -143,4 +143,6 @@
     <string name="cast">Cast spell</string>
     <string name="fileopenerror">An error occurred while opening file</string>
     <string name="selectpg">Select a character</string>
+    <string name="newpg">New character</string>
+    <string name="charselect">Select character</string>
 </resources>

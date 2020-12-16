@@ -17,14 +17,12 @@ import com.fexed.rpgsheet.data.Character;
 
 public class PGDialog extends Dialog implements android.view.View.OnClickListener {
 
-    public Activity c;
-    public Character character;
+    public CharacterActivity c;
     public Button yes;
 
-    public PGDialog(Activity a, Character character) {
+    public PGDialog(CharacterActivity a) {
         super(a);
         this.c = a;
-        this.character = character;
     }
 
     @Override
@@ -81,22 +79,23 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     });
                     break;
                 } else {
-                    character = new Character();
+                    c.character = new Character();
                     int lv = Integer.parseInt(pglvinput.getText().toString());
                     lv = (lv <= 0) ? 1 : lv;
                     lv = Math.min(lv, 45);
-                    character.nome = pgnameinput.getText().toString();
-                    character.classe = pgclassinput.getText().toString();
-                    character.LV = lv;
+                    c.character.nome = pgnameinput.getText().toString();
+                    c.character.classe = pgclassinput.getText().toString();
+                    c.character.LV = lv;
 
                     TextView pgnametxt = c.findViewById(R.id.pgnametxt);
                     TextView pgclasstxt = c.findViewById(R.id.pgclasstxt);
                     TextView pglvtxt = c.findViewById(R.id.pglvtxt);
 
-                    pgnametxt.setText(character.nome);
-                    pgclasstxt.setText(character.classe);
-                    pglvtxt.setText(character.LV + "");
+                    pgnametxt.setText(c.character.nome);
+                    pgclasstxt.setText(c.character.classe);
+                    pglvtxt.setText(c.character.LV + "");
 
+                    c.saveSchedaPG();
                     this.dismiss();
                     break;
                 }
