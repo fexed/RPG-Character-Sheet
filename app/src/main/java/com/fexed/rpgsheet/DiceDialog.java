@@ -89,18 +89,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             String suff = "1D20 + " + bonus;
             int dice = (rnd.nextInt(20) + 1);
             int result = dice + bonus;
-            rolls.add(result);
             suff += " = " + dice + " + " + bonus + " = " + result;
             outtxt.setText(suff);
-            StringBuilder str = new StringBuilder();
-            int total = rolls.get(0);
-            str.append(rolls.get(0));
-            for (int n : rolls.subList(1, rolls.size())) {
-                str.append("+");
-                str.append(n);
-                total += n;
-            }
-            str.append("= ").append(total);
         }
     }
 
