@@ -44,6 +44,8 @@ import com.fexed.rpgsheet.data.RangedWeapon;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
@@ -1414,10 +1416,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     }
 
     private void initializeAds() {
-        MobileAds.initialize(this, "ca-app-pub-9387595638685451~1613717773");
-        AdView mAdView = findViewById(R.id.banner1);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+                AdView mAdView = findViewById(R.id.banner1);
+                AdRequest adRequest = new AdRequest.Builder().build();
+                mAdView.loadAd(adRequest);
+            }
+        });
     }
 
     public static int mod(int punteggio) {
