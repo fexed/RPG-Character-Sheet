@@ -29,6 +29,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     private TextView histtxt;
     private Random rnd;
     private ArrayList<Integer> rolls;
+    private boolean roll = false;
+    private int bonus;
 
     public DiceDialog(Activity a, SharedPreferences state) {
         super(a);
@@ -37,6 +39,18 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         rolls = new ArrayList<>();
         state.edit().putBoolean("diceroller", true).apply();
         FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
+    }
+
+    public DiceDialog(Activity a, SharedPreferences state, int bonus) {
+        super(a);
+        this.c = a;
+        rnd = new Random(System.currentTimeMillis());
+        rolls = new ArrayList<>();
+        state.edit().putBoolean("diceroller", true).apply();
+        FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
+
+        this.roll = true;
+        this.bonus = bonus;
     }
 
     @Override
@@ -70,6 +84,23 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
 
         outtxt = findViewById(R.id.diceRollResutlTxtV);
         histtxt = findViewById(R.id.diceRollHistoryTxtV);
+
+        if (roll) {
+            String suff = "1D20 + " + bonus;
+            int result = (rnd.nextInt(20) + 1) + bonus;
+            rolls.add(result);
+            suff += " = " + result;
+            outtxt.setText(suff);
+            StringBuilder str = new StringBuilder();
+            int total = rolls.get(0);
+            str.append(rolls.get(0));
+            for (int n : rolls.subList(1, rolls.size())) {
+                str.append("+");
+                str.append(n);
+                total += n;
+            }
+            str.append("= ").append(total);
+        }
     }
 
     @Override
