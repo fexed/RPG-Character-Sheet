@@ -468,6 +468,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         FOR.setText(tempstr);
         tempstr = suffix + modfor;
         FORmod.setText(tempstr);
+        FORmod.setOnClickListener(this);
 
         moddex = mod(character.DEX);
         suffix = (moddex >= 0) ? "+" : "";
@@ -475,6 +476,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         DEX.setText(tempstr);
         tempstr = suffix + moddex;
         DEXmod.setText(tempstr);
+        DEXmod.setOnClickListener(this);
 
         modcos = mod(character.COS);
         suffix = (modcos >= 0) ? "+" : "";
@@ -482,6 +484,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         COS.setText(tempstr);
         tempstr = suffix + modcos;
         COSmod.setText(tempstr);
+        COSmod.setOnClickListener(this);
 
         modint = mod(character.INT);
         suffix = (modint >= 0) ? "+" : "";
@@ -489,6 +492,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         INT.setText(tempstr);
         tempstr = suffix + modint;
         INTmod.setText(tempstr);
+        INTmod.setOnClickListener(this);
 
         modsag = mod(character.SAG);
         suffix = (modsag >= 0) ? "+" : "";
@@ -496,6 +500,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         SAG.setText(tempstr);
         tempstr = suffix + modsag;
         SAGmod.setText(tempstr);
+        SAGmod.setOnClickListener(this);
 
         modcar = mod(character.CAR);
         suffix = (modcar >= 0) ? "+" : "";
@@ -503,6 +508,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         CAR.setText(tempstr);
         tempstr = suffix + modcar;
         CARmod.setText(tempstr);
+        CARmod.setOnClickListener(this);
 
         tempstr = "" + character.CA;
         CA.setText(tempstr);
@@ -521,6 +527,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus < 0) ? "" : "+";
         tempstr = suffix + bonus;
         spellatk.setText(tempstr);
+        spellatk.setOnClickListener(this);
         tempstr = "" + (8 + bonus);
         spellcd.setText(tempstr);
 
@@ -567,6 +574,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsfortxt.setText(tempstr);
+        tsfortxt.setOnClickListener(this);
         comptsfor.setOnClickListener(this);
 
         tsdextxt = findViewById(R.id.TSDEX);
@@ -576,6 +584,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsdextxt.setText(tempstr);
+        tsdextxt.setOnClickListener(this);
         comptsdex.setOnClickListener(this);
 
         tscostxt = findViewById(R.id.TSCOS);
@@ -585,6 +594,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscostxt.setText(tempstr);
+        tscostxt.setOnClickListener(this);
         comptscos.setOnClickListener(this);
 
         tsinttxt = findViewById(R.id.TSINT);
@@ -594,6 +604,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsinttxt.setText(tempstr);
+        tsinttxt.setOnClickListener(this);
         comptsint.setOnClickListener(this);
 
         tssagtxt = findViewById(R.id.TSSAG);
@@ -603,6 +614,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tssagtxt.setText(tempstr);
+        tssagtxt.setOnClickListener(this);
         comptssag.setOnClickListener(this);
 
         tscartxt = findViewById(R.id.TSCAR);
@@ -612,6 +624,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscartxt.setText(tempstr);
+        tscartxt.setOnClickListener(this);
         comptscar.setOnClickListener(this);
 
         atletica = findViewById(R.id.atletica);
@@ -625,6 +638,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         atletica.setText(tempstr);
+        atletica.setOnClickListener(this);
 
         acrobazia = findViewById(R.id.acrobazia);
         compacrobazia = findViewById(R.id.compacrobazia);
@@ -637,6 +651,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         acrobazia.setText(tempstr);
+        acrobazia.setOnClickListener(this);
 
         furtivita = findViewById(R.id.furtivita);
         compfurtivita = findViewById(R.id.compfurtivita);
@@ -649,6 +664,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         furtivita.setText(tempstr);
+        furtivita.setOnClickListener(this);
 
         rapiditadimano = findViewById(R.id.rapiditadimano);
         comprapiditadimano = findViewById(R.id.comprapiditadimano);
@@ -661,6 +677,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         rapiditadimano.setText(tempstr);
+        rapiditadimano.setOnClickListener(this);
 
         investigare = findViewById(R.id.investigare);
         compinvestigare = findViewById(R.id.compinvestigare);
@@ -673,6 +690,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         investigare.setText(tempstr);
+        investigare.setOnClickListener(this);
 
         arcano = findViewById(R.id.arcano);
         comparcano = findViewById(R.id.comparcano);
@@ -685,6 +703,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         arcano.setText(tempstr);
+        arcano.setOnClickListener(this);
 
         storia = findViewById(R.id.storia);
         compstoria = findViewById(R.id.compstoria);
@@ -697,6 +716,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         storia.setText(tempstr);
+        storia.setOnClickListener(this);
 
         religionefolklore = findViewById(R.id.religionefolklore);
         compreligionefolklore = findViewById(R.id.compreligionefolklore);
@@ -709,6 +729,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         religionefolklore.setText(tempstr);
+        religionefolklore.setOnClickListener(this);
 
         natura = findViewById(R.id.natura);
         compnatura = findViewById(R.id.compnatura);
@@ -721,6 +742,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         natura.setText(tempstr);
+        natura.setOnClickListener(this);
 
         sopravvivenza = findViewById(R.id.sopravvivenza);
         compsopravvivenza = findViewById(R.id.compsopravvivenza);
@@ -733,6 +755,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         sopravvivenza.setText(tempstr);
+        sopravvivenza.setOnClickListener(this);
 
         medicina = findViewById(R.id.medicina);
         compmedicina = findViewById(R.id.compmedicina);
@@ -745,6 +768,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         medicina.setText(tempstr);
+        medicina.setOnClickListener(this);
 
         percezione = findViewById(R.id.percezione);
         comppercezione = findViewById(R.id.comppercezione);
@@ -757,6 +781,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         percezione.setText(tempstr);
+        percezione.setOnClickListener(this);
 
         intuizione = findViewById(R.id.intuizione);
         compintuizione = findViewById(R.id.compintuizione);
@@ -769,6 +794,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intuizione.setText(tempstr);
+        intuizione.setOnClickListener(this);
 
         intimidire = findViewById(R.id.intimidire);
         compintimidire = findViewById(R.id.compintimidire);
@@ -781,6 +807,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intimidire.setText(tempstr);
+        intimidire.setOnClickListener(this);
 
         ingannare = findViewById(R.id.ingannare);
         compingannare = findViewById(R.id.compingannare);
@@ -793,6 +820,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         ingannare.setText(tempstr);
+        ingannare.setOnClickListener(this);
 
         intrattenere = findViewById(R.id.intrattenere);
         compintrattenere = findViewById(R.id.compintrattenere);
@@ -805,6 +833,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intrattenere.setText(tempstr);
+        intrattenere.setOnClickListener(this);
 
         persuadere = findViewById(R.id.persuadere);
         comppersuadere = findViewById(R.id.comppersuadere);
@@ -817,6 +846,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         persuadere.setText(tempstr);
+        persuadere.setOnClickListener(this);
 
         EditText linguetxt = findViewById(R.id.linguetxt);
         linguetxt.setText(character.linguetxt);
@@ -1673,6 +1703,130 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             case R.id.castpluslv:
                 character.currslotplus = (character.currslotplus > 0) ? character.currslotplus - 1 : 0;
                 pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
+                break;
+            case R.id.FORmod:
+                DiceDialog inputdialog = new DiceDialog(this, state, mod(character.FOR), getString(R.string.str));
+                inputdialog.show();
+                break;
+            case R.id.DEXmod:
+                inputdialog = new DiceDialog(this, state, mod(character.DEX), getString(R.string.dex));
+                inputdialog.show();
+                break;
+            case R.id.COSmod:
+                inputdialog = new DiceDialog(this, state, mod(character.COS), getString(R.string.cos));
+                inputdialog.show();
+                break;
+            case R.id.INTmod:
+                inputdialog = new DiceDialog(this, state, mod(character.INT), getString(R.string.inte));
+                inputdialog.show();
+                break;
+            case R.id.SAGmod:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG), getString(R.string.sag));
+                inputdialog.show();
+                break;
+            case R.id.CARmod:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR), getString(R.string.car));
+                inputdialog.show();
+                break;
+            case R.id.TSFOR:
+                inputdialog = new DiceDialog(this, state, mod(character.FOR) + ((character.tsfor) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.str));
+                inputdialog.show();
+                break;
+            case R.id.TSDEX:
+                inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((character.tsdex) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.dex));
+                inputdialog.show();
+                break;
+            case R.id.TSCOS:
+                inputdialog = new DiceDialog(this, state, mod(character.COS) + ((character.tscos) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.cos));
+                inputdialog.show();
+                break;
+            case R.id.TSINT:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((character.tsint) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.inte));
+                inputdialog.show();
+                break;
+            case R.id.TSSAG:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((character.tssag) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.sag));
+                inputdialog.show();
+                break;
+            case R.id.TSCAR:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
+                inputdialog.show();
+                break;
+            case R.id.atletica:
+                inputdialog = new DiceDialog(this, state, mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.atletica));
+                inputdialog.show();
+                break;
+            case R.id.acrobazia:
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.acrobazia));
+                inputdialog.show();
+                break;
+            case R.id.furtivita:
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.furtivit));
+                inputdialog.show();
+                break;
+            case R.id.rapiditadimano:
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.rapidit_di_mano));
+                inputdialog.show();
+                break;
+            case R.id.investigare:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.investigare));
+                inputdialog.show();
+                break;
+            case R.id.arcano:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.arcano));
+                inputdialog.show();
+                break;
+            case R.id.storia:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.storia));
+                inputdialog.show();
+                break;
+            case R.id.religionefolklore:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.religione_e_folklore));
+                inputdialog.show();
+                break;
+            case R.id.natura:
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.natura));
+                inputdialog.show();
+                break;
+            case R.id.sopravvivenza:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.sopravvivenza));
+                inputdialog.show();
+                break;
+            case R.id.medicina:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.medicina));
+                inputdialog.show();
+                break;
+            case R.id.percezione:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.percezione));
+                inputdialog.show();
+                break;
+            case R.id.intuizione:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intuizione));
+                inputdialog.show();
+                break;
+            case R.id.intimidire:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intimidire));
+                inputdialog.show();
+                break;
+            case R.id.ingannare:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.ingannare));
+                inputdialog.show();
+                break;
+            case R.id.intrattenere:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intrattenere));
+                inputdialog.show();
+                break;
+            case R.id.persuadere:
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.persuadere));
+                inputdialog.show();
+                break;
+            case R.id.spellatktxt:
+                int bonus = 0;
+                if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
+                else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
+                else bonus = prof[character.LV - 1] + mod(character.INT);
+                inputdialog = new DiceDialog(this, state, bonus, getString(R.string.cast) + " (" + character.spellstat + ")");
+                inputdialog.show();
                 break;
         }
         saveSchedaPG();
