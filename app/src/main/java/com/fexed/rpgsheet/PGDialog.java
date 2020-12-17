@@ -91,6 +91,7 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                     TextView pgclasstxt = c.findViewById(R.id.pgclasstxt);
                     TextView pglvtxt = c.findViewById(R.id.pglvtxt);
 
+                    c.setTitle(c.character.nome);
                     pgnametxt.setText(c.character.nome);
                     pgclasstxt.setText(c.character.classe);
                     pglvtxt.setText(c.character.LV + "");

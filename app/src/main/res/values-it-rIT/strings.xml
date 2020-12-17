@@ -144,4 +144,8 @@
     <string name="newpg">Nuovo personaggio</string>
     <string name="charselect">Seleziona personaggio</string>
     <string name="migratemsg">Migrazione dati personaggio</string>
+    <string name="delpg">Elimina personaggio</string>
+    <string name="pgdeleteok">Personaggio eliminato con successo</string>
+    <string name="deleteconfirm">Sei sicuro/a?</string>
+    <string name="delconfirmpg">Vuoi davvero eliminare %s?</string>
 </resources>

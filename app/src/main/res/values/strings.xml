@@ -146,4 +146,8 @@
     <string name="newpg">New character</string>
     <string name="charselect">Select character</string>
     <string name="migratemsg">Migrating character</string>
+    <string name="delpg">Remove character</string>
+    <string name="pgdeleteok">Character successfully deleted</string>
+    <string name="deleteconfirm">Are you sure?</string>
+    <string name="delconfirmpg">Are you sure you want to delete %s?</string>
 </resources>
