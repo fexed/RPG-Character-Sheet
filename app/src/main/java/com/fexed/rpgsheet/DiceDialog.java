@@ -31,6 +31,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     private ArrayList<Integer> rolls;
     private boolean roll = false;
     private int bonus;
+    private String text = "";
 
     public DiceDialog(Activity a, SharedPreferences state) {
         super(a);
@@ -41,7 +42,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
     }
 
-    public DiceDialog(Activity a, SharedPreferences state, int bonus) {
+    public DiceDialog(Activity a, SharedPreferences state, int bonus, String text) {
         super(a);
         this.c = a;
         rnd = new Random(System.currentTimeMillis());
@@ -51,6 +52,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
 
         this.roll = true;
         this.bonus = bonus;
+        this.text = text;
     }
 
     @Override
@@ -91,6 +93,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             int result = dice + bonus;
             suff += " = " + dice + " + " + bonus + " = " + result;
             outtxt.setText(suff);
+            histtxt.setText(text);
         }
     }
 
