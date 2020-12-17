@@ -1339,7 +1339,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         String path = character.portrait;
         if (path != null) {
             portrait.setImageBitmap(BitmapFactory.decodeFile(path));
-        }
+        } else portrait.setImageDrawable(getDrawable(R.drawable.propicplaceholder));
 
         saveSchedaPG();
     }
