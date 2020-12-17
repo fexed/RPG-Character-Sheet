@@ -14,9 +14,9 @@
             android:id="@+id/pgportrait"
             android:layout_width="150dp"
             android:layout_height="200dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/propicplaceholder" />
 
@@ -30,8 +30,8 @@
             android:text="@string/nome_cognome"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="30sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pgportrait"
+            app:layout_constraintEnd_toStartOf="@+id/pgportrait"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/pgportrait"
             tools:text="Atanvar il discretamente avveduto" />
 
@@ -40,6 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/classi_di_abilit"
@@ -53,13 +54,14 @@
             android:id="@+id/pgxptxtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-condensed"
             android:text="xxxx xp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="14sp"
-            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
-            app:layout_constraintTop_toBottomOf="@+id/pgclasstxt"
+            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
+            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
+            app:layout_constraintTop_toTopOf="@+id/pglvtxt"
             tools:text="xxxx xp" />
 
         <Button
@@ -77,6 +79,7 @@
             android:id="@+id/pglvtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:fontFamily="monospace"
             android:text="@string/lv"
@@ -84,19 +87,18 @@
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/pglvtxt2"
-            app:layout_constraintTop_toBottomOf="@+id/pgportrait" />
+            app:layout_constraintTop_toBottomOf="@+id/pgclasstxt" />
 
         <TextView
             android:id="@+id/pglvtxt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
             app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
         <TextView
@@ -109,7 +111,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/proftxt" />
 
         <TextView
@@ -117,12 +119,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
             android:text="+nn"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
             app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
+            app:layout_constraintTop_toBottomOf="@+id/pgportrait" />
 
         <CheckBox
             android:id="@+id/inspirationbtn"
@@ -187,7 +189,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/FORtag"
@@ -233,7 +235,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/DEXtag"
@@ -280,7 +282,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/COStag"
@@ -326,7 +328,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/INTtag"
@@ -372,7 +374,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/SAGtag"
@@ -418,7 +420,7 @@
                     android:text="+0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/CARtag"
@@ -759,6 +761,7 @@
 
                     <TextView
                         android:id="@+id/TSFOR"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -791,6 +794,7 @@
 
                     <TextView
                         android:id="@+id/TSDEX"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -823,6 +827,7 @@
 
                     <TextView
                         android:id="@+id/TSCOS"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -855,6 +860,7 @@
 
                     <TextView
                         android:id="@+id/TSINT"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -887,6 +893,7 @@
 
                     <TextView
                         android:id="@+id/TSSAG"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -919,6 +926,7 @@
 
                     <TextView
                         android:id="@+id/TSCAR"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
@@ -964,7 +972,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:paddingStart="5dp"
                     android:textAlignment="textEnd"
+                    android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:text="+100" />
@@ -1019,6 +1029,8 @@
 
                 <TextView
                     android:id="@+id/acrobazia"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1063,6 +1075,8 @@
 
                 <TextView
                     android:id="@+id/furtivita"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1107,6 +1121,8 @@
 
                 <TextView
                     android:id="@+id/rapiditadimano"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1164,6 +1180,8 @@
 
                 <TextView
                     android:id="@+id/investigare"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1208,6 +1226,8 @@
 
                 <TextView
                     android:id="@+id/arcano"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1252,6 +1272,8 @@
 
                 <TextView
                     android:id="@+id/storia"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1297,6 +1319,8 @@
 
                 <TextView
                     android:id="@+id/religionefolklore"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1341,6 +1365,8 @@
 
                 <TextView
                     android:id="@+id/natura"
+                    android:paddingStart="5dp"
+                    android:textSize="18sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1399,6 +1425,8 @@
 
                 <TextView
                     android:id="@+id/sopravvivenza"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1443,6 +1471,8 @@
 
                 <TextView
                     android:id="@+id/medicina"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1487,6 +1517,8 @@
 
                 <TextView
                     android:id="@+id/percezione"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1531,6 +1563,8 @@
 
                 <TextView
                     android:id="@+id/intuizione"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1589,6 +1623,8 @@
 
                 <TextView
                     android:id="@+id/intimidire"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1633,6 +1669,8 @@
 
                 <TextView
                     android:id="@+id/ingannare"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1677,6 +1715,8 @@
 
                 <TextView
                     android:id="@+id/intrattenere"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -1721,6 +1761,8 @@
 
                 <TextView
                     android:id="@+id/persuadere"
+                    android:textSize="18sp"
+                    android:paddingStart="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
