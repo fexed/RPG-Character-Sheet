@@ -145,4 +145,5 @@
     <string name="selectpg">Select a character</string>
     <string name="newpg">New character</string>
     <string name="charselect">Select character</string>
+    <string name="migratemsg">Migrating character</string>
 </resources>

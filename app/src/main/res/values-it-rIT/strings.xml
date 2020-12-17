@@ -143,4 +143,5 @@
     <string name="selectpg">Seleziona un personaggio</string>
     <string name="newpg">Nuovo personaggio</string>
     <string name="charselect">Seleziona personaggio</string>
+    <string name="migratemsg">Migrazione dati personaggio</string>
 </resources>

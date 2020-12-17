@@ -1,7 +1,6 @@
 package com.fexed.rpgsheet;
 
 import com.fexed.rpgsheet.data.Character;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -68,7 +67,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
     private static final int PICK_IMAGE = 101;
     static SharedPreferences state;
-    static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13};
+    static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13};
 
     TextView FOR; TextView FORmod;
     TextView DEX; TextView DEXmod;
@@ -93,30 +92,30 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     CheckBox inspirationtbn;
     TextView mptxtv; TextView motxtv; TextView matxtv; TextView mrtxtv; TextView totalmtxtv;
     RecyclerView inventoryView;
-    int pntfor; int modfor;
+    int modfor;
     TextView tsfortxt; CheckBox comptsfor;
     TextView atletica; CheckBox compatletica; CheckBox expatletica;
-    int pntdex; int moddex;
+    int moddex;
     TextView tsdextxt; CheckBox comptsdex;
     TextView acrobazia; CheckBox compacrobazia; CheckBox expacrobazia;
     TextView furtivita; CheckBox compfurtivita; CheckBox expfurtivita;
     TextView rapiditadimano; CheckBox comprapiditadimano; CheckBox exprapiditadimano;
-    int pntcos; int modcos;
+    int modcos;
     TextView tscostxt; CheckBox comptscos;
-    int pntint; int modint;
+    int modint;
     TextView tsinttxt; CheckBox comptsint;
     TextView investigare; CheckBox compinvestigare; CheckBox expinvestigare;
     TextView arcano; CheckBox comparcano; CheckBox exparcano;
     TextView storia; CheckBox compstoria; CheckBox expstoria;
     TextView religionefolklore; CheckBox compreligionefolklore; CheckBox expreligionefolklore;
     TextView natura; CheckBox compnatura; CheckBox expnatura;
-    int pntsag; int modsag;
+    int modsag;
     TextView tssagtxt; CheckBox comptssag;
     TextView sopravvivenza; CheckBox compsopravvivenza; CheckBox expsopravvivenza;
     TextView medicina; CheckBox compmedicina; CheckBox expmedicina;
     TextView percezione; CheckBox comppercezione; CheckBox exppercezione;
     TextView intuizione; CheckBox compintuizione; CheckBox expintuizione;
-    int pntcar; int modcar;
+    int modcar;
     TextView tscartxt; CheckBox comptscar;
     TextView intimidire; CheckBox compintimidire; CheckBox expintimidire;
     TextView ingannare; CheckBox compingannare; CheckBox expingannare;
@@ -249,7 +248,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
     public void migrateFromPreferences() {
         if (state.getString("pgname", null) != null) {
-            Toast.makeText(getApplicationContext(), "Migrating character", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), R.string.migratemsg, Toast.LENGTH_LONG).show();
             character = new Character();
             character.nome = state.getString("pgname", "");
             character.classe = state.getString("pgclass", "");
@@ -366,7 +365,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 character.inventario.add(new InventoryItem(item[0], item[1]));
             }
             saveSchedaPG();
-            //state.edit().clear().apply();
+            state.edit().clear().apply();
         }
     }
 
@@ -475,32 +474,28 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + moddex;
         DEXmod.setText(tempstr);
 
-        pntcos = character.COS;
-        modcos = mod(pntcos);
+        modcos = mod(character.COS);
         suffix = (modcos >= 0) ? "+" : "";
         tempstr = "" + character.COS;
         COS.setText(tempstr);
         tempstr = suffix + modcos;
         COSmod.setText(tempstr);
 
-        pntint = character.INT;
-        modint = mod(pntint);
+        modint = mod(character.INT);
         suffix = (modint >= 0) ? "+" : "";
         tempstr = "" + character.INT;
         INT.setText(tempstr);
         tempstr = suffix + modint;
         INTmod.setText(tempstr);
 
-        pntsag = character.SAG;
-        modsag = mod(pntsag);
+        modsag = mod(character.SAG);
         suffix = (modsag >= 0) ? "+" : "";
         tempstr = "" + character.SAG;
         SAG.setText(tempstr);
         tempstr = suffix + modsag;
         SAGmod.setText(tempstr);
 
-        pntcar = character.CAR;
-        modcar = mod(pntcar);
+        modcar = mod(character.CAR);
         suffix = (modcar >= 0) ? "+" : "";
         tempstr = "" + character.CAR;
         CAR.setText(tempstr);
@@ -1356,7 +1351,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
             builder.setTitle(getString(R.string.selectpg));
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CharacterActivity.this, android.R.layout.select_dialog_singlechoice);
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CharacterActivity.this, R.layout.pgselectchoice);
             for (int i = 0; i < files.length; i++) {
                 arrayAdapter.add((i+1) + ". " + files[i].getName().split("::")[0]);
             }
