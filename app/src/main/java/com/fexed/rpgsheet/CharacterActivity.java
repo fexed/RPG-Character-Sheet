@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -1339,7 +1340,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         String path = character.portrait;
         if (path != null) {
             portrait.setImageBitmap(BitmapFactory.decodeFile(path));
-        } else portrait.setImageDrawable(getDrawable(R.drawable.propicplaceholder));
+        } else portrait.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.propicplaceholder));
 
         saveSchedaPG();
     }
