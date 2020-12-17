@@ -453,6 +453,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             PGDialog inputdialog = new PGDialog(this);
             inputdialog.show();
         }
+        setTitle(character.nome);
         nametxt.setText(character.nome);
         classtxt.setText(character.classe);
         tempstr = character.LV + "";
