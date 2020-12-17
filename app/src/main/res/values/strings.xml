@@ -24,6 +24,7 @@
     <string name="inventario">Inventory</string>
     <string name="background_e_note">Background and notes</string>
     <string name="tiri_salvezza">Saving Throws</string>
+    <string name="tiro_salvezza">Saving Throw</string>
     <string name="lingue">Languages</string>
     <string name="competenze">Proficiencies</string>
     <string name="talenti">Class Features</string>
