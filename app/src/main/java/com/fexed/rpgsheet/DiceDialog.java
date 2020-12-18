@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,9 +84,20 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         d4btn.setOnLongClickListener(this);
         Button coinbtn = findViewById(R.id.coin);
         coinbtn.setOnClickListener(this);
-
+        ImageView dimage = findViewById(R.id.diceIcon);
         outtxt = findViewById(R.id.diceRollResutlTxtV);
         histtxt = findViewById(R.id.diceRollHistoryTxtV);
+
+        dimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rnd = new Random(System.currentTimeMillis());
+                rolls = new ArrayList<>();
+                roll = false;
+                histtxt.setText("");
+                outtxt.setText(c.getString(R.string.dicerollhintchoose));
+            }
+        });
 
         if (roll) {
             String suff = "1D20 + " + bonus;
