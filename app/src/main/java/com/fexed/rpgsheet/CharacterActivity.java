@@ -1,6 +1,8 @@
 package com.fexed.rpgsheet;
 
 import com.fexed.rpgsheet.data.Character;
+
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -36,7 +38,6 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fexed.rpgsheet.data.InventoryItem;
 import com.fexed.rpgsheet.data.MeleeWeapon;
@@ -377,6 +378,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    @SuppressLint("InflateParams")
     private void preparaSchedaPG() {
         FOR = findViewById(R.id.FOR);
         FORmod = findViewById(R.id.FORmod);
@@ -527,7 +529,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         PFmax.setText(tempstr);
 
         spellstat.setText(character.spellstat);
-        int bonus = 0;
+        int bonus;
         if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
         else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
         else bonus = prof[character.LV - 1] + mod(character.INT);
@@ -1389,7 +1391,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         if (files.length > 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
             builder.setTitle(getString(R.string.selectpg));
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CharacterActivity.this, R.layout.pgselectchoice);
+            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
             for (int i = 0; i < files.length; i++) {
                 arrayAdapter.add((i+1) + ". " + files[i].getName());
             }
@@ -1404,7 +1406,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     } else if (which == files.length+1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
                         builder.setTitle(getString(R.string.selectpg));
-                        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(CharacterActivity.this, R.layout.pgselectchoice);
+                        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
                         for (int i = 0; i < files.length; i++) {
                             arrayAdapter.add((i+1) + ". " + files[i].getName());
                         }
@@ -2785,8 +2787,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     }
                 }
 
-                String bmpuri = new ContextWrapper(getApplicationContext()).getDir("images", Context.MODE_PRIVATE).getAbsolutePath() + "/" + selected_img.hashCode() + ".png";
-                character.portrait = bmpuri;
+                character.portrait = new ContextWrapper(getApplicationContext()).getDir("images", Context.MODE_PRIVATE).getAbsolutePath() + "/" + selected_img.hashCode() + ".png";
                 portrait.setImageBitmap(selected_img);
                 saveSchedaPG();
             } catch (FileNotFoundException e) {
