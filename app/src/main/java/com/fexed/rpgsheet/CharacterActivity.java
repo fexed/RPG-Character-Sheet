@@ -48,6 +48,7 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 
@@ -166,11 +167,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         migrateFromPreferences();
         loadSchedaPG();
         initializeAds();
-
-        /*Bundle bndl = new Bundle();
-        bndl.putString("Name", state.getString("pgname", "nonsettato"));
-        bndl.putInt("launchtimes", n);
-        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);*/
+        Bundle bndl = new Bundle();
+        bndl.putInt("launchtimes", state.getInt("launchn", -1));
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.APP_OPEN, bndl);
     }
 
     @Override
@@ -389,6 +388,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             }
             saveSchedaPG();
             state.edit().clear().apply();
+            Bundle bndl = new Bundle();
+            bndl.putString("Name", character.nome);
+            bndl.putInt("launchtimes", state.getInt("launchn", -1));
+            FirebaseAnalytics.getInstance(this).logEvent("CharacterMigration", bndl);
         }
     }
 
@@ -477,6 +480,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             PGDialog inputdialog = new PGDialog(this);
             inputdialog.show();
         }
+        Bundle bndl = new Bundle();
+        bndl.putString("Name", character.nome);
+        bndl.putInt("launchtimes", state.getInt("launchn", -1));
+        FirebaseAnalytics.getInstance(this).logEvent(FirebaseAnalytics.Event.LOGIN, bndl);
         setTitle(character.nome);
         nametxt.setText(character.nome);
         classtxt.setText(character.classe);

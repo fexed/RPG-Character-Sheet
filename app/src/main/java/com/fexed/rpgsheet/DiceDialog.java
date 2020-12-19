@@ -36,7 +36,9 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         rnd = new Random(System.currentTimeMillis());
         rolls = new ArrayList<>();
         state.edit().putBoolean("diceroller", true).apply();
-        FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
+        Bundle bndl = new Bundle();
+        bndl.putInt("launchtimes", state.getInt("launchn", -1));
+        FirebaseAnalytics.getInstance(c).logEvent("DiceRoller", bndl);
     }
 
     public DiceDialog(Activity a, SharedPreferences state, int bonus, String text) {
@@ -45,7 +47,9 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         rnd = new Random(System.currentTimeMillis());
         rolls = new ArrayList<>();
         state.edit().putBoolean("diceroller", true).apply();
-        FirebaseAnalytics.getInstance(c).logEvent("Dice_Roller", null);
+        Bundle bndl = new Bundle();
+        bndl.putInt("launchtimes", state.getInt("launchn", -1));
+        FirebaseAnalytics.getInstance(c).logEvent("DiceRoller", bndl);
 
         this.roll = true;
         this.bonus = bonus;
