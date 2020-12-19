@@ -153,4 +153,11 @@
     <string name="delconfirmpg">Are you sure you want to delete %s?</string>
     <string name="casted">A %s spell has been casted!</string>
     <string name="noslots">No more %s slots left!</string>
+    <string name="changelog">Changelog, v 2.0!\n
+        - You can now set a portrait for you character: long-tap on the portrait icon to do it!\n
+        - Keep track of your spell slots: long-tap to set your maximum and cast a spell to use a slot\n
+        - Tap on a bonus (for example "+1" under STR) to roll a D20 with that bonus! Quick and easy rolls\n
+        - In the dice dialog, long press over a die to roll more dice! Fireball? Long tap on the D6 button, roll 8 of those! And tap on the D20 icon to reset to count.\n
+        - Rest button: tap on the rest button on the top right menu to refill your HP, slots and the like!\n
+        - More characters! Save and load your characters from the top right menu. Attention: characters with the same name will be overwritten, please use characters with different names.\n</string>
 </resources>
