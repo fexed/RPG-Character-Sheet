@@ -1436,7 +1436,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         ObjectInputStream os = null;
                         try {
                             os = new ObjectInputStream(new FileInputStream(files[which]));
+
+                            //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
                             character = (Character) os.readObject();
+                            //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
+
                             os.close();
                             preparaSchedaPG();
                         } catch (Exception e) {
