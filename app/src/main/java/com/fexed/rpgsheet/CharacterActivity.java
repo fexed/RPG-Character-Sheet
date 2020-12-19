@@ -137,7 +137,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         int n = state.getInt("launchn", 0);
         n++;
         if (n % 5 == 0) {
-            Toast.makeText(this, getString(R.string.ratepls), Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.mainscroll), R.string.ratepls, Snackbar.LENGTH_INDEFINITE).setAction("Play Store", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.fexed.rpgsheet"));
+                    startActivity(i);
+                }
+            }).show();
         }
         state.edit().putInt("launchn", n).apply();
 
@@ -249,7 +256,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
     public void migrateFromPreferences() {
         if (state.getString("pgname", null) != null) {
-            Toast.makeText(getApplicationContext(), R.string.migratemsg, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.mainscroll), R.string.migratemsg, Snackbar.LENGTH_LONG).show();
             character = new Character();
             character.nome = state.getString("pgname", "");
             character.classe = state.getString("pgclass", "");
@@ -1410,7 +1417,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                                         .setIcon(android.R.drawable.ic_dialog_alert)
                                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                                             public void onClick(DialogInterface dialog, int whichButton) {
-                                                if (files[which].delete()) Toast.makeText(getApplicationContext(), R.string.pgdeleteok, Toast.LENGTH_LONG).show();
+                                                if (files[which].delete()) Snackbar.make(findViewById(R.id.mainscroll), R.string.pgdeleteok, Snackbar.LENGTH_LONG).show();
                                                 loadSchedaPG();
                                             }})
                                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -1436,7 +1443,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                             try {
                                 if (os != null) os.close();
                             } catch (IOException e) {
-                                Toast.makeText(getApplicationContext(), R.string.fileopenerror, Toast.LENGTH_LONG).show();
+                                Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
                             }
                         }
                     }
@@ -2784,7 +2791,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 saveSchedaPG();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
-                Toast.makeText(this, R.string.fileopenerror, Toast.LENGTH_LONG).show();
+                Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
             }
 
             portrait.setImageURI(imageUri);
