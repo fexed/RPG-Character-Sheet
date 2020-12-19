@@ -7,8 +7,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Math.floor;
-
 public class Character implements Parcelable, Serializable {
     public String nome, classe;
     public int FOR, DEX, COS, INT, SAG, CAR, PF, PFMAX, CA, EXP, LV;
@@ -77,10 +75,6 @@ public class Character implements Parcelable, Serializable {
         compintrattenere= false; expintrattenere= false; comppersuadere= false; exppersuadere = false;
         spellstat = "INT";
         spellmana = 0; spellmanamax = 0;
-    }
-
-    public static int mod(int punteggio) {
-        return (int) floor((((double) punteggio - 10) / 2));
     }
 
     public Character(Parcel source) {
