@@ -151,11 +151,11 @@
     <string name="delconfirmpg">Vuoi davvero eliminare %s?</string>
     <string name="casted">Un incantesimo di %s è stato lanciato!</string>
     <string name="noslots">Non hai più slot di %s!</string>
-    <string name="changelog">Changelog, v 2.0!\n
-        - Adesso puoi impostare un\'immagine per il tuo personaggio: tieni premuto sull\'icona del ritratto per farlo!\n
-        - Tieni traccia dei tuoi slot incantesimo: tieni premuto per settare il massimo e lancia un\'incantesimo per usare uno slot.\n
-        - Premi su un bonus (ad esempio "+1" sotto FOR) per lanciare automaticamente un D20 con quel bonus! Tiri semplici e veloci.\n
-        - Nella schermata dei dadi, tieni premuto su un dado per lanciarne di più. Palla di fuoco? Tieni premuto su D6 e lanciane 8! Puoi toccare l'icona del D20 in alto per resettare il conteggio.\n
-        - Riposo: usa il pulsante nel menù in alto a destra per ricaricare subito PF, slot e simili!\n
-        - Memorizza e tieni traccia di tutti i tuoi personaggi: usa il pulsante nel menù in alto a destra per passare da un personaggio all'altro! Attenzione: personaggi con lo stesso nome vengono sovrascritti, creare personaggi con nomi diversi.\n</string>
+    <string name="changelog">Nuova versione!\n\n
+        - Adesso puoi impostare un\'immagine per il tuo personaggio: tieni premuto sull\'icona del ritratto per farlo!\n\n
+        - Tieni traccia dei tuoi slot incantesimo: tieni premuto per settare il massimo e lancia un\'incantesimo per usare uno slot.\n\n
+        - Premi su un bonus (ad esempio "+1" sotto FOR) per lanciare automaticamente un D20 con quel bonus! Tiri semplici e veloci.\n\n
+        - Nella schermata dei dadi, tieni premuto su un dado per lanciarne di più. Palla di fuoco? Tieni premuto su D6 e lanciane 8! Puoi toccare l\'icona del D20 in alto per resettare il conteggio.\n\n
+        - Riposo: usa il pulsante nel menù in alto a destra per ricaricare subito PF, slot e simili!\n\n
+        - Memorizza e tieni traccia di tutti i tuoi personaggi: usa il pulsante nel menù in alto a destra per passare da un personaggio all\'altro! Attenzione: personaggi con lo stesso nome vengono sovrascritti, creare personaggi con nomi diversi.</string>
 </resources>
