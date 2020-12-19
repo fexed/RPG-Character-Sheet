@@ -151,4 +151,6 @@
     <string name="pgdeleteok">Character successfully deleted</string>
     <string name="deleteconfirm">Are you sure?</string>
     <string name="delconfirmpg">Are you sure you want to delete %s?</string>
+    <string name="casted">A %s spell has been casted!</string>
+    <string name="noslots">No more %s slots left!</string>
 </resources>

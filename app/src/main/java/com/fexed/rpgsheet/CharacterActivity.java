@@ -1665,44 +1665,74 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 alert.show();
                 break;
             case R.id.castfirstlv:
+                if (character.currslot1 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot1 = (character.currslot1 > 0) ? character.currslot1 - 1 : 0;
                 firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
+                saveSchedaPG();
                 break;
             case R.id.castsecondlv:
+                if (character.currslot2 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot2 = (character.currslot2 > 0) ? character.currslot2 - 1 : 0;
                 secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
+                saveSchedaPG();
                 break;
             case R.id.castthirdlv:
+                if (character.currslot3 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot3 = (character.currslot3 > 0) ? character.currslot3 - 1 : 0;
                 thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
+                saveSchedaPG();
                 break;
             case R.id.castfourthlv:
+                if (character.currslot4 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot4 = (character.currslot4 > 0) ? character.currslot4 - 1 : 0;
                 fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
+                saveSchedaPG();
                 break;
             case R.id.castfifthlv:
+                if (character.currslot5 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot5 = (character.currslot5 > 0) ? character.currslot5 - 1 : 0;
                 fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
+                saveSchedaPG();
                 break;
             case R.id.castsixthlv:
+                if (character.currslot6 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot6 = (character.currslot6 > 0) ? character.currslot6 - 1 : 0;
                 sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
+                saveSchedaPG();
                 break;
             case R.id.castseventhlv:
+                if (character.currslot7 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot7 = (character.currslot7 > 0) ? character.currslot7 - 1 : 0;
                 seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
+                saveSchedaPG();
                 break;
             case R.id.casteightlv:
+                if (character.currslot8 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot8 = (character.currslot8 > 0) ? character.currslot8 - 1 : 0;
                 eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
+                saveSchedaPG();
                 break;
             case R.id.castninthlv:
+                if (character.currslot9 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslot9 = (character.currslot9 > 0) ? character.currslot9 - 1 : 0;
                 ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
+                saveSchedaPG();
                 break;
             case R.id.castpluslv:
+                if (character.currslotplus > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
                 character.currslotplus = (character.currslotplus > 0) ? character.currslotplus - 1 : 0;
                 pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
+                saveSchedaPG();
                 break;
             case R.id.FORmod:
                 DiceDialog inputdialog = new DiceDialog(this, state, mod(character.FOR), getString(R.string.str));

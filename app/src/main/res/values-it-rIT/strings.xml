@@ -149,4 +149,6 @@
     <string name="pgdeleteok">Personaggio eliminato con successo</string>
     <string name="deleteconfirm">Sei sicuro/a?</string>
     <string name="delconfirmpg">Vuoi davvero eliminare %s?</string>
+    <string name="casted">Un incantesimo di %s è stato lanciato!</string>
+    <string name="noslots">Non hai più slot di %s!</string>
 </resources>
