@@ -2639,7 +2639,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.expacrobazia:
                 expSwitch(compacrobazia, expacrobazia, acrobazia, character.DEX);
-                character.expatletica = expacrobazia.isChecked();
+                character.expacrobazia = expacrobazia.isChecked();
                 break;
             case R.id.compfurtivita:
                 compSwitch(b, compfurtivita, expfurtivita, furtivita, character.DEX);
