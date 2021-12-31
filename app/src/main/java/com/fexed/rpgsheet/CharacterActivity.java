@@ -135,14 +135,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
         setTitle(getString(android.R.string.unknownName));
 
-        if (!state.getString("lastchangelog", "-").equals("2.0")) {
+        if (!state.getString("lastchangelog", "-").equals("2.0.1")) {
             AlertDialog dialog = new AlertDialog.Builder(CharacterActivity.this)
                     .setTitle("Changelog 2.0")
                     .setMessage(R.string.changelog)
                     .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            state.edit().putString("lastchangelog", "2.0").apply();
+                            state.edit().putString("lastchangelog", "2.0.1").apply();
                             dialog.dismiss();
                         }
                     })
