@@ -83,7 +83,7 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                     TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
                     TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
 
-                    final MeleeWeapon weap = new MeleeWeapon(name.getText().toString(), damage.getText().toString());
+                    final MeleeWeapon weap = new MeleeWeapon(meleename.getText().toString(), meleedamage.getText().toString());
                     character.armimelee.add(weap);
 
                     Button removebtn = (Button) newrow.findViewById(R.id.removemelee);
@@ -106,6 +106,7 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
 
                     rangedatks.addView(newrow);
                     this.dismiss();
+                    ((CharacterActivity) c).saveSchedaPG();
                     break;
                 }
             default:

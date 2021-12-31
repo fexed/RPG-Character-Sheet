@@ -26,8 +26,8 @@ public class MeleeWeapon implements Parcelable, Serializable {
     }
 
     public MeleeWeapon(Parcel source) {
-        name = source.readString();
-        damage = source.readString();
+        this.name = source.readString();
+        this.damage = source.readString();
     }
 
     @Override

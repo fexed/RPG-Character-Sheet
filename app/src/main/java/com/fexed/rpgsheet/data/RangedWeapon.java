@@ -28,9 +28,9 @@ public class RangedWeapon implements Parcelable, Serializable {
     }
 
     public RangedWeapon(Parcel source) {
-        name = source.readString();
-        range = source.readString();
-        damage = source.readString();
+        this.name = source.readString();
+        this.range = source.readString();
+        this.damage = source.readString();
     }
 
     @Override

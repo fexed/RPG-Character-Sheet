@@ -121,6 +121,7 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
 
                     rangedatks.addView(newrow);
                     this.dismiss();
+                    ((CharacterActivity) c).saveSchedaPG();
                     break;
                 }
             default:
