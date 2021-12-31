@@ -117,6 +117,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView medicina; CheckBox compmedicina; CheckBox expmedicina;
     TextView percezione; CheckBox comppercezione; CheckBox exppercezione;
     TextView intuizione; CheckBox compintuizione; CheckBox expintuizione;
+    TextView animali; CheckBox companimali; CheckBox expanimali;
     int modcar;
     TextView tscartxt; CheckBox comptscar;
     TextView intimidire; CheckBox compintimidire; CheckBox expintimidire;
@@ -319,6 +320,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             character.exppercezione = state.getBoolean("exppercezione", false);
             character.compintuizione = state.getBoolean("compintuizione", false);
             character.expintuizione = state.getBoolean("expintuizione", false);
+            character.companimali = state.getBoolean("companimali", false);
+            character.expanimali = state.getBoolean("expanimali", false);
             character.compintimidire = state.getBoolean("compintimidire", false);
             character.expintimidire = state.getBoolean("expintimidire", false);
             character.compingannare = state.getBoolean("compingannare", false);
@@ -824,6 +827,19 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         intuizione.setText(tempstr);
         intuizione.setOnClickListener(this);
+
+        animali = findViewById(R.id.animali);
+        companimali = findViewById(R.id.companimali);
+        expanimali = findViewById(R.id.expanimali);
+        companimali.setOnCheckedChangeListener(this);
+        expanimali.setOnCheckedChangeListener(this);
+        companimali.setChecked(character.companimali);
+        expanimali.setChecked(character.expanimali);
+        bonus = mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        suffix = (bonus >= 0) ? "+" : "";
+        tempstr = suffix + bonus;
+        animali.setText(tempstr);
+        animali.setOnClickListener(this);
 
         intimidire = findViewById(R.id.intimidire);
         compintimidire = findViewById(R.id.compintimidire);
@@ -1867,6 +1883,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intuizione));
                 inputdialog.show();
                 break;
+            case R.id.animali:
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.animali));
+                inputdialog.show();
+                break;
             case R.id.intimidire:
                 inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intimidire));
                 inputdialog.show();
@@ -2729,6 +2749,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             case R.id.expintuizione:
                 expSwitch(compintuizione, expintuizione, intuizione, character.SAG);
                 character.expintuizione = expintuizione.isChecked();
+                break;
+            case R.id.companimali:
+                compSwitch(b, companimali, expanimali, animali, character.SAG);
+                character.companimali = b;
+                break;
+            case R.id.expanimali:
+                expSwitch(companimali, expanimali, animali, character.SAG);
+                character.expanimali = expanimali.isChecked();
                 break;
             //CAR
             case R.id.compintimidire:

@@ -1607,6 +1607,51 @@
                     app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
+                <CheckBox
+                    android:id="@+id/expanimali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    android:visibility="invisible"
+                    app:layout_constraintBaseline_toBaselineOf="@id/textView40"
+                    app:layout_constraintEnd_toStartOf="@id/companimali" />
+
+                <CheckBox
+                    android:id="@+id/companimali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/checkmark"
+                    android:checked="false"
+                    android:duplicateParentState="false"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/expanimali"
+                    app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
+
+                <TextView
+                    android:id="@+id/textView40"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/animali"
+                    android:textAlignment="textEnd"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textStyle="bold"
+                    app:layout_constraintBaseline_toBaselineOf="@id/animali"
+                    app:layout_constraintStart_toEndOf="@+id/animali" />
+
+                <TextView
+                    android:id="@+id/animali"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:paddingStart="5dp"
+                    android:textAlignment="textEnd"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/intuizione"
+                    tools:text="+100" />
+
                 <TextView
                     android:id="@+id/textView29"
                     android:layout_width="wrap_content"
@@ -1618,7 +1663,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/intuizione" />
+                    app:layout_constraintTop_toBottomOf="@id/animali" />
 
 
                 <TextView

@@ -26,7 +26,7 @@ public class Character implements Parcelable, Serializable {
             exprapiditadimano, compinvestigare, expinvestigare, comparcano, exparcano, compstoria,
             expstoria, compreligione, expreligione, compnatura, expnatura, compsopravvivenza,
             expsopravvivenza, compmedicina, expmedicina, comppercezione, exppercezione,
-            compintuizione, expintuizione, compintimidire, expintimidire, compingannare,
+            compintuizione, expintuizione, companimali, expanimali, compintimidire, expintimidire, compingannare,
             expingannare, compintrattenere, expintrattenere, comppersuadere, exppersuadere;
 
     public String portrait;
@@ -185,6 +185,8 @@ public class Character implements Parcelable, Serializable {
         source.readTypedList(armiranged, RangedWeapon.CREATOR);
         inventario = new ArrayList<>();
         source.readTypedList(inventario, InventoryItem.CREATOR);
+        companimali = (source.readInt() == 1);
+        expanimali = (source.readInt() == 1);
     }
 
     @Override
@@ -253,5 +255,7 @@ public class Character implements Parcelable, Serializable {
         dest.writeTypedList(armimelee);
         dest.writeTypedList(armiranged);
         dest.writeTypedList(inventario);
+        dest.writeInt((companimali) ? 1 : 0);
+        dest.writeInt((expanimali) ? 1 : 0);
     }
 }
