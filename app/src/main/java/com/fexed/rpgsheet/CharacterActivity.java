@@ -67,7 +67,6 @@ import java.util.Set;
 import static java.lang.Math.floor;
 
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
-
     private static final int PICK_IMAGE = 101;
     static SharedPreferences state;
     static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13};
