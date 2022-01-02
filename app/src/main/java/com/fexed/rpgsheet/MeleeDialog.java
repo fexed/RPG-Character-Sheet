@@ -101,7 +101,7 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
 
                     name.setText(meleename.getText().toString());
                     bonusrange.setText(suffix + bonus);
-                    comprange.setText("+" + CharacterActivity.prof[character.LV - 1]);
+                    comprange.setText("+" + CharacterActivity.prof(character.LV));
                     damage.setText(meleedamage.getText().toString());
 
                     rangedatks.addView(newrow);

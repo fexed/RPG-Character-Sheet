@@ -64,12 +64,13 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
     private static final int PICK_IMAGE = 101;
     static SharedPreferences state;
-    static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13};
+    //static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13};
 
     TextView FOR; TextView FORmod;
     TextView DEX; TextView DEXmod;
@@ -491,7 +492,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         classtxt.setText(character.classe);
         tempstr = character.LV + "";
         lvtxt.setText(tempstr);
-        tempstr = "+" + (prof[character.LV - 1]);
+        tempstr = "+" + (prof(character.LV));
         proftxt.setText(tempstr);
 
         modfor = mod(character.FOR);
@@ -553,9 +554,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         spellstat.setText(character.spellstat);
         int bonus;
-        if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
-        else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
-        else bonus = prof[character.LV - 1] + mod(character.INT);
+        if (character.spellstat.equals("SAG"))bonus = prof(character.LV) + mod(character.SAG);
+        else if (character.spellstat.equals("CAR"))bonus = prof(character.LV) + mod(character.CAR);
+        else bonus = prof(character.LV) + mod(character.INT);
         suffix = (bonus < 0) ? "" : "+";
         tempstr = suffix + bonus;
         spellatk.setText(tempstr);
@@ -575,7 +576,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         lvtxt.setOnLongClickListener(this);
         nametxt.setOnLongClickListener(this);
 
-        tempstr = "+" + prof[character.LV - 1];
+        tempstr = "+" + prof(character.LV);
         proftxt.setText(tempstr);
 
         spellmana.setOnLongClickListener(this);
@@ -602,7 +603,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tsfortxt = findViewById(R.id.TSFOR);
         comptsfor = findViewById(R.id.comptsfor);
         comptsfor.setChecked(character.tsfor);
-        int ts = mod(character.FOR) + ((comptsfor.isChecked()) ? prof[character.LV - 1] : 0);
+        int ts = mod(character.FOR) + ((comptsfor.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsfortxt.setText(tempstr);
@@ -612,7 +613,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tsdextxt = findViewById(R.id.TSDEX);
         comptsdex = findViewById(R.id.comptsdex);
         comptsdex.setChecked(character.tsdex);
-        ts = mod(character.DEX) + ((comptsdex.isChecked()) ? prof[character.LV - 1] : 0);
+        ts = mod(character.DEX) + ((comptsdex.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsdextxt.setText(tempstr);
@@ -622,7 +623,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tscostxt = findViewById(R.id.TSCOS);
         comptscos = findViewById(R.id.comptscos);
         comptscos.setChecked(character.tscos);
-        ts = mod(character.COS) + ((comptscos.isChecked()) ? prof[character.LV - 1] : 0);
+        ts = mod(character.COS) + ((comptscos.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscostxt.setText(tempstr);
@@ -632,7 +633,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tsinttxt = findViewById(R.id.TSINT);
         comptsint = findViewById(R.id.comptsint);
         comptsint.setChecked(character.tsint);
-        ts = mod(character.INT) + ((comptsint.isChecked()) ? prof[character.LV - 1] : 0);
+        ts = mod(character.INT) + ((comptsint.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tsinttxt.setText(tempstr);
@@ -642,7 +643,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tssagtxt = findViewById(R.id.TSSAG);
         comptssag = findViewById(R.id.comptssag);
         comptssag.setChecked(character.tssag);
-        ts = mod(character.SAG) + ((comptssag.isChecked()) ? prof[character.LV - 1] : 0);
+        ts = mod(character.SAG) + ((comptssag.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tssagtxt.setText(tempstr);
@@ -652,7 +653,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tscartxt = findViewById(R.id.TSCAR);
         comptscar = findViewById(R.id.comptscar);
         comptscar.setChecked(character.tscar);
-        ts = mod(character.CAR) + ((comptscar.isChecked()) ? prof[character.LV - 1] : 0);
+        ts = mod(character.CAR) + ((comptscar.isChecked()) ? prof(character.LV) : 0);
         suffix = (ts >= 0) ? "+" : "";
         tempstr = suffix + ts;
         tscartxt.setText(tempstr);
@@ -666,7 +667,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expatletica.setOnCheckedChangeListener(this);
         compatletica.setChecked(character.compatletica);
         expatletica.setChecked(character.expatletica);
-        bonus = mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         atletica.setText(tempstr);
@@ -679,7 +680,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expacrobazia.setOnCheckedChangeListener(this);
         compacrobazia.setChecked(character.compacrobazia);
         expacrobazia.setChecked(character.expacrobazia);
-        bonus = mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         acrobazia.setText(tempstr);
@@ -692,7 +693,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expfurtivita.setOnCheckedChangeListener(this);
         compfurtivita.setChecked(character.compfurtivita);
         expfurtivita.setChecked(character.expfurtivita);
-        bonus = mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         furtivita.setText(tempstr);
@@ -705,7 +706,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exprapiditadimano.setOnCheckedChangeListener(this);
         comprapiditadimano.setChecked(character.comprapiditadimano);
         exprapiditadimano.setChecked(character.exprapiditadimano);
-        bonus = mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         rapiditadimano.setText(tempstr);
@@ -718,7 +719,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expinvestigare.setOnCheckedChangeListener(this);
         compinvestigare.setChecked(character.compinvestigare);
         expinvestigare.setChecked(character.expinvestigare);
-        bonus = mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         investigare.setText(tempstr);
@@ -731,7 +732,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exparcano.setOnCheckedChangeListener(this);
         comparcano.setChecked(character.comparcano);
         exparcano.setChecked(character.exparcano);
-        bonus = mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         arcano.setText(tempstr);
@@ -744,7 +745,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expstoria.setOnCheckedChangeListener(this);
         compstoria.setChecked(character.compstoria);
         expstoria.setChecked(character.expstoria);
-        bonus = mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         storia.setText(tempstr);
@@ -757,7 +758,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expreligionefolklore.setOnCheckedChangeListener(this);
         compreligionefolklore.setChecked(character.compreligione);
         expreligionefolklore.setChecked(character.expreligione);
-        bonus = mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         religionefolklore.setText(tempstr);
@@ -770,7 +771,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expnatura.setOnCheckedChangeListener(this);
         compnatura.setChecked(character.compnatura);
         expnatura.setChecked(character.expnatura);
-        bonus = mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         natura.setText(tempstr);
@@ -783,7 +784,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expsopravvivenza.setOnCheckedChangeListener(this);
         compsopravvivenza.setChecked(character.compsopravvivenza);
         expsopravvivenza.setChecked(character.expsopravvivenza);
-        bonus = mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         sopravvivenza.setText(tempstr);
@@ -796,7 +797,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expmedicina.setOnCheckedChangeListener(this);
         compmedicina.setChecked(character.compmedicina);
         expmedicina.setChecked(character.expmedicina);
-        bonus = mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         medicina.setText(tempstr);
@@ -809,7 +810,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exppercezione.setOnCheckedChangeListener(this);
         comppercezione.setChecked(character.comppercezione);
         exppercezione.setChecked(character.exppercezione);
-        bonus = mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         percezione.setText(tempstr);
@@ -822,7 +823,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintuizione.setOnCheckedChangeListener(this);
         compintuizione.setChecked(character.compintuizione);
         expintuizione.setChecked(character.expintuizione);
-        bonus = mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intuizione.setText(tempstr);
@@ -835,7 +836,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expanimali.setOnCheckedChangeListener(this);
         companimali.setChecked(character.companimali);
         expanimali.setChecked(character.expanimali);
-        bonus = mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         animali.setText(tempstr);
@@ -848,7 +849,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintimidire.setOnCheckedChangeListener(this);
         compintimidire.setChecked(character.compintimidire);
         expintimidire.setChecked(character.expintimidire);
-        bonus = mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intimidire.setText(tempstr);
@@ -861,7 +862,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expingannare.setOnCheckedChangeListener(this);
         compingannare.setChecked(character.compingannare);
         expingannare.setChecked(character.expingannare);
-        bonus = mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         ingannare.setText(tempstr);
@@ -874,7 +875,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         expintrattenere.setOnCheckedChangeListener(this);
         compintrattenere.setChecked(character.compintrattenere);
         expintrattenere.setChecked(character.expintrattenere);
-        bonus = mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         intrattenere.setText(tempstr);
@@ -887,7 +888,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         exppersuadere.setOnCheckedChangeListener(this);
         comppersuadere.setChecked(character.comppersuadere);
         exppersuadere.setChecked(character.exppersuadere);
-        bonus = mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        bonus = mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         suffix = (bonus >= 0) ? "+" : "";
         tempstr = suffix + bonus;
         persuadere.setText(tempstr);
@@ -968,7 +969,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         totalmtxtv = findViewById(R.id.totalpgmoneytxtv);
 
         double money;
-        money = Math.ceil(character.mp*10 + character.mo + character.ma*0.1 + character.mr*0.01);
+        money = ceil(character.mp*10 + character.mo + character.ma*0.1 + character.mr*0.01);
         String txt = String.format(Locale.getDefault(), "%.0f", money);
         String strstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
         totalmtxtv.setText(strstr);
@@ -1054,7 +1055,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             range.setText(weap.range);
             tempstr = suffixb + bonusb;
             bonusrange.setText(tempstr);
-            tempstr = "+" + prof[character.LV - 1];
+            tempstr = "+" + prof(character.LV);
             comprange.setText(tempstr);
             damage.setText(weap.damage);
 
@@ -1101,7 +1102,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             name.setText(weap.name);
             tempstr = suffixb + bonusb;
             bonusrange.setText(tempstr);
-            tempstr = "+" + prof[character.LV - 1];
+            tempstr = "+" + prof(character.LV);
             comprange.setText(tempstr);
             damage.setText(weap.damage);
 
@@ -1535,6 +1536,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         return (int) floor((((double) punteggio - 10) / 2));
     }
 
+    public static int prof(int lv) {
+        return (int) ceil(1 + ((double) lv / 4));
+    }
+
     @Override
     public void onClick(View view) {
         String tempstr, suffix;
@@ -1561,9 +1566,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         }
                         character.spellstat = stat;
                         spellstat.setText(stat);int bonus = 0;
-                        if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
-                        else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
-                        else bonus = prof[character.LV - 1] + mod(character.INT);
+                        if (character.spellstat.equals("SAG"))bonus = prof(character.LV) + mod(character.SAG);
+                        else if (character.spellstat.equals("CAR"))bonus = prof(character.LV) + mod(character.CAR);
+                        else bonus = prof(character.LV) + mod(character.INT);
                         String suffix = (bonus < 0) ? "" : "+";
                         String tempstr;
                         tempstr = suffix + bonus;
@@ -1646,42 +1651,42 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 break;
             case R.id.comptsfor:
                 character.tsfor = comptsfor.isChecked();
-                int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsf >= 0) ? "+" : "";
                 tempstr = suffix + tsf;
                 tsfortxt.setText(tempstr);
                 break;
             case R.id.comptsdex:
                 character.tsdex = comptsdex.isChecked();
-                int tsd = mod(character.DEX) + ((comptsdex.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsd = mod(character.DEX) + ((comptsdex.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsd >= 0) ? "+" : "";
                 tempstr = suffix + tsd;
                 tsdextxt.setText(tempstr);
                 break;
             case R.id.comptscos:
                 character.tscos = comptscos.isChecked();
-                int tsc = mod(character.COS) + ((comptscos.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsc = mod(character.COS) + ((comptscos.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsc >= 0) ? "+" : "";
                 tempstr = suffix + tsc;
                 tscostxt.setText(tempstr);
                 break;
             case R.id.comptsint:
                 character.tsint = comptsint.isChecked();
-                int tsi = mod(character.INT) + ((comptsint.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsi = mod(character.INT) + ((comptsint.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsi >= 0) ? "+" : "";
                 tempstr = suffix + tsi;
                 tsinttxt.setText(tempstr);
                 break;
             case R.id.comptssag:
                 character.tssag = comptssag.isChecked();
-                int tsa = mod(character.SAG) + ((comptssag.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsa = mod(character.SAG) + ((comptssag.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsa >= 0) ? "+" : "";
                 tempstr = suffix + tsa;
                 tssagtxt.setText(tempstr);
                 break;
             case R.id.comptscar:
                 character.tscar = comptscar.isChecked();
-                int tsca = mod(character.CAR)+ ((comptscar.isChecked()) ? prof[character.LV - 1] : 0);
+                int tsca = mod(character.CAR)+ ((comptscar.isChecked()) ? prof(character.LV) : 0);
                 suffix = (tsca >= 0) ? "+" : "";
                 tempstr = suffix + tsca;
                 tscartxt.setText(tempstr);
@@ -1808,106 +1813,106 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 inputdialog.show();
                 break;
             case R.id.TSFOR:
-                inputdialog = new DiceDialog(this, state, mod(character.FOR) + ((character.tsfor) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.str));
+                inputdialog = new DiceDialog(this, state, mod(character.FOR) + ((character.tsfor) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.str));
                 inputdialog.show();
                 break;
             case R.id.TSDEX:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((character.tsdex) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.dex));
+                inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((character.tsdex) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.dex));
                 inputdialog.show();
                 break;
             case R.id.TSCOS:
-                inputdialog = new DiceDialog(this, state, mod(character.COS) + ((character.tscos) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.cos));
+                inputdialog = new DiceDialog(this, state, mod(character.COS) + ((character.tscos) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.cos));
                 inputdialog.show();
                 break;
             case R.id.TSINT:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((character.tsint) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.inte));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((character.tsint) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.inte));
                 inputdialog.show();
                 break;
             case R.id.TSSAG:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((character.tssag) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.sag));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((character.tssag) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.sag));
                 inputdialog.show();
                 break;
             case R.id.TSCAR:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof[character.LV-1] : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
                 inputdialog.show();
                 break;
             case R.id.atletica:
-                inputdialog = new DiceDialog(this, state, mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.atletica));
+                inputdialog = new DiceDialog(this, state, mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.atletica));
                 inputdialog.show();
                 break;
             case R.id.acrobazia:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.acrobazia));
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.acrobazia));
                 inputdialog.show();
                 break;
             case R.id.furtivita:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.furtivit));
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.furtivit));
                 inputdialog.show();
                 break;
             case R.id.rapiditadimano:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.rapidit_di_mano));
+                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.rapidit_di_mano));
                 inputdialog.show();
                 break;
             case R.id.investigare:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.investigare));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.investigare));
                 inputdialog.show();
                 break;
             case R.id.arcano:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.arcano));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.arcano));
                 inputdialog.show();
                 break;
             case R.id.storia:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.storia));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.storia));
                 inputdialog.show();
                 break;
             case R.id.religionefolklore:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.religione_e_folklore));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.religione_e_folklore));
                 inputdialog.show();
                 break;
             case R.id.natura:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.natura));
+                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.natura));
                 inputdialog.show();
                 break;
             case R.id.sopravvivenza:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.sopravvivenza));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.sopravvivenza));
                 inputdialog.show();
                 break;
             case R.id.medicina:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.medicina));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.medicina));
                 inputdialog.show();
                 break;
             case R.id.percezione:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.percezione));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.percezione));
                 inputdialog.show();
                 break;
             case R.id.intuizione:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intuizione));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intuizione));
                 inputdialog.show();
                 break;
             case R.id.animali:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.animali));
+                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.animali));
                 inputdialog.show();
                 break;
             case R.id.intimidire:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intimidire));
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intimidire));
                 inputdialog.show();
                 break;
             case R.id.ingannare:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.ingannare));
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.ingannare));
                 inputdialog.show();
                 break;
             case R.id.intrattenere:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.intrattenere));
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intrattenere));
                 inputdialog.show();
                 break;
             case R.id.persuadere:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0), getString(R.string.persuadere));
+                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.persuadere));
                 inputdialog.show();
                 break;
             case R.id.spellatktxt:
                 int bonus = 0;
-                if (character.spellstat.equals("SAG"))bonus = prof[character.LV - 1] + mod(character.SAG);
-                else if (character.spellstat.equals("CAR"))bonus = prof[character.LV - 1] + mod(character.CAR);
-                else bonus = prof[character.LV - 1] + mod(character.INT);
+                if (character.spellstat.equals("SAG"))bonus = prof(character.LV) + mod(character.SAG);
+                else if (character.spellstat.equals("CAR"))bonus = prof(character.LV) + mod(character.CAR);
+                else bonus = prof(character.LV) + mod(character.INT);
                 inputdialog = new DiceDialog(this, state, bonus, getString(R.string.cast) + " (" + character.spellstat + ")");
                 inputdialog.show();
                 break;
@@ -1941,7 +1946,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr;
                         tempstr = lv + "";
                         lvtxt.setText(tempstr);
-                        tempstr = "+" + prof[lv - 1];
+                        tempstr = "+" + prof(lv);
                         proftxt.setText(tempstr);
                         character.LV = lv;
                         dialog.cancel();
@@ -2306,7 +2311,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr = monete + "";
                         mptxtv.setText(tempstr);
                         character.mp = monete;
-                        double moneteTot =  Math.ceil(monete*10 + character.mo +character.ma*0.1 + character.mr*0.01);
+                        double moneteTot =  ceil(monete*10 + character.mo +character.ma*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2333,7 +2338,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr = monete + "";
                         motxtv.setText(tempstr);
                         character.mo = monete;
-                        double moneteTot =  Math.ceil(character.mp*10 + monete +character.ma*0.1 + character.mr*0.01);
+                        double moneteTot =  ceil(character.mp*10 + monete +character.ma*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2360,7 +2365,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr = monete + "";
                         matxtv.setText(tempstr);
                         character.ma = monete;
-                        double moneteTot =  Math.ceil(character.mp*10 + character.mo + monete*0.1 + character.mr*0.01);
+                        double moneteTot =  ceil(character.mp*10 + character.mo + monete*0.1 + character.mr*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2387,7 +2392,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         String tempstr = monete + "";
                         mrtxtv.setText(tempstr);
                         character.mr = monete;
-                        double moneteTot =  Math.ceil(character.mp*10 + character.mo +character.ma*0.1 + monete*0.01);
+                        double moneteTot =  ceil(character.mp*10 + character.mo +character.ma*0.1 + monete*0.01);
                         String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
                         tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
                         totalmtxtv.setText(tempstr);
@@ -2799,14 +2804,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     public void compSwitch(boolean b, CheckBox comp, CheckBox exp, TextView label, int caratt) {
         if (b) exp.setVisibility(View.VISIBLE);
         else exp.setVisibility(View.INVISIBLE);
-        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         String suffix = (bonus >= 0) ? "+" : "";
         String tempstr = suffix + bonus;
         label.setText(tempstr);
     }
 
     public void expSwitch(CheckBox comp, CheckBox exp, TextView label, int caratt) {
-        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof[character.LV - 1]*2 : prof[character.LV - 1]) : 0);
+        int bonus = mod(caratt) + ((comp.isChecked()) ? ((exp.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0);
         String suffix = (bonus >= 0) ? "+" : "";
         String tempstr = suffix + bonus;
         label.setText(tempstr);

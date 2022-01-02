@@ -115,7 +115,7 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
 
                     name.setText(rangedname.getText().toString());
                     bonusrange.setText(suffix + bonus);
-                    comprange.setText("+" + CharacterActivity.prof[character.LV - 1]);
+                    comprange.setText("+" + CharacterActivity.prof(character.LV));
                     range.setText(rangedrange.getText().toString());
                     damage.setText(rangeddamage.getText().toString());
 
