@@ -1425,6 +1425,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("characters", Context.MODE_PRIVATE);
         final File[] files = directory.listFiles();
+        assert files != null;
         if (files.length > 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
             builder.setTitle(getString(R.string.selectpg));
@@ -1543,379 +1544,368 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View view) {
         String tempstr, suffix;
-        switch (view.getId()) {
-            case R.id.spelstatselection:
-                AlertDialog.Builder b = new AlertDialog.Builder(CharacterActivity.this);
-                b.setTitle(getString(R.string.selectspellstat));
-                String[] types = {getString(R.string.inte), getString(R.string.sag), getString(R.string.car)};
-                b.setItems(types, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        String stat = "";
-                        switch(which) {
-                            case 0:
-                                stat = getString(R.string.inte);
-                                break;
-                            case 1:
-                                stat = getString(R.string.sag);
-                                break;
-                            case 2:
-                                stat = getString(R.string.car);
-                                break;
-                        }
-                        character.spellstat = stat;
-                        spellstat.setText(stat);int bonus = 0;
-                        if (character.spellstat.equals("SAG"))bonus = prof(character.LV) + mod(character.SAG);
-                        else if (character.spellstat.equals("CAR"))bonus = prof(character.LV) + mod(character.CAR);
-                        else bonus = prof(character.LV) + mod(character.INT);
-                        String suffix = (bonus < 0) ? "" : "+";
-                        String tempstr;
-                        tempstr = suffix + bonus;
-                        spellatk.setText(tempstr);
-                        tempstr = "" + (8 + bonus);
-                        spellcd.setText(tempstr);
+        int id = view.getId();
+        if (id == R.id.spelstatselection) {
+            AlertDialog.Builder b = new AlertDialog.Builder(CharacterActivity.this);
+            b.setTitle(getString(R.string.selectspellstat));
+            String[] types = {getString(R.string.inte), getString(R.string.sag), getString(R.string.car)};
+            b.setItems(types, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    String stat = "";
+                    switch (which) {
+                        case 0:
+                            stat = getString(R.string.inte);
+                            break;
+                        case 1:
+                            stat = getString(R.string.sag);
+                            break;
+                        case 2:
+                            stat = getString(R.string.car);
+                            break;
                     }
+                    character.spellstat = stat;
+                    spellstat.setText(stat);
+                    int bonus = 0;
+                    if (character.spellstat.equals("SAG"))
+                        bonus = prof(character.LV) + mod(character.SAG);
+                    else if (character.spellstat.equals("CAR"))
+                        bonus = prof(character.LV) + mod(character.CAR);
+                    else bonus = prof(character.LV) + mod(character.INT);
+                    String suffix = (bonus < 0) ? "" : "+";
+                    String tempstr;
+                    tempstr = suffix + bonus;
+                    spellatk.setText(tempstr);
+                    tempstr = "" + (8 + bonus);
+                    spellcd.setText(tempstr);
+                }
 
-                });
-                b.show();
-                break;
-            case R.id.dwna1:
-            case R.id.skillstitle:
-                LinearLayout skilllyt = findViewById(R.id.skills);
-                if (skilllyt.getVisibility() == View.VISIBLE) {
-                    skilllyt.setVisibility(View.GONE);
-                    abilitatalentiarrow.setImageResource(R.drawable.downarrow);
+            });
+            b.show();
+        } else if (id == R.id.dwna1 || id == R.id.skillstitle) {
+            LinearLayout skilllyt = findViewById(R.id.skills);
+            if (skilllyt.getVisibility() == View.VISIBLE) {
+                skilllyt.setVisibility(View.GONE);
+                abilitatalentiarrow.setImageResource(R.drawable.downarrow);
+            } else {
+                skilllyt.setVisibility(View.VISIBLE);
+                abilitatalentiarrow.setImageResource(R.drawable.uparrow);
+            }
+        } else if (id == R.id.dwna2 || id == R.id.atktitle) {
+            LinearLayout atklyt = findViewById(R.id.atk);
+            if (atklyt.getVisibility() == View.VISIBLE) {
+                atklyt.setVisibility(View.GONE);
+                attacchiarrow.setImageResource(R.drawable.downarrow);
+            } else {
+                atklyt.setVisibility(View.VISIBLE);
+                attacchiarrow.setImageResource(R.drawable.uparrow);
+            }
+        } else if (id == R.id.dwna3 || id == R.id.invtitle) {
+            LinearLayout invlyt = findViewById(R.id.inventory);
+            if (invlyt.getVisibility() == View.VISIBLE) {
+                invlyt.setVisibility(View.GONE);
+                inventarioarrow.setImageResource(R.drawable.downarrow);
+            } else {
+                invlyt.setVisibility(View.VISIBLE);
+                inventarioarrow.setImageResource(R.drawable.uparrow);
+            }
+        } else if (id == R.id.dwna4 || id == R.id.bgtitle) {
+            LinearLayout bglyt = findViewById(R.id.background);
+            if (bglyt.getVisibility() == View.VISIBLE) {
+                bglyt.setVisibility(View.GONE);
+                backgroundarrow.setImageResource(R.drawable.downarrow);
+            } else {
+                bglyt.setVisibility(View.VISIBLE);
+                backgroundarrow.setImageResource(R.drawable.uparrow);
+            }
+        } else if (id == R.id.addmana) {
+            character.spellmana = Math.min(character.spellmana + 1, character.spellmanamax);
+            tempstr = character.spellmana + "/" + character.spellmanamax;
+            spellmana.setText(tempstr);
+        } else if (id == R.id.removemana) {
+            character.spellmana = Math.max(character.spellmana - 1, 0);
+            tempstr = character.spellmana + "/" + character.spellmanamax;
+            spellmana.setText(tempstr);
+        } else if (id == R.id.pfplus) {
+            character.PF++;
+            if (character.PF > character.PFMAX) character.PF = character.PFMAX;
+            tempstr = character.PF + "";
+            PF.setText(tempstr);
+        } else if (id == R.id.pfminus) {
+            character.PF--;
+            tempstr = character.PF + "";
+            PF.setText(tempstr);
+        } else if (id == R.id.comptsfor) {
+            character.tsfor = comptsfor.isChecked();
+            int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsf >= 0) ? "+" : "";
+            tempstr = suffix + tsf;
+            tsfortxt.setText(tempstr);
+        } else if (id == R.id.comptsdex) {
+            character.tsdex = comptsdex.isChecked();
+            int tsd = mod(character.DEX) + ((comptsdex.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsd >= 0) ? "+" : "";
+            tempstr = suffix + tsd;
+            tsdextxt.setText(tempstr);
+        } else if (id == R.id.comptscos) {
+            character.tscos = comptscos.isChecked();
+            int tsc = mod(character.COS) + ((comptscos.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsc >= 0) ? "+" : "";
+            tempstr = suffix + tsc;
+            tscostxt.setText(tempstr);
+        } else if (id == R.id.comptsint) {
+            character.tsint = comptsint.isChecked();
+            int tsi = mod(character.INT) + ((comptsint.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsi >= 0) ? "+" : "";
+            tempstr = suffix + tsi;
+            tsinttxt.setText(tempstr);
+        } else if (id == R.id.comptssag) {
+            character.tssag = comptssag.isChecked();
+            int tsa = mod(character.SAG) + ((comptssag.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsa >= 0) ? "+" : "";
+            tempstr = suffix + tsa;
+            tssagtxt.setText(tempstr);
+        } else if (id == R.id.comptscar) {
+            character.tscar = comptscar.isChecked();
+            int tsca = mod(character.CAR) + ((comptscar.isChecked()) ? prof(character.LV) : 0);
+            suffix = (tsca >= 0) ? "+" : "";
+            tempstr = suffix + tsca;
+            tscartxt.setText(tempstr);
+        } else if (id == R.id.addxpbtn) {
+            final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
+            final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
                 }
-                else {
-                    skilllyt.setVisibility(View.VISIBLE);
-                    abilitatalentiarrow.setImageResource(R.drawable.uparrow);
-                }
-                break;
-            case R.id.dwna2:
-            case R.id.atktitle:
-                LinearLayout atklyt = findViewById(R.id.atk);
-                if (atklyt.getVisibility() == View.VISIBLE) {
-                    atklyt.setVisibility(View.GONE);
-                    attacchiarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    atklyt.setVisibility(View.VISIBLE);
-                    attacchiarrow.setImageResource(R.drawable.uparrow);
-                }
-                break;
-            case R.id.dwna3:
-            case R.id.invtitle:
-                LinearLayout invlyt = findViewById(R.id.inventory);
-                if (invlyt.getVisibility() == View.VISIBLE) {
-                    invlyt.setVisibility(View.GONE);
-                    inventarioarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    invlyt.setVisibility(View.VISIBLE);
-                    inventarioarrow.setImageResource(R.drawable.uparrow);
-                }
-                break;
-            case R.id.dwna4:
-            case R.id.bgtitle:
-                LinearLayout bglyt = findViewById(R.id.background);
-                if (bglyt.getVisibility() == View.VISIBLE) {
-                    bglyt.setVisibility(View.GONE);
-                    backgroundarrow.setImageResource(R.drawable.downarrow);
-                }
-                else {
-                    bglyt.setVisibility(View.VISIBLE);
-                    backgroundarrow.setImageResource(R.drawable.uparrow);
-                }
-                break;
-            case R.id.addmana:
-                character.spellmana = Math.min(character.spellmana+1, character.spellmanamax);
-                tempstr = character.spellmana+ "/" + character.spellmanamax;
-                spellmana.setText(tempstr);
-                break;
-            case R.id.removemana:
-                character.spellmana = Math.max(character.spellmana-1, 0);
-                tempstr = character.spellmana + "/" + character.spellmanamax;
-                spellmana.setText(tempstr);
-                break;
-            case R.id.pfplus:
-                character.PF++;
-                if (character.PF > character.PFMAX) character.PF = character.PFMAX;
-                tempstr = character.PF + "";
-                PF.setText(tempstr);
-                break;
-            case R.id.pfminus:
-                character.PF--;
-                tempstr = character.PF + "";
-                PF.setText(tempstr);
-                break;
-            case R.id.comptsfor:
-                character.tsfor = comptsfor.isChecked();
-                int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsf >= 0) ? "+" : "";
-                tempstr = suffix + tsf;
-                tsfortxt.setText(tempstr);
-                break;
-            case R.id.comptsdex:
-                character.tsdex = comptsdex.isChecked();
-                int tsd = mod(character.DEX) + ((comptsdex.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsd >= 0) ? "+" : "";
-                tempstr = suffix + tsd;
-                tsdextxt.setText(tempstr);
-                break;
-            case R.id.comptscos:
-                character.tscos = comptscos.isChecked();
-                int tsc = mod(character.COS) + ((comptscos.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsc >= 0) ? "+" : "";
-                tempstr = suffix + tsc;
-                tscostxt.setText(tempstr);
-                break;
-            case R.id.comptsint:
-                character.tsint = comptsint.isChecked();
-                int tsi = mod(character.INT) + ((comptsint.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsi >= 0) ? "+" : "";
-                tempstr = suffix + tsi;
-                tsinttxt.setText(tempstr);
-                break;
-            case R.id.comptssag:
-                character.tssag = comptssag.isChecked();
-                int tsa = mod(character.SAG) + ((comptssag.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsa >= 0) ? "+" : "";
-                tempstr = suffix + tsa;
-                tssagtxt.setText(tempstr);
-                break;
-            case R.id.comptscar:
-                character.tscar = comptscar.isChecked();
-                int tsca = mod(character.CAR)+ ((comptscar.isChecked()) ? prof(character.LV) : 0);
-                suffix = (tsca >= 0) ? "+" : "";
-                tempstr = suffix + tsca;
-                tscartxt.setText(tempstr);
-                break;
-            case R.id.addxpbtn:
-                final AlertDialog.Builder alert = new AlertDialog.Builder(CharacterActivity.this);
-                final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                final AlertDialog alertd = alert.create();
-                alert.setTitle(getString(R.string.addxpof));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int xp = Integer.parseInt(input.getText().toString());
-                        xp += character.EXP;
+            });
+            final AlertDialog alertd = alert.create();
+            alert.setTitle(getString(R.string.addxpof));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int xp = Integer.parseInt(input.getText().toString());
+                    xp += character.EXP;
 
-                        String tempstr = xp + " xp";
-                        XP.setText(tempstr);
-                        character.EXP = xp;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                    }
-                });
-                alert.show();
-                break;
-            case R.id.castfirstlv:
-                if (character.currslot1 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot1 = (character.currslot1 > 0) ? character.currslot1 - 1 : 0;
-                firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
-                saveSchedaPG();
-                break;
-            case R.id.castsecondlv:
-                if (character.currslot2 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot2 = (character.currslot2 > 0) ? character.currslot2 - 1 : 0;
-                secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
-                saveSchedaPG();
-                break;
-            case R.id.castthirdlv:
-                if (character.currslot3 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot3 = (character.currslot3 > 0) ? character.currslot3 - 1 : 0;
-                thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
-                saveSchedaPG();
-                break;
-            case R.id.castfourthlv:
-                if (character.currslot4 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot4 = (character.currslot4 > 0) ? character.currslot4 - 1 : 0;
-                fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
-                saveSchedaPG();
-                break;
-            case R.id.castfifthlv:
-                if (character.currslot5 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot5 = (character.currslot5 > 0) ? character.currslot5 - 1 : 0;
-                fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
-                saveSchedaPG();
-                break;
-            case R.id.castsixthlv:
-                if (character.currslot6 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot6 = (character.currslot6 > 0) ? character.currslot6 - 1 : 0;
-                sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
-                saveSchedaPG();
-                break;
-            case R.id.castseventhlv:
-                if (character.currslot7 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot7 = (character.currslot7 > 0) ? character.currslot7 - 1 : 0;
-                seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
-                saveSchedaPG();
-                break;
-            case R.id.casteightlv:
-                if (character.currslot8 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot8 = (character.currslot8 > 0) ? character.currslot8 - 1 : 0;
-                eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
-                saveSchedaPG();
-                break;
-            case R.id.castninthlv:
-                if (character.currslot9 > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslot9 = (character.currslot9 > 0) ? character.currslot9 - 1 : 0;
-                ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
-                saveSchedaPG();
-                break;
-            case R.id.castpluslv:
-                if (character.currslotplus > 0) Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                else Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
-                character.currslotplus = (character.currslotplus > 0) ? character.currslotplus - 1 : 0;
-                pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
-                saveSchedaPG();
-                break;
-            case R.id.FORmod:
-                DiceDialog inputdialog = new DiceDialog(this, state, mod(character.FOR), getString(R.string.str));
-                inputdialog.show();
-                break;
-            case R.id.DEXmod:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX), getString(R.string.dex));
-                inputdialog.show();
-                break;
-            case R.id.COSmod:
-                inputdialog = new DiceDialog(this, state, mod(character.COS), getString(R.string.cos));
-                inputdialog.show();
-                break;
-            case R.id.INTmod:
-                inputdialog = new DiceDialog(this, state, mod(character.INT), getString(R.string.inte));
-                inputdialog.show();
-                break;
-            case R.id.SAGmod:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG), getString(R.string.sag));
-                inputdialog.show();
-                break;
-            case R.id.CARmod:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR), getString(R.string.car));
-                inputdialog.show();
-                break;
-            case R.id.TSFOR:
-                inputdialog = new DiceDialog(this, state, mod(character.FOR) + ((character.tsfor) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.str));
-                inputdialog.show();
-                break;
-            case R.id.TSDEX:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((character.tsdex) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.dex));
-                inputdialog.show();
-                break;
-            case R.id.TSCOS:
-                inputdialog = new DiceDialog(this, state, mod(character.COS) + ((character.tscos) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.cos));
-                inputdialog.show();
-                break;
-            case R.id.TSINT:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((character.tsint) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.inte));
-                inputdialog.show();
-                break;
-            case R.id.TSSAG:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((character.tssag) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.sag));
-                inputdialog.show();
-                break;
-            case R.id.TSCAR:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
-                inputdialog.show();
-                break;
-            case R.id.atletica:
-                inputdialog = new DiceDialog(this, state, mod((character.FOR))+ ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.atletica));
-                inputdialog.show();
-                break;
-            case R.id.acrobazia:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.acrobazia));
-                inputdialog.show();
-                break;
-            case R.id.furtivita:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.furtivit));
-                inputdialog.show();
-                break;
-            case R.id.rapiditadimano:
-                inputdialog = new DiceDialog(this, state, mod(character.DEX)+ ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.rapidit_di_mano));
-                inputdialog.show();
-                break;
-            case R.id.investigare:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.investigare));
-                inputdialog.show();
-                break;
-            case R.id.arcano:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.arcano));
-                inputdialog.show();
-                break;
-            case R.id.storia:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.storia));
-                inputdialog.show();
-                break;
-            case R.id.religionefolklore:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.religione_e_folklore));
-                inputdialog.show();
-                break;
-            case R.id.natura:
-                inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.natura));
-                inputdialog.show();
-                break;
-            case R.id.sopravvivenza:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.sopravvivenza));
-                inputdialog.show();
-                break;
-            case R.id.medicina:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.medicina));
-                inputdialog.show();
-                break;
-            case R.id.percezione:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.percezione));
-                inputdialog.show();
-                break;
-            case R.id.intuizione:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intuizione));
-                inputdialog.show();
-                break;
-            case R.id.animali:
-                inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.animali));
-                inputdialog.show();
-                break;
-            case R.id.intimidire:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intimidire));
-                inputdialog.show();
-                break;
-            case R.id.ingannare:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.ingannare));
-                inputdialog.show();
-                break;
-            case R.id.intrattenere:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.intrattenere));
-                inputdialog.show();
-                break;
-            case R.id.persuadere:
-                inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof(character.LV)*2 : prof(character.LV)) : 0), getString(R.string.persuadere));
-                inputdialog.show();
-                break;
-            case R.id.spellatktxt:
-                int bonus = 0;
-                if (character.spellstat.equals("SAG"))bonus = prof(character.LV) + mod(character.SAG);
-                else if (character.spellstat.equals("CAR"))bonus = prof(character.LV) + mod(character.CAR);
-                else bonus = prof(character.LV) + mod(character.INT);
-                inputdialog = new DiceDialog(this, state, bonus, getString(R.string.cast) + " (" + character.spellstat + ")");
-                inputdialog.show();
-                break;
+                    String tempstr = xp + " xp";
+                    XP.setText(tempstr);
+                    character.EXP = xp;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                }
+            });
+            alert.show();
+        } else if (id == R.id.castfirstlv) {
+            if (character.currslot1 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_1).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot1 = (character.currslot1 > 0) ? character.currslot1 - 1 : 0;
+            firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
+            saveSchedaPG();
+        } else if (id == R.id.castsecondlv) {
+            if (character.currslot2 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_2).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot2 = (character.currslot2 > 0) ? character.currslot2 - 1 : 0;
+            secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
+            saveSchedaPG();
+        } else if (id == R.id.castthirdlv) {
+            if (character.currslot3 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_3).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot3 = (character.currslot3 > 0) ? character.currslot3 - 1 : 0;
+            thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
+            saveSchedaPG();
+        } else if (id == R.id.castfourthlv) {
+            if (character.currslot4 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_4).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot4 = (character.currslot4 > 0) ? character.currslot4 - 1 : 0;
+            fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
+            saveSchedaPG();
+        } else if (id == R.id.castfifthlv) {
+            if (character.currslot5 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_5).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot5 = (character.currslot5 > 0) ? character.currslot5 - 1 : 0;
+            fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
+            saveSchedaPG();
+        } else if (id == R.id.castsixthlv) {
+            if (character.currslot6 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_6).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot6 = (character.currslot6 > 0) ? character.currslot6 - 1 : 0;
+            sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
+            saveSchedaPG();
+        } else if (id == R.id.castseventhlv) {
+            if (character.currslot7 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_7).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot7 = (character.currslot7 > 0) ? character.currslot7 - 1 : 0;
+            seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
+            saveSchedaPG();
+        } else if (id == R.id.casteightlv) {
+            if (character.currslot8 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_8).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot8 = (character.currslot8 > 0) ? character.currslot8 - 1 : 0;
+            eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
+            saveSchedaPG();
+        } else if (id == R.id.castninthlv) {
+            if (character.currslot9 > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello_9).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslot9 = (character.currslot9 > 0) ? character.currslot9 - 1 : 0;
+            ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
+            saveSchedaPG();
+        } else if (id == R.id.castpluslv) {
+            if (character.currslotplus > 0)
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.casted, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            else
+                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.noslots, getString(R.string.livello).toLowerCase()), Snackbar.LENGTH_SHORT).show();
+            character.currslotplus = (character.currslotplus > 0) ? character.currslotplus - 1 : 0;
+            pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
+            saveSchedaPG();
+        } else if (id == R.id.FORmod) {
+            DiceDialog inputdialog = new DiceDialog(this, state, mod(character.FOR), getString(R.string.str));
+            inputdialog.show();
+        } else if (id == R.id.DEXmod) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.DEX), getString(R.string.dex));
+            inputdialog.show();
+        } else if (id == R.id.COSmod) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.COS), getString(R.string.cos));
+            inputdialog.show();
+        } else if (id == R.id.INTmod) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT), getString(R.string.inte));
+            inputdialog.show();
+        } else if (id == R.id.SAGmod) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG), getString(R.string.sag));
+            inputdialog.show();
+        } else if (id == R.id.CARmod) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR), getString(R.string.car));
+            inputdialog.show();
+        } else if (id == R.id.TSFOR) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.FOR) + ((character.tsfor) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.str));
+            inputdialog.show();
+        } else if (id == R.id.TSDEX) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((character.tsdex) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.dex));
+            inputdialog.show();
+        } else if (id == R.id.TSCOS) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.COS) + ((character.tscos) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.cos));
+            inputdialog.show();
+        } else if (id == R.id.TSINT) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((character.tsint) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.inte));
+            inputdialog.show();
+        } else if (id == R.id.TSSAG) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((character.tssag) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.sag));
+            inputdialog.show();
+        } else if (id == R.id.TSCAR) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
+            inputdialog.show();
+        } else if (id == R.id.atletica) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod((character.FOR)) + ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.atletica));
+            inputdialog.show();
+        } else if (id == R.id.acrobazia) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.acrobazia));
+            inputdialog.show();
+        } else if (id == R.id.furtivita) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.furtivit));
+            inputdialog.show();
+        } else if (id == R.id.rapiditadimano) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.rapidit_di_mano));
+            inputdialog.show();
+        } else if (id == R.id.investigare) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.investigare));
+            inputdialog.show();
+        } else if (id == R.id.arcano) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.arcano));
+            inputdialog.show();
+        } else if (id == R.id.storia) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.storia));
+            inputdialog.show();
+        } else if (id == R.id.religionefolklore) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.religione_e_folklore));
+            inputdialog.show();
+        } else if (id == R.id.natura) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.natura));
+            inputdialog.show();
+        } else if (id == R.id.sopravvivenza) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.sopravvivenza));
+            inputdialog.show();
+        } else if (id == R.id.medicina) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.medicina));
+            inputdialog.show();
+        } else if (id == R.id.percezione) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.percezione));
+            inputdialog.show();
+        } else if (id == R.id.intuizione) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intuizione));
+            inputdialog.show();
+        } else if (id == R.id.animali) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.animali));
+            inputdialog.show();
+        } else if (id == R.id.intimidire) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intimidire));
+            inputdialog.show();
+        } else if (id == R.id.ingannare) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.ingannare));
+            inputdialog.show();
+        } else if (id == R.id.intrattenere) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intrattenere));
+            inputdialog.show();
+        } else if (id == R.id.persuadere) {
+            DiceDialog inputdialog;
+            inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.persuadere));
+            inputdialog.show();
+        } else if (id == R.id.spellatktxt) {
+            DiceDialog inputdialog;
+            int bonus = 0;
+            if (character.spellstat.equals("SAG")) bonus = prof(character.LV) + mod(character.SAG);
+            else if (character.spellstat.equals("CAR"))
+                bonus = prof(character.LV) + mod(character.CAR);
+            else bonus = prof(character.LV) + mod(character.INT);
+            inputdialog = new DiceDialog(this, state, bonus, getString(R.string.cast) + " (" + character.spellstat + ")");
+            inputdialog.show();
         }
         saveSchedaPG();
     }
@@ -1926,876 +1916,841 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         final EditText input = new EditText(CharacterActivity.this.getApplicationContext());
         final AlertDialog alertd;
         String tempstr;
-        switch (view.getId()) {
-            case R.id.pglvtxt:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertlevelof) + " " + character.nome);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int lv = Integer.parseInt(input.getText().toString());
-                        if (lv <= 0) lv = 1;
-                        if (lv > 45) lv = 45;
+        int id = view.getId();
+        if (id == R.id.pglvtxt) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                }
+            });
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertlevelof) + " " + character.nome);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int lv = Integer.parseInt(input.getText().toString());
+                    if (lv <= 0) lv = 1;
+                    if (lv > 45) lv = 45;
 
-                        String tempstr;
-                        tempstr = lv + "";
-                        lvtxt.setText(tempstr);
-                        tempstr = "+" + prof(lv);
-                        proftxt.setText(tempstr);
-                        character.LV = lv;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.pgnametxt:
-                input.setText(character.nome);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewnameof) + " " + character.nome);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String name = input.getText().toString();
+                    String tempstr;
+                    tempstr = lv + "";
+                    lvtxt.setText(tempstr);
+                    tempstr = "+" + prof(lv);
+                    proftxt.setText(tempstr);
+                    character.LV = lv;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.pgnametxt) {
+            input.setText(character.nome);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertnewnameof) + " " + character.nome);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String name = input.getText().toString();
 
-                        nametxt.setText(name);
-                        character.nome = name;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.manatxt:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxpoints));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String maxp = input.getText().toString();
-                        int mana = Integer.parseInt(maxp);
-                        String tempstr = character.spellmana + "/" + mana;
-                        spellmana.setText(tempstr);
-                        character.spellmanamax = mana;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.pgclasstxt:
-                input.setText(character.classe);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertnewclass) + " " + character.nome);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        String classs = input.getText().toString();
+                    nametxt.setText(name);
+                    character.nome = name;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.manatxt) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxpoints));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String maxp = input.getText().toString();
+                    int mana = Integer.parseInt(maxp);
+                    String tempstr = character.spellmana + "/" + mana;
+                    spellmana.setText(tempstr);
+                    character.spellmanamax = mana;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.pgclasstxt) {
+            input.setText(character.classe);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertnewclass) + " " + character.nome);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    String classs = input.getText().toString();
 
-                        classtxt.setText(classs);
-                        character.classe = classs;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.CA:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = character.CA + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertca));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
+                    classtxt.setText(classs);
+                    character.classe = classs;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.CA) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            tempstr = character.CA + "";
+            input.setText(tempstr);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                }
+            });
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertca));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
 
-                        String tempstr = pnt + "";
-                        CA.setText(tempstr);
-                        character.CA = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.PF:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = character.PF + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertpf));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tempstr = pnt + "";
-                        PF.setText(tempstr);
-                        character.PF = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.pfplus:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = 0 + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.entercure));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        character.PF += pnt;
+                    String tempstr = pnt + "";
+                    CA.setText(tempstr);
+                    character.CA = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.PF) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            tempstr = character.PF + "";
+            input.setText(tempstr);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertpf));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tempstr = pnt + "";
+                    PF.setText(tempstr);
+                    character.PF = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.pfplus) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            tempstr = 0 + "";
+            input.setText(tempstr);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.entercure));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    character.PF += pnt;
 
-                        String tempstr = character.PF + "";
-                        PF.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.pfminus:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = 0 + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.enterdamage));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        character.PF -= pnt;
+                    String tempstr = character.PF + "";
+                    PF.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.pfminus) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            tempstr = 0 + "";
+            input.setText(tempstr);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.enterdamage));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    character.PF -= pnt;
 
-                        String tempstr = character.PF + "";
-                        PF.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.PFmax:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                tempstr = character.PFMAX + "";
-                input.setText(tempstr);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxpf));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
+                    String tempstr = character.PF + "";
+                    PF.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.PFmax) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            tempstr = character.PFMAX + "";
+            input.setText(tempstr);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxpf));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
 
-                        String tempstr = pnt + "";
-                        PFmax.setText(tempstr);
-                        character.PFMAX = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.FOR:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    PFmax.setText(tempstr);
+                    character.PFMAX = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.FOR) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        FOR.setText(tempstr);
-                        tempstr = suffix + mod;
-                        FORmod.setText(tempstr);
-                        character.FOR = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.DEX:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    FOR.setText(tempstr);
+                    tempstr = suffix + mod;
+                    FORmod.setText(tempstr);
+                    character.FOR = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.DEX) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        DEX.setText(tempstr);
-                        tempstr = suffix + mod;
-                        DEXmod.setText(tempstr);
-                        character.DEX = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.COS:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    DEX.setText(tempstr);
+                    tempstr = suffix + mod;
+                    DEXmod.setText(tempstr);
+                    character.DEX = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.COS) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        COS.setText(tempstr);
-                        tempstr = suffix + mod;
-                        COSmod.setText(tempstr);
-                        character.COS = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.INT:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    COS.setText(tempstr);
+                    tempstr = suffix + mod;
+                    COSmod.setText(tempstr);
+                    character.COS = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.INT) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        INT.setText(tempstr);
-                        tempstr = suffix + mod;
-                        INTmod.setText(tempstr);
-                        character.INT = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.SAG:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    INT.setText(tempstr);
+                    tempstr = suffix + mod;
+                    INTmod.setText(tempstr);
+                    character.INT = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.SAG) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        SAG.setText(tempstr);
-                        tempstr = suffix + mod;
-                        SAGmod.setText(tempstr);
-                        character.SAG = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.CAR:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        int mod = mod(pnt);
-                        String suffix = (mod >= 0) ? "+" : "";
+                    String tempstr = pnt + "";
+                    SAG.setText(tempstr);
+                    tempstr = suffix + mod;
+                    SAGmod.setText(tempstr);
+                    character.SAG = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.CAR) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    int mod = mod(pnt);
+                    String suffix = (mod >= 0) ? "+" : "";
 
-                        String tempstr = pnt + "";
-                        CAR.setText(tempstr);
-                        tempstr = suffix + mod;
-                        CARmod.setText(tempstr);
-                        character.CAR = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.mptxtv:
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsplatpieces, character.nome));
-                tempstr = character.mp + "";
-                input.setText(tempstr);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int monete = Integer.parseInt(input.getText().toString());
-                        String tempstr = monete + "";
-                        mptxtv.setText(tempstr);
-                        character.mp = monete;
-                        double moneteTot =  ceil(monete*10 + character.mo +character.ma*0.1 + character.mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                        totalmtxtv.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.motxtv:
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.pgsgoldpieces, character.nome));
-                tempstr = character.mo + "";
-                input.setText(tempstr);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int monete = Integer.parseInt(input.getText().toString());
-                        String tempstr = monete + "";
-                        motxtv.setText(tempstr);
-                        character.mo = monete;
-                        double moneteTot =  ceil(character.mp*10 + monete +character.ma*0.1 + character.mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                        totalmtxtv.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.matxtv:
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.pgssilvpieces, character.nome));
-                tempstr = character.ma + "";
-                input.setText(tempstr);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int monete = Integer.parseInt(input.getText().toString());
-                        String tempstr = monete + "";
-                        matxtv.setText(tempstr);
-                        character.ma = monete;
-                        double moneteTot =  ceil(character.mp*10 + character.mo + monete*0.1 + character.mr*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                        totalmtxtv.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.mrtxtv:
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.pgscopppieces, character.nome));
-                tempstr = character.mr + "";
-                input.setText(tempstr);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int monete = Integer.parseInt(input.getText().toString());
-                        String tempstr = monete + "";
-                        mrtxtv.setText(tempstr);
-                        character.mr = monete;
-                        double moneteTot =  ceil(character.mp*10 + character.mo +character.ma*0.1 + monete*0.01);
-                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                        totalmtxtv.setText(tempstr);
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.pgxptxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                    }
-                });
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertxpof) + " " + character.nome);
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int xp = Integer.parseInt(input.getText().toString());
+                    String tempstr = pnt + "";
+                    CAR.setText(tempstr);
+                    tempstr = suffix + mod;
+                    CARmod.setText(tempstr);
+                    character.CAR = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.mptxtv) {
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.pgsplatpieces, character.nome));
+            tempstr = character.mp + "";
+            input.setText(tempstr);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int monete = Integer.parseInt(input.getText().toString());
+                    String tempstr = monete + "";
+                    mptxtv.setText(tempstr);
+                    character.mp = monete;
+                    double moneteTot = ceil(monete * 10 + character.mo + character.ma * 0.1 + character.mr * 0.01);
+                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                    totalmtxtv.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.motxtv) {
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.pgsgoldpieces, character.nome));
+            tempstr = character.mo + "";
+            input.setText(tempstr);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int monete = Integer.parseInt(input.getText().toString());
+                    String tempstr = monete + "";
+                    motxtv.setText(tempstr);
+                    character.mo = monete;
+                    double moneteTot = ceil(character.mp * 10 + monete + character.ma * 0.1 + character.mr * 0.01);
+                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                    totalmtxtv.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.matxtv) {
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.pgssilvpieces, character.nome));
+            tempstr = character.ma + "";
+            input.setText(tempstr);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int monete = Integer.parseInt(input.getText().toString());
+                    String tempstr = monete + "";
+                    matxtv.setText(tempstr);
+                    character.ma = monete;
+                    double moneteTot = ceil(character.mp * 10 + character.mo + monete * 0.1 + character.mr * 0.01);
+                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                    totalmtxtv.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.mrtxtv) {
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.pgscopppieces, character.nome));
+            tempstr = character.mr + "";
+            input.setText(tempstr);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int monete = Integer.parseInt(input.getText().toString());
+                    String tempstr = monete + "";
+                    mrtxtv.setText(tempstr);
+                    character.mr = monete;
+                    double moneteTot = ceil(character.mp * 10 + character.mo + character.ma * 0.1 + monete * 0.01);
+                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                    totalmtxtv.setText(tempstr);
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.pgxptxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                }
+            });
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertxpof) + " " + character.nome);
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int xp = Integer.parseInt(input.getText().toString());
 
-                        String tempstr = xp + " xp";
-                        XP.setText(tempstr);
-                        character.EXP = xp;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotfirsttxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_1) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        firstlvslots.setText(tmp);
-                        character.slot1 = pnt;
-                        character.currslot1 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotsecondtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_2) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        secondlvslots.setText(tmp);
-                        character.slot2 = pnt;
-                        character.currslot2 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotthirdtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_3) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        thirdlvslots.setText(tmp);
-                        character.slot3 = pnt;
-                        character.currslot3 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotfourthtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_4) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        fourthlvslots.setText(tmp);
-                        character.slot4 = pnt;
-                        character.currslot4 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotfifthtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_5) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        fifthlvslots.setText(tmp);
-                        character.slot5 = pnt;
-                        character.currslot5 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotsixthtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_6) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        sixthlvslots.setText(tmp);
-                        character.slot6 = pnt;
-                        character.currslot6 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotseventhtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_7) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        seventhlvslots.setText(tmp);
-                        character.slot7 = pnt;
-                        character.currslot7 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.sloteigthtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_8) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        eighthlvslots.setText(tmp);
-                        character.slot8 = pnt;
-                        character.currslot8 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotninthtxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_9) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        ninthlvslots.setText(tmp);
-                        character.slot9 = pnt;
-                        character.currslot9 = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            case R.id.slotplustxtv:
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                alert.setView(input);
-                alert.setNegativeButton(getString(R.string.annulla), null);
-                alertd = alert.create();
-                alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello) + ")");
-                alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        int pnt = Integer.parseInt(input.getText().toString());
-                        String tmp = pnt + "/" + pnt;
-                        pluslvslots.setText(tmp);
-                        character.slotplus = pnt;
-                        character.currslotplus = pnt;
-                        dialog.cancel();
-                        alertd.dismiss();
-                        preparaSchedaPG();
-                        saveSchedaPG();
-                    }
-                });
-                alert.show();
-                return true;
-            default: return false;
+                    String tempstr = xp + " xp";
+                    XP.setText(tempstr);
+                    character.EXP = xp;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotfirsttxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_1) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    firstlvslots.setText(tmp);
+                    character.slot1 = pnt;
+                    character.currslot1 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotsecondtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_2) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    secondlvslots.setText(tmp);
+                    character.slot2 = pnt;
+                    character.currslot2 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotthirdtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_3) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    thirdlvslots.setText(tmp);
+                    character.slot3 = pnt;
+                    character.currslot3 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotfourthtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_4) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    fourthlvslots.setText(tmp);
+                    character.slot4 = pnt;
+                    character.currslot4 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotfifthtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_5) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    fifthlvslots.setText(tmp);
+                    character.slot5 = pnt;
+                    character.currslot5 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotsixthtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_6) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    sixthlvslots.setText(tmp);
+                    character.slot6 = pnt;
+                    character.currslot6 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotseventhtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_7) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    seventhlvslots.setText(tmp);
+                    character.slot7 = pnt;
+                    character.currslot7 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.sloteigthtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_8) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    eighthlvslots.setText(tmp);
+                    character.slot8 = pnt;
+                    character.currslot8 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotninthtxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_9) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    ninthlvslots.setText(tmp);
+                    character.slot9 = pnt;
+                    character.currslot9 = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
+        } else if (id == R.id.slotplustxtv) {
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            alert.setView(input);
+            alert.setNegativeButton(getString(R.string.annulla), null);
+            alertd = alert.create();
+            alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello) + ")");
+            alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    int pnt = Integer.parseInt(input.getText().toString());
+                    String tmp = pnt + "/" + pnt;
+                    pluslvslots.setText(tmp);
+                    character.slotplus = pnt;
+                    character.currslotplus = pnt;
+                    dialog.cancel();
+                    alertd.dismiss();
+                    preparaSchedaPG();
+                    saveSchedaPG();
+                }
+            });
+            alert.show();
+            return true;
         }
+        return false;
     }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        switch (compoundButton.getId()) {
-            case R.id.inspirationbtn: character.inspiration = b; break;
+        int id = compoundButton.getId();
+        if (id == R.id.inspirationbtn) {
+            character.inspiration = b;
             //FOR
-            case R.id.compatletica:
-                compSwitch(b, compatletica, expatletica, atletica, character.FOR);
-                character.compatletica = b;
-                break;
-            case R.id.expatletica:
-                expSwitch(compatletica, expatletica, atletica, character.FOR);
-                character.expatletica = expatletica.isChecked();
-                break;
+        } else if (id == R.id.compatletica) {
+            compSwitch(b, compatletica, expatletica, atletica, character.FOR);
+            character.compatletica = b;
+        } else if (id == R.id.expatletica) {
+            expSwitch(compatletica, expatletica, atletica, character.FOR);
+            character.expatletica = expatletica.isChecked();
             //DEX
-            case R.id.compacrobazia:
-                compSwitch(b, compacrobazia, expacrobazia, acrobazia, character.DEX);
-                character.compacrobazia = b;
-                break;
-            case R.id.expacrobazia:
-                expSwitch(compacrobazia, expacrobazia, acrobazia, character.DEX);
-                character.expacrobazia = expacrobazia.isChecked();
-                break;
-            case R.id.compfurtivita:
-                compSwitch(b, compfurtivita, expfurtivita, furtivita, character.DEX);
-                character.compfurtivita = b;
-                break;
-            case R.id.expfurtivita:
-                expSwitch(compfurtivita, expfurtivita, furtivita, character.DEX);
-                character.expfurtivita = expfurtivita.isChecked();
-                break;
-            case R.id.comprapiditadimano:
-                compSwitch(b, comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
-                character.comprapiditadimano = b;
-                break;
-            case R.id.exprapiditadimano:
-                expSwitch(comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
-                character.exprapiditadimano = exprapiditadimano.isChecked();
-                break;
+        } else if (id == R.id.compacrobazia) {
+            compSwitch(b, compacrobazia, expacrobazia, acrobazia, character.DEX);
+            character.compacrobazia = b;
+        } else if (id == R.id.expacrobazia) {
+            expSwitch(compacrobazia, expacrobazia, acrobazia, character.DEX);
+            character.expacrobazia = expacrobazia.isChecked();
+        } else if (id == R.id.compfurtivita) {
+            compSwitch(b, compfurtivita, expfurtivita, furtivita, character.DEX);
+            character.compfurtivita = b;
+        } else if (id == R.id.expfurtivita) {
+            expSwitch(compfurtivita, expfurtivita, furtivita, character.DEX);
+            character.expfurtivita = expfurtivita.isChecked();
+        } else if (id == R.id.comprapiditadimano) {
+            compSwitch(b, comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
+            character.comprapiditadimano = b;
+        } else if (id == R.id.exprapiditadimano) {
+            expSwitch(comprapiditadimano, exprapiditadimano, rapiditadimano, character.DEX);
+            character.exprapiditadimano = exprapiditadimano.isChecked();
             //INT
-            case R.id.compinvestigare:
-                compSwitch(b, compinvestigare, expinvestigare, investigare, character.INT);
-                character.compinvestigare = b;
-                break;
-            case R.id.expinvestigare:
-                expSwitch(compinvestigare, expinvestigare, investigare, character.INT);
-                character.expinvestigare = expinvestigare.isChecked();
-                break;
-            case R.id.comparcano:
-                compSwitch(b, comparcano, exparcano, arcano, character.INT);
-                character.comparcano = b;
-                break;
-            case R.id.exparcano:
-                expSwitch(comparcano, exparcano, arcano, character.INT);
-                character.exparcano = exparcano.isChecked();
-                break;
-            case R.id.compstoria:
-                compSwitch(b, compstoria, expstoria, storia, character.INT);
-                character.compstoria = b;
-                break;
-            case R.id.expstoria:
-                expSwitch(compstoria, expstoria, storia, character.INT);
-                character.expstoria = expstoria.isChecked();
-                break;
-            case R.id.compreligionefolklore:
-                compSwitch(b, compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
-                character.compreligione = b;
-                break;
-            case R.id.expreligionefolklore:
-                expSwitch(compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
-                character.expreligione = expreligionefolklore.isChecked();
-                break;
-            case R.id.compnatura:
-                compSwitch(b, compnatura, expnatura, natura, character.INT);
-                character.compnatura = b;
-                break;
-            case R.id.expnatura:
-                expSwitch(compnatura, expnatura, natura, character.INT);
-                character.expnatura = expnatura.isChecked();
-                break;
+        } else if (id == R.id.compinvestigare) {
+            compSwitch(b, compinvestigare, expinvestigare, investigare, character.INT);
+            character.compinvestigare = b;
+        } else if (id == R.id.expinvestigare) {
+            expSwitch(compinvestigare, expinvestigare, investigare, character.INT);
+            character.expinvestigare = expinvestigare.isChecked();
+        } else if (id == R.id.comparcano) {
+            compSwitch(b, comparcano, exparcano, arcano, character.INT);
+            character.comparcano = b;
+        } else if (id == R.id.exparcano) {
+            expSwitch(comparcano, exparcano, arcano, character.INT);
+            character.exparcano = exparcano.isChecked();
+        } else if (id == R.id.compstoria) {
+            compSwitch(b, compstoria, expstoria, storia, character.INT);
+            character.compstoria = b;
+        } else if (id == R.id.expstoria) {
+            expSwitch(compstoria, expstoria, storia, character.INT);
+            character.expstoria = expstoria.isChecked();
+        } else if (id == R.id.compreligionefolklore) {
+            compSwitch(b, compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
+            character.compreligione = b;
+        } else if (id == R.id.expreligionefolklore) {
+            expSwitch(compreligionefolklore, expreligionefolklore, religionefolklore, character.INT);
+            character.expreligione = expreligionefolklore.isChecked();
+        } else if (id == R.id.compnatura) {
+            compSwitch(b, compnatura, expnatura, natura, character.INT);
+            character.compnatura = b;
+        } else if (id == R.id.expnatura) {
+            expSwitch(compnatura, expnatura, natura, character.INT);
+            character.expnatura = expnatura.isChecked();
             //SAG
-            case R.id.compsopravvivenza:
-                compSwitch(b, compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
-                character.compsopravvivenza = b;
-                break;
-            case R.id.expsopravvivenza:
-                expSwitch(compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
-                character.expsopravvivenza = expsopravvivenza.isChecked();
-                break;
-            case R.id.compmedicina:
-                compSwitch(b, compmedicina, expmedicina, medicina, character.SAG);
-                character.compmedicina = b;
-                break;
-            case R.id.expmedicina:
-                expSwitch(compmedicina, expmedicina, medicina, character.SAG);
-                character.expmedicina = expmedicina.isChecked();
-                break;
-            case R.id.comppercezione:
-                compSwitch(b, comppercezione, exppercezione, percezione, character.SAG);
-                character.comppercezione = b;
-                break;
-            case R.id.exppercezione:
-                expSwitch(comppercezione, exppercezione, percezione, character.SAG);
-                character.exppercezione = exppercezione.isChecked();
-                break;
-            case R.id.compintuizione:
-                compSwitch(b, compintuizione, expintuizione, intuizione, character.SAG);
-                character.compintuizione = b;
-                break;
-            case R.id.expintuizione:
-                expSwitch(compintuizione, expintuizione, intuizione, character.SAG);
-                character.expintuizione = expintuizione.isChecked();
-                break;
-            case R.id.companimali:
-                compSwitch(b, companimali, expanimali, animali, character.SAG);
-                character.companimali = b;
-                break;
-            case R.id.expanimali:
-                expSwitch(companimali, expanimali, animali, character.SAG);
-                character.expanimali = expanimali.isChecked();
-                break;
+        } else if (id == R.id.compsopravvivenza) {
+            compSwitch(b, compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
+            character.compsopravvivenza = b;
+        } else if (id == R.id.expsopravvivenza) {
+            expSwitch(compsopravvivenza, expsopravvivenza, sopravvivenza, character.SAG);
+            character.expsopravvivenza = expsopravvivenza.isChecked();
+        } else if (id == R.id.compmedicina) {
+            compSwitch(b, compmedicina, expmedicina, medicina, character.SAG);
+            character.compmedicina = b;
+        } else if (id == R.id.expmedicina) {
+            expSwitch(compmedicina, expmedicina, medicina, character.SAG);
+            character.expmedicina = expmedicina.isChecked();
+        } else if (id == R.id.comppercezione) {
+            compSwitch(b, comppercezione, exppercezione, percezione, character.SAG);
+            character.comppercezione = b;
+        } else if (id == R.id.exppercezione) {
+            expSwitch(comppercezione, exppercezione, percezione, character.SAG);
+            character.exppercezione = exppercezione.isChecked();
+        } else if (id == R.id.compintuizione) {
+            compSwitch(b, compintuizione, expintuizione, intuizione, character.SAG);
+            character.compintuizione = b;
+        } else if (id == R.id.expintuizione) {
+            expSwitch(compintuizione, expintuizione, intuizione, character.SAG);
+            character.expintuizione = expintuizione.isChecked();
+        } else if (id == R.id.companimali) {
+            compSwitch(b, companimali, expanimali, animali, character.SAG);
+            character.companimali = b;
+        } else if (id == R.id.expanimali) {
+            expSwitch(companimali, expanimali, animali, character.SAG);
+            character.expanimali = expanimali.isChecked();
             //CAR
-            case R.id.compintimidire:
-                compSwitch(b, compintimidire, expintimidire, intimidire, character.CAR);
-                character.compintimidire = b;
-                break;
-            case R.id.expintimidire:
-                expSwitch(compintimidire, expintimidire, intimidire, character.CAR);
-                character.expintimidire = expintimidire.isChecked();
-                break;
-            case R.id.compingannare:
-                compSwitch(b, compingannare, expingannare, ingannare, character.CAR);
-                character.compingannare = b;
-                break;
-            case R.id.expingannare:
-                expSwitch(compingannare, expingannare, ingannare, character.CAR);
-                character.expingannare = expingannare.isChecked();
-                break;
-            case R.id.compintrattenere:
-                compSwitch(b, compintrattenere, expintrattenere, intrattenere, character.CAR);
-                character.compintrattenere = b;
-                break;
-            case R.id.expintrattenere:
-                expSwitch(compintrattenere, expintrattenere, intrattenere, character.CAR);
-                character.expintrattenere = expintrattenere.isChecked();
-                break;
-            case R.id.comppersuadere:
-                compSwitch(b, comppersuadere, exppersuadere, persuadere, character.CAR);
-                character.comppersuadere = b;
-                break;
-            case R.id.exppersuadere:
-                expSwitch(comppersuadere, exppersuadere, persuadere, character.CAR);
-                character.exppersuadere = exppersuadere.isChecked();
-                break;
+        } else if (id == R.id.compintimidire) {
+            compSwitch(b, compintimidire, expintimidire, intimidire, character.CAR);
+            character.compintimidire = b;
+        } else if (id == R.id.expintimidire) {
+            expSwitch(compintimidire, expintimidire, intimidire, character.CAR);
+            character.expintimidire = expintimidire.isChecked();
+        } else if (id == R.id.compingannare) {
+            compSwitch(b, compingannare, expingannare, ingannare, character.CAR);
+            character.compingannare = b;
+        } else if (id == R.id.expingannare) {
+            expSwitch(compingannare, expingannare, ingannare, character.CAR);
+            character.expingannare = expingannare.isChecked();
+        } else if (id == R.id.compintrattenere) {
+            compSwitch(b, compintrattenere, expintrattenere, intrattenere, character.CAR);
+            character.compintrattenere = b;
+        } else if (id == R.id.expintrattenere) {
+            expSwitch(compintrattenere, expintrattenere, intrattenere, character.CAR);
+            character.expintrattenere = expintrattenere.isChecked();
+        } else if (id == R.id.comppersuadere) {
+            compSwitch(b, comppersuadere, exppersuadere, persuadere, character.CAR);
+            character.comppersuadere = b;
+        } else if (id == R.id.exppersuadere) {
+            expSwitch(comppersuadere, exppersuadere, persuadere, character.CAR);
+            character.exppersuadere = exppersuadere.isChecked();
         }
         preparaSchedaPG();
         saveSchedaPG();

@@ -112,31 +112,23 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     @Override
     public void onClick(View v) {
         int max = 1;
-        switch (v.getId()) {
-            case R.id.D20:
-                max = 20;
-                break;
-            case R.id.D100:
-                max = 100;
-                break;
-            case R.id.D12:
-                max = 12;
-                break;
-            case R.id.D10:
-                max = 10;
-                break;
-            case R.id.D8:
-                max = 8;
-                break;
-            case R.id.D6:
-                max = 6;
-                break;
-            case R.id.D4:
-                max = 4;
-                break;
-            case R.id.coin:
-                max = -1;
-                break;
+        int id = v.getId();
+        if (id == R.id.D20) {
+            max = 20;
+        } else if (id == R.id.D100) {
+            max = 100;
+        } else if (id == R.id.D12) {
+            max = 12;
+        } else if (id == R.id.D10) {
+            max = 10;
+        } else if (id == R.id.D8) {
+            max = 8;
+        } else if (id == R.id.D6) {
+            max = 6;
+        } else if (id == R.id.D4) {
+            max = 4;
+        } else if (id == R.id.coin) {
+            max = -1;
         }
 
         if (max != -1) {
@@ -164,31 +156,23 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     @Override
     public boolean onLongClick(View v) {
         int max = 1;
-        switch (v.getId()) {
-            case R.id.D20:
-                max = 20;
-                break;
-            case R.id.D100:
-                max = 100;
-                break;
-            case R.id.D12:
-                max = 12;
-                break;
-            case R.id.D10:
-                max = 10;
-                break;
-            case R.id.D8:
-                max = 8;
-                break;
-            case R.id.D6:
-                max = 6;
-                break;
-            case R.id.D4:
-                max = 4;
-                break;
-            case R.id.coin:
-                max = -1;
-                break;
+        int id = v.getId();
+        if (id == R.id.D20) {
+            max = 20;
+        } else if (id == R.id.D100) {
+            max = 100;
+        } else if (id == R.id.D12) {
+            max = 12;
+        } else if (id == R.id.D10) {
+            max = 10;
+        } else if (id == R.id.D8) {
+            max = 8;
+        } else if (id == R.id.D6) {
+            max = 6;
+        } else if (id == R.id.D4) {
+            max = 4;
+        } else if (id == R.id.coin) {
+            max = -1;
         }
 
         if (max != -1) {

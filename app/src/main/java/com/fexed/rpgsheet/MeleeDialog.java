@@ -48,69 +48,63 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.meleeokbtn:
-                EditText meleename = findViewById(R.id.meleenameinput);
-                EditText meleedamage = findViewById(R.id.meleedamageinput);
+        if (v.getId() == R.id.meleeokbtn) {
+            EditText meleename = findViewById(R.id.meleenameinput);
+            EditText meleedamage = findViewById(R.id.meleedamageinput);
 
-                if (TextUtils.isEmpty(meleename.getText().toString())) {
-                    meleename.setError(getContext().getResources().getString(R.string.errorattackname));
-                    this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackname), Toast.LENGTH_SHORT).show();
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            MeleeDialog.this.show();
-                        }
-                    });
-                    break;
-                } else if (TextUtils.isEmpty(meleedamage.getText().toString())) {
-                    meleedamage.setError(getContext().getResources().getString(R.string.errorattackdmg));
-                    this.dismiss();
-                    Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackdmg), Toast.LENGTH_SHORT).show();
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            MeleeDialog.this.show();
-                        }
-                    });
-                    break;
-                } else {
-                    TextView name = (TextView) newrow.findViewById(R.id.meleename);
-                    TextView bonusrange = (TextView) newrow.findViewById(R.id.meleebonus);
-                    TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
-                    TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
+            if (TextUtils.isEmpty(meleename.getText().toString())) {
+                meleename.setError(getContext().getResources().getString(R.string.errorattackname));
+                this.dismiss();
+                Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackname), Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MeleeDialog.this.show();
+                    }
+                });
+            } else if (TextUtils.isEmpty(meleedamage.getText().toString())) {
+                meleedamage.setError(getContext().getResources().getString(R.string.errorattackdmg));
+                this.dismiss();
+                Toast.makeText(this.c.getApplicationContext(), getContext().getResources().getString(R.string.errorattackdmg), Toast.LENGTH_SHORT).show();
+                Handler handler = new Handler();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MeleeDialog.this.show();
+                    }
+                });
+            } else {
+                TextView name = (TextView) newrow.findViewById(R.id.meleename);
+                TextView bonusrange = (TextView) newrow.findViewById(R.id.meleebonus);
+                TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
+                TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
 
-                    final MeleeWeapon weap = new MeleeWeapon(meleename.getText().toString(), meleedamage.getText().toString());
-                    character.armimelee.add(weap);
+                final MeleeWeapon weap = new MeleeWeapon(meleename.getText().toString(), meleedamage.getText().toString());
+                character.armimelee.add(weap);
 
-                    Button removebtn = (Button) newrow.findViewById(R.id.removemelee);
-                    removebtn.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            character.armimelee.remove(weap);
-                            rangedatks.removeView(newrow);
-                            return true;
-                        }
-                    });
+                Button removebtn = (Button) newrow.findViewById(R.id.removemelee);
+                removebtn.setOnLongClickListener(new View.OnLongClickListener() {
+                    @Override
+                    public boolean onLongClick(View view) {
+                        character.armimelee.remove(weap);
+                        rangedatks.removeView(newrow);
+                        return true;
+                    }
+                });
 
-                    int bonus = CharacterActivity.mod(character.FOR);
-                    String suffix = (bonus >= 0) ? "+" : "";
+                int bonus = CharacterActivity.mod(character.FOR);
+                String suffix = (bonus >= 0) ? "+" : "";
 
-                    name.setText(meleename.getText().toString());
-                    bonusrange.setText(suffix + bonus);
-                    comprange.setText("+" + CharacterActivity.prof(character.LV));
-                    damage.setText(meleedamage.getText().toString());
+                name.setText(meleename.getText().toString());
+                bonusrange.setText(suffix + bonus);
+                comprange.setText("+" + CharacterActivity.prof(character.LV));
+                damage.setText(meleedamage.getText().toString());
 
-                    rangedatks.addView(newrow);
-                    this.dismiss();
-                    ((CharacterActivity) c).saveSchedaPG();
-                    break;
-                }
-            default:
-                break;
+                rangedatks.addView(newrow);
+                this.dismiss();
+                ((CharacterActivity) c).saveSchedaPG();
+            }
         }
         dismiss();
     }
