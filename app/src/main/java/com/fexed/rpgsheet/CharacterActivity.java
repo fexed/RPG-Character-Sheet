@@ -1441,6 +1441,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             builder.setTitle(getString(R.string.selectpg));
             final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
             for (int i = 0; i < files.length; i++) {
+                arrayAdapter.getViewTypeCount();
                 arrayAdapter.add((i+1) + ". " + files[i].getName());
             }
             arrayAdapter.add(getString(R.string.newpg));

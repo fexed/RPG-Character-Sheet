@@ -74,8 +74,8 @@
     <string name="ok">OK</string>
     <string name="rimuovi">Remove</string>
     <string name="nome">Name</string>
-    <string name="inseriscidatinuovo">Enter your character\'s details!</string>
-    <string name="nome_e_cognome">Name and surname</string>
+    <string name="inseriscidatinuovo">Enter your character\'s details</string>
+    <string name="nome_e_cognome">Full name</string>
     <string name="classi_e_livelli">Classes and levels</string>
     <string name="livello_totale">Level</string>
     <string name="rangednameplaceholder">Longbow</string>

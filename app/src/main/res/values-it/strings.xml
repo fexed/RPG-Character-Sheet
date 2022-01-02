@@ -72,8 +72,8 @@
     <string name="ok">Ok</string>
     <string name="rimuovi">Rimuovi</string>
     <string name="nome">Nome</string>
-    <string name="inseriscidatinuovo">Inserisci i dati del tuo personaggio!</string>
-    <string name="nome_e_cognome">Nome e cognome</string>
+    <string name="inseriscidatinuovo">Inserisci i dati del tuo personaggio</string>
+    <string name="nome_e_cognome">Nome completo</string>
     <string name="classi_e_livelli">Classi e livelli</string>
     <string name="livello_totale">Livello</string>
     <string name="rangednameplaceholder">Arco Lungo</string>
