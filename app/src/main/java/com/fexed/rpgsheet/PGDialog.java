@@ -1,10 +1,10 @@
 package com.fexed.rpgsheet;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
@@ -19,6 +19,7 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
 
     public CharacterActivity c;
     public Button yes;
+    public Button load;
 
     public PGDialog(CharacterActivity a) {
         super(a);
@@ -31,7 +32,9 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.pgedit);
         yes = findViewById(R.id.Okinputbtn);
+        load = findViewById(R.id.Loadcharbtn);
         yes.setOnClickListener(this);
+        load.setOnClickListener(this);
     }
 
     @Override
@@ -96,6 +99,12 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                 c.saveSchedaPG();
                 this.dismiss();
             }
+        } else if (v.getId() == R.id.Loadcharbtn) {
+            Intent gallery = new Intent(Intent.ACTION_PICK);
+            gallery.setType("*/*");
+            gallery.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            c.startActivityForResult(gallery, CharacterActivity.PICK_CHAR);
+            dismiss();
         }
         dismiss();
     }

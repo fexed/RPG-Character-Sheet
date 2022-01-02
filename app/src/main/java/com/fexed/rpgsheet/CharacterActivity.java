@@ -65,6 +65,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Locale;
@@ -74,8 +76,8 @@ import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
-    private static final int PICK_IMAGE = 101;
-    private static final int PICK_CHAR = 102;
+    static final int PICK_IMAGE = 101;
+    static final int PICK_CHAR = 102;
     static SharedPreferences state;
 
     TextView FOR; TextView FORmod;
@@ -2806,7 +2808,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 Character pg = (Character) (new Gson()).fromJson(json, Character.class);
                 Log.d("FILE", pg.nome);
                 Log.d("FILE", "n: " + pg.inventario.size());
-
+                character = pg;
+                preparaSchedaPG();
             } catch (IOException e) {
                 e.printStackTrace();
                 Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
@@ -2845,11 +2848,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         File pgfile = new File(dir, character.nome.toLowerCase(Locale.ROOT).replace(" ", "_") + ".txt");
 
         try {
-            ObjectOutputStream os = null;
+            OutputStreamWriter os = null;
             try {
-                os = new ObjectOutputStream(new FileOutputStream(pgfile));
+                os = new OutputStreamWriter(new FileOutputStream(pgfile));
                 String json = (new Gson()).toJson(character);
-                os.writeObject(json);
+                os.write(json);
                 Log.d("FILE", "Length: " + pgfile.length());
             } catch (Exception e) {
                 e.printStackTrace();
