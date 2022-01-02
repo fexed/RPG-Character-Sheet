@@ -155,4 +155,7 @@
     <string name="changelog">Nuova versione, v 2.0.1!\n
         - Aggiunta la skill Gestione Animali, sotto Saggezza\n
         - Corretto il bug che non mostrava correttamente le armi corpo a corpo\n</string>
+    <string name="share">Condividi</string>
+    <string name="sharing">Condivisione…</string>
+    <string name="sharingchar">Condivisione di %s</string>
 </resources>

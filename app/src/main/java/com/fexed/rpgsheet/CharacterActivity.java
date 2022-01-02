@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,6 +24,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,6 +51,7 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.gson.Gson;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 
@@ -60,6 +63,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -205,6 +209,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         if (item.getItemId() == R.id.settings) {
             Intent myIntent = new Intent(CharacterActivity.this, Settings.class);
             startActivity(myIntent);
+        } else if (item.getItemId() == R.id.share) {
+            sharePG();
         } else if (item.getItemId() == R.id.dice) {
             DiceDialog inputdialog = new DiceDialog(this, state);
             inputdialog.show();
@@ -1500,28 +1506,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
-    public void saveSchedaPG() {
-        if (!character.nome.equals("")) {
-            ContextWrapper cw = new ContextWrapper(getApplicationContext());
-            File directory = cw.getDir("characters", Context.MODE_PRIVATE);
-            File pgfile = new File(directory, character.nome);
-            ObjectOutputStream os = null;
-            try {
-                os = new ObjectOutputStream(new FileOutputStream(pgfile));
-                os.writeObject(character);
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    assert os != null;
-                    os.close();
-                } catch (IOException | NullPointerException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
-
     private void initializeAds() {
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -1531,14 +1515,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 mAdView.loadAd(adRequest);
             }
         });
-    }
-
-    public static int mod(int punteggio) {
-        return (int) floor((((double) punteggio - 10) / 2));
-    }
-
-    public static int prof(int lv) {
-        return (int) ceil(1 + ((double) lv / 4));
     }
 
     @Override
@@ -2810,5 +2786,76 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             portrait.setImageURI(imageUri);
         }
+    }
+
+    public void saveSchedaPG() {
+        if (!character.nome.equals("")) {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            File directory = cw.getDir("characters", Context.MODE_PRIVATE);
+            File pgfile = new File(directory, character.nome);
+            ObjectOutputStream os = null;
+            try {
+                os = new ObjectOutputStream(new FileOutputStream(pgfile));
+                os.writeObject(character);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    assert os != null;
+                    os.close();
+                } catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    public void sharePG() {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        File dir = new File(cw.getCacheDir(), "export");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+        File pgfile = new File(dir, character.nome.toLowerCase(Locale.ROOT).replace(" ", "_") + ".txt");
+
+        try {
+            ObjectOutputStream os = null;
+            try {
+                os = new ObjectOutputStream(new FileOutputStream(pgfile));
+                String json = (new Gson()).toJson(character);
+                os.writeObject(json);
+                Log.d("FILE", "Length: " + pgfile.length());
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    os.close();
+                } catch (IOException | NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            Uri fileuri = FileProvider.getUriForFile(this, "com.fexed.rpgsheet.provider", pgfile);
+            Log.d("FILE", fileuri.getPath());
+
+            Intent sendIntent = new Intent(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_STREAM, fileuri);
+            sendIntent.setType("text/plain");
+            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing));
+            sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharingchar, character.nome));
+            sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(Intent.createChooser(sendIntent, getString(R.string.sharing)));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+        }
+    }
+
+    public static int mod(int punteggio) {
+        return (int) floor((((double) punteggio - 10) / 2));
+    }
+
+    public static int prof(int lv) {
+        return (int) ceil(1 + ((double) lv / 4));
     }
 }

@@ -6,7 +6,7 @@
         android:id="@+id/charselect"
         android:title="@string/charselect"
         android:icon="@drawable/charselect"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/sleep"
@@ -18,6 +18,12 @@
         android:id="@+id/dice"
         android:title="@string/dice"
         android:icon="@drawable/icon_fg"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/share"
+        android:title="@string/share"
+        android:icon="@drawable/shareic"
         app:showAsAction="ifRoom" />
 
     <item
