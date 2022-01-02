@@ -55,12 +55,14 @@ import com.google.gson.Gson;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.URLConnection;
@@ -73,6 +75,7 @@ import static java.lang.Math.floor;
 
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
     private static final int PICK_IMAGE = 101;
+    private static final int PICK_CHAR = 102;
     static SharedPreferences state;
 
     TextView FOR; TextView FORmod;
@@ -2785,6 +2788,29 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             }
 
             portrait.setImageURI(imageUri);
+        } else if (resultCode == RESULT_OK && requestCode == PICK_CHAR) {
+            Uri fileUri = data.getData();
+            InputStream in;
+
+            try {
+                in = getContentResolver().openInputStream(fileUri);
+                InputStreamReader inr = new InputStreamReader(in);
+                BufferedReader br = new BufferedReader(inr);
+                String rstr;
+                StringBuilder stringBuilder = new StringBuilder();
+                while ((rstr = br.readLine()) != null) {
+                    stringBuilder.append("\n").append(rstr);
+                }
+                in.close();
+                String json = stringBuilder.toString();
+                Character pg = (Character) (new Gson()).fromJson(json, Character.class);
+                Log.d("FILE", pg.nome);
+                Log.d("FILE", "n: " + pg.inventario.size());
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 
