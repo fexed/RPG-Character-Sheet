@@ -161,5 +161,6 @@
     <string name="newlevel">Obtained level %s!</string>
     <string name="changelog">Changelog, v 2.1!\n
         - Code reworked\n
-        - Now you can share your characters with other players!\n</string>
+        - You can share your characters with other players!\n
+        - The app will let you know when you have enough experience points for the next level (according to the DnD 5e rule set)\n</string>
 </resources>
