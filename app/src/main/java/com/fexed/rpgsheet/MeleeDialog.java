@@ -2,7 +2,6 @@ package com.fexed.rpgsheet;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -17,9 +16,6 @@ import android.widget.Toast;
 
 import com.fexed.rpgsheet.data.Character;
 import com.fexed.rpgsheet.data.MeleeWeapon;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MeleeDialog extends Dialog implements View.OnClickListener {
 
@@ -75,15 +71,15 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                     }
                 });
             } else {
-                TextView name = (TextView) newrow.findViewById(R.id.meleename);
-                TextView bonusrange = (TextView) newrow.findViewById(R.id.meleebonus);
-                TextView comprange = (TextView) newrow.findViewById(R.id.meleebonuscomp);
-                TextView damage = (TextView) newrow.findViewById(R.id.meleedamage);
+                TextView name = newrow.findViewById(R.id.meleename);
+                TextView bonusrange = newrow.findViewById(R.id.meleebonus);
+                TextView comprange = newrow.findViewById(R.id.meleebonuscomp);
+                TextView damage = newrow.findViewById(R.id.meleedamage);
 
                 final MeleeWeapon weap = new MeleeWeapon(meleename.getText().toString(), meleedamage.getText().toString());
                 character.armimelee.add(weap);
 
-                Button removebtn = (Button) newrow.findViewById(R.id.removemelee);
+                Button removebtn = newrow.findViewById(R.id.removemelee);
                 removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
@@ -97,8 +93,10 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                 String suffix = (bonus >= 0) ? "+" : "";
 
                 name.setText(meleename.getText().toString());
-                bonusrange.setText(suffix + bonus);
-                comprange.setText("+" + CharacterActivity.prof(character.LV));
+                String tmp = suffix + bonus;
+                bonusrange.setText(tmp);
+                tmp = "+" + CharacterActivity.prof(character.LV);
+                comprange.setText(tmp);
                 damage.setText(meleedamage.getText().toString());
 
                 rangedatks.addView(newrow);

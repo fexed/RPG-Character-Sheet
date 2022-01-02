@@ -90,7 +90,8 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                 c.setTitle(c.character.nome);
                 pgnametxt.setText(c.character.nome);
                 pgclasstxt.setText(c.character.classe);
-                pglvtxt.setText(c.character.LV + "");
+                String tmp = c.character.LV + "";
+                pglvtxt.setText(tmp);
 
                 c.saveSchedaPG();
                 this.dismiss();

@@ -70,7 +70,6 @@ import static java.lang.Math.floor;
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
     private static final int PICK_IMAGE = 101;
     static SharedPreferences state;
-    //static int[] prof = {2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 10, 10, 11, 11, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13};
 
     TextView FOR; TextView FORmod;
     TextView DEX; TextView DEXmod;
@@ -137,7 +136,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         setTitle(getString(android.R.string.unknownName));
 
         if (!state.getString("lastchangelog", "-").equals("2.0.1")) {
-            AlertDialog dialog = new AlertDialog.Builder(CharacterActivity.this)
+            new AlertDialog.Builder(CharacterActivity.this)
                     .setTitle("Changelog 2.0")
                     .setMessage(R.string.changelog)
                     .setNeutralButton("OK", new DialogInterface.OnClickListener() {
@@ -1514,6 +1513,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
             } finally {
                 try {
+                    assert os != null;
                     os.close();
                 } catch (IOException | NullPointerException e) {
                     e.printStackTrace();
@@ -1567,7 +1567,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     }
                     character.spellstat = stat;
                     spellstat.setText(stat);
-                    int bonus = 0;
+                    int bonus;
                     if (character.spellstat.equals("SAG"))
                         bonus = prof(character.LV) + mod(character.SAG);
                     else if (character.spellstat.equals("CAR"))
@@ -1899,7 +1899,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             inputdialog.show();
         } else if (id == R.id.spellatktxt) {
             DiceDialog inputdialog;
-            int bonus = 0;
+            int bonus;
             if (character.spellstat.equals("SAG")) bonus = prof(character.LV) + mod(character.SAG);
             else if (character.spellstat.equals("CAR"))
                 bonus = prof(character.LV) + mod(character.CAR);
@@ -2793,6 +2793,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     e.printStackTrace();
                 } finally {
                     try {
+                        assert fos != null;
                         fos.close();
                     } catch (IOException | NullPointerException e) {
                         e.printStackTrace();

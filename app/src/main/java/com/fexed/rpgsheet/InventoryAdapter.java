@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class InventoryAdapter extends RecyclerView.Adapter {
-    private Character character;
+    private final Character character;
 
     public InventoryAdapter(Character character) {
         this.character = character;

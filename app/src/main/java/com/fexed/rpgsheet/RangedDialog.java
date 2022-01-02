@@ -2,7 +2,6 @@ package com.fexed.rpgsheet;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -18,8 +17,6 @@ import android.widget.Toast;
 import com.fexed.rpgsheet.data.Character;
 import com.fexed.rpgsheet.data.RangedWeapon;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class RangedDialog extends Dialog implements View.OnClickListener {
 
@@ -87,16 +84,16 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                     }
                 });
             } else {
-                TextView name = (TextView) newrow.findViewById(R.id.rangedname);
-                TextView range = (TextView) newrow.findViewById(R.id.range);
-                TextView bonusrange = (TextView) newrow.findViewById(R.id.rangedbonus);
-                TextView comprange = (TextView) newrow.findViewById(R.id.rangedbonuscomp);
-                TextView damage = (TextView) newrow.findViewById(R.id.rangeddamage);
+                TextView name = newrow.findViewById(R.id.rangedname);
+                TextView range = newrow.findViewById(R.id.range);
+                TextView bonusrange = newrow.findViewById(R.id.rangedbonus);
+                TextView comprange = newrow.findViewById(R.id.rangedbonuscomp);
+                TextView damage = newrow.findViewById(R.id.rangeddamage);
 
                 final RangedWeapon weap = new RangedWeapon(rangedname.getText().toString(), rangedrange.getText().toString(), rangeddamage.getText().toString());
                 character.armiranged.add(weap);
 
-                Button removebtn = (Button) newrow.findViewById(R.id.removeranged);
+                Button removebtn = newrow.findViewById(R.id.removeranged);
                 removebtn.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View view) {
@@ -110,8 +107,10 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                 String suffix = (bonus >= 0) ? "+" : "";
 
                 name.setText(rangedname.getText().toString());
-                bonusrange.setText(suffix + bonus);
-                comprange.setText("+" + CharacterActivity.prof(character.LV));
+                String tmp = suffix + bonus;
+                bonusrange.setText(tmp);
+                tmp = "+" + CharacterActivity.prof(character.LV);
+                comprange.setText(tmp);
                 range.setText(rangedrange.getText().toString());
                 damage.setText(rangeddamage.getText().toString());
 
