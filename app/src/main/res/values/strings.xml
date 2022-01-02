@@ -154,10 +154,10 @@
     <string name="delconfirmpg">Are you sure you want to delete %s?</string>
     <string name="casted">A %s spell has been casted!</string>
     <string name="noslots">No more %s slots left!</string>
-    <string name="changelog">Changelog, v 2.0.1!\n
-        - Added Animal Handling skill, under Wisdom\n
-        - Fixed the melee weapons not showing up correctly bug\n</string>
     <string name="share">Share</string>
     <string name="sharing">Sharing…</string>
     <string name="sharingchar">Sharing %s…</string>
+    <string name="changelog">Changelog, v 2.1!\n
+        - Code reworked\n
+        - Now you can share your characters with other players!\n</string>
 </resources>
