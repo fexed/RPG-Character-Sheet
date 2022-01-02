@@ -136,6 +136,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     ImageView portrait;
 
     public Character character;
+    int xptable[] = {0, 300, 900, 2700, 6500, 14000, 23000, 34000, 46000, 64000, 85000, 100000,
+                     120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000};
 
     @Override
     protected void onCreate (Bundle saveBundle) {
@@ -1676,6 +1678,11 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     character.EXP = xp;
                     dialog.cancel();
                     alertd.dismiss();
+                    try {
+                        if (xp >= xptable[character.LV]) {
+                            Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.newlevel, "" + (character.LV + 1)), Snackbar.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception ignored) {}
                     preparaSchedaPG();
                 }
             });

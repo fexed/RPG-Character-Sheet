@@ -156,6 +156,7 @@
     <string name="sharing">Condivisione…</string>
     <string name="sharingchar">Condivisione di %s</string>
     <string name="loadchar">Carica</string>
+    <string name="newlevel">Raggiunto il livello %s!</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Codice rielaborato\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n</string>

@@ -158,6 +158,7 @@
     <string name="sharing">Sharing…</string>
     <string name="sharingchar">Sharing %s…</string>
     <string name="loadchar">Load</string>
+    <string name="newlevel">Obtained level %s!</string>
     <string name="changelog">Changelog, v 2.1!\n
         - Code reworked\n
         - Now you can share your characters with other players!\n</string>
