@@ -1795,7 +1795,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     dialog.cancel();
                     alertd.dismiss();
                     try {
-                        if (xp >= xptable[character.LV]) {
+                        if (xp >= xptable[character.LV] && state.getBoolean("5ethresholds", true)) {
                             Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.newlevel, "" + (character.LV + 1)), Snackbar.LENGTH_SHORT).show();
                         }
                     } catch (Exception ignored) {}

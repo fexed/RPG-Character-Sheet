@@ -158,6 +158,7 @@
     <string name="loadchar">Carica</string>
     <string name="newlevel">Raggiunto il livello %s!</string>
     <string name="set_loadlastchar">Ricarica l\'ultimo personaggio all\'avvio</string>
+    <string name="set_5expthresholds">Usa i requisiti d\'esperienza di DnD 5e</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Codice rielaborato\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n

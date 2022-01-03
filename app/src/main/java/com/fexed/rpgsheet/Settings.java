@@ -32,6 +32,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         SwitchCompat lastchar = findViewById(R.id.switchloadlastchar);
         lastchar.setChecked(state.getBoolean("loadlastchar", false));
         lastchar.setOnCheckedChangeListener(this);
+
+        SwitchCompat thresholds5e = findViewById(R.id.switch5eexp);
+        thresholds5e.setChecked(state.getBoolean("5ethresholds", true));
+        thresholds5e.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -56,6 +60,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        state.edit().putBoolean("loadlastchar", b).apply();
+        if (compoundButton.getId() == R.id.switchloadlastchar) {
+            state.edit().putBoolean("loadlastchar", b).apply();
+        } else if (compoundButton.getId() == R.id.switch5eexp) {
+            state.edit().putBoolean("5ethresholds", b).apply();
+        }
     }
 }

@@ -62,11 +62,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:text="@string/set_loadlastchar"
         android:textAppearance="@android:style/TextAppearance"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/set_5expthresholds"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/switch5eexp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchloadlastchar" />
 
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/switchloadlastchar"
@@ -79,6 +92,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView43" />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switch5eexp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switchloadlastchar" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -90,7 +113,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView43" />
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <TextView
         android:id="@+id/textView10"
