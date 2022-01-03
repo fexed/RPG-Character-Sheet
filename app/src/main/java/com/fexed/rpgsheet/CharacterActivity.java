@@ -1092,7 +1092,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             removebtn = newrow.findViewById(R.id.removeranged);
 
             int bonusb = mod(character.DEX);
-            String suffixb = (bonus >= 0) ? "+" : "";
+            String suffixb = (bonusb >= 0) ? "+" : "";
 
             name.setText(weap.name);
             range.setText(weap.range);
@@ -1167,7 +1167,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             removebtn = newrow.findViewById(R.id.removemelee);
 
             int bonusb = mod(character.FOR);
-            String suffixb = (bonus >= 0) ? "+" : "";
+            String suffixb = (bonusb >= 0) ? "+" : "";
 
             name.setText(weap.name);
             tempstr = suffixb + bonusb;
