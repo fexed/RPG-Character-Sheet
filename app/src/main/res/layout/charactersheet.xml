@@ -980,7 +980,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/atleticatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -999,7 +999,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView8"
+                    app:layout_constraintBaseline_toBaselineOf="@id/atleticatxt"
                     app:layout_constraintEnd_toStartOf="@+id/compatletica" />
 
                 <CheckBox
@@ -1009,7 +1009,7 @@
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView8"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/atleticatxt"
                     app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
 
@@ -1040,7 +1040,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/acrobaziatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1059,7 +1059,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/textView12"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/acrobaziatxt"
                     app:layout_constraintEnd_toStartOf="@id/compacrobazia" />
 
                 <CheckBox
@@ -1086,7 +1086,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView14"
+                    android:id="@+id/furtivitatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1105,7 +1105,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView14"
+                    app:layout_constraintBaseline_toBaselineOf="@id/furtivitatxt"
                     app:layout_constraintEnd_toStartOf="@id/compfurtivita" />
 
                 <CheckBox
@@ -1132,7 +1132,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView15"
+                    android:id="@+id/rapiditadimanotxt"
                     android:layout_width="wrap_content"
                     android:layout_height="19dp"
                     android:layout_marginStart="8dp"
@@ -1151,7 +1151,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView15"
+                    app:layout_constraintBaseline_toBaselineOf="@id/rapiditadimanotxt"
                     app:layout_constraintEnd_toStartOf="@id/comprapiditadimano" />
 
                 <CheckBox
@@ -1191,7 +1191,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView19"
+                    android:id="@+id/investigaretxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1210,7 +1210,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView19"
+                    app:layout_constraintBaseline_toBaselineOf="@id/investigaretxt"
                     app:layout_constraintEnd_toStartOf="@id/compinvestigare" />
 
                 <CheckBox
@@ -1237,7 +1237,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView20"
+                    android:id="@+id/arcanotxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1256,7 +1256,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView20"
+                    app:layout_constraintBaseline_toBaselineOf="@id/arcanotxt"
                     app:layout_constraintEnd_toStartOf="@id/comparcano" />
 
                 <CheckBox
@@ -1284,7 +1284,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView21"
+                    android:id="@+id/storiatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1303,7 +1303,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView21"
+                    app:layout_constraintBaseline_toBaselineOf="@id/storiatxt"
                     app:layout_constraintEnd_toStartOf="@id/compstoria" />
 
                 <CheckBox
@@ -1330,7 +1330,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView22"
+                    android:id="@+id/religionetxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1349,7 +1349,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView22"
+                    app:layout_constraintBaseline_toBaselineOf="@id/religionetxt"
                     app:layout_constraintEnd_toStartOf="@id/compreligionefolklore" />
 
                 <CheckBox
@@ -1376,7 +1376,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView23"
+                    android:id="@+id/naturatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1395,7 +1395,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView23"
+                    app:layout_constraintBaseline_toBaselineOf="@id/naturatxt"
                     app:layout_constraintEnd_toStartOf="@id/compnatura" />
 
                 <CheckBox
@@ -1436,7 +1436,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView25"
+                    android:id="@+id/sopravvivenzatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1455,7 +1455,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView25"
+                    app:layout_constraintBaseline_toBaselineOf="@id/sopravvivenzatxt"
                     app:layout_constraintEnd_toStartOf="@id/compsopravvivenza" />
 
                 <CheckBox
@@ -1482,7 +1482,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/medicinatxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1501,7 +1501,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView26"
+                    app:layout_constraintBaseline_toBaselineOf="@id/medicinatxt"
                     app:layout_constraintEnd_toStartOf="@id/compmedicina" />
 
                 <CheckBox
@@ -1528,7 +1528,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView27"
+                    android:id="@+id/percezionetxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1547,7 +1547,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView27"
+                    app:layout_constraintBaseline_toBaselineOf="@id/percezionetxt"
                     app:layout_constraintEnd_toStartOf="@id/comppercezione" />
 
                 <CheckBox
@@ -1574,7 +1574,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView28"
+                    android:id="@+id/intuizionetxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1593,7 +1593,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView28"
+                    app:layout_constraintBaseline_toBaselineOf="@id/intuizionetxt"
                     app:layout_constraintEnd_toStartOf="@id/compintuizione" />
 
                 <CheckBox
@@ -1615,7 +1615,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView40"
+                    app:layout_constraintBaseline_toBaselineOf="@id/animalitxt"
                     app:layout_constraintEnd_toStartOf="@id/companimali" />
 
                 <CheckBox
@@ -1629,7 +1629,7 @@
                     app:layout_constraintEnd_toEndOf="@+id/abilitatitle" />
 
                 <TextView
-                    android:id="@+id/textView40"
+                    android:id="@+id/animalitxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1679,7 +1679,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView30"
+                    android:id="@+id/intimidiretxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1698,7 +1698,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView30"
+                    app:layout_constraintBaseline_toBaselineOf="@id/intimidiretxt"
                     app:layout_constraintEnd_toStartOf="@id/compintimidire" />
 
                 <CheckBox
@@ -1725,7 +1725,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/ingannaretxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1744,7 +1744,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView31"
+                    app:layout_constraintBaseline_toBaselineOf="@id/ingannaretxt"
                     app:layout_constraintEnd_toStartOf="@id/compingannare" />
 
                 <CheckBox
@@ -1771,7 +1771,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/intratteneretxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1790,7 +1790,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView32"
+                    app:layout_constraintBaseline_toBaselineOf="@id/intratteneretxt"
                     app:layout_constraintEnd_toStartOf="@id/compintrattenere" />
 
                 <CheckBox
@@ -1817,7 +1817,7 @@
                     tools:text="+100" />
 
                 <TextView
-                    android:id="@+id/textView33"
+                    android:id="@+id/persuaderetxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -1836,7 +1836,7 @@
                     android:checked="false"
                     android:duplicateParentState="false"
                     android:visibility="invisible"
-                    app:layout_constraintBaseline_toBaselineOf="@id/textView33"
+                    app:layout_constraintBaseline_toBaselineOf="@id/persuaderetxt"
                     app:layout_constraintEnd_toStartOf="@id/comppersuadere" />
 
                 <CheckBox

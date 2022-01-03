@@ -105,34 +105,34 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     RecyclerView inventoryView;
     int modfor;
     TextView tsfortxt; CheckBox comptsfor;
-    TextView atletica; CheckBox compatletica; CheckBox expatletica;
+    TextView atleticatxt; TextView atletica; CheckBox compatletica; CheckBox expatletica;
     int moddex;
     TextView tsdextxt; CheckBox comptsdex;
-    TextView acrobazia; CheckBox compacrobazia; CheckBox expacrobazia;
-    TextView furtivita; CheckBox compfurtivita; CheckBox expfurtivita;
-    TextView rapiditadimano; CheckBox comprapiditadimano; CheckBox exprapiditadimano;
+    TextView acrobaziatxt; TextView acrobazia; CheckBox compacrobazia; CheckBox expacrobazia;
+    TextView furtivitatxt; TextView furtivita; CheckBox compfurtivita; CheckBox expfurtivita;
+    TextView rapiditadimanotxt; TextView rapiditadimano; CheckBox comprapiditadimano; CheckBox exprapiditadimano;
     int modcos;
     TextView tscostxt; CheckBox comptscos;
     int modint;
     TextView tsinttxt; CheckBox comptsint;
-    TextView investigare; CheckBox compinvestigare; CheckBox expinvestigare;
-    TextView arcano; CheckBox comparcano; CheckBox exparcano;
-    TextView storia; CheckBox compstoria; CheckBox expstoria;
-    TextView religionefolklore; CheckBox compreligionefolklore; CheckBox expreligionefolklore;
-    TextView natura; CheckBox compnatura; CheckBox expnatura;
+    TextView investigaretxt; TextView investigare; CheckBox compinvestigare; CheckBox expinvestigare;
+    TextView arcanotxt; TextView arcano; CheckBox comparcano; CheckBox exparcano;
+    TextView storiatxt; TextView storia; CheckBox compstoria; CheckBox expstoria;
+    TextView religionefolkloretxt; TextView religionefolklore; CheckBox compreligionefolklore; CheckBox expreligionefolklore;
+    TextView naturatxt; TextView natura; CheckBox compnatura; CheckBox expnatura;
     int modsag;
     TextView tssagtxt; CheckBox comptssag;
-    TextView sopravvivenza; CheckBox compsopravvivenza; CheckBox expsopravvivenza;
-    TextView medicina; CheckBox compmedicina; CheckBox expmedicina;
-    TextView percezione; CheckBox comppercezione; CheckBox exppercezione;
-    TextView intuizione; CheckBox compintuizione; CheckBox expintuizione;
-    TextView animali; CheckBox companimali; CheckBox expanimali;
+    TextView sopravvivenzatxt; TextView sopravvivenza; CheckBox compsopravvivenza; CheckBox expsopravvivenza;
+    TextView medicinatxt; TextView medicina; CheckBox compmedicina; CheckBox expmedicina;
+    TextView percezionetxt; TextView percezione; CheckBox comppercezione; CheckBox exppercezione;
+    TextView intuizionetxt; TextView intuizione; CheckBox compintuizione; CheckBox expintuizione;
+    TextView animalitxt; TextView animali; CheckBox companimali; CheckBox expanimali;
     int modcar;
     TextView tscartxt; CheckBox comptscar;
-    TextView intimidire; CheckBox compintimidire; CheckBox expintimidire;
-    TextView ingannare; CheckBox compingannare; CheckBox expingannare;
-    TextView intrattenere; CheckBox compintrattenere; CheckBox expintrattenere;
-    TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
+    TextView intimidiretxt; TextView intimidire; CheckBox compintimidire; CheckBox expintimidire;
+    TextView ingannaretxt; TextView ingannare; CheckBox compingannare; CheckBox expingannare;
+    TextView intratteneretxt; TextView intrattenere; CheckBox compintrattenere; CheckBox expintrattenere;
+    TextView persuaderetxt; TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
     ImageView portrait;
 
     public Character character;
@@ -412,18 +412,12 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
     @SuppressLint("InflateParams")
     private void preparaSchedaPG() {
-        FOR = findViewById(R.id.FOR);
-        FORmod = findViewById(R.id.FORmod);
-        DEX = findViewById(R.id.DEX);
-        DEXmod = findViewById(R.id.DEXmod);
-        COS = findViewById(R.id.COS);
-        COSmod = findViewById(R.id.COSmod);
-        INT = findViewById(R.id.INT);
-        INTmod = findViewById(R.id.INTmod);
-        SAG = findViewById(R.id.SAG);
-        SAGmod = findViewById(R.id.SAGmod);
-        CAR = findViewById(R.id.CAR);
-        CARmod = findViewById(R.id.CARmod);
+        FOR = findViewById(R.id.FOR); FORmod = findViewById(R.id.FORmod);
+        DEX = findViewById(R.id.DEX); DEXmod = findViewById(R.id.DEXmod);
+        COS = findViewById(R.id.COS); COSmod = findViewById(R.id.COSmod);
+        INT = findViewById(R.id.INT); INTmod = findViewById(R.id.INTmod);
+        SAG = findViewById(R.id.SAG); SAGmod = findViewById(R.id.SAGmod);
+        CAR = findViewById(R.id.CAR); CARmod = findViewById(R.id.CARmod);
         lvtxt = findViewById(R.id.pglvtxt);
         nametxt = findViewById(R.id.pgnametxt);
         classtxt = findViewById(R.id.pgclasstxt);
@@ -674,6 +668,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         comptscar.setOnClickListener(this);
 
         atletica = findViewById(R.id.atletica);
+        atleticatxt = findViewById(R.id.atleticatxt);
         compatletica = findViewById(R.id.compatletica);
         expatletica = findViewById(R.id.expatletica);
         compatletica.setOnCheckedChangeListener(this);
@@ -685,8 +680,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         atletica.setText(tempstr);
         atletica.setOnClickListener(this);
+        atleticatxt.setOnClickListener(this);
 
         acrobazia = findViewById(R.id.acrobazia);
+        acrobaziatxt = findViewById(R.id.acrobaziatxt);
         compacrobazia = findViewById(R.id.compacrobazia);
         expacrobazia = findViewById(R.id.expacrobazia);
         compacrobazia.setOnCheckedChangeListener(this);
@@ -698,8 +695,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         acrobazia.setText(tempstr);
         acrobazia.setOnClickListener(this);
+        acrobaziatxt.setOnClickListener(this);
 
         furtivita = findViewById(R.id.furtivita);
+        furtivitatxt = findViewById(R.id.furtivitatxt);
         compfurtivita = findViewById(R.id.compfurtivita);
         expfurtivita = findViewById(R.id.expfurtivita);
         compfurtivita.setOnCheckedChangeListener(this);
@@ -711,8 +710,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         furtivita.setText(tempstr);
         furtivita.setOnClickListener(this);
+        furtivitatxt.setOnClickListener(this);
 
         rapiditadimano = findViewById(R.id.rapiditadimano);
+        rapiditadimanotxt = findViewById(R.id.rapiditadimanotxt);
         comprapiditadimano = findViewById(R.id.comprapiditadimano);
         exprapiditadimano = findViewById(R.id.exprapiditadimano);
         comprapiditadimano.setOnCheckedChangeListener(this);
@@ -724,8 +725,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         rapiditadimano.setText(tempstr);
         rapiditadimano.setOnClickListener(this);
+        rapiditadimanotxt.setOnClickListener(this);
 
         investigare = findViewById(R.id.investigare);
+        investigaretxt = findViewById(R.id.investigaretxt);
         compinvestigare = findViewById(R.id.compinvestigare);
         expinvestigare = findViewById(R.id.expinvestigare);
         compinvestigare.setOnCheckedChangeListener(this);
@@ -737,8 +740,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         investigare.setText(tempstr);
         investigare.setOnClickListener(this);
+        investigaretxt.setOnClickListener(this);
 
         arcano = findViewById(R.id.arcano);
+        arcanotxt = findViewById(R.id.arcanotxt);
         comparcano = findViewById(R.id.comparcano);
         exparcano = findViewById(R.id.exparcano);
         comparcano.setOnCheckedChangeListener(this);
@@ -750,8 +755,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         arcano.setText(tempstr);
         arcano.setOnClickListener(this);
+        arcanotxt.setOnClickListener(this);
 
         storia = findViewById(R.id.storia);
+        storiatxt = findViewById(R.id.storiatxt);
         compstoria = findViewById(R.id.compstoria);
         expstoria = findViewById(R.id.expstoria);
         compstoria.setOnCheckedChangeListener(this);
@@ -763,8 +770,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         storia.setText(tempstr);
         storia.setOnClickListener(this);
+        storiatxt.setOnClickListener(this);
 
         religionefolklore = findViewById(R.id.religionefolklore);
+        religionefolkloretxt = findViewById(R.id.religionetxt);
         compreligionefolklore = findViewById(R.id.compreligionefolklore);
         expreligionefolklore = findViewById(R.id.expreligionefolklore);
         compreligionefolklore.setOnCheckedChangeListener(this);
@@ -776,8 +785,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         religionefolklore.setText(tempstr);
         religionefolklore.setOnClickListener(this);
+        religionefolkloretxt.setOnClickListener(this);
 
         natura = findViewById(R.id.natura);
+        naturatxt = findViewById(R.id.naturatxt);
         compnatura = findViewById(R.id.compnatura);
         expnatura = findViewById(R.id.expnatura);
         compnatura.setOnCheckedChangeListener(this);
@@ -789,8 +800,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         natura.setText(tempstr);
         natura.setOnClickListener(this);
+        naturatxt.setOnClickListener(this);
 
         sopravvivenza = findViewById(R.id.sopravvivenza);
+        sopravvivenzatxt = findViewById(R.id.sopravvivenzatxt);
         compsopravvivenza = findViewById(R.id.compsopravvivenza);
         expsopravvivenza = findViewById(R.id.expsopravvivenza);
         compsopravvivenza.setOnCheckedChangeListener(this);
@@ -802,8 +815,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         sopravvivenza.setText(tempstr);
         sopravvivenza.setOnClickListener(this);
+        sopravvivenzatxt.setOnClickListener(this);
 
         medicina = findViewById(R.id.medicina);
+        medicinatxt = findViewById(R.id.medicinatxt);
         compmedicina = findViewById(R.id.compmedicina);
         expmedicina = findViewById(R.id.expmedicina);
         compmedicina.setOnCheckedChangeListener(this);
@@ -815,8 +830,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         medicina.setText(tempstr);
         medicina.setOnClickListener(this);
+        medicinatxt.setOnClickListener(this);
 
         percezione = findViewById(R.id.percezione);
+        percezionetxt = findViewById(R.id.percezionetxt);
         comppercezione = findViewById(R.id.comppercezione);
         exppercezione = findViewById(R.id.exppercezione);
         comppercezione.setOnCheckedChangeListener(this);
@@ -828,8 +845,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         percezione.setText(tempstr);
         percezione.setOnClickListener(this);
+        percezionetxt.setOnClickListener(this);
 
         intuizione = findViewById(R.id.intuizione);
+        intuizionetxt = findViewById(R.id.intuizionetxt);
         compintuizione = findViewById(R.id.compintuizione);
         expintuizione = findViewById(R.id.expintuizione);
         compintuizione.setOnCheckedChangeListener(this);
@@ -841,8 +860,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         intuizione.setText(tempstr);
         intuizione.setOnClickListener(this);
+        intuizionetxt.setOnClickListener(this);
 
         animali = findViewById(R.id.animali);
+        animalitxt = findViewById(R.id.animalitxt);
         companimali = findViewById(R.id.companimali);
         expanimali = findViewById(R.id.expanimali);
         companimali.setOnCheckedChangeListener(this);
@@ -854,8 +875,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         animali.setText(tempstr);
         animali.setOnClickListener(this);
+        animalitxt.setOnClickListener(this);
 
         intimidire = findViewById(R.id.intimidire);
+        intimidiretxt = findViewById(R.id.intimidiretxt);
         compintimidire = findViewById(R.id.compintimidire);
         expintimidire = findViewById(R.id.expintimidire);
         compintimidire.setOnCheckedChangeListener(this);
@@ -867,8 +890,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         intimidire.setText(tempstr);
         intimidire.setOnClickListener(this);
+        intimidiretxt.setOnClickListener(this);
 
         ingannare = findViewById(R.id.ingannare);
+        ingannaretxt = findViewById(R.id.ingannaretxt);
         compingannare = findViewById(R.id.compingannare);
         expingannare = findViewById(R.id.expingannare);
         compingannare.setOnCheckedChangeListener(this);
@@ -880,8 +905,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         ingannare.setText(tempstr);
         ingannare.setOnClickListener(this);
+        ingannaretxt.setOnClickListener(this);
 
         intrattenere = findViewById(R.id.intrattenere);
+        intratteneretxt = findViewById(R.id.intratteneretxt);
         compintrattenere = findViewById(R.id.compintrattenere);
         expintrattenere = findViewById(R.id.expintrattenere);
         compintrattenere.setOnCheckedChangeListener(this);
@@ -893,8 +920,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         intrattenere.setText(tempstr);
         intrattenere.setOnClickListener(this);
+        intratteneretxt.setOnClickListener(this);
 
         persuadere = findViewById(R.id.persuadere);
+        persuaderetxt = findViewById(R.id.persuaderetxt);
         comppersuadere = findViewById(R.id.comppersuadere);
         exppersuadere = findViewById(R.id.exppersuadere);
         comppersuadere.setOnCheckedChangeListener(this);
@@ -906,6 +935,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         tempstr = suffix + bonus;
         persuadere.setText(tempstr);
         persuadere.setOnClickListener(this);
+        persuaderetxt.setOnClickListener(this);
 
         EditText linguetxt = findViewById(R.id.linguetxt);
         linguetxt.setText(character.linguetxt);
@@ -1846,75 +1876,75 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((character.tscar) ? prof(character.LV) : 0), getString(R.string.tiro_salvezza) + " " + getString(R.string.car));
             inputdialog.show();
-        } else if (id == R.id.atletica) {
+        } else if (id == R.id.atletica || id == R.id.atleticatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod((character.FOR)) + ((compatletica.isChecked()) ? ((expatletica.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.atletica));
             inputdialog.show();
-        } else if (id == R.id.acrobazia) {
+        } else if (id == R.id.acrobazia || id == R.id.acrobaziatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((compacrobazia.isChecked()) ? ((expacrobazia.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.acrobazia));
             inputdialog.show();
-        } else if (id == R.id.furtivita) {
+        } else if (id == R.id.furtivita || id == R.id.furtivitatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((compfurtivita.isChecked()) ? ((expfurtivita.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.furtivit));
             inputdialog.show();
-        } else if (id == R.id.rapiditadimano) {
+        } else if (id == R.id.rapiditadimano || id == R.id.rapiditadimanotxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.DEX) + ((comprapiditadimano.isChecked()) ? ((exprapiditadimano.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.rapidit_di_mano));
             inputdialog.show();
-        } else if (id == R.id.investigare) {
+        } else if (id == R.id.investigare || id == R.id.investigaretxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compinvestigare.isChecked()) ? ((expinvestigare.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.investigare));
             inputdialog.show();
-        } else if (id == R.id.arcano) {
+        } else if (id == R.id.arcano || id == R.id.arcanotxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.INT) + ((comparcano.isChecked()) ? ((exparcano.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.arcano));
             inputdialog.show();
-        } else if (id == R.id.storia) {
+        } else if (id == R.id.storia || id == R.id.storiatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compstoria.isChecked()) ? ((expstoria.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.storia));
             inputdialog.show();
-        } else if (id == R.id.religionefolklore) {
+        } else if (id == R.id.religionefolklore || id == R.id.religionetxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compreligionefolklore.isChecked()) ? ((expreligionefolklore.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.religione_e_folklore));
             inputdialog.show();
-        } else if (id == R.id.natura) {
+        } else if (id == R.id.natura || id == R.id.naturatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.INT) + ((compnatura.isChecked()) ? ((expnatura.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.natura));
             inputdialog.show();
-        } else if (id == R.id.sopravvivenza) {
+        } else if (id == R.id.sopravvivenza || id == R.id.sopravvivenzatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compsopravvivenza.isChecked()) ? ((expsopravvivenza.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.sopravvivenza));
             inputdialog.show();
-        } else if (id == R.id.medicina) {
+        } else if (id == R.id.medicina || id == R.id.medicinatxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compmedicina.isChecked()) ? ((expmedicina.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.medicina));
             inputdialog.show();
-        } else if (id == R.id.percezione) {
+        } else if (id == R.id.percezione || id == R.id.percezionetxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((comppercezione.isChecked()) ? ((exppercezione.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.percezione));
             inputdialog.show();
-        } else if (id == R.id.intuizione) {
+        } else if (id == R.id.intuizione || id == R.id.intuizionetxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((compintuizione.isChecked()) ? ((expintuizione.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intuizione));
             inputdialog.show();
-        } else if (id == R.id.animali) {
+        } else if (id == R.id.animali || id == R.id.animalitxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.SAG) + ((companimali.isChecked()) ? ((expanimali.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.animali));
             inputdialog.show();
-        } else if (id == R.id.intimidire) {
+        } else if (id == R.id.intimidire || id == R.id.intimidiretxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintimidire.isChecked()) ? ((expintimidire.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intimidire));
             inputdialog.show();
-        } else if (id == R.id.ingannare) {
+        } else if (id == R.id.ingannare || id == R.id.ingannaretxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compingannare.isChecked()) ? ((expingannare.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.ingannare));
             inputdialog.show();
-        } else if (id == R.id.intrattenere) {
+        } else if (id == R.id.intrattenere || id == R.id.intratteneretxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((compintrattenere.isChecked()) ? ((expintrattenere.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.intrattenere));
             inputdialog.show();
-        } else if (id == R.id.persuadere) {
+        } else if (id == R.id.persuadere || id == R.id.persuaderetxt) {
             DiceDialog inputdialog;
             inputdialog = new DiceDialog(this, state, mod(character.CAR) + ((comppersuadere.isChecked()) ? ((exppersuadere.isChecked()) ? prof(character.LV) * 2 : prof(character.LV)) : 0), getString(R.string.persuadere));
             inputdialog.show();
