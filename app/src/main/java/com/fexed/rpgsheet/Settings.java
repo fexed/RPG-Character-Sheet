@@ -6,12 +6,14 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
-public class Settings extends AppCompatActivity implements View.OnClickListener {
+public class Settings extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     SharedPreferences state;
     @Override
@@ -26,6 +28,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
 
         Button resetbtn = findViewById(R.id.resetbtn);
         resetbtn.setOnClickListener(this);
+
+        SwitchCompat lastchar = findViewById(R.id.switchloadlastchar);
+        lastchar.setChecked(state.getBoolean("loadlastchar", false));
+        lastchar.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -46,5 +52,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener 
             });
             alert.show();
         }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        state.edit().putBoolean("loadlastchar", b).apply();
     }
 }

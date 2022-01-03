@@ -176,7 +176,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         state.edit().putInt("launchn", n).apply();
 
         migrateFromPreferences();
-        loadSchedaPG();
+        loadSchedaPG(state.getBoolean("loadlastchar", false));
         initializeAds();
         Bundle bndl = new Bundle();
         bndl.putInt("launchtimes", state.getInt("launchn", -1));
@@ -276,7 +276,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
             Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.resttxt), Snackbar.LENGTH_LONG).show();
         } else if (item.getItemId() == R.id.charselect) {
-            loadSchedaPG();
+            loadSchedaPG(false);
         }
         return true;
     }
@@ -495,6 +495,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             PGDialog inputdialog = new PGDialog(this);
             inputdialog.show();
         }
+        state.edit().putString("lastchar", character.nome).apply();
         Bundle bndl = new Bundle();
         bndl.putString("Name", character.nome);
         bndl.putInt("launchtimes", state.getInt("launchn", -1));
@@ -1433,81 +1434,112 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         saveSchedaPG();
     }
 
-    private void loadSchedaPG() {
+    private void loadSchedaPG(boolean loadlastchar) {
         ContextWrapper cw = new ContextWrapper(getApplicationContext());
         File directory = cw.getDir("characters", Context.MODE_PRIVATE);
         final File[] files = directory.listFiles();
         assert files != null;
         if (files.length > 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-            builder.setTitle(getString(R.string.selectpg));
-            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
-            for (int i = 0; i < files.length; i++) {
-                arrayAdapter.getViewTypeCount();
-                arrayAdapter.add((i+1) + ". " + files[i].getName());
-            }
-            arrayAdapter.add(getString(R.string.newpg));
-            arrayAdapter.add(getString(R.string.delpg));
-            builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    if (which == files.length) {
-                        character = null;
-                        preparaSchedaPG();
-                    } else if (which == files.length+1) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
-                        builder.setTitle(getString(R.string.selectpg));
-                        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
-                        for (int i = 0; i < files.length; i++) {
-                            arrayAdapter.add((i+1) + ". " + files[i].getName());
-                        }
-                        builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, final int which) {
-                                new AlertDialog.Builder(CharacterActivity.this)
-                                        .setTitle(R.string.deleteconfirm)
-                                        .setMessage(getString(R.string.delconfirmpg, files[which].getName()))
-                                        .setIcon(android.R.drawable.ic_dialog_alert)
-                                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                            public void onClick(DialogInterface dialog, int whichButton) {
-                                                if (files[which].delete()) Snackbar.make(findViewById(R.id.mainscroll), R.string.pgdeleteok, Snackbar.LENGTH_LONG).show();
-                                                loadSchedaPG();
-                                            }})
-                                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                                            @Override
-                                            public void onClick(DialogInterface dialog, int which) {
-                                                loadSchedaPG();
-                                            }
-                                        })
-                                        .setCancelable(false).show();
-                            }
-                        });
-                        builder.show();
-                    } else {
-                        ObjectInputStream os = null;
-                        try {
-                            os = new ObjectInputStream(new FileInputStream(files[which]));
+            if (loadlastchar && state.getString("lastchar", null) != null) {
+                int which = -1;
+                for (int i = 0; i < files.length; i++) {
+                    if (files[i].getName().equals(state.getString("lastchar", null))) {
+                        which = i;
+                        break;
+                    }
+                }
+                ObjectInputStream os = null;
+                try {
+                    os = new ObjectInputStream(new FileInputStream(files[which]));
 
-                            //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
-                            character = (Character) os.readObject();
-                            //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
+                    //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
+                    character = (Character) os.readObject();
+                    //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
 
-                            os.close();
+                    os.close();
+                    preparaSchedaPG();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        if (os != null) os.close();
+                    } catch (IOException e) {
+                        Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+                    }
+                }
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
+                builder.setTitle(getString(R.string.selectpg));
+                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
+                for (int i = 0; i < files.length; i++) {
+                    arrayAdapter.getViewTypeCount();
+                    arrayAdapter.add((i + 1) + ". " + files[i].getName());
+                }
+                arrayAdapter.add(getString(R.string.newpg));
+                arrayAdapter.add(getString(R.string.delpg));
+                builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == files.length) {
+                            character = null;
                             preparaSchedaPG();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
+                        } else if (which == files.length + 1) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(CharacterActivity.this);
+                            builder.setTitle(getString(R.string.selectpg));
+                            final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(CharacterActivity.this, R.layout.pgselectchoice);
+                            for (int i = 0; i < files.length; i++) {
+                                arrayAdapter.add((i + 1) + ". " + files[i].getName());
+                            }
+                            builder.setAdapter(arrayAdapter, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, final int which) {
+                                    new AlertDialog.Builder(CharacterActivity.this)
+                                            .setTitle(R.string.deleteconfirm)
+                                            .setMessage(getString(R.string.delconfirmpg, files[which].getName()))
+                                            .setIcon(android.R.drawable.ic_dialog_alert)
+                                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int whichButton) {
+                                                    if (files[which].delete())
+                                                        Snackbar.make(findViewById(R.id.mainscroll), R.string.pgdeleteok, Snackbar.LENGTH_LONG).show();
+                                                    loadSchedaPG(false);
+                                                }
+                                            })
+                                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    loadSchedaPG(false);
+                                                }
+                                            })
+                                            .setCancelable(false).show();
+                                }
+                            });
+                            builder.show();
+                        } else {
+                            ObjectInputStream os = null;
                             try {
-                                if (os != null) os.close();
-                            } catch (IOException e) {
-                                Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+                                os = new ObjectInputStream(new FileInputStream(files[which]));
+
+                                //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
+                                character = (Character) os.readObject();
+                                //************ROTTO SE CAMBI QUALCOSA NELLA CLASSE FAI ATTENZIONE PLEASE
+
+                                os.close();
+                                preparaSchedaPG();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            } finally {
+                                try {
+                                    if (os != null) os.close();
+                                } catch (IOException e) {
+                                    Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+                                }
                             }
                         }
                     }
-                }
-            });
-            builder.setCancelable(false);
-            builder.show();
+                });
+                builder.setCancelable(false);
+                builder.show();
+            }
         } else {
             character = null;
             preparaSchedaPG();

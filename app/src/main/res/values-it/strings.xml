@@ -157,8 +157,9 @@
     <string name="sharingchar">Condivisione di %s</string>
     <string name="loadchar">Carica</string>
     <string name="newlevel">Raggiunto il livello %s!</string>
+    <string name="set_loadlastchar">Ricarica l\'ultimo personaggio all\'avvio</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Codice rielaborato\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n
-        - L'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondio il set di regole di DnD 5e)\n</string>
+        - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondio il set di regole di DnD 5e)\n</string>
 </resources>
