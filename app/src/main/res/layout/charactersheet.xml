@@ -10,155 +10,164 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/pgportrait"
-            android:layout_width="150dp"
-            android:layout_height="200dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/propicplaceholder" />
-
-        <TextView
-            android:id="@+id/pgnametxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
-            android:fontFamily="serif"
-            android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@+id/pgportrait"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/pgportrait"
-            tools:text="Atanvar il discretamente avveduto" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/pgclasstxt"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="4dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@android:string/unknownName"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/pgnametxt"
-            app:layout_constraintStart_toStartOf="@+id/pgnametxt"
-            app:layout_constraintTop_toBottomOf="@+id/pgnametxt" />
+            <ImageView
+                android:id="@+id/pgportrait"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/propicplaceholder" />
 
-        <TextView
-            android:id="@+id/pgxptxtv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="0 xp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
-            app:layout_constraintTop_toTopOf="@+id/pglvtxt"
-            tools:text="xxxx xp" />
+            <TextView
+                android:id="@+id/pgnametxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="serif"
+                android:text="@android:string/unknownName"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="30sp"
+                app:layout_constraintEnd_toStartOf="@+id/pgportrait"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Atanvar il discretamente avveduto" />
 
-        <Button
-            android:id="@+id/addxpbtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="4dp"
-            android:background="@android:color/transparent"
-            android:text="+"
-            app:layout_constraintBottom_toBottomOf="@+id/pgxptxtv"
-            app:layout_constraintStart_toEndOf="@+id/pgxptxtv"
-            app:layout_constraintTop_toTopOf="@id/pgxptxtv" />
+            <TextView
+                android:id="@+id/pgclasstxt"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@android:string/unknownName"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pgnametxt" />
 
-        <TextView
-            android:id="@+id/pglvtxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:fontFamily="monospace"
-            android:text="0"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pglvtxt2"
-            app:layout_constraintTop_toBottomOf="@+id/pgclasstxt" />
+            <TextView
+                android:id="@+id/pgxptxtv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/addxpbtn"
+                app:layout_constraintStart_toStartOf="@+id/pglvtxt2"
+                app:layout_constraintTop_toTopOf="@+id/addxpbtn"
+                tools:text="xxxx xp" />
 
-        <TextView
-            android:id="@+id/pglvtxt2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/lv"
-            android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
-            app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
+            <Button
+                android:id="@+id/addxpbtn"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="@android:color/transparent"
+                android:text="+"
+                app:layout_constraintStart_toEndOf="@+id/pgxptxtv"
+                app:layout_constraintTop_toBottomOf="@+id/pglvtxt" />
 
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/bonus_comp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/proftxt" />
+            <TextView
+                android:id="@+id/pglvtxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="monospace"
+                android:text="0"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/pglvtxt2"
+                app:layout_constraintTop_toBottomOf="@+id/pgclasstxt" />
 
-        <TextView
-            android:id="@+id/proftxt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:text="+0"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/pgportrait" />
+            <TextView
+                android:id="@+id/pglvtxt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/lv"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
-        <CheckBox
-            android:id="@+id/inspirationbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:fontFamily="sans-serif-condensed"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/proftxt" />
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/bonus_comp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
+                app:layout_constraintEnd_toStartOf="@+id/proftxt"
+                app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/ispirazione"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/inspirationbtn"
-            app:layout_constraintEnd_toStartOf="@+id/inspirationbtn"
-            app:layout_constraintTop_toTopOf="@+id/inspirationbtn" />
+            <TextView
+                android:id="@+id/proftxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+0"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView18"
+                app:layout_constraintStart_toStartOf="@+id/inspirationbtn"
+                app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+            <CheckBox
+                android:id="@+id/inspirationbtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center_vertical"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/addxpbtn"
+                app:layout_constraintEnd_toStartOf="@+id/pgportrait" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-condensed"
+                android:text="@string/ispirazione"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/inspirationbtn"
+                app:layout_constraintEnd_toStartOf="@+id/inspirationbtn"
+                app:layout_constraintTop_toTopOf="@+id/inspirationbtn" />
+
+            <ProgressBar
+                android:id="@+id/xpbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="@+id/addxpbtn"
+                app:layout_constraintStart_toStartOf="@+id/pgxptxtv"
+                app:layout_constraintTop_toBottomOf="@+id/addxpbtn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/stats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/inspirationbtn">
+            app:layout_constraintTop_toBottomOf="@+id/header">
 
             <LinearLayout
                 android:layout_width="wrap_content"

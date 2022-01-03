@@ -37,6 +37,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -134,6 +135,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView intratteneretxt; TextView intrattenere; CheckBox compintrattenere; CheckBox expintrattenere;
     TextView persuaderetxt; TextView persuadere; CheckBox comppersuadere; CheckBox exppersuadere;
     ImageView portrait;
+    ProgressBar xpbar;
 
     public Character character;
     int xptable[] = {0, 300, 900, 2700, 6500, 14000, 23000, 34000, 46000, 64000, 85000, 100000,
@@ -482,6 +484,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         meleeatks = findViewById(R.id.meleeatks);
         inventoryView = findViewById(R.id.inventoryRecV);
         portrait = findViewById(R.id.pgportrait);
+        xpbar = findViewById(R.id.xpbar);
 
         String tempstr;
         if (character == null) {
@@ -1514,6 +1517,15 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         if (path != null) {
             portrait.setImageBitmap(BitmapFactory.decodeFile(path));
         } else portrait.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.propicplaceholder));
+
+        if (state.getBoolean("5ethresholds", true)) {
+            try {
+                int progress = (int) floor((double) (character.EXP * 100) / xptable[character.LV]);
+                xpbar.setProgress(progress);
+            } catch (Exception ex) {
+                xpbar.setProgress(100);
+            }
+        } else xpbar.setVisibility(View.GONE);
 
         saveSchedaPG();
     }
