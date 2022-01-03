@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="15dp">
 
     <ImageView
         android:id="@+id/diceIcon"
@@ -24,7 +24,7 @@
         android:layout_marginTop="24dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/D10"
         app:layout_constraintStart_toStartOf="@+id/D20"
         app:layout_constraintTop_toBottomOf="@+id/D6"
@@ -144,7 +144,7 @@
         android:layout_marginTop="5dp"
         android:text="@string/dicerollhintchoose"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/coin"
         app:layout_constraintStart_toStartOf="@+id/D8"
         app:layout_constraintTop_toBottomOf="@+id/diceRollHistoryTxtV" />
