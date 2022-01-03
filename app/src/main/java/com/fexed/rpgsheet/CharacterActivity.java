@@ -1131,7 +1131,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     damage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, finalweap.name + " (" + dmg + ")");
+                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, finalweap.name);
                             inputdialog.show();
                         }
                     });
@@ -1204,7 +1204,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     damage.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, weap.name + " (" + dmg + ")");
+                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, weap.name);
                             inputdialog.show();
                         }
                     });
