@@ -15,8 +15,7 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/propicplaceholder" />
 
@@ -24,14 +23,11 @@
             android:id="@+id/pgnametxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="4dp"
             android:fontFamily="serif"
             android:text="@android:string/unknownName"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="30sp"
-            app:layout_constraintEnd_toStartOf="@+id/pgportrait"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/pgportrait"
             app:layout_constraintTop_toTopOf="@+id/pgportrait"
             tools:text="Atanvar il discretamente avveduto" />
 
@@ -54,20 +50,20 @@
             android:id="@+id/pgxptxtv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="sans-serif-condensed"
             android:text="0 xp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
+            app:layout_constraintStart_toEndOf="@+id/inspirationbtn"
             app:layout_constraintTop_toTopOf="@+id/pglvtxt"
             tools:text="xxxx xp" />
 
         <Button
             android:id="@+id/addxpbtn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
             android:layout_marginStart="4dp"
             android:background="@android:color/transparent"
             android:text="+"
@@ -79,86 +75,86 @@
             android:id="@+id/pglvtxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:fontFamily="monospace"
             android:text="0"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/pglvtxt2"
+            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
             app:layout_constraintTop_toBottomOf="@+id/pgclasstxt" />
 
         <TextView
             android:id="@+id/pglvtxt2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/lv"
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/pglvtxt"
-            app:layout_constraintStart_toStartOf="@+id/pgclasstxt"
-            app:layout_constraintTop_toTopOf="@+id/pglvtxt" />
+            app:layout_constraintEnd_toEndOf="@+id/pglvtxt"
+            app:layout_constraintStart_toStartOf="@+id/pglvtxt"
+            app:layout_constraintTop_toBottomOf="@+id/pglvtxt" />
 
         <TextView
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/bonus_comp"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/proftxt" />
+            app:layout_constraintEnd_toEndOf="@+id/proftxt"
+            app:layout_constraintStart_toStartOf="@+id/proftxt"
+            app:layout_constraintTop_toBottomOf="@+id/proftxt" />
 
         <TextView
             android:id="@+id/proftxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginStart="24dp"
             android:text="+0"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="14sp"
-            app:layout_constraintStart_toEndOf="@+id/textView18"
-            app:layout_constraintTop_toBottomOf="@+id/pgportrait" />
+            app:layout_constraintBottom_toBottomOf="@+id/addxpbtn"
+            app:layout_constraintStart_toEndOf="@+id/pglvtxt"
+            app:layout_constraintTop_toTopOf="@+id/addxpbtn" />
 
         <CheckBox
             android:id="@+id/inspirationbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginStart="24dp"
             android:fontFamily="sans-serif-condensed"
-            android:minWidth="48dp"
-            android:minHeight="48dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@+id/proftxt"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView18"
             app:layout_constraintTop_toTopOf="@+id/proftxt" />
 
         <TextView
             android:id="@+id/textView13"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
             android:fontFamily="sans-serif-condensed"
             android:text="@string/ispirazione"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/inspirationbtn"
-            app:layout_constraintEnd_toStartOf="@+id/inspirationbtn"
-            app:layout_constraintTop_toTopOf="@+id/inspirationbtn" />
+            app:layout_constraintBottom_toBottomOf="@+id/textView18"
+            app:layout_constraintEnd_toEndOf="@+id/inspirationbtn"
+            app:layout_constraintStart_toStartOf="@+id/inspirationbtn"
+            app:layout_constraintTop_toBottomOf="@+id/proftxt" />
 
         <LinearLayout
             android:id="@+id/stats"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/inspirationbtn">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pgportrait"
+            app:layout_constraintTop_toBottomOf="@id/pglvtxt2">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -440,11 +436,11 @@
 
         <LinearLayout
             android:id="@+id/capf"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pgportrait"
             app:layout_constraintTop_toBottomOf="@+id/stats">
 
             <LinearLayout
@@ -499,7 +495,7 @@
                         android:id="@+id/pfminus"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:foregroundGravity="right"
                         android:text="-"
@@ -509,7 +505,8 @@
                     <TextView
                         android:id="@+id/PF"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_gravity="clip_vertical"
                         android:layout_marginLeft="2dp"
                         android:layout_marginRight="0dp"
                         android:layout_weight="1"
@@ -524,7 +521,7 @@
                         android:id="@+id/pfplus"
                         style="@style/Widget.AppCompat.Button.Borderless"
                         android:layout_width="wrap_content"
-                        android:layout_height="48dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:foregroundGravity="left"
                         android:text="+"
@@ -588,7 +585,7 @@
             app:adUnitId="ca-app-pub-9387595638685451/3199806772"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/capf" />
+            app:layout_constraintTop_toBottomOf="@id/capf" />
 
         <TextView
             android:id="@+id/skillstitle"
@@ -765,10 +762,10 @@
 
                     <TextView
                         android:id="@+id/TSFOR"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
 
@@ -798,10 +795,10 @@
 
                     <TextView
                         android:id="@+id/TSDEX"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
 
@@ -831,10 +828,10 @@
 
                     <TextView
                         android:id="@+id/TSCOS"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
 
@@ -864,10 +861,10 @@
 
                     <TextView
                         android:id="@+id/TSINT"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
 
@@ -897,10 +894,10 @@
 
                     <TextView
                         android:id="@+id/TSSAG"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
 
@@ -930,10 +927,10 @@
 
                     <TextView
                         android:id="@+id/TSCAR"
+                        android:textSize="18sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
-                        android:textSize="18sp"
                         tools:text="+100" />
                 </LinearLayout>
             </LinearLayout>
@@ -962,12 +959,11 @@
                     android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:text="@string/str"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/abilitatitle" />
 
 
@@ -975,12 +971,11 @@
                     android:id="@+id/atletica"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
                     tools:text="+100" />
 
@@ -1011,25 +1006,23 @@
                     android:id="@+id/compatletica"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/atleticatxt"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/dex"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/atletica" />
 
 
@@ -1037,12 +1030,11 @@
                     android:id="@+id/acrobazia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/textView9"
                     tools:text="+100" />
 
@@ -1073,24 +1065,22 @@
                     android:id="@+id/compacrobazia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expacrobazia"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/furtivita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/acrobazia"
                     tools:text="+100" />
 
@@ -1121,24 +1111,22 @@
                     android:id="@+id/compfurtivita"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@id/expfurtivita"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/rapiditadimano"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/furtivita"
                     tools:text="+100" />
 
@@ -1169,24 +1157,22 @@
                     android:id="@+id/comprapiditadimano"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@id/exprapiditadimano"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
                 <TextView
                     android:id="@+id/textView17"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/inte"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/rapiditadimano" />
 
 
@@ -1194,12 +1180,11 @@
                     android:id="@+id/investigare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/textView17"
                     tools:text="+100" />
 
@@ -1230,24 +1215,22 @@
                     android:id="@+id/compinvestigare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expinvestigare"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/arcano"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/investigare"
                     tools:text="+100" />
 
@@ -1278,24 +1261,22 @@
                     android:id="@+id/comparcano"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/exparcano"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/storia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/arcano"
                     tools:text="+100" />
 
@@ -1326,24 +1307,22 @@
                     android:id="@+id/compstoria"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expstoria"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/religionefolklore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/storia"
                     tools:text="+100" />
 
@@ -1374,24 +1353,22 @@
                     android:id="@+id/compreligionefolklore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expreligionefolklore"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/natura"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/expreligionefolklore"
                     tools:text="+100" />
 
@@ -1422,25 +1399,23 @@
                     android:id="@+id/compnatura"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expnatura"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/textView24"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/sag"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/natura" />
 
 
@@ -1448,12 +1423,11 @@
                     android:id="@+id/sopravvivenza"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/textView24"
                     tools:text="+100" />
 
@@ -1484,24 +1458,22 @@
                     android:id="@+id/compsopravvivenza"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expsopravvivenza"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/medicina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/sopravvivenza"
                     tools:text="+100" />
 
@@ -1532,24 +1504,22 @@
                     android:id="@+id/compmedicina"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expmedicina"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/percezione"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/medicina"
                     tools:text="+100" />
 
@@ -1580,24 +1550,22 @@
                     android:id="@+id/comppercezione"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/exppercezione"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/intuizione"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/percezione"
                     tools:text="+100" />
 
@@ -1628,12 +1596,11 @@
                     android:id="@+id/compintuizione"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintuizione"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <CheckBox
@@ -1651,12 +1618,11 @@
                     android:id="@+id/companimali"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expanimali"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
                 <TextView
                     android:id="@+id/animalitxt"
@@ -1674,12 +1640,11 @@
                     android:id="@+id/animali"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/intuizione"
                     tools:text="+100" />
 
@@ -1687,13 +1652,12 @@
                     android:id="@+id/textView29"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:text="@string/car"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/animali" />
 
 
@@ -1701,12 +1665,11 @@
                     android:id="@+id/intimidire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@+id/textView29"
                     tools:text="+100" />
 
@@ -1737,24 +1700,22 @@
                     android:id="@+id/compintimidire"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintimidire"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/ingannare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/intimidire"
                     tools:text="+100" />
 
@@ -1785,24 +1746,22 @@
                     android:id="@+id/compingannare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expingannare"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/intrattenere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/ingannare"
                     tools:text="+100" />
 
@@ -1833,24 +1792,22 @@
                     android:id="@+id/compintrattenere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@+id/expintrattenere"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
 
 
                 <TextView
                     android:id="@+id/persuadere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
                     android:layout_marginTop="4dp"
                     android:paddingStart="5dp"
                     android:textAlignment="textEnd"
                     android:textSize="18sp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/spskills"
                     app:layout_constraintTop_toBottomOf="@id/intrattenere"
                     tools:text="+100" />
 
@@ -1881,12 +1838,27 @@
                     android:id="@+id/comppersuadere"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="64dp"
                     android:button="@drawable/checkmark"
                     android:checked="false"
                     android:duplicateParentState="false"
                     app:layout_constraintBaseline_toBaselineOf="@id/exppersuadere"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="@id/spchecks" />
+
+                <Space
+                    android:id="@+id/spskills"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    app:layout_constraintEnd_toStartOf="@+id/abilitatitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/abilitatitle" />
+
+                <Space
+                    android:id="@+id/spchecks"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/abilitatitle"
+                    app:layout_constraintTop_toTopOf="@id/abilitatitle" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -1934,12 +1906,13 @@
                 android:id="@+id/atks"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:layout_weight="0.5"
                     app:cardBackgroundColor="@color/colorPrimaryDark"
                     app:cardElevation="15dp">
 
@@ -1975,9 +1948,10 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="5dp"
+                    android:layout_weight="0.5"
                     app:cardBackgroundColor="@color/colorPrimaryDark"
                     app:cardElevation="15dp">
 
