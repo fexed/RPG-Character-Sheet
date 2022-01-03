@@ -28,6 +28,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     private ArrayList<Integer> rolls;
     private boolean roll = false;
     private int bonus;
+    private int max;
+    private int dices;
     private String text = "";
 
     public DiceDialog(Activity a, SharedPreferences state) {
@@ -54,6 +56,25 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         this.roll = true;
         this.bonus = bonus;
         this.text = text;
+        this.max = 20;
+        this.dices = 1;
+    }
+
+    public DiceDialog(Activity a, SharedPreferences state, int dices, int max, int bonus, String text) {
+        super(a);
+        this.c = a;
+        rnd = new Random(System.currentTimeMillis());
+        rolls = new ArrayList<>();
+        state.edit().putBoolean("diceroller", true).apply();
+        Bundle bndl = new Bundle();
+        bndl.putInt("launchtimes", state.getInt("launchn", -1));
+        FirebaseAnalytics.getInstance(c).logEvent("DiceRoller", bndl);
+
+        this.roll = true;
+        this.bonus = bonus;
+        this.text = text;
+        this.max = max;
+        this.dices = dices;
     }
 
     @Override
@@ -100,11 +121,16 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         });
 
         if (roll) {
-            String suff = "1D20 + " + bonus;
-            int dice = (rnd.nextInt(20) + 1);
-            int result = dice + bonus;
-            suff += " = " + dice + " + " + bonus + " = " + result;
-            outtxt.setText(suff);
+            String suff = dices + "D" + max;
+            suff += (bonus < 0) ? " " + bonus : " + " + bonus;
+            int result, totalResult = 0;
+            for (int j = 0; j < dices; j++) {
+                result = rnd.nextInt(max) + 1;
+                totalResult += result;
+            }
+            totalResult += bonus;
+            String tmp = suff + " = " + totalResult;
+            outtxt.setText(tmp);
             histtxt.setText(text);
         }
     }

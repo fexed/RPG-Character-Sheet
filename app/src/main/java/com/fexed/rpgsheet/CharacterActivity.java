@@ -1112,6 +1112,33 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     return true;
                 }
             });
+            final String dmg = weap.damage.toLowerCase(Locale.ROOT).substring(0, weap.damage.lastIndexOf(" "));
+            if (dmg.contains("d")) {
+                try {
+                    final int dices = Integer.parseInt(dmg.split("d")[0]);
+                    int max = 0;
+                    int rollbonus = 0;
+                    if (dmg.split("d")[1].contains("+")){
+                        max = Integer.parseInt(dmg.split("d")[1].split("\\+")[0].replace(" ", ""));
+                        rollbonus = Integer.parseInt(dmg.split("d")[1].split("\\+")[1].replace(" ", ""));
+                        Log.d("WEAP", dmg);
+                    } else {
+                        max = Integer.parseInt(dmg.split("d")[1].replace(" ", ""));
+                        rollbonus = 0;
+                    }
+                    final int finalRollbonus = rollbonus;
+                    final int finalMax = max;
+                    damage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, finalweap.name + " (" + dmg + ")");
+                            inputdialog.show();
+                        }
+                    });
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
             rangedatks.addView(newrow);
         }
 
@@ -1130,7 +1157,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         removebtn.setText("");
         meleeatks.addView(header);
 
-        for (MeleeWeapon weap : character.armimelee) {
+        for (final MeleeWeapon weap : character.armimelee) {
             final TableRow newrow = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
             name = newrow.findViewById(R.id.meleename);
             bonusrange = newrow.findViewById(R.id.meleebonus);
@@ -1158,6 +1185,33 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     return true;
                 }
             });
+            final String dmg = weap.damage.toLowerCase(Locale.ROOT).substring(0, weap.damage.lastIndexOf(" "));
+            if (dmg.contains("d")) {
+                try {
+                    final int dices = Integer.parseInt(dmg.split("d")[0]);
+                    int max = 0;
+                    int rollbonus = 0;
+                    if (dmg.split("d")[1].contains("+")){
+                        max = Integer.parseInt(dmg.split("d")[1].split("\\+")[0].replace(" ", ""));
+                        rollbonus = Integer.parseInt(dmg.split("d")[1].split("\\+")[1].replace(" ", ""));
+                        Log.d("WEAP", dmg);
+                    } else {
+                        max = Integer.parseInt(dmg.split("d")[1].replace(" ", ""));
+                        rollbonus = 0;
+                    }
+                    final int finalRollbonus = rollbonus;
+                    final int finalMax = max;
+                    damage.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, dices, finalMax, finalRollbonus, weap.name + " (" + dmg + ")");
+                            inputdialog.show();
+                        }
+                    });
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+            }
             meleeatks.addView(newrow);
         }
 

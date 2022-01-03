@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.fexed.rpgsheet.data.Character;
 import com.fexed.rpgsheet.data.RangedWeapon;
+
+import java.util.Locale;
 
 
 public class RangedDialog extends Dialog implements View.OnClickListener {
@@ -113,7 +116,6 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                 comprange.setText(tmp);
                 range.setText(rangedrange.getText().toString());
                 damage.setText(rangeddamage.getText().toString());
-
                 rangedatks.addView(newrow);
                 this.dismiss();
                 ((CharacterActivity) c).saveSchedaPG();
