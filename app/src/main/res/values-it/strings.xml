@@ -161,5 +161,6 @@
     <string name="changelog">Nuova versione, v 2.1!\n
         - Codice rielaborato\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n
-        - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondio il set di regole di DnD 5e)\n</string>
+        - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondio il set di regole di DnD 5e)\n
+        - Possibilità di caricare automaticamente l\'ultimo personaggio selezionato all\'avvio\n</string>
 </resources>
