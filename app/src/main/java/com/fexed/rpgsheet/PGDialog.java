@@ -81,20 +81,28 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
                 c.character = new Character();
                 int lv = Integer.parseInt(pglvinput.getText().toString());
                 lv = (lv <= 0) ? 1 : lv;
-                lv = Math.min(lv, 45);
                 c.character.nome = pgnameinput.getText().toString();
                 c.character.classe = pgclassinput.getText().toString();
                 c.character.LV = lv;
+                try {
+                    c.character.EXP = c.xptable[c.character.LV - 1];
+                } catch (Exception ignored) {}
 
                 TextView pgnametxt = c.findViewById(R.id.pgnametxt);
                 TextView pgclasstxt = c.findViewById(R.id.pgclasstxt);
                 TextView pglvtxt = c.findViewById(R.id.pglvtxt);
+                TextView pgexptxt = c.findViewById(R.id.pgxptxtv);
+                TextView proftxt = c.findViewById(R.id.proftxt);
 
                 c.setTitle(c.character.nome);
                 pgnametxt.setText(c.character.nome);
                 pgclasstxt.setText(c.character.classe);
                 String tmp = c.character.LV + "";
                 pglvtxt.setText(tmp);
+                tmp = c.character.EXP + " xp";
+                pgexptxt.setText(tmp);
+                tmp = "+" + (CharacterActivity.prof(c.character.LV));
+                proftxt.setText(tmp);
                 CharacterActivity.state.edit().putString("lastchar", c.character.nome).apply();
 
                 c.saveSchedaPG();

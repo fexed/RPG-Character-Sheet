@@ -1982,7 +1982,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 public void onClick(DialogInterface dialog, int whichButton) {
                     int lv = Integer.parseInt(input.getText().toString());
                     if (lv <= 0) lv = 1;
-                    if (lv > 45) lv = 45;
 
                     String tempstr;
                     tempstr = lv + "";
