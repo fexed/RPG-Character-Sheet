@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -95,7 +96,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     TextView attacchi; ImageView attacchiarrow;
     TextView spellatk; TextView spellcd; TextView spellstat; TextView spellmana; Button spellapp;
     Button addmanabtn; Button removemanabtn;
-    Button PFplus; Button PFminus;
+    ImageButton PFplus; ImageButton PFminus;
     Button addranged; Button addmelee; TableLayout rangedatks; TableLayout meleeatks;
     Button addxpbtn;
     EditText cantrip; EditText firstlv; EditText secondlv; EditText thirdlv; EditText fourthlv; EditText fifthlv; EditText sixthlv; EditText seventhlv; EditText eighthlv; EditText ninthlv; EditText pluslv;
