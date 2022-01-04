@@ -1692,6 +1692,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                     spellatk.setText(tempstr);
                     tempstr = "" + (8 + bonus);
                     spellcd.setText(tempstr);
+                    saveSchedaPG();
                 }
 
             });
