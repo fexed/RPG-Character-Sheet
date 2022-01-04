@@ -161,6 +161,7 @@
     <string name="newlevel">Obtained level %s!</string>
     <string name="set_loadlastchar">Load last character on startup</string>
     <string name="set_5expthresholds">Use the DnD 5e experience tresholds</string>
+    <string name="numbererror">Invalid number!</string>
     <string name="changelog">Changelog, v 2.1!\n
         - Code reworked\n
         - You can share your characters with other players!\n

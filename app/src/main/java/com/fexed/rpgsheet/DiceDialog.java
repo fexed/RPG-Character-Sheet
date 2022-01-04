@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -212,27 +214,32 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             builder.setPositiveButton(R.string.roll , new OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    int howMany = Integer.parseInt(input.getText().toString());
-                    String suff = howMany + "D" + finalMax;
-                    int result;
-                    int totalResult = 0;
-                    for (int j = 0; j < howMany; j++) {
-                        result = rnd.nextInt(finalMax) + 1;
-                        rolls.add(result);
-                        totalResult += result;
+                    try {
+                        int howMany = Integer.parseInt(input.getText().toString());
+                        String suff = howMany + "D" + finalMax;
+                        int result;
+                        int totalResult = 0;
+                        for (int j = 0; j < howMany; j++) {
+                            result = rnd.nextInt(finalMax) + 1;
+                            rolls.add(result);
+                            totalResult += result;
+                        }
+                        suff += " = " + totalResult;
+                        outtxt.setText(suff);
+                        StringBuilder str = new StringBuilder();
+                        int total = rolls.get(0);
+                        str.append(rolls.get(0));
+                        for (int n : rolls.subList(1, rolls.size())) {
+                            str.append("+");
+                            str.append(n);
+                            total += n;
+                        }
+                        str.append("= ").append(total);
+                        histtxt.setText(str.toString());
+                    } catch (Exception ex) {
+                        input.setError(getContext().getString(R.string.numbererror));
+                        Toast.makeText(c.getApplicationContext(), getContext().getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
                     }
-                    suff += " = " + totalResult;
-                    outtxt.setText(suff);
-                    StringBuilder str = new StringBuilder();
-                    int total = rolls.get(0);
-                    str.append(rolls.get(0));
-                    for (int n : rolls.subList(1, rolls.size())) {
-                        str.append("+");
-                        str.append(n);
-                        total += n;
-                    }
-                    str.append("= ").append(total);
-                    histtxt.setText(str.toString());
                 }
             });
             builder.show();
