@@ -42,6 +42,7 @@ import android.widget.ProgressBar;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fexed.rpgsheet.data.InventoryItem;
 import com.fexed.rpgsheet.data.MeleeWeapon;
@@ -1800,20 +1801,26 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.addxpof));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int xp = Integer.parseInt(input.getText().toString());
-                    xp += character.EXP;
-
-                    String tempstr = xp + " xp";
-                    XP.setText(tempstr);
-                    character.EXP = xp;
-                    dialog.cancel();
-                    alertd.dismiss();
                     try {
-                        if (xp >= xptable[character.LV] && state.getBoolean("5ethresholds", true)) {
-                            Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.newlevel, "" + (character.LV + 1)), Snackbar.LENGTH_SHORT).show();
+                        int xp = Integer.parseInt(input.getText().toString());
+                        xp += character.EXP;
+
+                        String tempstr = xp + " xp";
+                        XP.setText(tempstr);
+                        character.EXP = xp;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        try {
+                            if (xp >= xptable[character.LV] && state.getBoolean("5ethresholds", true)) {
+                                Snackbar.make(findViewById(R.id.mainscroll), getString(R.string.newlevel, "" + (character.LV + 1)), Snackbar.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ignored) {
                         }
-                    } catch (Exception ignored) {}
-                    preparaSchedaPG();
+                        preparaSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2048,19 +2055,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertlevelof) + " " + character.nome);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int lv = Integer.parseInt(input.getText().toString());
-                    if (lv <= 0) lv = 1;
+                    try {
+                        int lv = Integer.parseInt(input.getText().toString());
+                        if (lv <= 0) lv = 1;
 
-                    String tempstr;
-                    tempstr = lv + "";
-                    lvtxt.setText(tempstr);
-                    tempstr = "+" + prof(lv);
-                    proftxt.setText(tempstr);
-                    character.LV = lv;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr;
+                        tempstr = lv + "";
+                        lvtxt.setText(tempstr);
+                        tempstr = "+" + prof(lv);
+                        proftxt.setText(tempstr);
+                        character.LV = lv;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2093,15 +2105,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxpoints));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    String maxp = input.getText().toString();
-                    int mana = Integer.parseInt(maxp);
-                    String tempstr = character.spellmana + "/" + mana;
-                    spellmana.setText(tempstr);
-                    character.spellmanamax = mana;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        String maxp = input.getText().toString();
+                        int mana = Integer.parseInt(maxp);
+                        String tempstr = character.spellmana + "/" + mana;
+                        spellmana.setText(tempstr);
+                        character.spellmanamax = mana;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2140,15 +2157,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertca));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
 
-                    String tempstr = pnt + "";
-                    CA.setText(tempstr);
-                    character.CA = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        CA.setText(tempstr);
+                        character.CA = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2164,14 +2186,19 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertpf));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tempstr = pnt + "";
-                    PF.setText(tempstr);
-                    character.PF = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tempstr = pnt + "";
+                        PF.setText(tempstr);
+                        character.PF = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2187,15 +2214,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.entercure));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    character.PF += pnt;
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        character.PF += pnt;
 
-                    String tempstr = character.PF + "";
-                    PF.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = character.PF + "";
+                        PF.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2211,15 +2243,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.enterdamage));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    character.PF -= pnt;
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        character.PF -= pnt;
 
-                    String tempstr = character.PF + "";
-                    PF.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = character.PF + "";
+                        PF.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2235,15 +2272,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxpf));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
 
-                    String tempstr = pnt + "";
-                    PFmax.setText(tempstr);
-                    character.PFMAX = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        PFmax.setText(tempstr);
+                        character.PFMAX = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2257,19 +2299,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.str));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    FOR.setText(tempstr);
-                    tempstr = suffix + mod;
-                    FORmod.setText(tempstr);
-                    character.FOR = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        FOR.setText(tempstr);
+                        tempstr = suffix + mod;
+                        FORmod.setText(tempstr);
+                        character.FOR = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2283,19 +2330,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.dex));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    DEX.setText(tempstr);
-                    tempstr = suffix + mod;
-                    DEXmod.setText(tempstr);
-                    character.DEX = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        DEX.setText(tempstr);
+                        tempstr = suffix + mod;
+                        DEXmod.setText(tempstr);
+                        character.DEX = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2309,19 +2361,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.cos));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    COS.setText(tempstr);
-                    tempstr = suffix + mod;
-                    COSmod.setText(tempstr);
-                    character.COS = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        COS.setText(tempstr);
+                        tempstr = suffix + mod;
+                        COSmod.setText(tempstr);
+                        character.COS = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2335,19 +2392,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.inte));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    INT.setText(tempstr);
-                    tempstr = suffix + mod;
-                    INTmod.setText(tempstr);
-                    character.INT = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        INT.setText(tempstr);
+                        tempstr = suffix + mod;
+                        INTmod.setText(tempstr);
+                        character.INT = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2361,19 +2423,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.sag));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    SAG.setText(tempstr);
-                    tempstr = suffix + mod;
-                    SAGmod.setText(tempstr);
-                    character.SAG = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        SAG.setText(tempstr);
+                        tempstr = suffix + mod;
+                        SAGmod.setText(tempstr);
+                        character.SAG = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2387,19 +2454,24 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insert) + " " + getString(R.string.car));
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    int mod = mod(pnt);
-                    String suffix = (mod >= 0) ? "+" : "";
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        int mod = mod(pnt);
+                        String suffix = (mod >= 0) ? "+" : "";
 
-                    String tempstr = pnt + "";
-                    CAR.setText(tempstr);
-                    tempstr = suffix + mod;
-                    CARmod.setText(tempstr);
-                    character.CAR = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = pnt + "";
+                        CAR.setText(tempstr);
+                        tempstr = suffix + mod;
+                        CARmod.setText(tempstr);
+                        character.CAR = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2415,18 +2487,23 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int monete = Integer.parseInt(input.getText().toString());
-                    String tempstr = monete + "";
-                    mptxtv.setText(tempstr);
-                    character.mp = monete;
-                    double moneteTot = ceil(monete * 10 + character.mo + character.ma * 0.1 + character.mr * 0.01);
-                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                    totalmtxtv.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        mptxtv.setText(tempstr);
+                        character.mp = monete;
+                        double moneteTot = ceil(monete * 10 + character.mo + character.ma * 0.1 + character.mr * 0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2442,18 +2519,23 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int monete = Integer.parseInt(input.getText().toString());
-                    String tempstr = monete + "";
-                    motxtv.setText(tempstr);
-                    character.mo = monete;
-                    double moneteTot = ceil(character.mp * 10 + monete + character.ma * 0.1 + character.mr * 0.01);
-                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                    totalmtxtv.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        motxtv.setText(tempstr);
+                        character.mo = monete;
+                        double moneteTot = ceil(character.mp * 10 + monete + character.ma * 0.1 + character.mr * 0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2469,18 +2551,23 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int monete = Integer.parseInt(input.getText().toString());
-                    String tempstr = monete + "";
-                    matxtv.setText(tempstr);
-                    character.ma = monete;
-                    double moneteTot = ceil(character.mp * 10 + character.mo + monete * 0.1 + character.mr * 0.01);
-                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                    totalmtxtv.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        matxtv.setText(tempstr);
+                        character.ma = monete;
+                        double moneteTot = ceil(character.mp * 10 + character.mo + monete * 0.1 + character.mr * 0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2496,18 +2583,23 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int monete = Integer.parseInt(input.getText().toString());
-                    String tempstr = monete + "";
-                    mrtxtv.setText(tempstr);
-                    character.mr = monete;
-                    double moneteTot = ceil(character.mp * 10 + character.mo + character.ma * 0.1 + monete * 0.01);
-                    String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
-                    tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
-                    totalmtxtv.setText(tempstr);
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int monete = Integer.parseInt(input.getText().toString());
+                        String tempstr = monete + "";
+                        mrtxtv.setText(tempstr);
+                        character.mr = monete;
+                        double moneteTot = ceil(character.mp * 10 + character.mo + character.ma * 0.1 + monete * 0.01);
+                        String txt = String.format(Locale.getDefault(), "%.0f", moneteTot);
+                        tempstr = getString(R.string.total) + " " + txt + " " + getString(R.string.mo);
+                        totalmtxtv.setText(tempstr);
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2524,15 +2616,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertxpof) + " " + character.nome);
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int xp = Integer.parseInt(input.getText().toString());
+                    try {
+                        int xp = Integer.parseInt(input.getText().toString());
 
-                    String tempstr = xp + " xp";
-                    XP.setText(tempstr);
-                    character.EXP = xp;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                        String tempstr = xp + " xp";
+                        XP.setText(tempstr);
+                        character.EXP = xp;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2545,15 +2642,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_1) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    firstlvslots.setText(tmp);
-                    character.slot1 = pnt;
-                    character.currslot1 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        firstlvslots.setText(tmp);
+                        character.slot1 = pnt;
+                        character.currslot1 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2566,15 +2668,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_2) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    secondlvslots.setText(tmp);
-                    character.slot2 = pnt;
-                    character.currslot2 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        secondlvslots.setText(tmp);
+                        character.slot2 = pnt;
+                        character.currslot2 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2587,15 +2694,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_3) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    thirdlvslots.setText(tmp);
-                    character.slot3 = pnt;
-                    character.currslot3 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        thirdlvslots.setText(tmp);
+                        character.slot3 = pnt;
+                        character.currslot3 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2608,15 +2720,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_4) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    fourthlvslots.setText(tmp);
-                    character.slot4 = pnt;
-                    character.currslot4 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        fourthlvslots.setText(tmp);
+                        character.slot4 = pnt;
+                        character.currslot4 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2629,15 +2746,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_5) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    fifthlvslots.setText(tmp);
-                    character.slot5 = pnt;
-                    character.currslot5 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        fifthlvslots.setText(tmp);
+                        character.slot5 = pnt;
+                        character.currslot5 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2650,15 +2772,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_6) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    sixthlvslots.setText(tmp);
-                    character.slot6 = pnt;
-                    character.currslot6 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        sixthlvslots.setText(tmp);
+                        character.slot6 = pnt;
+                        character.currslot6 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2671,15 +2798,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_7) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    seventhlvslots.setText(tmp);
-                    character.slot7 = pnt;
-                    character.currslot7 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        seventhlvslots.setText(tmp);
+                        character.slot7 = pnt;
+                        character.currslot7 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2692,15 +2824,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_8) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    eighthlvslots.setText(tmp);
-                    character.slot8 = pnt;
-                    character.currslot8 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        eighthlvslots.setText(tmp);
+                        character.slot8 = pnt;
+                        character.currslot8 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2713,15 +2850,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello_9) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    ninthlvslots.setText(tmp);
-                    character.slot9 = pnt;
-                    character.currslot9 = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        ninthlvslots.setText(tmp);
+                        character.slot9 = pnt;
+                        character.currslot9 = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
@@ -2734,15 +2876,20 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             alert.setTitle(getString(R.string.insertmaxslots) + " (" + getString(R.string.livello) + ")");
             alert.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
-                    int pnt = Integer.parseInt(input.getText().toString());
-                    String tmp = pnt + "/" + pnt;
-                    pluslvslots.setText(tmp);
-                    character.slotplus = pnt;
-                    character.currslotplus = pnt;
-                    dialog.cancel();
-                    alertd.dismiss();
-                    preparaSchedaPG();
-                    saveSchedaPG();
+                    try {
+                        int pnt = Integer.parseInt(input.getText().toString());
+                        String tmp = pnt + "/" + pnt;
+                        pluslvslots.setText(tmp);
+                        character.slotplus = pnt;
+                        character.currslotplus = pnt;
+                        dialog.cancel();
+                        alertd.dismiss();
+                        preparaSchedaPG();
+                        saveSchedaPG();
+                    } catch (Exception ex) {
+                        input.setError(getString(R.string.numbererror));
+                        Toast.makeText(CharacterActivity.this, getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
             alert.show();
