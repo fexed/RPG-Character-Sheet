@@ -146,6 +146,15 @@
             app:layout_constraintStart_toStartOf="@+id/inspirationbtn"
             app:layout_constraintTop_toBottomOf="@+id/proftxt" />
 
+        <ProgressBar
+            android:id="@+id/xpbar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/addxpbtn"
+            app:layout_constraintStart_toStartOf="@+id/pgxptxtv"
+            app:layout_constraintTop_toBottomOf="@+id/addxpbtn" />
+
         <LinearLayout
             android:id="@+id/stats"
             android:layout_width="0dp"
