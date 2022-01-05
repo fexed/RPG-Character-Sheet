@@ -146,6 +146,37 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                      120000, 140000, 165000, 195000, 225000, 265000, 305000, 355000};
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        if (intent != null) {
+            Uri fileUri = intent.getData();
+            if (fileUri != null) {
+                try {
+                    InputStream in = getContentResolver().openInputStream(fileUri);
+                    InputStreamReader inr = new InputStreamReader(in);
+                    BufferedReader br = new BufferedReader(inr);
+                    String rstr;
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((rstr = br.readLine()) != null) {
+                        stringBuilder.append("\n").append(rstr);
+                    }
+                    in.close();
+                    String json = stringBuilder.toString();
+                    Character pg = (Character) (new Gson()).fromJson(json, Character.class);
+                    Log.d("FILE", pg.nome);
+                    Log.d("FILE", "n: " + pg.inventario.size());
+                    character = pg;
+                    preparaSchedaPG();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+                }
+            }
+        }
+    }
+
+    @Override
     protected void onCreate (Bundle saveBundle) {
         super.onCreate(saveBundle);
         setContentView(R.layout.charactersheet);
@@ -3151,10 +3182,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     public void sharePG() {
         Intent export = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         export.addCategory(Intent.CATEGORY_OPENABLE);
-        export.setType("application/json");
+        export.setType("*/*");
         export.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing));
         export.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharingchar, character.nome));
-        export.putExtra(Intent.EXTRA_TITLE, character.nome + ".json");
+        export.putExtra(Intent.EXTRA_TITLE, character.nome + ".rpgchar");
         startActivityForResult(export, SAVE_FILE);
     }
 
