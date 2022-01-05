@@ -20,6 +20,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.InputType;
@@ -81,6 +82,7 @@ import static java.lang.Math.floor;
 public class CharacterActivity extends AppCompatActivity implements View.OnClickListener, View.OnLongClickListener, CheckBox.OnCheckedChangeListener {
     static final int PICK_IMAGE = 101;
     static final int PICK_CHAR = 102;
+    static final int SAVE_FILE = 103;
     static SharedPreferences state;
 
     TextView FOR; TextView FORmod;
@@ -3098,6 +3100,29 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                 e.printStackTrace();
                 Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
             }
+        } else if (resultCode == RESULT_OK && requestCode == SAVE_FILE) {
+            Uri uri = data.getData();
+
+            try {
+                ParcelFileDescriptor pgfile = getContentResolver().openFileDescriptor(uri, "w");
+                OutputStreamWriter os = null;
+                try {
+                    os = new OutputStreamWriter(new FileOutputStream(pgfile.getFileDescriptor()));
+                    String json = (new Gson()).toJson(character);
+                    os.write(json);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        os.close();
+                    } catch (IOException | NullPointerException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -3124,44 +3149,13 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void sharePG() {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        File dir = new File(cw.getCacheDir(), "export");
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        File pgfile = new File(dir, character.nome.toLowerCase(Locale.ROOT).replace(" ", "_") + ".txt");
-
-        try {
-            OutputStreamWriter os = null;
-            try {
-                os = new OutputStreamWriter(new FileOutputStream(pgfile));
-                String json = (new Gson()).toJson(character);
-                os.write(json);
-                Log.d("FILE", "Length: " + pgfile.length());
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    os.close();
-                } catch (IOException | NullPointerException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            Uri fileuri = FileProvider.getUriForFile(this, "com.fexed.rpgsheet.provider", pgfile);
-            Log.d("FILE", fileuri.getPath());
-
-            Intent sendIntent = new Intent(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_STREAM, fileuri);
-            sendIntent.setType("text/plain");
-            sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing));
-            sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharingchar, character.nome));
-            sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            startActivity(Intent.createChooser(sendIntent, getString(R.string.sharing)));
-        } catch (Exception e) {
-            e.printStackTrace();
-            Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
-        }
+        Intent export = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        export.addCategory(Intent.CATEGORY_OPENABLE);
+        export.setType("application/json");
+        export.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing));
+        export.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharingchar, character.nome));
+        export.putExtra(Intent.EXTRA_TITLE, character.nome + ".json");
+        startActivityForResult(export, SAVE_FILE);
     }
 
     public static int mod(int punteggio) {
