@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -106,7 +107,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         Button d4btn = findViewById(R.id.D4);
         d4btn.setOnClickListener(this);
         d4btn.setOnLongClickListener(this);
-        Button coinbtn = findViewById(R.id.coin);
+        ImageButton coinbtn = findViewById(R.id.coin);
         coinbtn.setOnClickListener(this);
         ImageView dimage = findViewById(R.id.diceIcon);
         outtxt = findViewById(R.id.diceRollResutlTxtV);

@@ -7,6 +7,28 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Coin Icon"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@+id/textView38"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:text="Online Web Fonts"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+    <TextView
         android:id="@+id/textView36"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,6 +76,7 @@
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView37" />
 
@@ -181,6 +204,7 @@
         android:text="https://gist.github.com/hperantunes/f4c2fd407c2ea74c6c9d"
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -216,6 +240,7 @@
         android:text="https://github.com/skydoves/Balloon"
         android:textAppearance="@android:style/TextAppearance"
         android:textSize="16sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView38"
         app:layout_constraintTop_toBottomOf="@+id/textView39" />

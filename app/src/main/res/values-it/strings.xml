@@ -165,8 +165,9 @@
     <string name="numbererror">Numero non valido!</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n
-        - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondio il set di regole di DnD 5e)\n
+        - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondo il set di regole di DnD 5e)\n
         - Possibilità di caricare automaticamente l\'ultimo personaggio selezionato all\'avvio\n
+        - Altre funzionalità minori\n
         - Codice e layout rielaborati\n
         - Bugfix\n</string>
 </resources>
