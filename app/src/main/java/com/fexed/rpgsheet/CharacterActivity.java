@@ -1141,14 +1141,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             damage.setText(weap.damage);
 
             final RangedWeapon finalweap = weap;
-            removebtn.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    character.armiranged.remove(finalweap);
-                    rangedatks.removeView(newrow);
-                    saveSchedaPG();
-                    return true;
-                }
+            removebtn.setOnLongClickListener(view -> {
+                character.armiranged.remove(finalweap);
+                rangedatks.removeView(newrow);
+                saveSchedaPG();
+                return true;
+            });
+            removebtn.setOnClickListener(view -> {
+                Toast.makeText(this, getString(R.string.keeptoremove), Toast.LENGTH_SHORT).show();
             });
             final String dmg = weap.damage.toLowerCase(Locale.ROOT).substring(0, weap.damage.lastIndexOf(" "));
             if (dmg.contains("d")) {
@@ -1215,14 +1215,15 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             damage.setText(weap.damage);
 
             final MeleeWeapon finalweap = weap;
-            removebtn.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    character.armimelee.remove(finalweap);
-                    meleeatks.removeView(newrow);
-                    return true;
-                }
+            removebtn.setOnLongClickListener(view -> {
+                character.armimelee.remove(finalweap);
+                meleeatks.removeView(newrow);
+                return true;
             });
+            removebtn.setOnClickListener(view -> {
+                Toast.makeText(this, getString(R.string.keeptoremove), Toast.LENGTH_SHORT).show();
+            });
+
             final String dmg = weap.damage.toLowerCase(Locale.ROOT).substring(0, weap.damage.lastIndexOf(" "));
             if (dmg.contains("d")) {
                 try {

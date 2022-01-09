@@ -158,6 +158,7 @@
     <string name="exporting">Exporting…</string>
     <string name="exportingchar">Exporting %s…</string>
     <string name="exportsuccess">Character exported successfully</string>
+    <string name="keeptoremove">Long tap to remove</string>
     <string name="loadchar">Load</string>
     <string name="newlevel">Obtained level %s!</string>
     <string name="set_loadlastchar">Load last character on startup</string>

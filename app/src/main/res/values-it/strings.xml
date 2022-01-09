@@ -156,6 +156,7 @@
     <string name="exporting">Esportando…</string>
     <string name="exportingchar">Esportando %s…</string>
     <string name="exportsuccess">Personaggio esportato con successo</string>
+    <string name="keeptoremove">Tieni premuto per rimuovere</string>
     <string name="loadchar">Carica</string>
     <string name="newlevel">Raggiunto il livello %s!</string>
     <string name="set_loadlastchar">Ricarica l\'ultimo personaggio all\'avvio</string>

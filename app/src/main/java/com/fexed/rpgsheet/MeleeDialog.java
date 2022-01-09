@@ -80,13 +80,13 @@ public class MeleeDialog extends Dialog implements View.OnClickListener {
                 character.armimelee.add(weap);
 
                 Button removebtn = newrow.findViewById(R.id.removemelee);
-                removebtn.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        character.armimelee.remove(weap);
-                        rangedatks.removeView(newrow);
-                        return true;
-                    }
+                removebtn.setOnLongClickListener(view -> {
+                    character.armimelee.remove(weap);
+                    rangedatks.removeView(newrow);
+                    return true;
+                });
+                removebtn.setOnClickListener(view -> {
+                    Toast.makeText(c, c.getString(R.string.keeptoremove), Toast.LENGTH_SHORT).show();
                 });
 
                 int bonus = CharacterActivity.mod(character.FOR);

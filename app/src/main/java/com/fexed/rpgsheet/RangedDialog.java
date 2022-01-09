@@ -97,13 +97,13 @@ public class RangedDialog extends Dialog implements View.OnClickListener {
                 character.armiranged.add(weap);
 
                 Button removebtn = newrow.findViewById(R.id.removeranged);
-                removebtn.setOnLongClickListener(new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View view) {
-                        character.armiranged.remove(weap);
-                        rangedatks.removeView(newrow);
-                        return true;
-                    }
+                removebtn.setOnLongClickListener(view -> {
+                    character.armiranged.remove(weap);
+                    rangedatks.removeView(newrow);
+                    return true;
+                });
+                removebtn.setOnClickListener(view -> {
+                    Toast.makeText(c, c.getString(R.string.keeptoremove), Toast.LENGTH_SHORT).show();
                 });
 
                 int bonus = CharacterActivity.mod(character.DEX);
