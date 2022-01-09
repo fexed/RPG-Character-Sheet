@@ -165,6 +165,10 @@
     <string name="set_loadlastchar">Load last character on startup</string>
     <string name="set_5expthresholds">Use the DnD 5e experience tresholds</string>
     <string name="numbererror">Invalid number!</string>
+    <string name="atk">Attack</string>
+    <string name="atklbl">%s attack with proficiency (1D20 + %s + %s)</string>
+    <string name="melee">Melee</string>
+    <string name="ranged">Ranged</string>
     <string name="changelog">Changelog, v 2.1!\n
         - You can share your characters with other players!\n
         - The app will let you know when you have enough experience points for the next level (according to the DnD 5e rule set)\n

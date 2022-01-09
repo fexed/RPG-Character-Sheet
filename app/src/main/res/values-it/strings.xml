@@ -163,6 +163,10 @@
     <string name="set_loadlastchar">Ricarica l\'ultimo personaggio all\'avvio</string>
     <string name="set_5expthresholds">Usa i requisiti d\'esperienza di DnD 5e</string>
     <string name="numbererror">Numero non valido!</string>
+    <string name="atk">Attacca</string>
+    <string name="atklbl">Attacco %s con competenza (1D20 + %s + %s)</string>
+    <string name="melee">corpo a corpo</string>
+    <string name="ranged">a distanza</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n
         - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondo il set di regole di DnD 5e)\n

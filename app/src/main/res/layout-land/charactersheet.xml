@@ -1944,12 +1944,27 @@
 
                         </TableLayout>
 
-                        <Button
-                            android:id="@+id/addmeleeatk"
-                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aggiungi" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/atkmelee"
+                                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/atk" />
+
+                            <Button
+                                android:id="@+id/addmeleeatk"
+                                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/aggiungi" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -1983,12 +1998,27 @@
 
                         </TableLayout>
 
-                        <Button
-                            android:id="@+id/addrangedatk"
-                            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/aggiungi" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/atkranged"
+                                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/atk" />
+
+                            <Button
+                                android:id="@+id/addrangedatk"
+                                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/aggiungi" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>

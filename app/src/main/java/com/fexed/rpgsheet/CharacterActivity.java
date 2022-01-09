@@ -101,6 +101,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
     Button addmanabtn; Button removemanabtn;
     ImageButton PFplus; ImageButton PFminus;
     Button addranged; Button addmelee; TableLayout rangedatks; TableLayout meleeatks;
+    Button atkmelee; Button atkranged;
     Button addxpbtn;
     EditText cantrip; EditText firstlv; EditText secondlv; EditText thirdlv; EditText fourthlv; EditText fifthlv; EditText sixthlv; EditText seventhlv; EditText eighthlv; EditText ninthlv; EditText pluslv;
     TextView firstlvslots; TextView secondlvslots; TextView thirdlvslots; TextView fourthlvslots; TextView fifthlvslots; TextView sixthlvslots; TextView seventhlvslots; TextView eighthlvslots; TextView ninthlvslots; TextView pluslvslots;
@@ -516,7 +517,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         castpluslv = findViewById(R.id.castpluslv);
         inspirationtbn = findViewById(R.id.inspirationbtn);
         rangedatks = findViewById(R.id.rangedatks);
+        atkranged = findViewById(R.id.atkranged);
         meleeatks = findViewById(R.id.meleeatks);
+        atkmelee = findViewById(R.id.atkmelee);
         inventoryView = findViewById(R.id.inventoryRecV);
         portrait = findViewById(R.id.pgportrait);
         xpbar = findViewById(R.id.xpbar);
@@ -1103,6 +1106,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         });
         backgroundtxt.clearFocus();
 
+        atkranged.setOnClickListener(this);
         rangedatks.removeAllViews();
 
         TableRow header = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.rangedrow, null);
@@ -1180,6 +1184,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             rangedatks.addView(newrow);
         }
 
+        atkmelee.setOnClickListener(this);
         meleeatks.removeAllViews();
 
         header = (TableRow) LayoutInflater.from(CharacterActivity.this).inflate(R.layout.meleerow, null);
@@ -2066,6 +2071,13 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             else bonus = prof(character.LV) + mod(character.INT);
             inputdialog = new DiceDialog(this, state, bonus, getString(R.string.cast) + " (" + character.spellstat + ")");
             inputdialog.show();
+        } else if (id == R.id.atkranged) {
+            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, 1, 20, mod(character.DEX) + prof(character.LV), getString(R.string.atklbl, getString(R.string.ranged), ""+mod(character.DEX), ""+prof(character.LV)));
+            inputdialog.show();
+        } else if (id == R.id.atkmelee) {
+            DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, 1, 20, mod(character.FOR) + prof(character.LV), getString(R.string.atklbl, getString(R.string.melee), ""+mod(character.FOR), ""+prof(character.LV)));
+            inputdialog.show();
+
         }
         saveSchedaPG();
     }
