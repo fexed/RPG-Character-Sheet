@@ -30,6 +30,19 @@
         app:layout_constraintTop_toBottomOf="@+id/D6"
         tools:text="1+103=999" />
 
+    <TextView
+        android:id="@+id/nattxtv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="@+id/D10"
+        app:layout_constraintStart_toStartOf="@+id/D20"
+        app:layout_constraintTop_toBottomOf="@+id/diceRollResutlTxtV"
+        tools:text="Natural 20!" />
+
     <Button
         android:id="@+id/D8"
         style="@style/Widget.AppCompat.Button.Small"
@@ -141,7 +154,7 @@
         android:id="@+id/diceRollResutlTxtV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="8dp"
         android:text="@string/dicerollhintchoose"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="20sp"

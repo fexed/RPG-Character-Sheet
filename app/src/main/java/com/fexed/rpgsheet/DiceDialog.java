@@ -26,6 +26,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     public Activity c;
     private TextView outtxt;
     private TextView histtxt;
+    private TextView nattxt;
     private Random rnd;
     private ArrayList<Integer> rolls;
     private boolean roll = false;
@@ -110,6 +111,9 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         ImageView dimage = findViewById(R.id.diceIcon);
         outtxt = findViewById(R.id.diceRollResutlTxtV);
         histtxt = findViewById(R.id.diceRollHistoryTxtV);
+        nattxt = findViewById(R.id.nattxtv);
+
+        nattxt.setText("");
 
         dimage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +122,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
                 rolls = new ArrayList<>();
                 roll = false;
                 histtxt.setText("");
+                nattxt.setText("");
                 outtxt.setText(c.getString(R.string.dicerollhintchoose));
             }
         });
@@ -125,10 +130,13 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         if (roll) {
             String suff = dices + "D" + max;
             suff += (bonus < 0) ? " " + bonus : " + " + bonus;
-            int result, totalResult = 0;
+            int result = 0, totalResult = 0;
             for (int j = 0; j < dices; j++) {
                 result = rnd.nextInt(max) + 1;
                 totalResult += result;
+            }
+            if (dices == 1 && max == 20 && (result == 1 || result == 20)) {
+                nattxt.setText(c.getString(R.string.naturaldice, result + ""));
             }
             totalResult += bonus;
             String tmp = suff + " = " + totalResult;
@@ -159,10 +167,14 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             max = -1;
         }
 
+        nattxt.setText("");
         if (max != -1) {
             String suff = "1D" + max;
             int result = rnd.nextInt(max) + 1;
             rolls.add(result);
+            if (max == 20 && (result == 1 || result == 20)) {
+                nattxt.setText(c.getString(R.string.naturaldice, result + ""));
+            }
             suff += " = " + result;
             outtxt.setText(suff);
             StringBuilder str = new StringBuilder();
