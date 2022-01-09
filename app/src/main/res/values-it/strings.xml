@@ -152,9 +152,10 @@
     <string name="delconfirmpg">Vuoi davvero eliminare %s?</string>
     <string name="casted">Un incantesimo di %s è stato lanciato!</string>
     <string name="noslots">Non hai più slot di %s!</string>
-    <string name="share">Condividi</string>
-    <string name="sharing">Condivisione…</string>
-    <string name="sharingchar">Condivisione di %s</string>
+    <string name="export">Esporta personaggio</string>
+    <string name="exporting">Esportando…</string>
+    <string name="exportingchar">Esportando %s…</string>
+    <string name="exportsuccess">Personaggio esportato con successo</string>
     <string name="loadchar">Carica</string>
     <string name="newlevel">Raggiunto il livello %s!</string>
     <string name="set_loadlastchar">Ricarica l\'ultimo personaggio all\'avvio</string>

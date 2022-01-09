@@ -3150,6 +3150,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
                         e.printStackTrace();
                     }
                 }
+                Snackbar.make(findViewById(R.id.mainscroll), R.string.exportsuccess, Snackbar.LENGTH_LONG).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Snackbar.make(findViewById(R.id.mainscroll), R.string.fileopenerror, Snackbar.LENGTH_LONG).show();
@@ -3183,8 +3184,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         Intent export = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         export.addCategory(Intent.CATEGORY_OPENABLE);
         export.setType("*/*");
-        export.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.sharing));
-        export.putExtra(Intent.EXTRA_TEXT, getString(R.string.sharingchar, character.nome));
+        export.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exporting));
+        export.putExtra(Intent.EXTRA_TEXT, getString(R.string.exportingchar, character.nome));
         export.putExtra(Intent.EXTRA_TITLE, character.nome + ".rpgchar");
         startActivityForResult(export, SAVE_FILE);
     }

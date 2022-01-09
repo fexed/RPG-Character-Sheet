@@ -154,9 +154,10 @@
     <string name="delconfirmpg">Are you sure you want to delete %s?</string>
     <string name="casted">A %s spell has been casted!</string>
     <string name="noslots">No more %s slots left!</string>
-    <string name="share">Share</string>
-    <string name="sharing">Sharing…</string>
-    <string name="sharingchar">Sharing %s…</string>
+    <string name="export">Export character</string>
+    <string name="exporting">Exporting…</string>
+    <string name="exportingchar">Exporting %s…</string>
+    <string name="exportsuccess">Character exported successfully</string>
     <string name="loadchar">Load</string>
     <string name="newlevel">Obtained level %s!</string>
     <string name="set_loadlastchar">Load last character on startup</string>
