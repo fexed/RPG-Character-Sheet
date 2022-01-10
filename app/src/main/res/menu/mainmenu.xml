@@ -3,10 +3,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/charselect"
-        android:title="@string/charselect"
-        android:icon="@drawable/charselect"
-        app:showAsAction="always" />
+        android:id="@+id/dice"
+        android:title="@string/dice"
+        android:icon="@drawable/icon_fg"
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/sleep"
@@ -15,10 +15,10 @@
         app:showAsAction="ifRoom" />
 
     <item
-        android:id="@+id/dice"
-        android:title="@string/dice"
-        android:icon="@drawable/icon_fg"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/charselect"
+        android:title="@string/charselect"
+        android:icon="@drawable/charselect"
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/share"
