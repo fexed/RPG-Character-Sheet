@@ -35,6 +35,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
     private int max;
     private int dices;
     private String text = "";
+    private int[] diceThrown = {0, 0, 0, 0, 0, 0, 0};
 
     public DiceDialog(Activity a, SharedPreferences state) {
         super(a);
@@ -125,6 +126,7 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
                 histtxt.setText("");
                 nattxt.setText("");
                 outtxt.setText(c.getString(R.string.dicerollhintchoose));
+                diceThrown = new int[]{0, 0, 0, 0, 0, 0, 0};
             }
         });
 
@@ -152,18 +154,25 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
         int id = v.getId();
         if (id == R.id.D20) {
             max = 20;
+            diceThrown[0]++;
         } else if (id == R.id.D100) {
             max = 100;
+            diceThrown[1]++;
         } else if (id == R.id.D12) {
             max = 12;
+            diceThrown[2]++;
         } else if (id == R.id.D10) {
             max = 10;
+            diceThrown[3]++;
         } else if (id == R.id.D8) {
             max = 8;
+            diceThrown[4]++;
         } else if (id == R.id.D6) {
             max = 6;
+            diceThrown[5]++;
         } else if (id == R.id.D4) {
             max = 4;
+            diceThrown[6]++;
         } else if (id == R.id.coin) {
             max = -1;
         }
@@ -180,13 +189,37 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             outtxt.setText(suff);
             StringBuilder str = new StringBuilder();
             int total = rolls.get(0);
-            str.append(rolls.get(0));
             for (int n : rolls.subList(1, rolls.size())) {
-                str.append("+");
-                str.append(n);
                 total += n;
             }
-            str.append("= ").append(total);
+            if (diceThrown[0] > 0) {
+                str.append(diceThrown[0] + "D20");
+            }
+            if (diceThrown[1] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[1] + "D100");
+            }
+            if (diceThrown[2] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[2] + "D12");
+            }
+            if (diceThrown[3] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[3] + "D10");
+            }
+            if (diceThrown[4] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[4] + "D8");
+            }
+            if (diceThrown[5] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[5] + "D6");
+            }
+            if (diceThrown[6] > 0) {
+                if (str.length() > 0) str.append(" + ");
+                str.append(diceThrown[6] + "D4");
+            }
+            str.append(" = " + total);
             histtxt.setText(str.toString());
         } else {
             if (rnd.nextBoolean()) outtxt.setText(this.getContext().getText(R.string.testa));
