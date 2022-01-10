@@ -202,7 +202,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         int n = state.getInt("launchn", 0);
         n++;
         if (n % 5 == 0) {
-            Snackbar.make(findViewById(R.id.mainscroll), R.string.ratepls, Snackbar.LENGTH_INDEFINITE).setAction("Play Store", new View.OnClickListener() {
+            Snackbar.make(findViewById(R.id.mainscroll), R.string.ratepls, Snackbar.LENGTH_LONG).setAction("Play Store", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(Intent.ACTION_VIEW);
@@ -622,6 +622,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         attacchi.setOnClickListener(this);
         attacchiarrow.setOnClickListener(this);
         lvtxt.setOnLongClickListener(this);
+        lvtxt.setOnClickListener(this);
         nametxt.setOnLongClickListener(this);
 
         tempstr = "+" + prof(character.LV);
@@ -635,18 +636,27 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         removemanabtn.setOnClickListener(this);
         classtxt.setOnLongClickListener(this);
         CA.setOnLongClickListener(this);
+        CA.setOnClickListener(this);
         PF.setOnLongClickListener(this);
+        PF.setOnClickListener(this);
         PFplus.setOnClickListener(this);
         PFplus.setOnLongClickListener(this);
         PFminus.setOnClickListener(this);
         PFminus.setOnLongClickListener(this);
         PFmax.setOnLongClickListener(this);
+        PFmax.setOnClickListener(this);
         FOR.setOnLongClickListener(this);
         DEX.setOnLongClickListener(this);
         COS.setOnLongClickListener(this);
         INT.setOnLongClickListener(this);
         SAG.setOnLongClickListener(this);
         CAR.setOnLongClickListener(this);
+        FOR.setOnClickListener(this);
+        DEX.setOnClickListener(this);
+        COS.setOnClickListener(this);
+        INT.setOnClickListener(this);
+        SAG.setOnClickListener(this);
+        CAR.setOnClickListener(this);
 
         tsfortxt = findViewById(R.id.TSFOR);
         comptsfor = findViewById(R.id.comptsfor);
@@ -1322,6 +1332,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         firstlv.clearFocus();
         firstlvslots.setText(new StringBuilder().append(character.currslot1).append("/").append(character.slot1));
         firstlvslots.setOnLongClickListener(this);
+        firstlvslots.setOnClickListener(this);
         castfirstlv.setOnClickListener(this);
 
 
@@ -1343,6 +1354,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         secondlv.clearFocus();
         secondlvslots.setText(new StringBuilder().append(character.currslot2).append("/").append(character.slot2));
         secondlvslots.setOnLongClickListener(this);
+        secondlvslots.setOnClickListener(this);
         castsecondlv.setOnClickListener(this);
 
         thirdlv.setText(character.lv3);
@@ -1363,6 +1375,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         thirdlv.clearFocus();
         thirdlvslots.setText(new StringBuilder().append(character.currslot3).append("/").append(character.slot3));
         thirdlvslots.setOnLongClickListener(this);
+        thirdlvslots.setOnClickListener(this);
         castthirdlv.setOnClickListener(this);
 
         fourthlv.setText(character.lv4);
@@ -1383,6 +1396,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         fourthlv.clearFocus();
         fourthlvslots.setText(new StringBuilder().append(character.currslot4).append("/").append(character.slot4));
         fourthlvslots.setOnLongClickListener(this);
+        fourthlvslots.setOnClickListener(this);
         castfourthlv.setOnClickListener(this);
 
         fifthlv.setText(character.lv5);
@@ -1403,6 +1417,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         fifthlv.clearFocus();
         fifthlvslots.setText(new StringBuilder().append(character.currslot5).append("/").append(character.slot5));
         fifthlvslots.setOnLongClickListener(this);
+        fifthlvslots.setOnClickListener(this);
         castfifthlv.setOnClickListener(this);
 
         sixthlv.setText(character.lv6);
@@ -1423,6 +1438,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         sixthlv.clearFocus();
         sixthlvslots.setText(new StringBuilder().append(character.currslot6).append("/").append(character.slot6));
         sixthlvslots.setOnLongClickListener(this);
+        sixthlvslots.setOnClickListener(this);
         castsixthlv.setOnClickListener(this);
 
         seventhlv.setText(character.lv7);
@@ -1443,6 +1459,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         seventhlv.clearFocus();
         seventhlvslots.setText(new StringBuilder().append(character.currslot7).append("/").append(character.slot7));
         seventhlvslots.setOnLongClickListener(this);
+        seventhlvslots.setOnClickListener(this);
         castseventhlv.setOnClickListener(this);
 
         eighthlv.setText(character.lv8);
@@ -1463,6 +1480,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         eighthlv.clearFocus();
         eighthlvslots.setText(new StringBuilder().append(character.currslot8).append("/").append(character.slot8));
         eighthlvslots.setOnLongClickListener(this);
+        eighthlvslots.setOnClickListener(this);
         casteightlv.setOnClickListener(this);
 
         ninthlv.setText(character.lv9);
@@ -1483,6 +1501,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         ninthlv.clearFocus();
         ninthlvslots.setText(new StringBuilder().append(character.currslot9).append("/").append(character.slot9));
         ninthlvslots.setOnLongClickListener(this);
+        ninthlvslots.setOnClickListener(this);
         castninthlv.setOnClickListener(this);
 
         pluslv.setText(character.lvplus);
@@ -1503,6 +1522,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         pluslv.clearFocus();
         pluslvslots.setText(new StringBuilder().append(character.currslotplus).append("/").append(character.slotplus));
         pluslvslots.setOnLongClickListener(this);
+        pluslvslots.setOnClickListener(this);
         castpluslv.setOnClickListener(this);
 
         inspirationtbn.setChecked(character.inspiration);
@@ -1559,9 +1579,10 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             portrait.setImageBitmap(BitmapFactory.decodeFile(path));
         } else portrait.setImageDrawable(ContextCompat.getDrawable(getApplicationContext(), R.drawable.propicplaceholder));
 
-        if (state.getBoolean("5ethresholds", true)) {
+        if (state.getBoolean("5ethresholds", true) && character.LV < 20) {
             try {
                 int progress = (int) floor((double) (character.EXP * 100) / xptable[character.LV]);
+                xpbar.setVisibility(View.VISIBLE);
                 xpbar.setProgress(progress);
             } catch (Exception ex) {
                 xpbar.setProgress(100);
@@ -2078,7 +2099,14 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             DiceDialog inputdialog = new DiceDialog(CharacterActivity.this, state, 1, 20, mod(character.FOR) + prof(character.LV), getString(R.string.atklbl, getString(R.string.melee), ""+mod(character.FOR), ""+prof(character.LV)));
             inputdialog.show();
 
+        } else if (id == R.id.slotfirsttxtv || id == R.id.slotsecondtxtv || id == R.id.slotthirdtxtv || id == R.id.slotfourthtxtv || id == R.id.slotfifthtxtv || id == R.id.slotsixthtxtv || id == R.id.slotseventhtxtv || id == R.id.sloteigthtxtv || id == R.id.slotninthtxtv || id == R.id.slotplustxtv) {
+            Toast.makeText(this, getString(R.string.keeptoedit), Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.FOR || id == R.id.DEX || id == R.id.COS || id == R.id.INT || id == R.id.SAG || id == R.id.CAR) {
+            Toast.makeText(this, getString(R.string.keeptoedit), Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.CA || id == R.id.PF || id == R.id.PFmax || id == R.id.pglvtxt) {
+            Toast.makeText(this, getString(R.string.keeptoedit), Toast.LENGTH_SHORT).show();
         }
+
         saveSchedaPG();
     }
 
@@ -2090,6 +2118,8 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
         String tempstr;
         int id = view.getId();
         if (id == R.id.pglvtxt) {
+            String tmpstr = character.LV + "";
+            input.setText(tmpstr);
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setView(input);

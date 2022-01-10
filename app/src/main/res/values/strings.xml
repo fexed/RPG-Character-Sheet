@@ -159,6 +159,7 @@
     <string name="exportingchar">Exporting %s…</string>
     <string name="exportsuccess">Character exported successfully</string>
     <string name="keeptoremove">Long tap to remove</string>
+    <string name="keeptoedit">Long tap to edit</string>
     <string name="naturaldice">Natural %s!</string>
     <string name="loadchar">Load</string>
     <string name="newlevel">Obtained level %s!</string>

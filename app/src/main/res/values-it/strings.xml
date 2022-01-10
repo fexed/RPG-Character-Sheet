@@ -157,6 +157,7 @@
     <string name="exportingchar">Esportando %s…</string>
     <string name="exportsuccess">Personaggio esportato con successo</string>
     <string name="keeptoremove">Tieni premuto per rimuovere</string>
+    <string name="keeptoedit">Tieni premuto per modificare</string>
     <string name="naturaldice">%s naturale!</string>
     <string name="loadchar">Carica</string>
     <string name="newlevel">Raggiunto il livello %s!</string>
