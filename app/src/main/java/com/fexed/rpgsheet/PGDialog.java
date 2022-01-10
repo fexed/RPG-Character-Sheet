@@ -35,6 +35,9 @@ public class PGDialog extends Dialog implements android.view.View.OnClickListene
         load = findViewById(R.id.Loadcharbtn);
         yes.setOnClickListener(this);
         load.setOnClickListener(this);
+        EditText pglvinput = findViewById(R.id.pglvinput);
+        String tmp = 1 + "";
+        pglvinput.setText(tmp);
     }
 
     @Override
