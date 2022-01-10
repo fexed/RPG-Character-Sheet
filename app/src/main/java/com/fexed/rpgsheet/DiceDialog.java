@@ -188,8 +188,12 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             suff += " = " + result;
             outtxt.setText(suff);
             StringBuilder str = new StringBuilder();
+            StringBuilder res = new StringBuilder();
+            res.append(rolls.get(0));
             int total = rolls.get(0);
             for (int n : rolls.subList(1, rolls.size())) {
+                res.append("+");
+                res.append(n);
                 total += n;
             }
             if (diceThrown[0] > 0) {
@@ -221,6 +225,8 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             }
             str.append(" = " + total);
             histtxt.setText(str.toString());
+            histtxt.setOnClickListener(view -> Toast.makeText(c, res.toString(), Toast.LENGTH_LONG).show());
+            outtxt.setOnClickListener(view -> Toast.makeText(c, res.toString(), Toast.LENGTH_LONG).show());
         } else {
             if (rnd.nextBoolean()) outtxt.setText(this.getContext().getText(R.string.testa));
             else outtxt.setText(this.getContext().getText(R.string.croce));
