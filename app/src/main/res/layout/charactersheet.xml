@@ -2230,7 +2230,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="@string/app_spell"
                                 android:textSize="12sp"
-                                android:visibility="visible" />
+                                android:visibility="gone" />
 
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
