@@ -1811,6 +1811,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             character.PF--;
             tempstr = character.PF + "";
             PF.setText(tempstr);
+            int n = state.getInt("dmgrec", 0);
+            n++;
+            state.edit().putInt("dmgrec", n).apply();
         } else if (id == R.id.comptsfor) {
             character.tsfor = comptsfor.isChecked();
             int tsf = mod(character.FOR) + ((comptsfor.isChecked()) ? prof(character.LV) : 0);
@@ -2325,6 +2328,9 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
                         String tempstr = character.PF + "";
                         PF.setText(tempstr);
+                        int n = state.getInt("dmgrec", 0);
+                        n += pnt;
+                        state.edit().putInt("dmgrec", n).apply();
                         dialog.cancel();
                         alertd.dismiss();
                         preparaSchedaPG();

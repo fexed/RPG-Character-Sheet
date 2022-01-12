@@ -172,6 +172,7 @@
     <string name="ranged">Ranged</string>
     <string name="stats">Stats</string>
     <string name="dicethrown">%s dice thrown</string>
+    <string name="dmgrec">%s damage received</string>
     <string name="changelog">Changelog, v 2.1!\n
         - You can share your characters with other players!\n
         - The app will let you know when you have enough experience points for the next level (according to the DnD 5e rule set)\n

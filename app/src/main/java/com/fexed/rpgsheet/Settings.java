@@ -30,6 +30,10 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         String num = "" + state.getInt("dicethrown", 0);
         dicetxt.setText(getString(R.string.dicethrown, num));
 
+        TextView dmgtxt = findViewById(R.id.dmgrecv);
+        num = "" + state.getInt("dmgrec", 0);
+        dmgtxt.setText(getString(R.string.dmgrec, num));
+
         Button resetbtn = findViewById(R.id.resetbtn);
         resetbtn.setOnClickListener(this);
 

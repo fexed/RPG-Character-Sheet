@@ -170,6 +170,7 @@
     <string name="ranged">a distanza</string>
     <string name="stats">Statistiche</string>
     <string name="dicethrown">%s dadi lanciati</string>
+    <string name="dmgrec">%s danni ricevuti</string>
     <string name="changelog">Nuova versione, v 2.1!\n
         - Adesso potrai condividere i tuoi personaggi con altri giocatori!\n
         - L\'app ti avviserà quando avrai abbastanza punti esperienza per passare di livello (secondo il set di regole di DnD 5e)\n
