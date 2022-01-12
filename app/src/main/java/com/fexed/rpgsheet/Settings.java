@@ -21,10 +21,14 @@ public class Settings extends AppCompatActivity implements View.OnClickListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
         state = getApplicationContext().getSharedPreferences(getString(R.string.state), Context.MODE_PRIVATE);
-        setTitle(getString(R.string.settings));
+        setTitle(getString(R.string.app_name));
 
         TextView vertxt = findViewById(R.id.vertext);
         vertxt.setText(BuildConfig.VERSION_NAME);
+
+        TextView dicetxt = findViewById(R.id.dicethrowntxtv);
+        String num = "" + state.getInt("dicethrown", 0);
+        dicetxt.setText(getString(R.string.dicethrown, num));
 
         Button resetbtn = findViewById(R.id.resetbtn);
         resetbtn.setOnClickListener(this);

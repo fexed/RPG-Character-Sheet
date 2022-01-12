@@ -145,6 +145,9 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             String tmp = suff + " = " + totalResult;
             outtxt.setText(tmp);
             histtxt.setText(text);
+            int n = CharacterActivity.state.getInt("dicethrown", 0);
+            n += dices;
+            CharacterActivity.state.edit().putInt("dicethrown", n).apply();
         }
     }
 
@@ -231,6 +234,10 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
             if (rnd.nextBoolean()) outtxt.setText(this.getContext().getText(R.string.testa));
             else outtxt.setText(this.getContext().getText(R.string.croce));
         }
+
+        int n = CharacterActivity.state.getInt("dicethrown", 0);
+        n++;
+        CharacterActivity.state.edit().putInt("dicethrown", n).apply();
     }
 
     @Override
@@ -288,6 +295,9 @@ public class DiceDialog extends Dialog implements View.OnClickListener, View.OnL
                         }
                         str.append("= ").append(total);
                         histtxt.setText(str.toString());
+                        int n = CharacterActivity.state.getInt("dicethrown", 0);
+                        n += howMany;
+                        CharacterActivity.state.edit().putInt("dicethrown", n).apply();
                     } catch (Exception ex) {
                         input.setError(getContext().getString(R.string.numbererror));
                         Toast.makeText(c.getApplicationContext(), getContext().getString(R.string.numbererror), Toast.LENGTH_SHORT).show();
