@@ -1804,7 +1804,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             spellmana.setText(tempstr);
         } else if (id == R.id.pfplus) {
             character.PF++;
-            if (character.PF > character.PFMAX) character.PF = character.PFMAX;
             tempstr = character.PF + "";
             PF.setText(tempstr);
         } else if (id == R.id.pfminus) {
