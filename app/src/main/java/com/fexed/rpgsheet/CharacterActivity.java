@@ -1233,6 +1233,7 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
             removebtn.setOnLongClickListener(view -> {
                 character.armimelee.remove(finalweap);
                 meleeatks.removeView(newrow);
+                saveSchedaPG();
                 return true;
             });
             removebtn.setOnClickListener(view -> {
