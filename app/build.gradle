@@ -6,7 +6,7 @@ android {
         applicationId "com.fexed.rpgsheet"
         minSdkVersion 23
         targetSdkVersion 31
-        versionCode 8
+        versionCode 9
         versionName "2.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true

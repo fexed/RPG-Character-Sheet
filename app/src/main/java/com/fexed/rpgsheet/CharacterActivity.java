@@ -1528,7 +1528,6 @@ public class CharacterActivity extends AppCompatActivity implements View.OnClick
 
         inspirationtbn.setChecked(character.inspiration);
         inspirationtbn.setOnCheckedChangeListener(this);
-
         tempstr = character.EXP + " xp";
         XP.setText(tempstr);
         XP.setOnLongClickListener(this);
